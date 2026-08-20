@@ -1,7 +1,5 @@
 import type { Guide, Platform } from "./types";
 
-// Seed content is intentionally conservative. Verify current fees, licensing, market availability
-// and affiliate eligibility before turning any platform CTA live.
 export const platforms: Platform[] = [];
 
 export const guides: Guide[] = [
@@ -13,4 +11,4 @@ export const guides: Guide[] = [
   { slug:"how-we-rate-platforms", title:"How our platform scoring works", excerpt:"A transparent evidence-first methodology for exchanges, brokers and wallets.", category:"learn", readTime:"6 min" }
 ];
 
-export const getPlatform = (slug: string) => platforms.find(p => p.slug === slug);
+export const getPlatform = (slug: string) => platforms.find((p) => p.slug === slug);

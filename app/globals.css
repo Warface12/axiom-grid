@@ -19,7 +19,7 @@
 
 /* ============================================================
    AXIOM VOID TERMINAL THEME — 2026-08-20
-   Distinct from Nivaro: hard-edged research terminal, graphite,
+   Distinct from Axiom: hard-edged research terminal, graphite,
    electric cyan / signal green, low-radius panels, grid motion.
    ============================================================ */
 :root{--ax-bg:#05080d;--ax-panel:#090f17;--ax-panel2:#0c141e;--ax-line:#1a2a38;--ax-line2:#263c4f;--ax-text:#e8f3fb;--ax-muted:#7d94a6;--ax-cyan:#46d7ff;--ax-green:#79ffb2;--ax-amber:#ffb657;--ax-red:#ff6b6b;--ax-grid:rgba(70,215,255,.065)}

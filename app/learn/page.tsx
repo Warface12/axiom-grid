@@ -1,3 +1,6 @@
-import { guides } from "@/lib/demo-data";import { GuideCard } from "@/components/GuideCard";import { buildMetadata } from "@/lib/seo";
-export const metadata=buildMetadata({title:"Crypto & Trading Learning Hub",description:"Learn how exchanges, brokers, wallets, custody, fees and crypto platform risks work before comparing providers.",path:"/learn"});
-export default function Page(){return <main><section className="shell page-hero"><span>EDUCATION HUB</span><h1>Learn before you choose</h1><p>Evergreen explainers support comparison pages and help users understand the product before encountering a commercial link.</p></section><section className="shell content-shell"><div className="guide-grid">{guides.map(g=><GuideCard guide={g} key={g.slug}/>)}</div></section></main>}
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { guides } from "@/lib/demo-data";
+import { buildMetadata } from "@/lib/seo";
+export const metadata=buildMetadata({title:"Signals & Guides — Axiom Grid",description:"Evergreen guides for exchanges, brokers, wallets, fees and custody.",path:"/learn"});
+export default function Page(){return <main className="shell content-shell"><section className="page-hero"><span>SIGNALS / EDUCATION</span><h1>Build a better decision model.</h1><p>Independent explainers for the structures behind digital-asset products.</p></section><div className="guide-grid">{guides.map(g=><Link className="prose-card" href={`/learn/${g.slug}`} key={g.slug}><small>{g.category.toUpperCase()} · {g.readTime}</small><h2>{g.title}</h2><p>{g.excerpt}</p><span>Read guide <ArrowUpRight size={14}/></span></Link>)}</div></main>}

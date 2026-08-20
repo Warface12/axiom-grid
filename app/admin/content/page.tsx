@@ -1,4 +1,0 @@
-import { AdminTitle } from "@/components/AdminShell";import { guides } from "@/lib/demo-data";export default function Page(){return <main><AdminTitle title="Content" subtitle="Topic-cluster publishing for evergreen education and high-intent comparison pages."/><div className="admin-panel"><table className="admin-table"><thead><tr><th>Guide</th><th>Cluster</th><th>Intent</th><th>Status</th></tr></thead><tbody>{guides.map(g=><tr key={g.slug}><td><b>{g.title}</b></td><td>{g.categories?.join(', ')}</td><td>{g.categories?.join(', ')==="learn"?"informational":"mixed"}</td><td><span className="admin-chip">draft scaffold</span></td></tr>)}</tbody></table></div></main>}
-
-
-

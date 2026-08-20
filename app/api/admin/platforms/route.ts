@@ -1,3 +1,4 @@
+import { isAdminUser } from "@/lib/supabase/admin";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
@@ -14,6 +15,7 @@ const cleanArray = (value: unknown) =>
     : String(value ?? "").split(",").map((v) => v.trim()).filter(Boolean);
 
 export async function GET() {
+  if (!(await isAdminUser())) return NextResponse.json({ ok:false, error:"Unauthorized", items:[] }, { status:401 });
   const supabase = adminClient();
   if (!supabase) {
     return NextResponse.json({
@@ -29,6 +31,7 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  if (!(await isAdminUser())) return NextResponse.json({ ok:false, error:"Unauthorized" }, { status:401 });
   const supabase = adminClient();
   if (!supabase) return NextResponse.json({ ok: false, error: "Supabase admin connection is not configured." }, { status: 503 });
   const body = await request.json().catch(() => ({}));
@@ -75,6 +78,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
+  if (!(await isAdminUser())) return NextResponse.json({ ok:false, error:"Unauthorized" }, { status:401 });
   const supabase = adminClient();
   if (!supabase) return NextResponse.json({ ok: false, error: "Supabase admin connection is not configured." }, { status: 503 });
   const id = request.nextUrl.searchParams.get("id");

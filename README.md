@@ -1,29 +1,23 @@
-# NIVARO
+# Axiom Grid
 
-Production-oriented foundation for a premium Casino + Bonuses + Live Sports discovery platform.
+Independent digital-asset research platform for exchanges, brokers, wallets, fees, security and market access.
 
-## Run locally
+## Local run
 
-1. Install Node.js 20+.
-2. Run:
-   npm install
-   npm run dev
-3. Open http://localhost:3000
+```bash
+npm install
+npm run dev
+```
 
-## Supabase
+## Production check
 
-Copy `.env.example` to `.env.local` and add your Supabase project URL and anon key.
+```bash
+npm run typecheck
+npm run build
+```
 
-Run `supabase/schema.sql` in Supabase SQL Editor.
+## Admin
 
-## Production security
+The public header intentionally has no admin link. `/admin` is protected by Supabase Auth and `ADMIN_EMAIL`. Configure `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, and `ADMIN_EMAIL` in Vercel.
 
-The Admin page is a UI foundation. Before public launch, connect it to Supabase Auth and enforce authorization server-side/RLS. Never put a Supabase service-role key in client-side code.
-
-## External integrations
-
-- Casino/affiliate feeds: connect only official partner APIs/data feeds.
-- Sports: connect a licensed/authorized sports data provider.
-- Payment/commission reporting: use partner-provided reporting or secure server-side imports.
-
-Do not publish placeholder/demo live-score data as real data.
+The platform inventory uses the `platform` table and the protected `/api/admin/platforms` API.

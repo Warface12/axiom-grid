@@ -1,36 +1,5 @@
-import { GitCompare } from "lucide-react";
-import { CompareClient } from "@/components/CompareClient";
-import { EmptyState } from "@/components/GuideCard";
-import { getCasinos, getCasinosByIds } from "@/lib/data";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
-
-type Props = { searchParams: Promise<{ ids?: string }> };
-
-export const metadata = buildMetadata({
-  title: "Compare Casinos — NivaroBet",
-  description: "Compare casino ratings, bonuses, payment methods, licensing and availability side by side.",
-  path: "/compare",
-});
-
-export default async function ComparePage({ searchParams }: Props) {
-  const params = await searchParams;
-  const allCasinos = await getCasinos();
-  const selectedIds = params.ids?.split(",").filter(Boolean) || [];
-  const selectedCasinos = selectedIds.length ? await getCasinosByIds(selectedIds) : [];
-
-  return (
-    <main className="container page">
-      <div className="page-title">
-        <span className="eyebrow"><GitCompare size={15} /> COMPARE</span>
-        <h1>Compare casinos side by side.</h1>
-        <p>Select up to 4 casinos and compare ratings, bonuses, payments and more.</p>
-      </div>
-
-      {allCasinos.length ? (
-        <CompareClient casinos={selectedCasinos.length >= 2 ? selectedCasinos : allCasinos} />
-      ) : (
-        <EmptyState title="No casinos to compare" message="Add casinos in Admin first." actionHref="/admin/casinos" actionLabel="Manage Casinos" />
-      )}
-    </main>
-  );
-}
+export const metadata=buildMetadata({title:"Compare Platforms — Axiom Grid",description:"Compare exchanges, brokers and wallets by product type, custody, fees, security and market access.",path:"/compare"});
+export default function Page(){return <main className="shell content-shell"><section className="page-hero"><span>COMPARE</span><h1>Compare like with like.</h1><p>Exchanges, brokers and wallets are separated because the products, risks and custody models are fundamentally different.</p></section><section className="ag-lanes"><Link className="ag-lane" href="/exchanges"><div className="lane-copy"><small>LIQUIDITY / CUSTODY</small><h2>Exchange research</h2><p>Fees, funding, assets, security and market access.</p></div><ArrowUpRight/></Link><Link className="ag-lane" href="/brokers"><div className="lane-copy"><small>EXECUTION / PRODUCTS</small><h2>Broker research</h2><p>Spreads, instruments, entities and platform access.</p></div><ArrowUpRight/></Link><Link className="ag-lane" href="/wallets"><div className="lane-copy"><small>CUSTODY / RECOVERY</small><h2>Wallet research</h2><p>Control, recovery, supported assets and security model.</p></div><ArrowUpRight/></Link></section></main>}
