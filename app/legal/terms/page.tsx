@@ -1,1 +1,18 @@
-import { buildMetadata } from "@/lib/seo";export const metadata=buildMetadata({title:"Terms of Use",description:"Terms for using this independent comparison website.",path:"/legal/terms"});export default function Page(){return <main><section className="shell page-hero"><span>LEGAL</span><h1>Terms of use</h1></section><section className="shell content-shell"><article className="prose-card"><p>Information is provided for general comparison and education and is not personalized investment advice. Product availability and rules can change. Users should verify current terms with the provider and consider their own jurisdiction and risk tolerance.</p></article></section></main>}
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({ title: "Terms of Service — NivaroBet", description: "Read the terms that govern use of NivaroBet, including informational content, affiliate links, market availability, third-party operators and limitations of responsibility.", path: "/legal/terms" });
+
+export default function TermsPage() {
+  return (
+    <main className="container page legal-page">
+      <h1>Terms of Service</h1>
+      <p>By using Nivaro, you agree to these terms. Nivaro provides informational content about online casinos and sports. We are not a gambling operator.</p>
+      <h2>Eligibility</h2>
+      <p>You must be 18+ and comply with local laws regarding online gambling.</p>
+      <h2>Affiliate Links</h2>
+      <p>We may earn commissions through affiliate links. See our Affiliate Disclosure.</p>
+      <h2>Disclaimer</h2>
+      <p>Information is provided as-is. Always verify offers on the partner site before claiming.</p>
+    </main>
+  );
+}

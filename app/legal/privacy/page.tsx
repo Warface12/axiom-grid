@@ -1,1 +1,20 @@
-import { buildMetadata } from "@/lib/seo";export const metadata=buildMetadata({title:"Privacy Policy",description:"Privacy information for this website.",path:"/legal/privacy"});export default function Page(){return <main><section className="shell page-hero"><span>LEGAL</span><h1>Privacy policy</h1></section><section className="shell content-shell"><article className="prose-card"><p>Launch placeholder. Replace with a policy that accurately reflects the analytics, cookies, forms, database and third-party services actually enabled on the production site.</p></article></section></main>}
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({ title: "Privacy Policy — NivaroBet", description: "Read the NivaroBet privacy policy to understand what information may be processed, how analytics and site services are used, and what choices visitors have.", path: "/legal/privacy" });
+
+export default function PrivacyPage() {
+  return (
+    <main className="container page legal-page">
+      <h1>Privacy Policy</h1>
+      <p>Last updated: {new Date().toLocaleDateString()}</p>
+      <h2>Information We Collect</h2>
+      <p>We may collect usage data, analytics and affiliate click tracking to improve our service. We do not sell personal data.</p>
+      <h2>Cookies</h2>
+      <p>See our <a href="/legal/cookies">Cookie Policy</a> for details on cookies and similar technologies.</p>
+      <h2>Data Security</h2>
+      <p>We use industry-standard security measures. Affiliate partner secrets are never stored in client-side code.</p>
+      <h2>Contact</h2>
+      <p>For privacy inquiries, contact contact@nivaro.com.</p>
+    </main>
+  );
+}

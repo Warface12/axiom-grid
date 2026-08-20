@@ -1,1 +1,19 @@
-import { buildMetadata } from "@/lib/seo";export const metadata=buildMetadata({title:"About Axiom Grid",description:"About our independent crypto platform comparison and research publication.",path:"/about"});export default function Page(){return <main><section className="shell page-hero"><span>ABOUT</span><h1>Research infrastructure for complex platforms</h1><p>Axiom Grid is a working brand for this independent crypto, trading and wallet comparison project. It can be renamed centrally before domain launch.</p></section><section className="shell content-shell"><article className="prose-card"><h2>What we publish</h2><p>Platform profiles, comparisons, market pages and educational guides. Commercial relationships should be disclosed, while editorial facts are verified separately from affiliate compensation.</p></article></section></main>}
+import Link from "next/link";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "About — NivaroBet",
+  description: "Learn about NivaroBet, a casino discovery, bonus comparison and verification platform.",
+  path: "/about",
+});
+
+export default function AboutPage() {
+  return (
+    <main className="container page legal-page">
+      <h1>About NivaroBet</h1>
+      <p>NivaroBet is a casino discovery and bonus comparison platform built to help users review monitored partner information, current offers and market availability in one organized experience.</p>
+      <p>We prioritize transparency, verification dates and clear comparisons so users can make informed decisions quickly.</p>
+      <Link href="/contact" className="text-link">Contact us →</Link>
+    </main>
+  );
+}

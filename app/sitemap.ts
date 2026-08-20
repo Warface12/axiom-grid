@@ -1,2 +1,24 @@
-import type { MetadataRoute } from "next";import { SITE_URL } from "@/lib/site";import { guides,platforms } from "@/lib/demo-data";
-export default function sitemap():MetadataRoute.Sitemap{const now=new Date();const staticRoutes=["","/exchanges","/brokers","/wallets","/compare","/learn","/markets","/research","/fees","/security","/how-we-rate","/editorial-policy","/about","/legal/affiliate-disclosure","/legal/privacy","/legal/terms"];const routes=[...staticRoutes,...guides.map(g=>`/learn/${g.slug}`),...platforms.map(p=>`/${p.kind}s/${p.slug}`)];return routes.map(route=>({url:`${SITE_URL}${route}`,lastModified:now,changeFrequency:route===""?"daily":"weekly",priority:route===""?1:route.split("/").filter(Boolean).length===1?.85:.65}))}
+import type { MetadataRoute } from "next";
+
+const BASE_URL = "https://nivarobet.best";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+
+  // Keep this list limited to real, public, indexable pages.
+  // Do NOT add blocked/review-only GEO or casino pages here.
+  const routes = [
+    "",
+    "/casinos",
+    "/about",
+    "/legal/privacy",
+    "/legal/responsible-gambling",
+  ];
+
+  return routes.map((route) => ({
+    url: `${BASE_URL}${route}`,
+    lastModified: now,
+    changeFrequency: route === "" ? "daily" : "weekly",
+    priority: route === "" ? 1 : 0.7,
+  }));
+}

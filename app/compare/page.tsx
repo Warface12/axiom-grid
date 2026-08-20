@@ -1,3 +1,36 @@
-import { platforms } from "@/lib/demo-data";import { buildMetadata } from "@/lib/seo";
-export const metadata=buildMetadata({title:"Compare Crypto Exchanges, Brokers & Wallets",description:"Compare product types and research fields side by side before choosing a crypto exchange, broker or wallet.",path:"/compare"});
-export default function Page(){return <main><section className="shell page-hero"><span>DECISION TOOL</span><h1>Compare platforms</h1><p>A comparison should begin with product type. An exchange, a leveraged broker and a self-custody wallet solve different problems and carry different risks.</p></section><section className="shell content-shell"><div className="prose-card"><div style={{overflowX:"auto"}}><table className="admin-table"><thead><tr><th>Platform</th><th>Type</th><th>Custody</th><th>Research status</th><th>Current publishing rule</th></tr></thead><tbody>{platforms.map(p=><tr key={p.id}><td><b>{p.name}</b></td><td>{p.kind}</td><td>{p.custody||"N/A"}</td><td>{p.status}</td><td>Verify market + source before CTA</td></tr>)}</tbody></table></div></div></section></main>}
+import { GitCompare } from "lucide-react";
+import { CompareClient } from "@/components/CompareClient";
+import { EmptyState } from "@/components/GuideCard";
+import { getCasinos, getCasinosByIds } from "@/lib/data";
+import { buildMetadata } from "@/lib/seo";
+
+type Props = { searchParams: Promise<{ ids?: string }> };
+
+export const metadata = buildMetadata({
+  title: "Compare Casinos — NivaroBet",
+  description: "Compare casino ratings, bonuses, payment methods, licensing and availability side by side.",
+  path: "/compare",
+});
+
+export default async function ComparePage({ searchParams }: Props) {
+  const params = await searchParams;
+  const allCasinos = await getCasinos();
+  const selectedIds = params.ids?.split(",").filter(Boolean) || [];
+  const selectedCasinos = selectedIds.length ? await getCasinosByIds(selectedIds) : [];
+
+  return (
+    <main className="container page">
+      <div className="page-title">
+        <span className="eyebrow"><GitCompare size={15} /> COMPARE</span>
+        <h1>Compare casinos side by side.</h1>
+        <p>Select up to 4 casinos and compare ratings, bonuses, payments and more.</p>
+      </div>
+
+      {allCasinos.length ? (
+        <CompareClient casinos={selectedCasinos.length >= 2 ? selectedCasinos : allCasinos} />
+      ) : (
+        <EmptyState title="No casinos to compare" message="Add casinos in Admin first." actionHref="/admin/casinos" actionLabel="Manage Casinos" />
+      )}
+    </main>
+  );
+}
