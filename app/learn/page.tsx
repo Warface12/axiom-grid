@@ -1,0 +1,3 @@
+import { guides } from "@/lib/demo-data";import { GuideCard } from "@/components/GuideCard";import { buildMetadata } from "@/lib/seo";
+export const metadata=buildMetadata({title:"Crypto & Trading Learning Hub",description:"Learn how exchanges, brokers, wallets, custody, fees and crypto platform risks work before comparing providers.",path:"/learn"});
+export default function Page(){return <main><section className="shell page-hero"><span>EDUCATION HUB</span><h1>Learn before you choose</h1><p>Evergreen explainers support comparison pages and help users understand the product before encountering a commercial link.</p></section><section className="shell content-shell"><div className="guide-grid">{guides.map(g=><GuideCard guide={g} key={g.slug}/>)}</div></section></main>}

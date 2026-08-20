@@ -1,0 +1,1 @@
+import Link from "next/link";export default function NotFound(){return <main><section className="shell page-hero"><span>404</span><h1>Research path not found</h1><p>The requested page does not exist in this project.</p><Link className="btn-primary" href="/">Return home</Link></section></main>}

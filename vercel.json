@@ -1,0 +1,8 @@
+{
+  "framework": "nextjs",
+  "crons": [
+    { "path": "/api/nivaro-core/run", "schedule": "0 * * * *" },
+    { "path": "/api/seo/run", "schedule": "30 3 * * *" },
+    { "path": "/api/search-console/run", "schedule": "0 4 * * *" }
+  ]
+}
