@@ -1,34 +1,63 @@
 import { NextResponse } from "next/server";
-import { createAdminSession } from "@/lib/admin-auth";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-const ADMIN_EMAIL = "kshota094@gmail.com";
-// SHA-256 verifier only. The plaintext password is intentionally not stored in source.
-const ADMIN_PASSWORD_SHA256 = "0e4525b7d2e0b157bef1c86163deeefbba1d5d3d0696083c884ed6d4ec407486";
-
-async function sha256Hex(value: string) {
-  const bytes = new TextEncoder().encode(value);
-  const digest = await crypto.subtle.digest("SHA-256", bytes);
-  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
-}
+const FALLBACK_ADMIN_EMAIL = "kshota094@gmail.com";
 
 export async function POST(request: Request) {
-  const body = (await request.json().catch(() => null)) as { email?: string; password?: string } | null;
-  const email = body?.email?.trim().toLowerCase() || "";
-  const password = body?.password || "";
-  const passwordHash = await sha256Hex(password);
+  try {
+    const body = (await request.json().catch(() => null)) as
+      | { email?: string; password?: string }
+      | null;
 
-  if (email !== ADMIN_EMAIL || passwordHash !== ADMIN_PASSWORD_SHA256) {
-    return NextResponse.json({ error: "Incorrect email or password." }, { status: 401 });
+    const email = body?.email?.trim().toLowerCase() || "";
+    const password = body?.password || "";
+    const adminEmail = (process.env.ADMIN_EMAIL || FALLBACK_ADMIN_EMAIL)
+      .trim()
+      .toLowerCase();
+
+    if (!email || !password) {
+      return NextResponse.json(
+        { error: "Email and password are required." },
+        { status: 400 }
+      );
+    }
+
+    // Fail closed: only the configured Axiom administrator account may use
+    // the private control-room login, even if other Supabase users exist.
+    if (email !== adminEmail) {
+      return NextResponse.json(
+        { error: "Incorrect email or password." },
+        { status: 401 }
+      );
+    }
+
+    const supabase = await createSupabaseServerClient();
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error || !data.user || !data.session) {
+      return NextResponse.json(
+        { error: "Incorrect email or password." },
+        { status: 401 }
+      );
+    }
+
+    if (data.user.email?.toLowerCase() !== adminEmail) {
+      await supabase.auth.signOut();
+      return NextResponse.json({ error: "Unauthorized." }, { status: 403 });
+    }
+
+    // createSupabaseServerClient writes the Supabase auth cookies through
+    // next/headers during signInWithPassword. The protected admin layout then
+    // validates the user server-side with auth.getUser().
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    console.error("Axiom admin login failed:", error);
+    return NextResponse.json(
+      { error: "Unable to sign in right now." },
+      { status: 500 }
+    );
   }
-
-  const token = await createAdminSession(ADMIN_EMAIL);
-  const response = NextResponse.json({ ok: true });
-  response.cookies.set("axiom_admin", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 60 * 12,
-  });
-  return response;
 }

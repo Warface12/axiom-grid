@@ -1,6 +1,8 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
+const FALLBACK_ADMIN_EMAIL = "kshota094@gmail.com";
+
 export async function createClient() {
   const cookieStore = await cookies();
 
@@ -18,7 +20,8 @@ export async function createClient() {
               cookieStore.set(name, value, options);
             });
           } catch {
-            // Cookies may not be writable in every Server Component context.
+            // Server Components can be read-only. Route handlers and actions
+            // are responsible for session cookie writes.
           }
         },
       },
@@ -27,24 +30,28 @@ export async function createClient() {
 }
 
 export async function isAdminUser() {
-  const supabase = await createClient();
+  if (
+    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ) {
+    return false;
+  }
 
+  const supabase = await createClient();
   const {
     data: { user },
     error,
   } = await supabase.auth.getUser();
 
-  if (error || !user) {
+  if (error || !user?.email) {
     return false;
   }
 
-  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminEmail = (process.env.ADMIN_EMAIL || FALLBACK_ADMIN_EMAIL)
+    .trim()
+    .toLowerCase();
 
-  if (!adminEmail) {
-    return false;
-  }
-
-  return user.email?.toLowerCase() === adminEmail.toLowerCase();
+  return user.email.toLowerCase() === adminEmail;
 }
 
 export async function requireAdmin() {
