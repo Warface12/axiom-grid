@@ -10,7 +10,7 @@ Current leading crypto/finance publishers commonly combine:
 - clear discussion of fees, security, product availability and user fit;
 - internal links between informational and commercial pages.
 
-Axiom Grid preserves those **patterns** without copying competitor wording or page text.
+TopPick.pro preserves those **patterns** without copying competitor wording or page text.
 
 ## Planned clusters
 - `/exchanges` → exchange reviews → exchange-vs-exchange comparisons → fee/security/beginner guides

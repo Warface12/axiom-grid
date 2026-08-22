@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { Search } from "lucide-react";
-import { buildMetadata } from "@/lib/seo";
-export const metadata=buildMetadata({title:"Search — Axiom Grid",description:"Search Axiom Grid research sections.",path:"/search",noIndex:true});
-export default function Page(){return <main className="shell content-shell"><section className="page-hero"><span>SEARCH</span><h1>Search the grid.</h1><p>Use the research layers below while the full index is being connected to live platform data.</p></section><div className="ag-lanes"><Link className="ag-lane" href="/exchanges"><Search/><div className="lane-copy"><h2>Exchanges</h2><p>Crypto venues, custody and fees.</p></div></Link><Link className="ag-lane" href="/brokers"><Search/><div className="lane-copy"><h2>Brokers</h2><p>Execution, products and market access.</p></div></Link><Link className="ag-lane" href="/wallets"><Search/><div className="lane-copy"><h2>Wallets</h2><p>Custody, recovery and security.</p></div></Link></div></main>}
+import {buildMetadata}from"@/lib/seo";import{SearchClient}from"@/components/SearchClient";
+export const metadata=buildMetadata({title:"Search platform research — TopPick.pro",description:"Search public TopPick.pro research profiles for exchanges, brokers and wallets.",path:"/search",noIndex:true});
+export default function Page(){return <main className="shell content-shell"><section className="page-hero"><span>RESEARCH SEARCH</span><h1>Search the grid.</h1><p>Search public research profiles. Commercial links remain controlled separately by market eligibility.</p></section><SearchClient/></main>}

@@ -1,63 +1,24 @@
 import { NextResponse } from "next/server";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { COOKIE_NAME, createAdminSession } from "@/lib/admin-auth";
 
-const FALLBACK_ADMIN_EMAIL = "kshota094@gmail.com";
+export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  try {
-    const body = (await request.json().catch(() => null)) as
-      | { email?: string; password?: string }
-      | null;
+  const body = (await request.json().catch(() => null)) as { email?: string; password?: string } | null;
+  const email = body?.email?.trim().toLowerCase() || "";
+  const password = body?.password || "";
+  const expectedEmail = (process.env.ADMIN_EMAIL || "").trim().toLowerCase();
+  const expectedPassword = process.env.ADMIN_PASSWORD || "";
 
-    const email = body?.email?.trim().toLowerCase() || "";
-    const password = body?.password || "";
-    const adminEmail = (process.env.ADMIN_EMAIL || FALLBACK_ADMIN_EMAIL)
-      .trim()
-      .toLowerCase();
-
-    if (!email || !password) {
-      return NextResponse.json(
-        { error: "Email and password are required." },
-        { status: 400 }
-      );
-    }
-
-    // Fail closed: only the configured Axiom administrator account may use
-    // the private control-room login, even if other Supabase users exist.
-    if (email !== adminEmail) {
-      return NextResponse.json(
-        { error: "Incorrect email or password." },
-        { status: 401 }
-      );
-    }
-
-    const supabase = await createSupabaseServerClient();
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error || !data.user || !data.session) {
-      return NextResponse.json(
-        { error: "Incorrect email or password." },
-        { status: 401 }
-      );
-    }
-
-    if (data.user.email?.toLowerCase() !== adminEmail) {
-      await supabase.auth.signOut();
-      return NextResponse.json({ error: "Unauthorized." }, { status: 403 });
-    }
-
-    // createSupabaseServerClient writes the Supabase auth cookies through
-    // next/headers during signInWithPassword. The protected admin layout then
-    // validates the user server-side with auth.getUser().
-    return NextResponse.json({ ok: true });
-  } catch (error) {
-    console.error("Axiom admin login failed:", error);
-    return NextResponse.json(
-      { error: "Unable to sign in right now." },
-      { status: 500 }
-    );
+  if (!expectedEmail || !expectedPassword || !process.env.ADMIN_SESSION_SECRET) {
+    return NextResponse.json({ error: "Admin login is not configured. Add ADMIN_EMAIL, ADMIN_PASSWORD and ADMIN_SESSION_SECRET in Vercel." }, { status: 503 });
   }
+  if (email !== expectedEmail || password !== expectedPassword) {
+    return NextResponse.json({ error: "Incorrect email or password." }, { status: 401 });
+  }
+
+  const token = await createAdminSession(expectedEmail);
+  const response = NextResponse.json({ ok: true });
+  response.cookies.set(COOKIE_NAME, token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax", path: "/", maxAge: 60 * 60 * 12 });
+  return response;
 }

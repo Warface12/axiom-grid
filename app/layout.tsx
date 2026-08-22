@@ -1,7 +1,4 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { buildMetadata, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
-export const metadata:Metadata={...buildMetadata({title:"Axiom Grid — Digital Asset Intelligence",description:"Independent research for crypto exchanges, brokers, wallets, fees, security and market access.",path:"/"}),verification:{google:process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION||undefined},icons:{icon:[{url:"/axiom-mark.svg",type:"image/svg+xml"}],apple:"/axiom-mark.svg"}};
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><head><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(organizationJsonLd())}}/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(websiteJsonLd())}}/></head><body><Header/><div id="main-content">{children}</div><Footer/></body></html>}
+import type{Metadata}from"next";import"./globals.css";import{Header}from"@/components/Header";import{Footer}from"@/components/Footer";import{buildMetadata,organizationJsonLd,websiteJsonLd}from"@/lib/seo";
+export const metadata:Metadata={...buildMetadata({title:"TopPick.pro — Compare Brokers, Exchanges & Wallets",description:"Independent evidence-led research and comparison for brokers, crypto exchanges, wallets and trading platforms.",path:"/"}),verification:{google:process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION||undefined},icons:{icon:[{url:"/toppick-mark.svg",type:"image/svg+xml"}],apple:"/toppick-mark.svg"},category:"finance"};
+const themeScript=`try{var t=localStorage.getItem('toppick-theme');document.documentElement.dataset.theme=t==='dark'?'dark':'light'}catch(e){}`;
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{__html:themeScript}}/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(organizationJsonLd())}}/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(websiteJsonLd())}}/></head><body><a className="skip-link" href="#main-content">Skip to content</a><Header/><div id="main-content">{children}</div><Footer/></body></html>}

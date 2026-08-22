@@ -1,3 +1,1 @@
-{
-  "framework": "nextjs"
-}
+{"framework":"nextjs","crons":[{"path":"/api/monitoring/run","schedule":"15 2 * * *"},{"path":"/api/seo-platform/run/daily","schedule":"35 3 * * *"},{"path":"/api/search-console/run","schedule":"0 4 * * *"},{"path":"/api/seo/run","schedule":"30 4 * * *"}]}

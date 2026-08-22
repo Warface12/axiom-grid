@@ -1,0 +1,2 @@
+import{Fingerprint,ShieldCheck,Clock3,Globe2}from"lucide-react";
+export function TrustStrip(){return <section className="tp-trust-strip"><div><Fingerprint/><span><b>Source-linked</b><small>Evidence is stored with each review</small></span></div><div><Clock3/><span><b>Freshness-aware</b><small>Stale records are flagged for review</small></span></div><div><Globe2/><span><b>Market-aware</b><small>Availability is never assumed globally</small></span></div><div><ShieldCheck/><span><b>Fail-closed</b><small>Unknown promotion eligibility stays off</small></span></div></section>}

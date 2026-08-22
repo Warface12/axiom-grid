@@ -1,3 +1,3 @@
-import { AdminTitle } from "@/components/AdminShell";
-import { guides } from "@/lib/demo-data";
-export default function Page(){return <main className="ax-admin-page"><AdminTitle title="Editorial" subtitle="Research queue for evergreen education and comparison content."/><div className="ax-inventory-grid"><div className="ax-inventory-head"><span>GUIDE</span><span>CLUSTER</span><span>READ</span><span>STATUS</span><span></span><span></span></div>{guides.map(g=><div className="ax-inventory-row" key={g.slug}><span><b>{g.title}</b></span><span>{g.category}</span><span>{g.readTime}</span><span className="ax-state-chip is-research">research</span><span></span><span></span></div>)}</div></main>}
+import {AdminTitle}from"@/components/AdminShell";
+import {PartnerPostsAdminClient}from"@/components/admin/PartnerPostsAdminClient";
+export default function Page(){return <main className="ax-admin-page"><AdminTitle title="Editorial & partner updates" subtitle="Create sourced partner news, bonus updates and product changes without unsupported promises. Public posts inherit market eligibility controls automatically."/><PartnerPostsAdminClient/></main>}

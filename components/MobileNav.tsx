@@ -1,0 +1,3 @@
+"use client";import{useState}from"react";import Link from"next/link";import{Menu,X}from"lucide-react";
+const links=[["Exchanges","/exchanges"],["Brokers","/brokers"],["Wallets","/wallets"],["Compare","/compare"],["Research","/learn"],["Markets","/markets"]];
+export function MobileNav(){const[open,setOpen]=useState(false);return <><button className="ag-icon-btn tp-menu" onClick={()=>setOpen(!open)} aria-label="Toggle navigation">{open?<X size={18}/>:<Menu size={18}/>}</button>{open&&<div className="tp-mobile-nav">{links.map(([a,h])=><Link key={h} href={h} onClick={()=>setOpen(false)}>{a}</Link>)}<Link href="/search" onClick={()=>setOpen(false)}>Search</Link></div>}</>}
