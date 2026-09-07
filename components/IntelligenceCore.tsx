@@ -93,38 +93,60 @@ export function IntelligenceCore() {
       ctx!.fillRect(0, 0, width, height);
 
       const origin = project(0, 0, 0, width, height, rotY, rotX);
-      ctx!.strokeStyle = `rgba(${cyan},0.22)`;
-      ctx!.lineWidth = 1.15;
-      for (const n of nodes) {
-        const p = project(n.x, n.y, n.z, width, height, rotY, rotX);
-        ctx!.globalAlpha = 0.25 + p.s * 0.45;
+      ctx!.strokeStyle = `rgba(${cyan},0.18)`;
+      ctx!.lineWidth = 1;
+      [90, 124, 156].forEach((rad, idx) => {
+        ctx!.beginPath();
+        const tilt = idx === 1 ? 8 : idx === 2 ? -14 : 22;
+        for (let i = 0; i <= 48; i += 1) {
+          const a = (i / 48) * Math.PI * 2;
+          const p = project(Math.cos(a) * rad, tilt, Math.sin(a) * rad, width, height, rotY, rotX);
+          if (i === 0) ctx!.moveTo(p.x, p.y);
+          else ctx!.lineTo(p.x, p.y);
+        }
+        ctx!.closePath();
+        ctx!.globalAlpha = 0.35 + idx * 0.12;
+        ctx!.stroke();
+      });
+      ctx!.globalAlpha = 1;
+      ctx!.strokeStyle = `rgba(${cyan},0.28)`;
+      ctx!.lineWidth = 1.2;
+      const ordered = nodes.map((n, i) => ({ n, i, p: project(n.x, n.y, n.z, width, height, rotY, rotX) }))
+        .sort((a, b) => a.p.z - b.p.z);
+      for (const item of ordered) {
+        ctx!.globalAlpha = 0.22 + item.p.s * 0.5;
         ctx!.beginPath();
         ctx!.moveTo(origin.x, origin.y);
-        ctx!.lineTo(p.x, p.y);
+        ctx!.lineTo(item.p.x, item.p.y);
         ctx!.stroke();
       }
       ctx!.globalAlpha = 1;
       for (const s of sparks) {
         const p = project(s.x, s.y, s.z, width, height, rotY, rotX);
-        ctx!.fillStyle = `rgba(${cyan},${0.12 + p.s * 0.25})`;
-        ctx!.fillRect(p.x, p.y, 1.4, 1.4);
+        ctx!.fillStyle = `rgba(${cyan},${0.1 + p.s * 0.28})`;
+        ctx!.fillRect(p.x, p.y, 1.5 * p.s, 1.5 * p.s);
       }
-      if (tier === "high") {
-        ctx!.shadowColor = `rgb(${cyan})`;
-        ctx!.shadowBlur = 10;
-      }
-      ctx!.fillStyle = `rgb(${cyan})`;
+      const core = ctx!.createRadialGradient(origin.x - 4, origin.y - 5, 2, origin.x, origin.y, 22);
+      core.addColorStop(0, "#e7fbff");
+      core.addColorStop(0.35, `rgb(${cyan})`);
+      core.addColorStop(1, "rgba(0,0,0,0)");
+      ctx!.fillStyle = core;
       ctx!.beginPath();
-      ctx!.arc(origin.x, origin.y, 12, 0, Math.PI * 2);
+      ctx!.arc(origin.x, origin.y, 18, 0, Math.PI * 2);
       ctx!.fill();
-      ctx!.shadowBlur = 0;
-      nodes.forEach((n, i) => {
-        const p = project(n.x, n.y, n.z, width, height, rotY, rotX);
-        const on = i === activeRef.current;
-        ctx!.fillStyle = on ? `rgb(${cyan})` : light ? "rgba(16,32,51,0.72)" : "rgba(200,236,255,0.88)";
+      ordered.forEach((item) => {
+        const on = item.i === activeRef.current;
+        const r = (on ? 6.2 : 3.4) * item.p.s;
+        ctx!.fillStyle = on ? `rgb(${cyan})` : light ? "rgba(16,32,51,0.85)" : "rgba(200,236,255,0.92)";
         ctx!.beginPath();
-        ctx!.arc(p.x, p.y, on ? 5.4 * p.s : 3.2 * p.s, 0, Math.PI * 2);
+        ctx!.arc(item.p.x, item.p.y, r, 0, Math.PI * 2);
         ctx!.fill();
+        if (on) {
+          ctx!.strokeStyle = `rgba(${cyan},0.55)`;
+          ctx!.beginPath();
+          ctx!.arc(item.p.x, item.p.y, r + 5, 0, Math.PI * 2);
+          ctx!.stroke();
+        }
       });
       lastDraw = now;
     }
@@ -204,6 +226,9 @@ export function IntelligenceCore() {
             </radialGradient>
           </defs>
           <ellipse cx="240" cy="170" rx="170" ry="70" fill="url(#tpCoreGlow)" />
+          <ellipse cx="240" cy="170" rx="168" ry="58" fill="none" stroke="#37d9ff" strokeOpacity="0.28" />
+          <ellipse cx="240" cy="170" rx="118" ry="38" fill="none" stroke="#37d9ff" strokeOpacity="0.18" transform="rotate(-18 240 170)" />
+          <ellipse cx="240" cy="170" rx="86" ry="86" fill="none" stroke="#37d9ff" strokeOpacity="0.12" />
           {svgNodes.map((n, i) => (
             <g key={BRANCHES[i].id}>
               <line x1="240" y1="170" x2={n.x} y2={n.y} stroke="#37d9ff" strokeOpacity={i === active ? 0.7 : 0.28} />
