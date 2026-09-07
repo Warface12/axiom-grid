@@ -62,6 +62,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   if (destination) destination = withCampaign(destination, data.affiliate_campaign, geoSubid);
   const safe = destination ? parsePublicHttpUrl(destination) : { ok: false as const };
   if (!safe.ok) return NextResponse.redirect(new URL("/unavailable?reason=link", request.url));
+  const clickId = crypto.randomUUID().replace(/-/g, "");
   const click = {
     platform_id: platformId,
     market_code: decision.marketCode,
@@ -69,13 +70,13 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     user_agent: request.headers.get("user-agent"),
     placement: request.nextUrl.searchParams.get("placement") || request.nextUrl.searchParams.get("src") || null,
     cta: request.nextUrl.searchParams.get("cta") || null,
+    click_id: clickId,
   };
   const { error: clickError } = await supabase.from("affiliate_click").insert(click);
   if (clickError && /column|schema cache/i.test(clickError.message)) {
-    const { placement, cta, ...legacy } = click;
+    const { placement, cta, click_id, ...legacy } = click;
     await supabase.from("affiliate_click").insert(legacy);
   }
-  const clickId = crypto.randomUUID().replace(/-/g, "");
   const { error: trackError } = await supabase.from("tracking_click").insert({
     click_id: clickId,
     platform_id: platformId,
