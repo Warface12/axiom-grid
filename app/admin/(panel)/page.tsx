@@ -28,6 +28,7 @@ export default async function Page() {
         <div><small>QUALITY</small><strong>{kpis.needsReview}</strong><span>{kpis.missingSeo} missing SEO · {kpis.missingAffiliate} public without affiliate URL</span></div>
       </section>
       <section className="ax-admin-launch">
+        <Link href="/admin/partners"><Globe2 /><b>Partners</b><span>Applications, claims and commercial states</span><ArrowUpRight /></Link>
         <Link href="/admin/platforms"><Boxes /><b>Partner inventory</b><span>Add, import from URL, duplicate and publish</span><ArrowUpRight /></Link>
         <Link href="/admin/content"><BookOpenText /><b>Editorial</b><span>Research and partner updates</span><ArrowUpRight /></Link>
         <Link href="/admin/markets"><Globe2 /><b>Markets</b><span>Availability, GEO affiliates and commercial gates</span><ArrowUpRight /></Link>

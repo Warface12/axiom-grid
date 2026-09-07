@@ -132,7 +132,8 @@ html[data-scheme="light"] .tp-drawer-panel{background:#fff;color:#102033}
 .tp-glossary-item{border:1px solid var(--tp-border);border-radius:16px;padding:18px 20px;background:var(--tp-panel)}
 .tp-finder{border:1px solid var(--tp-border);border-radius:20px;padding:22px;display:grid;gap:14px;background:var(--tp-panel)}
 .tp-finder fieldset{border:0;padding:0;display:grid;gap:8px}
-.tp-finder label{display:flex;gap:10px;align-items:center;min-height:44px}
+.tp-finder input,.tp-finder select,.tp-finder textarea{width:100%;min-height:44px;border:1px solid var(--tp-border);border-radius:12px;padding:8px 12px;background:var(--tp-panel);color:inherit}
+.tp-finder label{display:grid;gap:6px;font-weight:650}
 .compare-stack{display:none;gap:12px}
 .compare-stack article{border:1px solid var(--tp-border);border-radius:16px;padding:14px}
 html[data-scheme="dark"] .compare-stack article{background:#07141d}

@@ -1,6 +1,6 @@
 import { MarketSwitcher } from "@/components/MarketSwitcher";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Search, UserRound } from "lucide-react";
 import { SITE_NAME } from "@/lib/site";
 import { TopPickMark } from "@/components/TopPickMark";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -26,8 +26,13 @@ export function Header() {
           <Link href="/finder">Finder</Link>
           <Link href="/learn">Research</Link>
           <Link href="/markets">Markets</Link>
+          <Link href="/partners">Partners</Link>
+          <Link href="/opportunities">Opportunities</Link>
         </nav>
         <div className="ag-header-actions">
+          <Link href="/account" className="ag-icon-btn" aria-label="Account">
+            <UserRound size={17} />
+          </Link>
           <Link href="/search" className="ag-icon-btn" aria-label="Search">
             <Search size={17} />
           </Link>

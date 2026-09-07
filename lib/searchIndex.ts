@@ -37,6 +37,12 @@ export async function searchPublic(q: string, limit = 24): Promise<SearchHit[]> 
   const term = q.trim().toLowerCase();
   if (term.length < 2) return [];
   const hits: SearchHit[] = [];
+  if ("partner".includes(term) || term.includes("advertis") || term.includes("partner")) {
+    hits.push({ id: "page-partners", title: "Partner with TopPick", short: "Apply for verified partner access. Advertising and affiliate are separate.", kind: "page", href: "/partners" });
+  }
+  if (term.includes("offer") || term.includes("opportun") || term.includes("airdrop")) {
+    hits.push({ id: "page-opportunities", title: "Opportunities", short: "Published offers only. Empty until real records exist.", kind: "page", href: "/opportunities" });
+  }
   for (const cat of CATALOG) {
     const hay = `${cat.plural} ${cat.label} ${cat.summary} ${cat.hub}`.toLowerCase();
     if (hay.includes(term)) hits.push({ id: `cat-${cat.id}`, title: cat.plural, short: cat.summary, kind: "category", href: `/${cat.hub}` });

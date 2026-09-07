@@ -75,5 +75,17 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     const { placement, cta, ...legacy } = click;
     await supabase.from("affiliate_click").insert(legacy);
   }
-  return NextResponse.redirect(safe.url.toString(), 302);
+  const clickId = crypto.randomUUID().replace(/-/g, "");
+  const { error: trackError } = await supabase.from("tracking_click").insert({
+    click_id: clickId,
+    platform_id: platformId,
+    placement: click.placement,
+    market_code: decision.marketCode,
+    source_path: request.headers.get("referer"),
+    destination_kind: "toppick_affiliate",
+  });
+  void trackError;
+  const dest = new URL(safe.url.toString());
+  if (!dest.searchParams.get("clickid")) dest.searchParams.set("clickid", clickId);
+  return NextResponse.redirect(dest.toString(), 302);
 }

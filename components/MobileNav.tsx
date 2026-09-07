@@ -30,7 +30,7 @@ export function MobileNav() {
               <ThemeToggle />
               <MarketSwitcher />
             </div>
-            {[["Home", "/"], ["Compare", "/compare"], ["Finder", "/finder"], ["Search", "/search"], ["Research", "/learn"], ["Glossary", "/glossary"], ["Markets", "/markets"], ["Install app", "/apps"]].map(([label, href]) => (
+            {[["Home", "/"], ["Compare", "/compare"], ["Finder", "/finder"], ["Search", "/search"], ["Opportunities", "/opportunities"], ["Partners", "/partners"], ["Account", "/account"], ["Research", "/learn"], ["Glossary", "/glossary"], ["Markets", "/markets"], ["Install app", "/apps"]].map(([label, href]) => (
               <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>
             ))}
             {CATALOG.map((item) => (

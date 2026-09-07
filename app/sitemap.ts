@@ -5,7 +5,7 @@ import { MARKET_POLICIES } from "@/lib/markets";
 import { guides } from "@/lib/guides";
 import { CATALOG, platformPath } from "@/lib/catalog";
 
-const STATIC = ["/", "/about", "/apps", "/finder", "/glossary", "/source-policy", "/exchanges", "/brokers", "/wallets", "/research", "/updates", "/compare", "/learn", "/markets", "/fees", "/security", "/how-we-rate", "/editorial-policy", "/corrections", "/contact", "/legal/affiliate-disclosure", "/legal/risk-disclosure", "/legal/privacy", "/legal/cookies", "/legal/terms"];
+const STATIC = ["/", "/about", "/apps", "/finder", "/glossary", "/source-policy", "/partners", "/exchanges", "/brokers", "/wallets", "/research", "/updates", "/compare", "/learn", "/markets", "/fees", "/security", "/how-we-rate", "/editorial-policy", "/corrections", "/contact", "/legal/affiliate-disclosure", "/legal/risk-disclosure", "/legal/privacy", "/legal/cookies", "/legal/terms"];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
