@@ -1,0 +1,116 @@
+import type { Guide } from "@/lib/types";
+
+export type GuideArticle = Guide & { body: { heading: string; paragraphs: string[] }[] };
+
+export const guides: GuideArticle[] = [
+  {
+    slug: "how-to-choose-a-crypto-exchange",
+    title: "How to choose a crypto exchange",
+    excerpt: "A practical framework for comparing security, fees, funding, product access and jurisdiction.",
+    category: "exchanges",
+    readTime: "8 min",
+    body: [
+      { heading: "Separate the product from the marketing", paragraphs: [
+        "A crypto exchange is a venue that matches or fills orders in digital assets and usually also holds customer funds. Compare it as a custody-plus-market-access product, not as a generic “trading app”.",
+        "Start with the legal entity named in the terms, the markets it actually onboards, and whether you would be a customer of that entity. Do not infer availability from a global homepage or from an affiliate advertisement.",
+      ]},
+      { heading: "What to verify before opening an account", paragraphs: [
+        "Identity: official domain, operating entity, and whether the product is an exchange, broker wrapper, or hybrid.",
+        "Custody: who holds assets, how withdrawals work, and what happens during an outage. If the operator does not publish a current custody or proof-of-reserves statement, treat that as missing evidence rather than a positive.",
+        "Cost: maker/taker fees, spreads, deposit and withdrawal fees, and conversion fees. A headline “zero fee” claim is incomplete until spread and funding costs are visible.",
+        "Jurisdiction: onboarding rules, product restrictions, and whether promotional activity is allowed in your market. TopPick.pro keeps research visibility and partner CTAs as separate decisions.",
+      ]},
+    ],
+  },
+  {
+    slug: "exchange-vs-wallet",
+    title: "Crypto exchange vs wallet",
+    excerpt: "Understand custody, control of private keys, convenience and the different risk profiles.",
+    category: "wallets",
+    readTime: "7 min",
+    body: [
+      { heading: "Different jobs, different failures", paragraphs: [
+        "An exchange is built for matching, liquidity and account-level onboarding. A wallet is built for holding keys or instructing transactions. Mixing the two in one comparison hides the main risk: who can move the asset without you.",
+        "Self-custody wallets give you recovery responsibility. Custodial wallets and exchange balances give the operator operational and counterparty responsibility. Neither model is universally safer; they fail in different ways.",
+      ]},
+      { heading: "A working decision rule", paragraphs: [
+        "If you need frequent conversion, fiat ramps or order types, an exchange account may be the operational fit — provided you accept venue risk and only keep what you intend to trade.",
+        "If you need long-term control of keys, a wallet with a documented recovery path is the relevant product. Compare seed/backup design, device security, supported assets and the vendor’s update process rather than bonus-style marketing.",
+      ]},
+    ],
+  },
+  {
+    slug: "broker-vs-exchange",
+    title: "Broker vs crypto exchange",
+    excerpt: "The structural differences between trading through a broker and trading on a digital-asset exchange.",
+    category: "brokers",
+    readTime: "9 min",
+    body: [
+      { heading: "Execution and ownership are not the same", paragraphs: [
+        "A broker typically offers contracts, CFDs or other derivatives referenced to an underlying market. You may have exposure to price movement without holding the underlying asset.",
+        "A spot crypto exchange typically credits an account balance in the traded asset, subject to the venue’s custody, withdrawal and terms. Treating both as “trading platforms” hides leverage, expiry, entity and client-money differences.",
+      ]},
+      { heading: "Compare within the product class", paragraphs: [
+        "For brokers: legal entity, product permissions, margin rules, negative-balance treatment where published, and whether the account is available in your market.",
+        "For exchanges: listed assets, fee schedule, funding rails, wallet/withdrawal controls and operational disclosures. TopPick.pro keeps these directories separate so the comparison stays honest.",
+      ]},
+    ],
+  },
+  {
+    slug: "crypto-fees-explained",
+    title: "Crypto fees explained",
+    excerpt: "Maker/taker fees, spreads, funding charges and withdrawals — what to compare before signing up.",
+    category: "learn",
+    readTime: "10 min",
+    body: [
+      { heading: "The fee you see is rarely the whole cost", paragraphs: [
+        "Published maker/taker schedules are a starting point, not a total cost of trading. Spread, conversion, funding, withdrawal network fees and inactivity charges can dominate for smaller accounts.",
+        "If a page does not show a current fee schedule from the operator, TopPick.pro will not invent one. Missing cost data is shown as unpublished rather than estimated.",
+      ]},
+      { heading: "A simple comparison checklist", paragraphs: [
+        "Spot vs derivatives: funding and overnight costs only apply where the product uses them.",
+        "Fiat ramps: deposit and payout fees can exceed trading fees.",
+        "Network withdrawals: on-chain fees vary and are not controlled by comparison publishers.",
+        "Account tiers: volume discounts are operator-specific; do not assume a public VIP schedule applies to you.",
+      ]},
+    ],
+  },
+  {
+    slug: "self-custody-basics",
+    title: "Self-custody basics",
+    excerpt: "Seed phrases, hot vs cold wallets and practical security habits for beginners.",
+    category: "wallets",
+    readTime: "11 min",
+    body: [
+      { heading: "Control means responsibility", paragraphs: [
+        "Self-custody means you (or your device) can authorize transfers. That removes exchange counterparty risk and introduces backup, phishing and device-compromise risk.",
+        "A seed phrase or recovery kit is not a password to reset. Anyone who copies it can move assets. Store it offline, never in screenshots, email or chat.",
+      ]},
+      { heading: "Hot, cold and vendor updates", paragraphs: [
+        "Hot wallets stay connected and are convenient for smaller operational balances. Cold or hardware wallets keep keys off general-purpose computers, which reduces some malware paths but does not remove physical-loss or supply-chain questions.",
+        "Compare vendor documentation, firmware update process, supported assets and recovery design. Do not treat a wallet review as a guarantee that a device is free of defects.",
+      ]},
+    ],
+  },
+  {
+    slug: "how-we-rate-platforms",
+    title: "How our platform scoring works",
+    excerpt: "A transparent evidence-first methodology for exchanges, brokers and wallets.",
+    category: "learn",
+    readTime: "6 min",
+    body: [
+      { heading: "Evidence before promotion", paragraphs: [
+        "TopPick.pro does not publish a synthetic star rating unless an editorial score is stored against a reviewed record. Missing scores are omitted rather than filled with placeholders.",
+        "Each public profile is expected to separate identity, product scope, cost, security or custody, regulatory context, evidence freshness and market eligibility. A partner relationship never proves that a product is available in a visitor’s country.",
+      ]},
+      { heading: "Fail-closed commercial routing", paragraphs: [
+        "Affiliate buttons stay disabled unless an approved, unexpired market rule allows both product availability and commercial promotion.",
+        "SEO automation may recommend snippet or internal-linking improvements. It does not auto-publish factual claims, bonuses or licenses.",
+      ]},
+    ],
+  },
+];
+
+export function getGuide(slug: string) {
+  return guides.find((guide) => guide.slug === slug) || null;
+}

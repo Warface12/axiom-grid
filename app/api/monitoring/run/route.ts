@@ -1,1 +1,16 @@
-import{NextRequest,NextResponse}from"next/server";import{runMonitoringCycle}from"@/lib/monitoring";export async function GET(r:NextRequest){const secret=process.env.CRON_SECRET;if(secret&&r.headers.get("authorization")!==`Bearer ${secret}`)return NextResponse.json({ok:false},{status:401});try{return NextResponse.json(await runMonitoringCycle())}catch(e){return NextResponse.json({ok:false,error:e instanceof Error?e.message:"Monitoring failed"},{status:500})}}
+import { NextRequest, NextResponse } from "next/server";
+import { requireCronSecret } from "@/lib/cronAuth";
+import { runMonitoringCycle } from "@/lib/monitoring";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+export async function GET(request: NextRequest) {
+  const denied = requireCronSecret(request);
+  if (denied) return denied;
+  try {
+    return NextResponse.json(await runMonitoringCycle());
+  } catch (error) {
+    return NextResponse.json({ ok: false, error: error instanceof Error ? error.message : "Monitoring failed" }, { status: 500 });
+  }
+}

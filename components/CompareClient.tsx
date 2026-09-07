@@ -1,72 +1,86 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Check, GitCompare, Star } from "lucide-react";
+import { Check, GitCompare } from "lucide-react";
+import type { Platform } from "@/lib/types";
 
-type CompareCasino = {
-  id: string;
-  name: string;
-  slug: string;
-  rating: number;
-  welcome_bonus: string | null;
-  no_deposit: boolean;
-  free_spins: boolean;
-  crypto: boolean;
-  payment_methods: string[];
-  license_info: string | null;
-  country_codes: string[];
-  min_deposit: string | null;
-  payout_speed?: string | null;
-  withdrawal_limits?: string | null;
-  kyc_required?: boolean | null;
-  live_chat?: boolean | null;
-  mobile_app?: boolean | null;
-};
+type Props = { platforms: Platform[]; initialIds?: string[] };
 
-type Props = { casinos: CompareCasino[] };
-
-export function CompareClient({ casinos }: Props) {
-  const [selected, setSelected] = useState<string[]>([]);
-  const router = useRouter();
+export function CompareClient({ platforms, initialIds = [] }: Props) {
+  const [selected, setSelected] = useState<string[]>(initialIds.filter((id) => platforms.some((p) => (p.id || p.slug) === id)).slice(0, 4));
 
   function toggle(id: string) {
-    setSelected((prev) => prev.includes(id) ? prev.filter((x) => x !== id) : prev.length < 4 ? [...prev, id] : prev);
+    setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : prev.length < 4 ? [...prev, id] : prev));
   }
-  function goCompare() { router.push(`/compare?ids=${selected.join(",")}`); }
-  const compareList = casinos.filter((c) => selected.includes(c.id));
 
-  return <>
-    <div className="compare-picker-grid">
-      {casinos.map((casino) => <label key={casino.id} className={`compare-picker-card ${selected.includes(casino.id) ? "selected" : ""}`}>
-        <div className="compare-select"><input type="checkbox" checked={selected.includes(casino.id)} onChange={() => toggle(casino.id)} /><strong>{casino.name}</strong></div>
-        {Number(casino.rating) > 0 ? <span className="compare-rating"><Star size={12} fill="currentColor"/>{casino.rating}/10</span> : null}
-        {casino.welcome_bonus ? <p className="compare-meta">{casino.welcome_bonus}</p> : null}
-      </label>)}
-    </div>
+  const compareList = useMemo(
+    () => platforms.filter((p) => selected.includes(p.id || p.slug)),
+    [platforms, selected]
+  );
 
-    {selected.length >= 2 ? <div className="compare-bar"><span><GitCompare size={15}/>{selected.length} selected</span><button className="primary-btn" onClick={goCompare}>Compare selected</button></div> : null}
+  return (
+    <>
+      <div className="compare-picker-grid">
+        {platforms.map((platform) => {
+          const id = platform.id || platform.slug;
+          return (
+            <label key={id} className={`compare-picker-card ${selected.includes(id) ? "selected" : ""}`}>
+              <div className="compare-select">
+                <input type="checkbox" checked={selected.includes(id)} onChange={() => toggle(id)} />
+                <strong>{platform.name}</strong>
+              </div>
+              <p className="compare-meta">{platform.kind} · {platform.status}</p>
+              <p className="compare-meta">{platform.short}</p>
+            </label>
+          );
+        })}
+      </div>
 
-    {compareList.length >= 2 ? <div className="compare-table-wrap premium-compare-wrap"><table className="compare-table"><thead><tr><th>Feature</th>{compareList.map((c) => <th key={c.id}><Link href={`/casinos/${c.slug}`}>{c.name}</Link></th>)}</tr></thead><tbody>
-      <CompareRow label="Rating" values={compareList.map((c) => Number(c.rating) > 0 ? `${c.rating}/10` : "—")} />
-      <CompareRow label="Welcome Bonus" values={compareList.map((c) => c.welcome_bonus || "—")} />
-      <CompareRow label="No Deposit" values={compareList.map((c) => c.no_deposit ? "Yes" : "—")} />
-      <CompareRow label="Free Spins" values={compareList.map((c) => c.free_spins ? "Yes" : "—")} />
-      <CompareRow label="Minimum Deposit" values={compareList.map((c) => c.min_deposit || "—")} />
-      <CompareRow label="Payout Speed" values={compareList.map((c) => c.payout_speed || "—")} />
-      <CompareRow label="Withdrawal Limits" values={compareList.map((c) => c.withdrawal_limits || "—")} />
-      <CompareRow label="Payment Methods" values={compareList.map((c) => c.payment_methods?.join(", ") || "—")} />
-      <CompareRow label="License" values={compareList.map((c) => c.license_info || "—")} />
-      <CompareRow label="KYC" values={compareList.map((c) => c.kyc_required === true ? "Required" : c.kyc_required === false ? "Varies / not always" : "—")} />
-      <CompareRow label="Live Chat" values={compareList.map((c) => c.live_chat ? "Yes" : "—")} />
-      <CompareRow label="Mobile App" values={compareList.map((c) => c.mobile_app ? "Yes" : "—")} />
-      <CompareRow label="Crypto" values={compareList.map((c) => c.crypto ? "Yes" : "—")} />
-      <CompareRow label="Countries" values={compareList.map((c) => c.country_codes?.join(", ") || "—")} />
-    </tbody></table></div> : null}
-  </>;
+      {selected.length >= 2 ? (
+        <div className="compare-bar">
+          <span><GitCompare size={15} />{selected.length} selected</span>
+          <Link className="primary-btn" href={`/compare?ids=${selected.join(",")}`}>Share this comparison</Link>
+        </div>
+      ) : platforms.length ? (
+        <p className="compare-hint">Select two to four public profiles to compare product type, custody, fees and research notes.</p>
+      ) : null}
+
+      {compareList.length >= 2 ? (
+        <div className="compare-table-wrap premium-compare-wrap">
+          <table className="compare-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                {compareList.map((p) => (
+                  <th key={p.slug}><Link href={`/${p.kind}s/${p.slug}`}>{p.name}</Link></th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <CompareRow label="Product type" values={compareList.map((p) => p.kind)} />
+              <CompareRow label="Research status" values={compareList.map((p) => p.status)} />
+              <CompareRow label="Custody" values={compareList.map((p) => p.custody || "Verify with provider")} />
+              <CompareRow label="Fees" values={compareList.map((p) => p.feeSummary || "Not published")} />
+              <CompareRow label="Security" values={compareList.map((p) => p.securitySummary || "Not published")} />
+              <CompareRow label="Regulatory context" values={compareList.map((p) => p.regulatorySummary || "Not published")} />
+              <CompareRow label="Highlights" values={compareList.map((p) => p.pros?.slice(0, 3).join("; ") || "—")} />
+              <CompareRow label="Points to consider" values={compareList.map((p) => p.cons?.slice(0, 3).join("; ") || "—")} />
+            </tbody>
+          </table>
+        </div>
+      ) : null}
+    </>
+  );
 }
 
 function CompareRow({ label, values }: { label: string; values: string[] }) {
-  return <tr><td>{label}</td>{values.map((v, i) => <td key={i}>{v === "Yes" ? <span className="compare-yes"><Check size={12}/>Yes</span> : v}</td>)}</tr>;
+  return (
+    <tr>
+      <td>{label}</td>
+      {values.map((v, i) => (
+        <td key={i}>{v === "Yes" ? <span className="compare-yes"><Check size={12} />Yes</span> : v}</td>
+      ))}
+    </tr>
+  );
 }

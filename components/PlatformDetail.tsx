@@ -1,2 +1,90 @@
-import Link from "next/link";import{ExternalLink,Globe2,ShieldCheck}from"lucide-react";import type{Platform}from"@/lib/types";import{platformMarketDecision}from"@/lib/marketVisibility";
-export async function PlatformDetail({platform}:{platform:Platform}){const decision=platform.id?await platformMarketDecision(platform.id):null;const promotional=Boolean(platform.affiliateUrl)&&Boolean(platform.id)&&Boolean(decision?.commercial);return <div className="shell content-shell detail-grid"><article className="detail-main"><span className="kind-label">{platform.kind} / RESEARCH PROFILE</span><h1>{platform.name}</h1><p className="page-lead">{platform.description}</p><div className="notice"><ShieldCheck size={18}/> TopPick.pro publishes research, not personal financial advice. Product access, legal entity, protections, fees and promotional eligibility can vary by jurisdiction. Verify current terms with the provider.</div>{platform.productSummary&&<><h2>Products & access</h2><p>{platform.productSummary}</p></>}{platform.feeSummary&&<><h2>Fees & trading costs</h2><p>{platform.feeSummary}</p></>}{platform.securitySummary&&<><h2>Security & custody</h2><p>{platform.securitySummary}</p></>}<h2>Market availability</h2><p>{platform.productNote}</p>{platform.pros?.length?<><h2>Research highlights</h2><ul>{platform.pros.map(x=><li key={x}>{x}</li>)}</ul></>:null}{platform.cons?.length?<><h2>Points to consider</h2><ul>{platform.cons.map(x=><li key={x}>{x}</li>)}</ul></>:null}<h2>Editorial & affiliate disclosure</h2><p>TopPick.pro may receive compensation when a user follows certain partner links. Compensation is not a guarantee, ranking claim or statement that a service is available in every market.</p><div className="tag-row">{platform.tags.map(t=><span key={t}>{t}</span>)}</div></article><aside className="detail-side">{platform.logoUrl?<span className="platform-logo platform-logo-image detail-logo"><img src={platform.logoUrl}alt={`${platform.name} logo`}width={64}height={64}/></span>:<span className={`platform-logo logo-${platform.kind}`}>{platform.logoText}</span>}<h3>{platform.name}</h3><dl><div><dt>Product type</dt><dd>{platform.kind}</dd></div><div><dt>Research status</dt><dd>{platform.status}</dd></div><div><dt>Custody</dt><dd>{platform.custody||"Verify with provider"}</dd></div><div><dt>Last review update</dt><dd>{platform.updatedAt}</dd></div>{decision&&<div><dt>Current market</dt><dd>{decision.country||"Unverified"}</dd></div>}</dl>{decision&&<div className={`tp-market-decision ${decision.visible?"is-open":"is-closed"}`}><Globe2/><span><b>{decision.visible?"Research visibility approved":"Not available for this market"}</b><small>{decision.reason}</small></span></div>}{platform.website!=="#"&&<Link className="btn-ghost"href={platform.website}target="_blank"rel="nofollow noopener">Official website <ExternalLink size={15}/></Link>}{promotional&&<Link className="primary-btn partner-cta"href={`/go/${platform.id}`}target="_blank"rel="sponsored nofollow noopener">Open partner site <ExternalLink size={15}/></Link>}{decision?.visible&&!decision.commercial&&<small className="affiliate-note">Research is available in this market, but the partner/promotional link is disabled until commercial eligibility is separately approved.</small>}<small className="affiliate-note">Partner links may generate compensation. Eligibility and account terms are determined by the provider.</small></aside></div>}
+import Link from "next/link";
+import { ExternalLink, Globe2, ShieldCheck } from "lucide-react";
+import type { Platform } from "@/lib/types";
+import { platformMarketDecision } from "@/lib/marketVisibility";
+import { getPublicPlatforms } from "@/lib/platforms";
+import { SITE_URL } from "@/lib/site";
+
+export async function PlatformDetail({ platform }: { platform: Platform }) {
+  const decision = platform.id ? await platformMarketDecision(platform.id) : null;
+  const promotional = Boolean(platform.affiliateUrl) && Boolean(platform.id) && Boolean(decision?.commercial);
+  const related = (await getPublicPlatforms(platform.kind, 8)).filter((item) => item.slug !== platform.slug).slice(0, 3);
+  const hub = `/${platform.kind}s`;
+
+  return (
+    <div className="shell content-shell detail-grid">
+      <article className="detail-main">
+        <nav className="tp-breadcrumbs" aria-label="Breadcrumb">
+          <Link href="/">Home</Link>
+          <span>/</span>
+          <Link href={hub}>{platform.kind}s</Link>
+          <span>/</span>
+          <span>{platform.name}</span>
+        </nav>
+        <span className="kind-label">{platform.kind} / RESEARCH PROFILE</span>
+        <h1>{platform.name}</h1>
+        <p className="page-lead">{platform.description}</p>
+        <div className="notice">
+          <ShieldCheck size={18} /> TopPick.pro publishes research, not personal financial advice. Product access, legal entity, protections, fees and promotional eligibility can vary by jurisdiction. Verify current terms with the provider.
+        </div>
+        {platform.productSummary && <><h2>Products & access</h2><p>{platform.productSummary}</p></>}
+        {platform.feeSummary && <><h2>Fees & trading costs</h2><p>{platform.feeSummary}</p></>}
+        {platform.securitySummary && <><h2>Security & custody</h2><p>{platform.securitySummary}</p></>}
+        <h2>Market availability</h2>
+        <p>{platform.productNote}</p>
+        {platform.pros?.length ? <><h2>Research highlights</h2><ul>{platform.pros.map((x) => <li key={x}>{x}</li>)}</ul></> : null}
+        {platform.cons?.length ? <><h2>Points to consider</h2><ul>{platform.cons.map((x) => <li key={x}>{x}</li>)}</ul></> : null}
+        <h2>Editorial & affiliate disclosure</h2>
+        <p>TopPick.pro may receive compensation when a user follows certain partner links. Compensation is not a guarantee, ranking claim or statement that a service is available in every market.</p>
+        <div className="tag-row">{platform.tags.map((t) => <span key={t}>{t}</span>)}</div>
+        {related.length > 0 && (
+          <section className="tp-related">
+            <h2>Related {platform.kind}s</h2>
+            <div className="tp-related-links">
+              {related.map((item) => (
+                <Link key={item.slug} href={`/${item.kind}s/${item.slug}`}>{item.name}</Link>
+              ))}
+              <Link href={`/compare?ids=${[platform.id || platform.slug, ...related.map((item) => item.id || item.slug)].slice(0, 3).join(",")}`}>Compare nearby profiles</Link>
+            </div>
+          </section>
+        )}
+      </article>
+      <aside className="detail-side">
+        {platform.logoUrl ? (
+          <span className="platform-logo platform-logo-image detail-logo">
+            <img src={platform.logoUrl} alt={`${platform.name} logo`} width={64} height={64} />
+          </span>
+        ) : (
+          <span className={`platform-logo logo-${platform.kind}`}>{platform.logoText}</span>
+        )}
+        <h3>{platform.name}</h3>
+        <dl>
+          <div><dt>Product type</dt><dd>{platform.kind}</dd></div>
+          <div><dt>Research status</dt><dd>{platform.status}</dd></div>
+          <div><dt>Custody</dt><dd>{platform.custody || "Verify with provider"}</dd></div>
+          <div><dt>Last review update</dt><dd>{platform.updatedAt}</dd></div>
+          {decision && <div><dt>Current market</dt><dd>{decision.country || "Unverified"}</dd></div>}
+        </dl>
+        {decision && (
+          <div className={`tp-market-decision ${decision.visible ? "is-open" : "is-closed"}`}>
+            <Globe2 />
+            <span>
+              <b>{decision.visible ? "Research visibility approved" : "Not available for this market"}</b>
+              <small>{decision.reason}</small>
+            </span>
+          </div>
+        )}
+        {platform.website !== "#" && (
+          <Link className="btn-ghost" href={platform.website} target="_blank" rel="nofollow noopener">Official website <ExternalLink size={15} /></Link>
+        )}
+        {promotional && (
+          <Link className="primary-btn partner-cta" href={`/go/${platform.id}`} target="_blank" rel="sponsored nofollow noopener">Open partner site <ExternalLink size={15} /></Link>
+        )}
+        {decision?.visible && !decision.commercial && (
+          <small className="affiliate-note">Research is available in this market, but the partner/promotional link is disabled until commercial eligibility is separately approved.</small>
+        )}
+        <small className="affiliate-note">Partner links may generate compensation. Eligibility and account terms are determined by the provider. Canonical profile: {SITE_URL}{hub}/{platform.slug}</small>
+      </aside>
+    </div>
+  );
+}

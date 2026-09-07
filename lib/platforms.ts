@@ -10,7 +10,7 @@ export async function getPublicPlatforms(kind?:PlatformKind,limit=100):Promise<P
  const {ids}=await visiblePlatformIdsForVisitor();if(!ids.length)return[];
  let query=supabase.from("platform").select("*").in("id",ids).eq("visible",true).neq("status","restricted").order("featured",{ascending:false}).order("updated_at",{ascending:false}).limit(limit);if(kind)query=query.eq("kind",kind);
  const {data,error}=await query;if(error){console.error("getPublicPlatforms:",error.message);return[]}
- return(data||[]).map(mapRow).sort((a:Platform,b:Platform)=>Number(b.featured)-Number(a.featured));
+ return(data||[]).map(mapRow).sort((a:Platform,b:Platform)=>Number(b.featured)-Number(a.featured)||String(b.updatedAt).localeCompare(String(a.updatedAt)));
 }
 
 export async function getPublicPlatform(slug:string,kind?:PlatformKind):Promise<Platform|null>{

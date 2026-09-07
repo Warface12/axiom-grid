@@ -1,1 +1,16 @@
-import{NextRequest,NextResponse}from"next/server";import{runDailySeoPlatform}from"@/lib/seoPlatform";export async function GET(r:NextRequest){const s=process.env.CRON_SECRET;if(s&&r.headers.get("authorization")!==`Bearer ${s}`)return NextResponse.json({ok:false},{status:401});try{return NextResponse.json(await runDailySeoPlatform())}catch(e){return NextResponse.json({ok:false,error:e instanceof Error?e.message:"SEO cycle failed"},{status:500})}}
+import { NextRequest, NextResponse } from "next/server";
+import { requireCronSecret } from "@/lib/cronAuth";
+import { runDailySeoPlatform } from "@/lib/seoPlatform";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+export async function GET(request: NextRequest) {
+  const denied = requireCronSecret(request);
+  if (denied) return denied;
+  try {
+    return NextResponse.json(await runDailySeoPlatform());
+  } catch (error) {
+    return NextResponse.json({ ok: false, error: error instanceof Error ? error.message : "SEO cycle failed" }, { status: 500 });
+  }
+}
