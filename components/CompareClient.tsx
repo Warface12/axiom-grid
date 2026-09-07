@@ -91,6 +91,7 @@ export function CompareClient({ platforms, initialIds = [] }: Props) {
       ) : null}
 
       {compareList.length >= 2 ? (
+        <>
         <div className="compare-table-wrap premium-compare-wrap">
           <table className="compare-table">
             <thead>
@@ -111,6 +112,17 @@ export function CompareClient({ platforms, initialIds = [] }: Props) {
             </tbody>
           </table>
         </div>
+        <div className="compare-stack">
+          {compareList.map((p) => (
+            <article key={p.slug}>
+              <Link href={platformPath(p.kind, p.slug)}><b>{p.name}</b></Link>
+              {keys.map((key) => (
+                <p key={key}><small>{rowLabel(p.kind, key)}</small> {valueFor(p, key)}</p>
+              ))}
+            </article>
+          ))}
+        </div>
+        </>
       ) : null}
     </>
   );

@@ -1,3 +1,3 @@
 import {buildMetadata}from"@/lib/seo";import{SearchClient}from"@/components/SearchClient";
-export const metadata=buildMetadata({title:"Search platform research — TopPick.pro",description:"Search public TopPick.pro research profiles for exchanges, brokers and wallets.",path:"/search",noIndex:true});
-export default function Page(){return <main className="shell content-shell"><section className="page-hero"><span>RESEARCH SEARCH</span><h1>Search the grid.</h1><p>Search public research profiles. Commercial links remain controlled separately by market eligibility.</p></section><SearchClient/></main>}
+export const metadata=buildMetadata({title:"Search TopPick research",description:"Search guides, categories, glossary terms and published platform profiles. Empty inventories stay empty.",path:"/search",noIndex:true});
+export default function Page(){return <main className="shell content-shell"><section className="page-hero"><span>SEARCH</span><h1>Find research, not filler.</h1><p>Search published profiles, guides and glossary terms. If no partners are live yet, you will still find the research architecture — not invented companies.</p></section><SearchClient/></main>}

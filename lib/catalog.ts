@@ -9,6 +9,8 @@ export const PLATFORM_KIND_IDS = [
   "crypto-card",
   "onramp",
   "tool",
+  "explorer",
+  "tax",
 ] as const;
 
 export type PlatformKind = (typeof PLATFORM_KIND_IDS)[number];
@@ -224,6 +226,38 @@ export const CATALOG: CatalogKind[] = [
     ],
     compareKeys: ["bot", "portfolio", "analytics", "api", "mobile_app", "productSummary"],
   },
+  {
+    id: "explorer",
+    hub: "explorers",
+    label: "Blockchain explorer",
+    plural: "Explorers",
+    group: "Infrastructure",
+    dedicated: false,
+    summary: "Block explorers and chain browsers compared on disclosed networks, APIs and what they actually index — never simulated chain data.",
+    subcategories: ["l1", "l2", "multi-chain"],
+    attributes: [
+      bool("api", "Public API"),
+      text("networks", "Networks (as published)"),
+      bool("analytics", "Analytics views"),
+    ],
+    compareKeys: ["networks", "api", "analytics", "productSummary"],
+  },
+  {
+    id: "tax",
+    hub: "tax",
+    label: "Crypto tax / accounting",
+    plural: "Tax & accounting",
+    group: "Tools",
+    dedicated: false,
+    summary: "Tax and accounting products compared on published jurisdictions, import methods and reporting scope. This is not tax advice.",
+    subcategories: ["tax", "accounting", "bookkeeping"],
+    attributes: [
+      bool("api", "API / CSV import"),
+      text("kyc", "Account requirements (as published)"),
+      bool("mobile_app", "Mobile app"),
+    ],
+    compareKeys: ["kyc", "api", "mobile_app", "productSummary", "regulatorySummary"],
+  },
 ];
 
 export const VERIFICATION_STATES = ["needs_review", "imported", "manual", "verified", "stale", "missing"] as const;
@@ -263,6 +297,8 @@ export function classifyKindFromPublicText(input: { title?: string; description?
     ["defi", /\b(defi|lending protocol|liquidity pool)\b/],
     ["broker", /\b(forex|cfd broker|mt4|mt5|spread betting)\b/],
     ["trading-platform", /\b(trading terminal|tradingview|copy trading)\b/],
+    ["explorer", /\b(block explorer|blockchain explorer|tx hash|etherscan)\b/],
+    ["tax", /\b(crypto tax|tax software|capital gains report|accounting for crypto)\b/],
     ["tool", /\b(portfolio tracker|trading bot|analytics dashboard|market data)\b/],
     ["exchange", /\b(crypto exchange|spot trading|centralized exchange|cex)\b/],
   ];

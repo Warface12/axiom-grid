@@ -32,7 +32,7 @@ type Row = {
 const blank = {
   name: "",
   slug: "",
-  kind: "broker",
+  kind: "exchange",
   status: "research",
   official_url: "",
   affiliate_url: "",

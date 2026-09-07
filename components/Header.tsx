@@ -6,10 +6,12 @@ import { TopPickMark } from "@/components/TopPickMark";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { MobileNav } from "@/components/MobileNav";
 import { CatalogNav } from "@/components/CatalogNav";
+import { SearchHotkey } from "@/components/SearchHotkey";
 
 export function Header() {
   return (
     <header className="ag-header">
+      <SearchHotkey />
       <div className="ag-header-inner">
         <Link href="/" className="ag-brand" aria-label={`${SITE_NAME} home`}>
           <TopPickMark />
@@ -21,6 +23,7 @@ export function Header() {
           <Link href="/wallets">Wallets</Link>
           <CatalogNav />
           <Link href="/compare">Compare</Link>
+          <Link href="/finder">Finder</Link>
           <Link href="/learn">Research</Link>
           <Link href="/markets">Markets</Link>
         </nav>

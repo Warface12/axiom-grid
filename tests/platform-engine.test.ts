@@ -15,7 +15,9 @@ describe("catalog", () => {
   it("maps hubs and rejects unknown kinds", () => {
     assert.equal(isPlatformKind("exchange"), true);
     assert.equal(isPlatformKind("casino"), false);
-    assert.equal(catalogByHub("dex")?.id, "dex");
+    assert.equal(isPlatformKind("explorer"), true);
+    assert.equal(isPlatformKind("tax"), true);
+    assert.equal(catalogByHub("explorers")?.id, "explorer");
     assert.equal(platformPath("wallet", "ledger"), "/wallets/ledger");
   });
 });
@@ -27,5 +29,15 @@ describe("url safety", () => {
     assert.equal(parsePublicHttpUrl("https://user:pass@example.com").ok, false);
     assert.equal(isPrivateIp("127.0.0.1"), true);
     assert.equal(isPrivateIp("8.8.8.8"), false);
+  });
+});
+
+describe("json-ld extractor", () => {
+  it("reads organization name and ignores junk", async () => {
+    const { extractJsonLd } = await import("../lib/import/extractJsonLd.ts");
+    const html = `<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Example Exchange","url":"https://example.com","description":"Public blurb"}</script>`;
+    const out = extractJsonLd(html);
+    assert.equal(out.name, "Example Exchange");
+    assert.equal(out.url, "https://example.com");
   });
 });
