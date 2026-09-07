@@ -23,14 +23,13 @@ export function IntelligenceCore() {
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let shown = false;
     const sync = () => setLive(shown && document.visibilityState === "visible");
     const io = new IntersectionObserver(([entry]) => {
       shown = entry.isIntersecting;
       sync();
-    }, { threshold: 0.15 });
+    }, { threshold: 0.12 });
     io.observe(el);
     document.addEventListener("visibilitychange", sync);
     return () => {
@@ -41,34 +40,55 @@ export function IntelligenceCore() {
 
   return (
     <div ref={rootRef} className={`tp-core${live ? " is-live" : ""}`}>
-      <div className="tp-gyro" aria-hidden="true">
-        <div className="tp-gyro-inner">
-          <i className="tp-gyro-glow" />
-          <div className="tp-gyro-ring r1">
-            {BRANCHES.slice(0, 4).map((b, i) => (
-              <span key={b.id} className={`tp-gyro-bead${active === i ? " is-on" : ""}`} style={{ ["--a" as string]: String(i * 90) }} />
-            ))}
+      <div className="tp-gyro-scene">
+        <svg className="tp-gyro-net" viewBox="0 0 400 400" aria-hidden="true">
+          <circle cx="200" cy="200" r="168" fill="none" stroke="rgba(55,217,255,.18)" />
+          <circle cx="200" cy="200" r="118" fill="none" stroke="rgba(55,217,255,.12)" />
+          {BRANCHES.map((_, i) => {
+            const a = ((i * 45 - 90) * Math.PI) / 180;
+            const x = 200 + Math.cos(a) * 168;
+            const y = 200 + Math.sin(a) * 168;
+            return <line key={i} x1="200" y1="200" x2={x} y2={y} stroke="rgba(55,217,255,.16)" />;
+          })}
+        </svg>
+        <div className="tp-gyro" aria-hidden="true">
+          <div className="tp-gyro-inner">
+            <i className="tp-gyro-glow" />
+            <div className="tp-gyro-ring r1">
+              {BRANCHES.slice(0, 4).map((b, i) => (
+                <span key={b.id} className="tp-gyro-spoke" style={{ ["--a" as string]: String(i * 90) }}>
+                  <i className={active === i ? "is-on" : ""} />
+                </span>
+              ))}
+            </div>
+            <div className="tp-gyro-ring r2">
+              {BRANCHES.slice(4).map((b, i) => (
+                <span key={b.id} className="tp-gyro-spoke" style={{ ["--a" as string]: String(i * 90 + 45) }}>
+                  <i className={active === i + 4 ? "is-on" : ""} />
+                </span>
+              ))}
+            </div>
+            <div className="tp-gyro-ring r3" />
+            <span className="tp-gyro-core" />
           </div>
-          <div className="tp-gyro-ring r2">
-            {BRANCHES.slice(4).map((b, i) => (
-              <span key={b.id} className={`tp-gyro-bead${active === i + 4 ? " is-on" : ""}`} style={{ ["--a" as string]: String(i * 90 + 45) }} />
-            ))}
-          </div>
-          <div className="tp-gyro-ring r3" />
-          <span className="tp-gyro-core" />
         </div>
+        {BRANCHES.map((b, i) => (
+          <button
+            key={b.id}
+            type="button"
+            className={`tp-gyro-node${i === active ? " is-active" : ""}`}
+            style={{ ["--a" as string]: String(i * 45) }}
+            onClick={() => setActive(i)}
+            aria-pressed={i === active}
+          >
+            {b.label}
+          </button>
+        ))}
       </div>
-      <div className="tp-core-panel">
-        <div className="tp-core-map" role="tablist" aria-label="Product map">
-          {BRANCHES.map((b, i) => (
-            <button key={b.id} type="button" role="tab" aria-selected={i === active} className={i === active ? "is-active" : ""} onClick={() => setActive(i)}>
-              {b.label}
-            </button>
-          ))}
-        </div>
-        <p>{current.copy}</p>
+      <p className="tp-core-copy">
+        {current.copy}{" "}
         <Link href={current.href}>Explore {current.label}</Link>
-      </div>
+      </p>
     </div>
   );
 }

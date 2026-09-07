@@ -51,10 +51,10 @@ export default function Home(){
         <h2>Four ways in</h2>
       </div>
       <div className="tp-journey-list">
-        <Link href="/finder"><b>Finder</b><span>Start from the job you need done</span></Link>
-        <Link href="/compare"><b>Compare</b><span>Exchange vs exchange, wallet vs wallet</span></Link>
-        <Link href="/learn"><b>Learn</b><span>Custody, fees, brokers and risk</span></Link>
-        <Link href="/search"><b>Search</b><span>Guides, terms and published profiles</span></Link>
+        <Link href="/finder"><small>01</small><b>Finder</b><span>Start from the job you need done.</span></Link>
+        <Link href="/compare"><small>02</small><b>Compare</b><span>Exchange vs exchange, wallet vs wallet.</span></Link>
+        <Link href="/learn"><small>03</small><b>Learn</b><span>Custody, fees, brokers and risk.</span></Link>
+        <Link href="/search"><small>04</small><b>Search</b><span>Guides, terms and published profiles.</span></Link>
       </div>
     </section>
     <CompareLike/>

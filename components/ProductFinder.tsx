@@ -55,14 +55,14 @@ export function ProductFinder() {
         <fieldset key={q.id}>
           <legend>{q.label}</legend>
           {q.options.map((opt, oi) => (
-            <label key={opt.label}>
+            <label key={opt.label} className={answers[qi] === oi ? "is-on" : ""}>
               <input
                 type="radio"
                 name={q.id}
                 checked={answers[qi] === oi}
                 onChange={() => setAnswers((prev) => prev.map((value, index) => (index === qi ? oi : value)))}
               />
-              {opt.label}
+              <span>{opt.label}</span>
             </label>
           ))}
         </fieldset>

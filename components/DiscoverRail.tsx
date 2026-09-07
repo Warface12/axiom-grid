@@ -7,19 +7,24 @@ export function DiscoverRail() {
     <section className="tp-discover" id="categories">
       <div className="tp-section-head">
         <p>ECOSYSTEM</p>
-        <h2>Discover by product class</h2>
-        <p>Each class has different risks. Start here, then compare inside the class.</p>
+        <h2>The product map</h2>
+        <p>Each class has different risks. Open a class, then compare inside it.</p>
       </div>
-      <div className="tp-cat-map">
+      <div className="tp-eco-grid">
         {groups.map((group) => (
-          <div key={group} className="tp-cat-col">
-            <b>{group}</b>
-            <div className="tp-chip-rail">
+          <article key={group} className="tp-eco-col">
+            <h3>{group}</h3>
+            <ul>
               {CATALOG.filter((item) => item.group === group).map((item) => (
-                <Link key={item.id} href={`/${item.hub}`}>{item.plural}</Link>
+                <li key={item.id}>
+                  <Link href={`/${item.hub}`}>
+                    <b>{item.plural}</b>
+                    <span>{item.summary}</span>
+                  </Link>
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </article>
         ))}
       </div>
     </section>
