@@ -11,6 +11,7 @@ Apply in Supabase (in order if not already applied):
 - `supabase/migrations/20260907_toppick_kind_explorer_tax.sql`
 - `supabase/migrations/20260907_toppick_ecosystem.sql`
 - `supabase/migrations/20260907_toppick_ecosystem_rls.sql`
+- `supabase/migrations/20260907_toppick_phase2_connect.sql`
 
 ## Auth
 - Enable Supabase Auth email (password or magic link).

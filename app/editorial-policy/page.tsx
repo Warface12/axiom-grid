@@ -1,1 +1,23 @@
-import{buildMetadata}from"@/lib/seo";export const metadata=buildMetadata({title:"Editorial Policy — TopPick.pro",description:"How TopPick.pro separates research, commercial relationships, corrections and publication decisions.",path:"/editorial-policy"});export default function Page(){return <main className="shell content-shell"><section className="page-hero"><span>EDITORIAL POLICY</span><h1>Commercial relationships do not decide research conclusions.</h1><p>TopPick.pro is an affiliate comparison publisher. Editorial research, public visibility and commercial-link eligibility are separate decisions.</p></section><section className="policy-grid"><article><h2>Evidence first</h2><p>Material factual claims should be traceable to official provider documentation, regulatory records or other reliable primary sources. Source date and review freshness should be stored with the record.</p></article><article><h2>Commercial separation</h2><p>A partner relationship does not make a platform “approved”, available in every jurisdiction or appropriate for every user. Partner links may remain disabled while research stays public.</p></article><article><h2>No individualized advice</h2><p>Content is general information and comparison research. It does not consider an individual user’s financial situation, objectives, tax position or risk tolerance.</p></article><article><h2>Corrections</h2><p>Material factual errors should be corrected promptly and the internal change history retained. Sponsored or affiliate status must never be used to suppress a correction.</p></article></section></main>}
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Editorial policy — TopPick.pro",
+  description: "How TopPick separates research, partner compensation and unpublished facts.",
+  path: "/editorial-policy",
+});
+
+export default function Page() {
+  return (
+    <main className="shell legal-page">
+      <span>EDITORIAL</span>
+      <h1>Editorial policy</h1>
+      <p>TopPick publishes comparison research. It is not an exchange, broker, wallet issuer or financial adviser.</p>
+      <h2>What we will not invent</h2>
+      <p>Fees, licenses, ratings, availability and affiliate destinations stay empty until a sourced record exists. Empty is a valid public state.</p>
+      <h2>Partner relationships</h2>
+      <p>Advertising, affiliate and tracking are independent. A company may advertise with no affiliate contract. Compensation is not a ranking.</p>
+      <h2>Corrections</h2>
+      <p>If a published fact is wrong, we correct the record rather than quietly overwriting history. See the corrections page.</p>
+    </main>
+  );
+}

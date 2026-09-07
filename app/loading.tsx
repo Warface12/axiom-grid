@@ -3,8 +3,8 @@ export default function Loading() {
     <main className="shell content-shell">
       <div className="tp-state-card" aria-busy="true">
         <span>LOADING</span>
-        <h1>Preparing the research surface.</h1>
-        <p>Public pages render from published records only. This state does not display sample platforms.</p>
+        <h1>Loading TopPick…</h1>
+        <p>Published pages only. This pause does not insert sample platforms.</p>
       </div>
     </main>
   );

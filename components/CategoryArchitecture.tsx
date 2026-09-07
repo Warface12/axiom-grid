@@ -5,9 +5,9 @@ export function CategoryArchitecture() {
   const groups = Array.from(new Set(CATALOG.map((item) => item.group)));
   return (
     <section className="tp-category-arch" id="categories">
-      <div className="ag-section-marker">RESEARCH SURFACE / CATEGORIES</div>
-      <h2>The directories are ready. The companies are not invented.</h2>
-      <p>Each hub is a real product class TopPick can research later. Empty hubs stay empty until a reviewed record is published.</p>
+      <div className="ag-section-marker">EXPLORE BY CATEGORY</div>
+      <h2>Every product class has a home. Sample brands do not.</h2>
+      <p>Each hub is a real category TopPick can research. Empty hubs stay empty until a reviewed record is published.</p>
       {groups.map((group) => (
         <div key={group} className="tp-cat-group">
           <h3>{group}</h3>

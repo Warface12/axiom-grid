@@ -4,12 +4,12 @@ import { Monitor, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { THEME_KEY, type ThemeMode, isThemeMode } from "@/lib/theme";
 
-const order: ThemeMode[] = ["auto", "light", "dark"];
+const order: ThemeMode[] = ["dark", "light", "auto"];
 
 function resolveScheme(mode: ThemeMode) {
-  return mode === "dark" || (mode === "auto" && window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ? "dark"
-    : "light";
+  if (mode === "light") return "light";
+  if (mode === "dark") return "dark";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 function paint(mode: ThemeMode) {
@@ -23,17 +23,17 @@ function paint(mode: ThemeMode) {
 }
 
 export function ThemeToggle() {
-  const [mode, setMode] = useState<ThemeMode>("auto");
+  const [mode, setMode] = useState<ThemeMode>("dark");
 
   useEffect(() => {
     const stored = localStorage.getItem(THEME_KEY);
-    const next = isThemeMode(stored) ? stored : "auto";
+    const next = isThemeMode(stored) ? stored : "dark";
     setMode(next);
     paint(next);
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const onSystem = () => {
       const current = localStorage.getItem(THEME_KEY);
-      if (!isThemeMode(current) || current === "auto") paint("auto");
+      if (current === "auto") paint("auto");
     };
     mq.addEventListener("change", onSystem);
     return () => mq.removeEventListener("change", onSystem);

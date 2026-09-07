@@ -1,1 +1,19 @@
-import Link from"next/link";import{buildMetadata}from"@/lib/seo";export const metadata=buildMetadata({title:"Corrections Policy — TopPick.pro",description:"How TopPick.pro reviews and corrects material factual errors.",path:"/corrections"});export default function Page(){return <main className="shell content-shell"><section className="page-hero"><span>CORRECTIONS</span><h1>Accuracy is a continuing process.</h1><p>Markets, fees, entities and product terms change. We maintain a correction path for material factual errors and stale research.</p></section><article className="prose-card tp-wide-prose"><h2>What to send</h2><p>Include the affected URL, the statement you believe is wrong, and a reliable source showing the current information. We prioritize corrections that could materially change a user’s understanding of cost, risk, security, legal entity or availability.</p><h2>What happens next</h2><p>We re-check the source, update the record when warranted, refresh the review date and keep internal change history for auditability.</p><Link href="/contact">Contact the editorial team</Link></article></main>}
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Corrections — TopPick.pro",
+  description: "How TopPick handles factual corrections on published research.",
+  path: "/corrections",
+});
+
+export default function Page() {
+  return (
+    <main className="shell legal-page">
+      <span>CORRECTIONS</span>
+      <h1>Corrections</h1>
+      <p>If a public profile, guide or market note is factually wrong, send the official source URL and the field that should change.</p>
+      <p>We do not silently rewrite published facts from marketing copy. Partner-submitted changes still require review.</p>
+      <p><a href="/contact">Contact TopPick</a></p>
+    </main>
+  );
+}

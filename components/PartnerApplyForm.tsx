@@ -45,21 +45,21 @@ export function PartnerApplyForm() {
       });
       const j = await r.json();
       if (!j.ok) { setMessage(j.error || "Could not submit."); return; }
-      setStep(4);
       setMessage(
         j.claimSuggested
           ? `Application received. A matching company record already exists (${j.existingName}). This is a claim request, not a duplicate company.`
-          : "Application received. It is queued for email verification and review. This is not yet partner access.",
+          : "Application received. Email verification is queued. This is not yet partner access.",
       );
       if (j.email?.ownerAction) setMessage((m) => `${m} Email sending is not configured yet (${j.email.ownerAction}).`);
+      setStep(6);
     } finally {
       setBusy(false);
     }
   }
 
   return (
-    <form className="tp-finder" onSubmit={(e) => { e.preventDefault(); if (step < 3) setStep(step + 1); else void submit(); }}>
-      <p><b>Step {step} of 4</b></p>
+    <form className="tp-finder" onSubmit={(e) => { e.preventDefault(); if (step < 4) setStep(step + 1); else void submit(); }}>
+      <p><b>Step {Math.min(step, 6)} of 6</b></p>
       {step === 1 && (
         <fieldset>
           <legend>Company</legend>
@@ -90,14 +90,24 @@ export function PartnerApplyForm() {
           ))}
         </fieldset>
       )}
-      {step === 4 && <p>{message}</p>}
-      {step < 4 && (
+      {step === 4 && (
+        <fieldset>
+          <legend>Review</legend>
+          <p>{form.company_name} · {form.official_website}</p>
+          <p>{form.representative_name} · {form.business_email}</p>
+          <p>{intentLabel[form.intent]}</p>
+          <p>Submitting queues email verification and a human review. DNS proof is not required for every applicant.</p>
+        </fieldset>
+      )}
+      {step >= 5 && <p>{message}</p>}
+      {step === 6 && <p>Status: pending review. Create a consumer sign-in with the same business email so access can be attached after approval.</p>}
+      {step < 5 && (
         <div style={{ display: "flex", gap: 8 }}>
           {step > 1 && <button type="button" onClick={() => setStep(step - 1)}>Back</button>}
-          <button className="primary-btn" disabled={busy} type="submit">{step === 3 ? (busy ? "Submitting…" : "Submit application") : "Continue"}</button>
+          <button className="primary-btn" disabled={busy} type="submit">{step === 4 ? (busy ? "Submitting…" : "Submit application") : "Continue"}</button>
         </div>
       )}
-      {step < 4 && message ? <p>{message}</p> : null}
+      {step < 5 && message ? <p>{message}</p> : null}
     </form>
   );
 }

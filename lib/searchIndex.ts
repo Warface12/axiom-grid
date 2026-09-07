@@ -37,11 +37,33 @@ export async function searchPublic(q: string, limit = 24): Promise<SearchHit[]> 
   const term = q.trim().toLowerCase();
   if (term.length < 2) return [];
   const hits: SearchHit[] = [];
-  if ("partner".includes(term) || term.includes("advertis") || term.includes("partner")) {
+  if (term.includes("partner") || term.includes("advertis")) {
     hits.push({ id: "page-partners", title: "Partner with TopPick", short: "Apply for verified partner access. Advertising and affiliate are separate.", kind: "page", href: "/partners" });
   }
-  if (term.includes("offer") || term.includes("opportun") || term.includes("airdrop")) {
+  if (term.includes("offer") || term.includes("opportun") || term.includes("airdrop") || term.includes("reward")) {
     hits.push({ id: "page-opportunities", title: "Opportunities", short: "Published offers only. Empty until real records exist.", kind: "page", href: "/opportunities" });
+  }
+  if (term.includes("game")) {
+    hits.push({ id: "page-games", title: "TopPick games", short: "Original TopPick games stay isolated. Not third-party casino listings.", kind: "page", href: "/games" });
+    hits.push({ id: "page-crypto-games", title: "Crypto games index", short: "Third-party games appear only after a reviewed record exists.", kind: "page", href: "/crypto-games" });
+  }
+  if (term.includes("event") || term.includes("conference") || term.includes("ama")) {
+    hits.push({ id: "page-events", title: "Events", short: "Launches, AMAs and conferences — published records only.", kind: "page", href: "/events" });
+  }
+  if (term.includes("fee") || term.includes("maker") || term.includes("taker") || term.includes("spread")) {
+    hits.push({ id: "page-fees", title: "Fees education", short: "Maker/taker, spread and withdrawals without invented numbers.", kind: "page", href: "/fees" });
+  }
+  if (term.includes("secur") || term.includes("custody") || term.includes("hardware")) {
+    hits.push({ id: "page-security", title: "Security & custody", short: "Who can move the asset, and how wallets differ from venues.", kind: "page", href: "/security" });
+  }
+  if (term.includes("account") || term.includes("watchlist") || term.includes("follow")) {
+    hits.push({ id: "page-account", title: "Your account", short: "Save research and follow companies. Private — not indexed.", kind: "page", href: "/account" });
+  }
+  if (term.includes("install") || term.includes("pwa") || term.includes("app")) {
+    hits.push({ id: "page-apps", title: "Install TopPick", short: "PWA install path. Native stores are listed only when binaries exist.", kind: "page", href: "/apps" });
+  }
+  if (term.includes("market") || term.includes("geo") || term.includes("country")) {
+    hits.push({ id: "page-markets", title: "Markets", short: "Product availability and promotional eligibility are separate.", kind: "page", href: "/markets" });
   }
   for (const cat of CATALOG) {
     const hay = `${cat.plural} ${cat.label} ${cat.summary} ${cat.hub}`.toLowerCase();

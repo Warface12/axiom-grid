@@ -5,6 +5,7 @@ import { platformMarketDecision } from "@/lib/marketVisibility";
 import { getPublicPlatforms, hrefFor } from "@/lib/platforms";
 import { SITE_URL } from "@/lib/site";
 import { catalogById, unknownLabel } from "@/lib/catalog";
+import { SaveFollowControls } from "@/components/SaveFollowControls";
 
 function attrLabel(platform: Platform, key: string) {
   const spec = catalogById(platform.kind)?.attributes.find((item) => item.key === key);
@@ -70,6 +71,7 @@ export async function PlatformDetail({ platform }: { platform: Platform }) {
         <h2>Editorial & affiliate disclosure</h2>
         <p>If a partner link is shown, TopPick.pro may receive compensation. Compensation is not a ranking claim and does not mean the product is available in every market. Official-site links are not affiliate destinations unless a stored partner URL is used.</p>
         <div className="tag-row">{platform.tags.map((t) => <span key={t}>{t}</span>)}</div>
+        <SaveFollowControls platformId={platform.id} slug={platform.slug} kind={platform.kind} />
         {related.length > 0 && (
           <section className="tp-related">
             <h2>Related {cat?.plural || "profiles"}</h2>

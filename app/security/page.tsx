@@ -1,1 +1,20 @@
-import Link from "next/link";import {ArrowUpRight,ShieldCheck} from "lucide-react";import {buildMetadata} from "@/lib/seo";export const metadata=buildMetadata({title:"Crypto Platform Security Research — TopPick.pro",description:"Security and custody research for exchanges, brokers and wallets.",path:"/security"});export default function Page(){return <main className="editorial-page dark-editorial"><section className="editorial-hero"><span>RESEARCH DESK / SECURITY</span><ShieldCheck/><h1>Security claims need<br/>evidence and context.</h1><p>We separate account controls, custody architecture, incident history, recovery design and public disclosures because they answer different risk questions.</p></section><section className="editorial-columns"><article><b>01</b><h2>Custody</h2><p>Who controls keys or assets, and what changes when the product is self-custodial?</p></article><article><b>02</b><h2>Controls</h2><p>Authentication, withdrawal protections and operational safeguards are recorded as distinct facts.</p></article><article><b>03</b><h2>History</h2><p>Material incidents should remain visible rather than disappear after a marketing refresh.</p></article><article><b>04</b><h2>Transparency</h2><p>Missing evidence is not replaced with assumptions or an invented confidence badge.</p></article></section><Link className="editorial-link" href="/how-we-rate">See research protocol <ArrowUpRight/></Link></main>}
+import { buildMetadata } from "@/lib/seo";
+import Link from "next/link";
+
+export const metadata = buildMetadata({
+  title: "Security & custody — TopPick.pro",
+  description: "A practical orientation to custody, keys, phishing and venue risk.",
+  path: "/security",
+});
+
+export default function Page() {
+  return (
+    <main className="shell legal-page">
+      <span>LEARN / SECURITY</span>
+      <h1>Who can move the asset?</h1>
+      <p>That is the first security question. An exchange balance, a custodial wallet and a hardware device fail in different ways.</p>
+      <p>Self-custody removes venue counterparty risk and introduces backup, phishing and device-compromise risk. Neither model is universally safer.</p>
+      <p><Link href="/learn/self-custody-basics">Self-custody basics</Link> · <Link href="/learn/exchange-vs-wallet">Exchange vs wallet</Link></p>
+    </main>
+  );
+}

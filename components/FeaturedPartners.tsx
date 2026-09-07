@@ -30,8 +30,8 @@ export async function FeaturedPartners() {
         </div>
       ) : (
         <div className="ag-partner-empty">
-          <b>No public partner profiles yet.</b>
-          <span>When you add a real platform in Admin, it remains hidden until you choose to publish it.</span>
+          <b>No reviewed platform profiles are published yet.</b>
+          <span>Explore guides, the product finder and market explainers while the directory grows. Companies appear here only after a human review.</span>
         </div>
       )}
     </section>

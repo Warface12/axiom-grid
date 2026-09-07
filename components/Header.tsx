@@ -18,16 +18,13 @@ export function Header() {
           <span><b>TopPick</b><em>.pro</em></span>
         </Link>
         <nav className="ag-nav" aria-label="Primary">
-          <Link href="/exchanges">Exchanges</Link>
-          <Link href="/brokers">Brokers</Link>
-          <Link href="/wallets">Wallets</Link>
           <CatalogNav />
           <Link href="/compare">Compare</Link>
-          <Link href="/finder">Finder</Link>
+          <Link href="/finder">Tools</Link>
           <Link href="/learn">Research</Link>
+          <Link href="/opportunities">Opportunities</Link>
           <Link href="/markets">Markets</Link>
           <Link href="/partners">Partners</Link>
-          <Link href="/opportunities">Opportunities</Link>
         </nav>
         <div className="ag-header-actions">
           <Link href="/account" className="ag-icon-btn" aria-label="Account">

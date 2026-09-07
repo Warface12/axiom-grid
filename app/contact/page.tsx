@@ -1,1 +1,24 @@
-import{buildMetadata}from"@/lib/seo";export const metadata=buildMetadata({title:"Contact — TopPick.pro",description:"Contact TopPick.pro for corrections, partnership operations and editorial questions.",path:"/contact"});export default function Page(){return <main className="shell content-shell"><section className="page-hero"><span>CONTACT</span><h1>Corrections, evidence and partnerships.</h1><p>Use the appropriate contact channel configured by the site owner. Do not send passwords, API keys, recovery phrases or other secrets.</p></section><section className="policy-grid"><article><h2>Editorial corrections</h2><p>Send the affected page, disputed fact and supporting primary source.</p></article><article><h2>Partner operations</h2><p>Partner onboarding should include official URLs, legal entity details, eligible markets, promotion permissions and current affiliate terms.</p></article><article><h2>Security</h2><p>Report security concerns privately. Never submit wallet recovery phrases, authentication codes or account credentials.</p></article></section></main>}
+import { buildMetadata } from "@/lib/seo";
+import { SITE_NAME } from "@/lib/site";
+
+export const metadata = buildMetadata({
+  title: "Contact — TopPick.pro",
+  description: "Contact TopPick for editorial corrections and partnership enquiries.",
+  path: "/contact",
+});
+
+export default function Page() {
+  const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "";
+  return (
+    <main className="shell legal-page">
+      <span>CONTACT</span>
+      <h1>Contact</h1>
+      <p>{SITE_NAME} is a comparison publisher. We do not open trading accounts or hold customer funds.</p>
+      <h2>Editorial</h2>
+      <p>Use this page for sourced corrections. Include the URL of the TopPick page and the official document that supports the change.</p>
+      <h2>Partnerships</h2>
+      <p>Companies should use <a href="/partners/apply">the partner application</a>. Consumer accounts cannot become company administrators from a toggle.</p>
+      {email ? <p>Email: <a href={`mailto:${email}`}>{email}</a></p> : <p>A public contact mailbox is shown here only after it is configured for this deployment.</p>}
+    </main>
+  );
+}

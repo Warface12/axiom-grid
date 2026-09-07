@@ -92,6 +92,68 @@ export const REWARD_CLASSES = [
   "unknown",
 ] as const;
 
+export const OFFER_TYPES = [
+  "welcome_offer",
+  "crypto_reward",
+  "trading_credit",
+  "fee_promotion",
+  "trading_promotion",
+  "learn_and_earn",
+  "staking_offer",
+  "card_offer",
+  "wallet_offer",
+  "airdrop",
+  "event",
+  "tournament",
+  "game_reward",
+  "product_launch",
+  "app_launch",
+  "new_market",
+  "referral",
+  "giveaway",
+  "other_reviewed",
+] as const;
+
+export const USER_INTERESTS = [
+  "exchanges",
+  "wallets",
+  "hardware_wallets",
+  "trading",
+  "defi",
+  "staking",
+  "cards",
+  "tools",
+  "analytics",
+  "learn_and_earn",
+  "crypto_games",
+  "events",
+  "security",
+  "research",
+] as const;
+
+export const NOTIFICATION_KINDS = [
+  "transactional",
+  "account",
+  "product",
+  "followed_company",
+  "opportunity",
+  "research",
+  "marketing",
+] as const;
+
+export const AD_PLACEMENTS = [
+  "homepage",
+  "category",
+  "search",
+  "compare",
+  "research",
+  "markets",
+  "opportunities",
+  "games",
+  "app",
+  "email",
+] as const;
+
 export const OFFER_STATUSES = ["draft", "pending_review", "active", "paused", "expired", "rejected"] as const;
 export const PROVENANCE = ["partner_provided", "toppick_verified", "toppick_research", "third_party_source"] as const;
 

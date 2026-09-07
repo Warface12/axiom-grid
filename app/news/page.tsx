@@ -20,7 +20,7 @@ export default async function Page() {
       <section className="shell page-hero">
         <span>NEWS / SOURCED ONLY</span>
         <h1>No invented headlines.</h1>
-        <p>Public news here is limited to sourced partner updates entered in Admin. If this list is empty, nothing has been published yet.</p>
+        <p>Public news here is limited to sourced partner updates. If this list is empty, nothing has been published yet.</p>
       </section>
       <section className="shell content-shell">
         {posts.length ? posts.map((p) => (

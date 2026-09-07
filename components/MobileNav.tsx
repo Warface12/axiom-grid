@@ -7,6 +7,19 @@ import { CATALOG } from "@/lib/catalog";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { MarketSwitcher } from "@/components/MarketSwitcher";
 
+const primary = [
+  ["Home", "/"],
+  ["Explore", "/#categories"],
+  ["Compare", "/compare"],
+  ["Finder", "/finder"],
+  ["Research", "/learn"],
+  ["Opportunities", "/opportunities"],
+  ["Markets", "/markets"],
+  ["Account", "/account"],
+  ["Install app", "/apps"],
+  ["Partners", "/partners"],
+];
+
 export function MobileNav() {
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -30,9 +43,10 @@ export function MobileNav() {
               <ThemeToggle />
               <MarketSwitcher />
             </div>
-            {[["Home", "/"], ["Compare", "/compare"], ["Finder", "/finder"], ["Search", "/search"], ["Opportunities", "/opportunities"], ["Partners", "/partners"], ["Account", "/account"], ["Research", "/learn"], ["Glossary", "/glossary"], ["Markets", "/markets"], ["Install app", "/apps"]].map(([label, href]) => (
+            {primary.map(([label, href]) => (
               <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>
             ))}
+            <b style={{ marginTop: 12 }}>Categories</b>
             {CATALOG.map((item) => (
               <Link key={item.id} href={`/${item.hub}`} onClick={() => setOpen(false)}>{item.plural}</Link>
             ))}

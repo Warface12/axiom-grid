@@ -1,1 +1,19 @@
-import{buildMetadata}from"@/lib/seo";export const metadata=buildMetadata({title:"Risk Disclosure — TopPick.pro",description:"General trading, digital-asset and platform risk disclosure for TopPick.pro readers.",path:"/legal/risk-disclosure"});export default function Page(){return <main className="shell content-shell"><section className="page-hero"><span>RISK DISCLOSURE</span><h1>Trading and digital assets can involve substantial risk.</h1><p>TopPick.pro provides general information and comparison research, not individualized financial, legal or tax advice.</p></section><article className="prose-card tp-wide-prose"><h2>Loss risk</h2><p>Crypto assets, leveraged products, CFDs, forex and other trading products may be volatile and can result in substantial or total loss. Leverage can magnify losses.</p><h2>Counterparty and custody risk</h2><p>Exchanges, brokers, wallet providers and custodians differ in legal structure, protections, custody design and failure risk. Historical security measures do not guarantee future safety.</p><h2>Jurisdiction risk</h2><p>Products, protections and provider permissions vary by country and sometimes by state or province. A public research page is not a statement that an account or product is available to you.</p></article></main>}
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "Risk disclosure — TopPick.pro",
+  description: "Trading and digital-asset risk disclosure for TopPick research users.",
+  path: "/legal/risk-disclosure",
+});
+
+export default function Page() {
+  return (
+    <main className="shell legal-page">
+      <span>LEGAL / RISK</span>
+      <h1>Risk disclosure</h1>
+      <p>Cryptoassets and leveraged trading can result in the loss of some or all of your capital. Past performance is not a reliable indicator of future results.</p>
+      <p>TopPick does not provide personal investment, tax or legal advice. Product availability, client money protections and dispute venues vary by country and by legal entity.</p>
+      <p>Promotional offers may include conditions, expiry dates, KYC and restricted markets. In-game or loyalty points are not cash unless a sourced record says otherwise.</p>
+    </main>
+  );
+}
