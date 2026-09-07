@@ -1,6 +1,7 @@
 import { buildMetadata } from "@/lib/seo";
 import { countPublished } from "@/lib/publicInventory";
-import { OFFER_TYPES, REWARD_CLASSES } from "@/lib/ecosystem";
+import { OFFER_TYPES } from "@/lib/ecosystem";
+import { OpportunityTaxonomy } from "@/components/OpportunityTaxonomy";
 import Link from "next/link";
 
 export async function generateMetadata() {
@@ -20,20 +21,20 @@ export default async function Page() {
       <section className="shell page-hero">
         <span>OPPORTUNITIES</span>
         <h1>Offers with conditions attached.</h1>
-        <p>Rewards are classified as cash, crypto, trading credit, points or unknown. Game coins are never presented as dollars. This index is hidden from search until a real offer is published.</p>
+        <p>Rewards are classified as cash, crypto, trading credit, points or unknown. Game coins are never presented as dollars.</p>
       </section>
       <section className="shell content-shell">
+        <OpportunityTaxonomy />
         <div className="tp-state-card">
-          <b>{count ? `${count} published offers` : "No published offers yet"}</b>
-          <p>Welcome offers, trading credit, learn & earn, staking, cards, airdrops and launches appear here only after review. Game coins are never presented as dollars.</p>
-          <p><Link href="/learn">Read independent guides</Link> while this index stays empty.</p>
+          <b>{count ? `${count} published offers` : "Reviewed offers will appear here"}</b>
+          <p>Welcome offers, trading credit, learn & earn, staking, cards, airdrops and launches appear only after review. Game coins are never presented as dollars.</p>
+          <p><Link href="/learn">Read independent guides</Link> while this index waits for a sourced offer.</p>
         </div>
         <div className="tp-tool-grid" style={{ marginTop: 24 }}>
           {OFFER_TYPES.slice(0, 8).map((type) => (
-            <article key={type} className="tp-tool-card"><small>TYPE</small><b>{type.replace(/_/g, " ")}</b><p>Supported in the opportunity engine. Not a live offer.</p></article>
+            <article key={type} className="tp-tool-card"><small>TYPE</small><b>{type.replace(/_/g, " ")}</b><p>How TopPick can classify an offer. Not a live promotion.</p></article>
           ))}
         </div>
-        <p className="tp-muted" style={{ marginTop: 16 }}>Reward classes: {REWARD_CLASSES.join(" · ")}.</p>
       </section>
     </main>
   );

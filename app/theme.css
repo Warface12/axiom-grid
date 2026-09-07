@@ -1,7 +1,6 @@
 /* Light overrides only. Dark uses the original TopPick terminal look from globals.css. */
 html[data-scheme="light"]{
   --tp-bg:#f3f6fb;--tp-panel:#ffffff;--tp-text:#102033;--tp-muted:#5b6d82;--tp-border:#c9d6e4;--tp-cyan:#0b8fb8;--tp-line:#d5e0ec;
-  color-scheme:light;
 }
 
 html[data-scheme="light"] body{

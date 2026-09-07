@@ -11,7 +11,7 @@ export async function FeaturedPartners() {
       <div className="ag-partner-head">
         <div>
           <h2>Platforms we research</h2>
-          <p>This strip stays empty until an editor publishes a reviewed record. It is not filled with sample exchanges or wallets.</p>
+          <p>Reviewed company profiles appear here. Until then, use categories, the finder and guides — never sample brands.</p>
         </div>
         <Link href="/compare">Compare platforms <ArrowUpRight /></Link>
       </div>
@@ -29,9 +29,16 @@ export async function FeaturedPartners() {
           ))}
         </div>
       ) : (
-        <div className="ag-partner-empty">
-          <b>No reviewed platform profiles are published yet.</b>
-          <span>Explore guides, the product finder and market explainers while the directory grows. Companies appear here only after a human review.</span>
+        <div className="ag-partner-empty tp-discover-empty">
+          <b>Explore while the directory grows.</b>
+          <span>Published company profiles appear here after review — never as sample brands. Start with a category, the finder, or a guide.</span>
+          <div className="tp-empty-links">
+            <Link href="/exchanges">Exchanges</Link>
+            <Link href="/wallets">Wallets</Link>
+            <Link href="/brokers">Brokers</Link>
+            <Link href="/finder">Finder</Link>
+            <Link href="/learn">Guides</Link>
+          </div>
         </div>
       )}
     </section>

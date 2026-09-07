@@ -1,15 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { CATALOG } from "@/lib/catalog";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { MarketSwitcher } from "@/components/MarketSwitcher";
+import { ThemeControls } from "@/components/ThemeControls";
 
-const primary = [
+const explore = [
   ["Home", "/"],
-  ["Explore", "/#categories"],
   ["Compare", "/compare"],
   ["Finder", "/finder"],
   ["Research", "/learn"],
@@ -17,42 +16,55 @@ const primary = [
   ["Markets", "/markets"],
   ["Account", "/account"],
   ["Install app", "/apps"],
-  ["Partners", "/partners"],
 ];
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const titleId = useId();
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (open) closeRef.current?.focus();
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
   }, [open]);
+
   return (
     <>
       <button className="ag-icon-btn tp-menu" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? "Close menu" : "Open menu"}>
         {open ? <X size={18} /> : <Menu size={18} />}
       </button>
-      {open && (
+      {open ? (
         <div className="tp-drawer" id="mobile-nav">
           <button type="button" className="tp-drawer-scrim" aria-label="Close menu" onClick={() => setOpen(false)} />
-          <div className="tp-drawer-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+          <div className="tp-drawer-panel" role="dialog" aria-modal="true" aria-labelledby={titleId}>
             <div className="tp-drawer-head">
-              <b>Browse TopPick</b>
-              <button type="button" className="ag-icon-btn" onClick={() => setOpen(false)} aria-label="Close"><X size={18} /></button>
+              <b id={titleId}>Browse TopPick</b>
+              <button type="button" ref={closeRef} className="ag-icon-btn" onClick={() => setOpen(false)} aria-label="Close"><X size={18} /></button>
             </div>
-            <div style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
-              <ThemeToggle />
-              <MarketSwitcher />
-            </div>
-            {primary.map(([label, href]) => (
+            <p className="tp-drawer-label">Explore</p>
+            {explore.map(([label, href]) => (
               <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>
             ))}
-            <b style={{ marginTop: 12 }}>Categories</b>
+            <p className="tp-drawer-label">Categories</p>
             {CATALOG.map((item) => (
               <Link key={item.id} href={`/${item.hub}`} onClick={() => setOpen(false)}>{item.plural}</Link>
             ))}
+            <p className="tp-drawer-label">Market</p>
+            <MarketSwitcher />
+            <p className="tp-drawer-label">Appearance</p>
+            <ThemeControls />
+            <Link className="tp-drawer-partner" href="/partners" onClick={() => setOpen(false)}>Partner with TopPick</Link>
           </div>
         </div>
-      )}
+      ) : null}
     </>
   );
 }

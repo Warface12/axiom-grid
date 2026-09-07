@@ -11,7 +11,7 @@ export default function Page() {
       <h1>Cookies</h1>
       <p>TopPick.pro uses a small number of cookies and similar storage items to operate the site. We do not use them to fabricate personalised investment recommendations.</p>
       <h2>Essential operation</h2>
-      <p>The market selector stores <code>toppick_market</code> when you explicitly choose a country. This preference is used to show research visibility and to keep partner CTAs fail-closed. Clearing the cookie returns the site to automatic geo detection where available, plus unknown-market hiding when a country cannot be verified.</p>
+      <p>The market selector stores <code>toppick_market</code> when you explicitly choose a country. This preference is used to show the right research visibility and to keep partner buttons off until a market is approved. Clearing the cookie returns the site to automatic country detection where available.</p>
       <h2>Administration</h2>
       <p>Signed-in operators receive an HTTP-only admin session cookie. It is not used on public pages and is not an analytics identifier.</p>
       <h2>Theme</h2>

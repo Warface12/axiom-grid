@@ -30,7 +30,7 @@ export function SearchClient() {
     <section className="tp-search-console">
       <div className="tp-search-box">
         <Search />
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search guides, categories and published profiles…" aria-label="Search TopPick" />
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search TopPick" aria-label="Search TopPick" />
         {loading && <LoaderCircle className="spin" />}
       </div>
       {q.trim().length > 1 && (

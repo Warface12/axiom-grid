@@ -19,16 +19,16 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ i
       <section className="page-hero">
         <span>COMPARE</span>
         <h1>Compare like with like.</h1>
-        <p>The comparison engine is ready. It only lists reviewed public profiles and leaves undisclosed fields empty. It will not invent fees, ratings or availability.</p>
+        <p>Compare reviewed public profiles in the same product class. Undisclosed fields stay empty. Fees, ratings and availability are never invented.</p>
       </section>
       {platforms.length ? (
         <CompareClient platforms={platforms} initialIds={initialIds} />
       ) : (
         <div className="ag-empty-directory">
           <div className="empty-index">
-            <span>COMPARISON ENGINE</span>
-            <h2>Nothing to compare yet.</h2>
-            <p>When real platforms are published, you can compare two to four profiles inside the same product class. Until then, use the field map below — it is the comparison engine, not a table of invented brands.</p>
+            <span>COMPARE</span>
+            <h2>Like with like — when profiles exist.</h2>
+            <p>Select two to four published products in the same class. Missing facts stay blank. Nothing is invented to fill a table.</p>
             <div className="empty-actions">
               {CATALOG.filter((c) => c.dedicated).map((c) => (
                 <Link key={c.id} href={`/${c.hub}`}>{c.plural}</Link>
@@ -40,7 +40,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ i
                 <article key={c.id} className="tp-tool-card">
                   <small>{c.plural}</small>
                   <b>{c.label}</b>
-                  <p>Compared on: {c.compareKeys.join(", ")}.</p>
+                  <p>We compare {c.compareKeys.map((key) => c.attributes.find((a) => a.key === key)?.label || key.replace(/_/g, " ")).slice(0, 6).join(", ")}.</p>
                 </article>
               ))}
             </div>

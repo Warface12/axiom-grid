@@ -1,6 +1,6 @@
 import { MarketSwitcher } from "@/components/MarketSwitcher";
 import Link from "next/link";
-import { Search, UserRound } from "lucide-react";
+import { Search } from "lucide-react";
 import { SITE_NAME } from "@/lib/site";
 import { TopPickMark } from "@/components/TopPickMark";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -14,7 +14,7 @@ export function Header() {
       <SearchHotkey />
       <div className="ag-header-inner">
         <Link href="/" className="ag-brand" aria-label={`${SITE_NAME} home`}>
-          <TopPickMark />
+          <TopPickMark gradientId="tpMarkHeader" />
           <span><b>TopPick</b><em>.pro</em></span>
         </Link>
         <nav className="ag-nav" aria-label="Primary">
@@ -27,14 +27,14 @@ export function Header() {
           <Link href="/partners">Partners</Link>
         </nav>
         <div className="ag-header-actions">
-          <Link href="/account" className="ag-icon-btn" aria-label="Account">
-            <UserRound size={17} />
-          </Link>
-          <Link href="/search" className="ag-icon-btn" aria-label="Search">
+          <Link href="/search" className="ag-icon-btn" aria-label="Search TopPick">
             <Search size={17} />
           </Link>
-          <MarketSwitcher />
-          <ThemeToggle />
+          <div className="tp-header-aux">
+            <Link href="/account" className="ag-icon-btn" aria-label="Account">Account</Link>
+            <MarketSwitcher />
+            <ThemeToggle />
+          </div>
           <MobileNav />
         </div>
       </div>

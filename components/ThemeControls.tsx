@@ -4,7 +4,11 @@ import { Monitor, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { THEME_KEY, type ThemeMode, isThemeMode } from "@/lib/theme";
 
-const order: ThemeMode[] = ["dark", "light", "auto"];
+const modes: { id: ThemeMode; label: string; Icon: typeof Moon }[] = [
+  { id: "dark", label: "Dark", Icon: Moon },
+  { id: "light", label: "Light", Icon: Sun },
+  { id: "auto", label: "Auto", Icon: Monitor },
+];
 
 function resolveScheme(mode: ThemeMode) {
   if (mode === "light") return "light";
@@ -12,7 +16,7 @@ function resolveScheme(mode: ThemeMode) {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-function paint(mode: ThemeMode) {
+export function paintTheme(mode: ThemeMode) {
   const root = document.documentElement;
   root.dataset.theme = mode;
   const scheme = resolveScheme(mode);
@@ -21,18 +25,17 @@ function paint(mode: ThemeMode) {
   if (meta) meta.setAttribute("content", scheme === "dark" ? "#050a11" : "#f3f6fb");
 }
 
-export function ThemeToggle() {
+export function ThemeControls() {
   const [mode, setMode] = useState<ThemeMode>("dark");
 
   useEffect(() => {
     const stored = localStorage.getItem(THEME_KEY);
     const next = isThemeMode(stored) ? stored : "dark";
     setMode(next);
-    paint(next);
+    paintTheme(next);
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const onSystem = () => {
-      const current = localStorage.getItem(THEME_KEY);
-      if (current === "auto") paint("auto");
+      if (localStorage.getItem(THEME_KEY) === "auto") paintTheme("auto");
     };
     mq.addEventListener("change", onSystem);
     return () => mq.removeEventListener("change", onSystem);
@@ -41,19 +44,17 @@ export function ThemeToggle() {
   function apply(next: ThemeMode) {
     setMode(next);
     localStorage.setItem(THEME_KEY, next);
-    paint(next);
+    paintTheme(next);
   }
-
-  function cycle() {
-    apply(order[(order.indexOf(mode) + 1) % order.length]);
-  }
-
-  const Icon = mode === "dark" ? Moon : mode === "light" ? Sun : Monitor;
-  const label = mode === "auto" ? "Theme: system" : mode === "dark" ? "Theme: dark" : "Theme: light";
 
   return (
-    <button className="ag-icon-btn tp-theme" onClick={cycle} aria-label={label} title={label}>
-      <Icon size={17} />
-    </button>
+    <div className="tp-theme-pills" role="group" aria-label="Theme">
+      {modes.map(({ id, label, Icon }) => (
+        <button key={id} type="button" className={mode === id ? "is-active" : ""} aria-pressed={mode === id} onClick={() => apply(id)}>
+          <Icon size={16} />
+          {label}
+        </button>
+      ))}
+    </div>
   );
 }

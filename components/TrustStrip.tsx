@@ -1,2 +1,12 @@
-import{Fingerprint,ShieldCheck,Clock3,Globe2}from"lucide-react";
-export function TrustStrip(){return <section className="tp-trust-strip"><div><Fingerprint/><span><b>Source-linked</b><small>Evidence is stored with each review</small></span></div><div><Clock3/><span><b>Freshness-aware</b><small>Stale records are flagged for review</small></span></div><div><Globe2/><span><b>Market-aware</b><small>Availability is never assumed globally</small></span></div><div><ShieldCheck/><span><b>Closed until approved</b><small>Unknown promotion stays off</small></span></div></section>}
+import { Fingerprint, ShieldCheck, Clock3, Globe2 } from "lucide-react";
+
+export function TrustStrip() {
+  return (
+    <section className="tp-trust-strip" aria-label="How TopPick stays honest">
+      <div><Fingerprint /><span><b>Source-linked</b><small>Evidence rides with each review</small></span></div>
+      <div><Clock3 /><span><b>Kept current</b><small>Stale records get flagged</small></span></div>
+      <div><Globe2 /><span><b>Market-aware</b><small>Access is never assumed</small></span></div>
+      <div><ShieldCheck /><span><b>Promotion gated</b><small>Unknown markets stay off</small></span></div>
+    </section>
+  );
+}

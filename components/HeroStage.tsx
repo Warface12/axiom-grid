@@ -10,18 +10,16 @@ const Lattice = dynamic(() => import("@/components/ResearchLattice").then((m) =>
 });
 
 export function HeroStage({ children }: { children: React.ReactNode }) {
-  const [tier, setTier] = useState<"high" | "balanced" | "lite">("balanced");
   const [show, setShow] = useState(false);
   useEffect(() => {
     const next = detectVisualTier();
-    setTier(next);
-    setShow(next !== "lite");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setShow(next !== "lite" && !reduce);
   }, []);
   return (
-    <section className="tp-hero-stage" data-tier={tier}>
-      {show ? <Lattice /> : null}
+    <section className="tp-hero-stage">
+      {show ? <Lattice /> : <div className="tp-hero-static" aria-hidden="true" />}
       <div className="tp-hero-copy">{children}</div>
-      <span className="tp-quality-chip">{tier.toUpperCase()} VISUALS</span>
     </section>
   );
 }

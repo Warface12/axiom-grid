@@ -8,12 +8,12 @@ export function Footer() {
       <div className="ag-footer-grid">
         <div>
           <Link href="/" className="ag-brand">
-            <TopPickMark />
+            <TopPickMark gradientId="tpMarkFooter" />
             <span><b>TopPick</b><em>.pro</em></span>
           </Link>
           <p>Independent comparison research for crypto exchanges, wallets, brokers and related tools. Availability, legal entity, product terms and commercial eligibility can vary by country.</p>
         </div>
-        <details className="ag-footer-col" open>
+        <details className="ag-footer-col">
           <summary>Explore</summary>
           <Link href="/exchanges">Exchanges</Link>
           <Link href="/brokers">Brokers</Link>
@@ -23,7 +23,7 @@ export function Footer() {
           <Link href="/compare">Compare</Link>
           <Link href="/search">Search</Link>
         </details>
-        <details className="ag-footer-col" open>
+        <details className="ag-footer-col">
           <summary>Use TopPick</summary>
           <Link href="/learn">Guides</Link>
           <Link href="/glossary">Glossary</Link>
@@ -33,7 +33,7 @@ export function Footer() {
           <Link href="/markets">Markets</Link>
           <Link href="/how-we-rate">How we rate</Link>
         </details>
-        <details className="ag-footer-col" open>
+        <details className="ag-footer-col">
           <summary>Company & legal</summary>
           <Link href="/partners">Partners</Link>
           <Link href="/editorial-policy">Editorial policy</Link>
