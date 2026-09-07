@@ -47,14 +47,33 @@ export async function POST(r: NextRequest) {
     affiliate_url: affiliateRaw || null,
     campaign_subid: String(b.campaign_subid || "").trim() || null,
     legal_notice: String(b.legal_notice || "").trim() || null,
+    availability_status: ["available", "restricted", "unknown", "needs_review"].includes(String(b.availability_status))
+      ? String(b.availability_status)
+      : (Boolean(b.product_available) ? "available" : String(b.status) === "restricted" ? "restricted" : String(b.status) === "review" ? "needs_review" : "unknown"),
+    cta_label: String(b.cta_label || "").trim() || null,
+    seo_title: String(b.seo_title || "").trim() || null,
+    seo_description: String(b.seo_description || "").trim() || null,
     updated_at: new Date().toISOString(),
   };
+  if (payload.availability_status === "restricted") {
+    payload.status = "restricted";
+    payload.product_available = false;
+    payload.commercial_allowed = false;
+  }
+  if (payload.availability_status === "unknown" || payload.availability_status === "needs_review") {
+    payload.product_available = false;
+    payload.commercial_allowed = false;
+  }
+  if (payload.availability_status === "available") {
+    payload.product_available = true;
+    if (payload.status === "review") payload.status = "approved";
+  }
   if (payload.status !== "approved") payload.commercial_allowed = false;
   const run = (row: typeof payload) =>
     b.id ? s.from("platform_market").update(row).eq("id", b.id).select("*").single() : s.from("platform_market").insert(row).select("*").single();
   let { data, error } = await run(payload);
   if (error && /column|schema cache/i.test(error.message)) {
-    const { affiliate_url, campaign_subid, legal_notice, ...legacy } = payload;
+    const { affiliate_url, campaign_subid, legal_notice, availability_status, cta_label, seo_title, seo_description, ...legacy } = payload;
     ({ data, error } = await run(legacy as typeof payload));
   }
   if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });

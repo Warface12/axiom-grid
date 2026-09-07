@@ -5,6 +5,7 @@ import Link from "next/link";
 import { GitCompare } from "lucide-react";
 import type { Platform } from "@/lib/types";
 import { catalogById, platformPath, unknownLabel } from "@/lib/catalog";
+import { comparisonPath } from "@/lib/compareSlug";
 
 type Props = { platforms: Platform[]; initialIds?: string[] };
 
@@ -83,7 +84,7 @@ export function CompareClient({ platforms, initialIds = [] }: Props) {
       {selected.length >= 2 ? (
         <div className="compare-bar">
           <span><GitCompare size={15} />{selected.length} selected</span>
-          <Link className="primary-btn" href={`/compare?ids=${selected.join(",")}`}>Share this comparison</Link>
+          <Link className="primary-btn" href={comparisonPath(compareList.map((p) => p.slug))}>Share this comparison</Link>
         </div>
       ) : platforms.length ? (
         <p className="compare-hint">Select two to four published profiles. Missing cells stay “Not disclosed” instead of estimated.</p>

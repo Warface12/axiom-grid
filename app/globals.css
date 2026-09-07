@@ -308,7 +308,8 @@ body{min-height:100dvh}
 .ag-mega-wrap:hover>.ag-mega,.ag-mega-wrap:focus-within>.ag-mega{display:grid}
 .ag-mega b{display:block;margin-bottom:8px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6f8c9e}
 .ag-mega a{display:block;padding:6px 0;text-transform:none;letter-spacing:0;font-weight:600;font-size:13px;color:#c9e2ee}
-@media(prefers-reduced-motion:reduce){
-  .ag-radar .scan,.ag-crypto-orbit,.ag-chain-stream i,.pulse{animation:none!important}
-}
+.tp-shot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.tp-shot-grid img{width:100%;height:auto;border-radius:12px;border:1px solid #1b4054}
+.tp-state-card{padding:40px 24px;border:1px solid #1b4054;border-radius:20px;background:#07141d;display:grid;gap:12px}
+.tp-state-card button,.tp-state-card a{min-height:44px;display:inline-flex;align-items:center}
 

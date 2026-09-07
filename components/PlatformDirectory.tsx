@@ -8,6 +8,7 @@ export function PlatformDirectory({ items }: { items: Platform[] }) {
   const [query, setQuery] = useState("");
   const [custody, setCustody] = useState("all");
   const [featured, setFeatured] = useState(false);
+  const [sort, setSort] = useState("rank");
 
   const custodyOptions = useMemo(
     () => ["all", ...Array.from(new Set(items.map((item) => item.custody).filter(Boolean) as string[]))],
@@ -20,6 +21,10 @@ export function PlatformDirectory({ items }: { items: Platform[] }) {
     if (featured && !item.featured) return false;
     if (custody !== "all" && item.custody !== custody) return false;
     return true;
+  }).sort((a, b) => {
+    if (sort === "name") return a.name.localeCompare(b.name);
+    if (sort === "updated") return String(b.updatedAt).localeCompare(String(a.updatedAt));
+    return Number(b.featured) - Number(a.featured);
   });
 
   return (
@@ -28,6 +33,11 @@ export function PlatformDirectory({ items }: { items: Platform[] }) {
         <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Filter this directory…" aria-label="Filter platforms" />
         <select value={custody} onChange={(e) => setCustody(e.target.value)} aria-label="Custody filter">
           {custodyOptions.map((option) => <option key={option} value={option}>{option === "all" ? "All custody notes" : option}</option>)}
+        </select>
+        <select value={sort} onChange={(e) => setSort(e.target.value)} aria-label="Sort directory">
+          <option value="rank">Featured first</option>
+          <option value="name">Name</option>
+          <option value="updated">Last updated</option>
         </select>
         <label>
           <input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} />

@@ -54,6 +54,17 @@ export async function PlatformDetail({ platform }: { platform: Platform }) {
             <ul>{attrKeys.map((key) => <li key={key}><strong>{attrLabel(platform, key)}:</strong> {attrValue(platform, key)}</li>)}</ul>
           </>
         ) : null}
+        {platform.riskNotes ? <><h2>Risk notes</h2><p>{platform.riskNotes}</p></> : null}
+        {platform.screenshots?.length ? (
+          <>
+            <h2>Editor-uploaded screenshots</h2>
+            <div className="tp-shot-grid">
+              {platform.screenshots.map((src) => (
+                <figure key={src}><img src={src} alt={`Editorial screenshot for ${platform.name}`} width={640} height={360} /></figure>
+              ))}
+            </div>
+          </>
+        ) : null}
         {platform.pros?.length ? <><h2>Research highlights</h2><ul>{platform.pros.map((x) => <li key={x}>{x}</li>)}</ul></> : null}
         {platform.cons?.length ? <><h2>Limitations</h2><ul>{platform.cons.map((x) => <li key={x}>{x}</li>)}</ul></> : null}
         <h2>Editorial & affiliate disclosure</h2>
@@ -104,7 +115,7 @@ export async function PlatformDetail({ platform }: { platform: Platform }) {
           <Link className="btn-ghost" href={platform.website} target="_blank" rel="nofollow noopener">Official website <ExternalLink size={15} /></Link>
         ) : null}
         {promotional && (
-          <Link className="primary-btn partner-cta" href={`/go/${platform.id}`} target="_blank" rel="sponsored nofollow noopener">Open partner site <ExternalLink size={15} /></Link>
+          <Link className="primary-btn partner-cta" href={`/go/${platform.id}?placement=profile&cta=partner`} target="_blank" rel="sponsored nofollow noopener">{platform.ctaLabel || "Open partner site"} <ExternalLink size={15} /></Link>
         )}
         {decision?.visible && !decision.commercial && (
           <small className="affiliate-note">Research is available in this market, but no approved partner destination is configured.</small>

@@ -103,6 +103,9 @@ export async function POST(request: NextRequest) {
     archived: Boolean(body.archived),
     cover_url: cover.value,
     languages: cleanArray(body.languages),
+    screenshots: cleanArray(body.screenshots),
+    cta_label: String(body.cta_label ?? "").trim() || null,
+    risk_notes: String(body.risk_notes ?? "").trim() || null,
     source_notes: String(body.source_notes ?? "").trim() || null,
     updated_at: new Date().toISOString(),
   };
@@ -117,7 +120,7 @@ export async function POST(request: NextRequest) {
     const {
       ranking_priority, affiliate_campaign, og_image_url, import_source_url, import_retrieved_at, import_provenance,
       subcategory, attributes, verification_status, last_verified_at, operator_name, founded_year, editorial_score,
-      archived, cover_url, languages, source_notes, ...legacy
+      archived, cover_url, languages, screenshots, cta_label, risk_notes, source_notes, ...legacy
     } = payload;
     ({ data, error } = await run(legacy as typeof payload));
   }

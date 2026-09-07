@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { PlatformIndex } from "@/components/PlatformIndex";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, itemListJsonLd } from "@/lib/seo";
 import { getPublicPlatforms, getSitemapPlatforms } from "@/lib/platforms";
 import type { CatalogKind } from "@/lib/catalog";
+import { SITE_URL } from "@/lib/site";
+import { platformPath } from "@/lib/catalog";
 
 export async function productHubMetadata(cat: CatalogKind) {
   const published = (await getSitemapPlatforms()).filter((item) => item.kind === cat.id);
@@ -16,8 +18,10 @@ export async function productHubMetadata(cat: CatalogKind) {
 
 export async function ProductHub({ cat }: { cat: CatalogKind }) {
   const items = await getPublicPlatforms(cat.id);
+  const list = items.length ? itemListJsonLd(items.map((item) => ({ name: item.name, url: `${SITE_URL}${platformPath(item.kind, item.slug)}` }))) : null;
   return (
     <main>
+      {list ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(list) }} /> : null}
       <section className="shell page-hero">
         <span>PLATFORM HUB / {cat.plural.toUpperCase()}</span>
         <h1>{cat.plural}</h1>

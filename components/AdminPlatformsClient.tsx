@@ -68,10 +68,13 @@ const blank = {
   archived: false,
   cover_url: "",
   languages: "",
+  screenshots: "",
+  cta_label: "",
+  risk_notes: "",
   source_notes: "",
 };
 
-const tabs = ["General", "Features", "Affiliate", "Review", "GEO / SEO", "Publish"] as const;
+const tabs = ["General", "Features", "Affiliate", "Review", "GEO / SEO", "Sources", "Publish"] as const;
 
 function slugify(v: string) {
   return v.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -102,6 +105,9 @@ export function AdminPlatformsClient() {
   const [duplicates, setDuplicates] = useState<{ id: string; name: string; slug: string }[]>([]);
   const [quality, setQuality] = useState("all");
   const [kindFilter, setKindFilter] = useState("all");
+  const [sources, setSources] = useState<{ id: string; url: string; title?: string | null; source_type?: string }[]>([]);
+  const [sourceUrl, setSourceUrl] = useState("");
+  const [sourceTitle, setSourceTitle] = useState("");
 
   async function load() {
     setLoading(true);
@@ -157,6 +163,7 @@ export function AdminPlatformsClient() {
       pros: (row.pros || []).join("\n"),
       cons: (row.cons || []).join("\n"),
       languages: Array.isArray(row.languages) ? row.languages.join(", ") : String(row.languages || ""),
+      screenshots: Array.isArray(row.screenshots) ? row.screenshots.join("\n") : String(row.screenshots || ""),
       ranking_priority: Number(row.ranking_priority || 0),
       attributes: (row.attributes && typeof row.attributes === "object" ? row.attributes : {}) as Record<string, string | boolean | null>,
       verification_status: String(row.verification_status || "needs_review"),
@@ -170,6 +177,10 @@ export function AdminPlatformsClient() {
     setTab("General");
     setDirty(false);
     setOpen(true);
+    setSources([]);
+    if (row?.id) {
+      fetch(`/api/admin/sources?platform_id=${encodeURIComponent(row.id)}`).then((r) => r.json()).then((j) => setSources(j.items || [])).catch(() => setSources([]));
+    }
   }
 
   async function importFromUrl() {
@@ -215,6 +226,39 @@ export function AdminPlatformsClient() {
     }
   }
 
+  async function uploadMedia(file: File, field: "logo_url" | "cover_url" | "og_image_url" | "screenshots") {
+    const data = new FormData();
+    data.append("file", file);
+    const r = await fetch("/api/admin/media", { method: "POST", body: data });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !j.ok) {
+      setMessage(j.error || "Upload failed.");
+      return;
+    }
+    if (field === "screenshots") setField({ screenshots: `${form.screenshots || ""}\n${j.url}`.trim() });
+    else setField({ [field]: j.url });
+  }
+
+  async function addSource() {
+    if (!form.id) {
+      setMessage("Save the platform first, then attach sources.");
+      return;
+    }
+    const r = await fetch("/api/admin/sources", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ platform_id: form.id, url: sourceUrl, title: sourceTitle, source_type: "official" }),
+    });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !j.ok) {
+      setMessage(j.error || "Source could not be saved.");
+      return;
+    }
+    setSourceUrl("");
+    setSourceTitle("");
+    setSources((prev) => [j.item, ...prev]);
+  }
+
   async function save(e: React.FormEvent) {
     e.preventDefault();
     setMessage("Saving partner…");
@@ -225,6 +269,7 @@ export function AdminPlatformsClient() {
       pros: String(form.pros || "").split(/[,\n]/).map((x) => x.trim()).filter(Boolean),
       cons: String(form.cons || "").split(/[,\n]/).map((x) => x.trim()).filter(Boolean),
       languages: String(form.languages || "").split(/[,\n]/).map((x) => x.trim()).filter(Boolean),
+      screenshots: String(form.screenshots || "").split(/[\n,]/).map((x) => x.trim()).filter(Boolean),
     };
     const r = await fetch("/api/admin/platforms", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
     const j = await r.json().catch(() => ({}));
@@ -384,8 +429,12 @@ export function AdminPlatformsClient() {
                 </label>
                 <label className="wide">Official URL<input value={form.official_url || ""} onChange={(e) => setField({ official_url: e.target.value })} /></label>
                 <label className="wide">Logo URL<input value={form.logo_url || ""} onChange={(e) => setField({ logo_url: e.target.value })} /></label>
-                <label className="wide">Short description<textarea value={form.short_description || ""} onChange={(e) => setField({ short_description: e.target.value })} /></label>
+                <label>Upload logo<input type="file" accept="image/jpeg,image/png,image/webp,image/svg+xml" onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadMedia(f, "logo_url"); }} /></label>
                 <label className="wide">Cover image URL<input value={form.cover_url || ""} onChange={(e) => setField({ cover_url: e.target.value })} /></label>
+                <label>Upload cover<input type="file" accept="image/jpeg,image/png,image/webp,image/svg+xml" onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadMedia(f, "cover_url"); }} /></label>
+                <label className="wide">Screenshots<textarea value={form.screenshots || ""} onChange={(e) => setField({ screenshots: e.target.value })} placeholder="One image URL per line" /></label>
+                <label>Upload screenshot<input type="file" accept="image/jpeg,image/png,image/webp,image/svg+xml" onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadMedia(f, "screenshots"); }} /></label>
+                <label className="wide">Short description<textarea value={form.short_description || ""} onChange={(e) => setField({ short_description: e.target.value })} /></label>
                 <label>Custody model<input value={form.custody_model || ""} onChange={(e) => setField({ custody_model: e.target.value })} /></label>
                 <label>Ranking priority<input type="number" value={form.ranking_priority || 0} onChange={(e) => setField({ ranking_priority: Number(e.target.value) })} /></label>
                 <label className="wide">Tags<input value={form.tags || ""} onChange={(e) => setField({ tags: e.target.value })} placeholder="forex, mt5, crypto" /></label>
@@ -424,6 +473,7 @@ export function AdminPlatformsClient() {
             {tab === "Affiliate" && (
               <section className="ax-form-grid">
                 <label className="wide">Default affiliate URL<input value={form.affiliate_url || ""} onChange={(e) => setField({ affiliate_url: e.target.value })} /></label>
+                <label className="wide">CTA label<input value={form.cta_label || ""} onChange={(e) => setField({ cta_label: e.target.value })} placeholder="Leave empty until a real partner URL exists" /></label>
                 <label>Partner / affiliate ID<input value={form.affiliate_partner_id || ""} onChange={(e) => setField({ affiliate_partner_id: e.target.value })} /></label>
                 <label>Campaign / sub ID<input value={form.affiliate_campaign || ""} onChange={(e) => setField({ affiliate_campaign: e.target.value })} /></label>
                 <p className="wide partner-safety-note">Market-specific affiliate URLs are managed under Admin → Markets. The public CTA stays fail-closed until a market rule allows promotion.</p>
@@ -439,6 +489,7 @@ export function AdminPlatformsClient() {
                 <label className="wide">Full review<textarea className="tall" value={form.full_review || ""} onChange={(e) => setField({ full_review: e.target.value })} /></label>
                 <label className="wide">Pros<textarea value={form.pros || ""} onChange={(e) => setField({ pros: e.target.value })} placeholder="One per line" /></label>
                 <label className="wide">Points to consider<textarea value={form.cons || ""} onChange={(e) => setField({ cons: e.target.value })} placeholder="One per line" /></label>
+                <label className="wide">Risk notes<textarea value={form.risk_notes || ""} onChange={(e) => setField({ risk_notes: e.target.value })} /></label>
               </section>
             )}
 
@@ -449,6 +500,20 @@ export function AdminPlatformsClient() {
                 <label className="wide">OG image URL<input value={form.og_image_url || ""} onChange={(e) => setField({ og_image_url: e.target.value })} /></label>
                 <label className="wide">Languages<input value={form.languages || ""} onChange={(e) => setField({ languages: e.target.value })} placeholder="en, es — only if sourced" /></label>
                 <p className="wide partner-safety-note">GEO availability, blocked markets and legal notices are stored as market rules. Add them after saving this platform.</p>
+              </section>
+            )}
+
+            {tab === "Sources" && (
+              <section className="ax-form-grid">
+                <p className="wide partner-safety-note">Attach official URLs for fees, GEO, licensing and product claims. Imported metadata is not a verified source.</p>
+                <label className="wide">Source URL<input value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} /></label>
+                <label className="wide">Title<input value={sourceTitle} onChange={(e) => setSourceTitle(e.target.value)} /></label>
+                <button type="button" className="ax-tool-btn" onClick={addSource}>Add source</button>
+                <div className="wide">
+                  {sources.length ? sources.map((item) => (
+                    <div key={item.id}><a href={item.url} target="_blank" rel="noreferrer">{item.title || item.url}</a></div>
+                  )) : <span>No sources yet.</span>}
+                </div>
               </section>
             )}
 

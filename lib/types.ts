@@ -38,5 +38,8 @@ export type Platform = {
   archived?: boolean;
   coverUrl?: string | null;
   languages?: string[];
+  screenshots?: string[];
+  ctaLabel?: string | null;
+  riskNotes?: string | null;
 };
 export type Guide = { slug: string; title: string; excerpt: string; category: "exchanges" | "brokers" | "wallets" | "learn"; readTime: string };

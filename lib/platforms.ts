@@ -65,6 +65,9 @@ export function mapPlatformRow(row: Record<string, unknown>): Platform {
     archived: Boolean(row.archived),
     coverUrl: row.cover_url ? String(row.cover_url) : null,
     languages: Array.isArray(row.languages) ? row.languages.map(String) : [],
+    screenshots: Array.isArray(row.screenshots) ? row.screenshots.map(String).filter(Boolean) : [],
+    ctaLabel: row.cta_label ? String(row.cta_label) : null,
+    riskNotes: row.risk_notes ? String(row.risk_notes) : null,
   };
 }
 
@@ -77,9 +80,19 @@ export async function getPublicPlatforms(kind?: PlatformKind, limit = 100): Prom
   if (!supabase) return [];
   const { ids } = await visiblePlatformIdsForVisitor();
   if (!ids.length) return [];
-  let query = supabase.from("platform").select("*").in("id", ids).eq("visible", true).neq("status", "restricted").order("featured", { ascending: false }).order("updated_at", { ascending: false }).limit(limit);
+  let query = supabase.from("platform").select("*").in("id", ids).eq("visible", true).neq("status", "restricted").order("featured", { ascending: false }).order("ranking_priority", { ascending: false }).order("updated_at", { ascending: false }).limit(limit);
   if (kind) query = query.eq("kind", kind);
   const { data, error } = await query;
+  if (error && /ranking_priority|column|schema cache/i.test(error.message)) {
+    let fallback = supabase.from("platform").select("*").in("id", ids).eq("visible", true).neq("status", "restricted").order("featured", { ascending: false }).order("updated_at", { ascending: false }).limit(limit);
+    if (kind) fallback = fallback.eq("kind", kind);
+    const retry = await fallback;
+    if (retry.error) {
+      console.error("getPublicPlatforms:", retry.error.message);
+      return [];
+    }
+    return (retry.data || []).map((row) => mapPlatformRow(row as Record<string, unknown>)).filter((p) => !p.archived);
+  }
   if (error) {
     console.error("getPublicPlatforms:", error.message);
     return [];

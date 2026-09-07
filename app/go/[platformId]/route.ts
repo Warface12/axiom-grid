@@ -62,11 +62,18 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   if (destination) destination = withCampaign(destination, data.affiliate_campaign, geoSubid);
   const safe = destination ? parsePublicHttpUrl(destination) : { ok: false as const };
   if (!safe.ok) return NextResponse.redirect(new URL("/unavailable?reason=link", request.url));
-  await supabase.from("affiliate_click").insert({
+  const click = {
     platform_id: platformId,
     market_code: decision.marketCode,
     referrer: request.headers.get("referer"),
     user_agent: request.headers.get("user-agent"),
-  });
+    placement: request.nextUrl.searchParams.get("placement") || request.nextUrl.searchParams.get("src") || null,
+    cta: request.nextUrl.searchParams.get("cta") || null,
+  };
+  const { error: clickError } = await supabase.from("affiliate_click").insert(click);
+  if (clickError && /column|schema cache/i.test(clickError.message)) {
+    const { placement, cta, ...legacy } = click;
+    await supabase.from("affiliate_click").insert(legacy);
+  }
   return NextResponse.redirect(safe.url.toString(), 302);
 }
