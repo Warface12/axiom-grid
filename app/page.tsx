@@ -8,7 +8,7 @@ import {HeroStage} from "@/components/HeroStage";
 import {HomeSearch} from "@/components/HomeSearch";
 import {DiscoverRail} from "@/components/DiscoverRail";
 import {MarketGlobe} from "@/components/MarketGlobe";
-import {OpportunityTaxonomy} from "@/components/OpportunityTaxonomy";
+import {OpportunityConstellation} from "@/components/OpportunityConstellation";
 import {CompareLike} from "@/components/CompareLike";
 
 export const metadata=buildMetadata({
@@ -59,20 +59,24 @@ export default function Home(){
     </section>
     <CompareLike/>
     <MarketGlobe/>
-    <OpportunityTaxonomy/>
+    <OpportunityConstellation/>
     <section className="tp-save-story">
-      <div>
+      <div className="tp-save-copy">
         <p>YOUR SET</p>
         <h2>Save, follow, get notified.</h2>
         <p>Keep the products you are researching. Follow a company. Hear about the classes you care about — across devices.</p>
+        <Link className="tp-save-cta" href="/account">Open your TopPick</Link>
+        <nav className="tp-save-links">
+          <Link href="/apps">Install the app</Link>
+          <Link href="/how-we-rate">How we research</Link>
+          <Link href="/legal/risk-disclosure">Risks</Link>
+        </nav>
       </div>
-      <Link href="/account">Open your TopPick</Link>
-    </section>
-    <section className="tp-continue">
-      <Link href="/apps">Install the app</Link>
-      <Link href="/how-we-rate">How we research</Link>
-      <Link href="/legal/risk-disclosure">Risks</Link>
-      <Link href="/partners">Partners</Link>
+      <div className="tp-save-scene" aria-hidden="true">
+        <span className="tp-save-plate" style={{["--d" as string]:"0"}}>Save</span>
+        <span className="tp-save-plate" style={{["--d" as string]:"1"}}>Follow</span>
+        <span className="tp-save-plate" style={{["--d" as string]:"2"}}>Notify</span>
+      </div>
     </section>
     <LatestPartnerUpdates/>
     <section className="ag-bottom-cta"><Sparkles/><div><span>FOR COMPANIES</span><h2>Advertise or manage your official presence.</h2></div><Link href="/partners">Partner with TopPick <ArrowUpRight/></Link></section>
