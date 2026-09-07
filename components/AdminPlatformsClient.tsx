@@ -2,12 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Copy, ExternalLink, Link2, Plus, RefreshCw, Search, Trash2, WandSparkles, X } from "lucide-react";
+import { CATALOG, catalogById, VERIFICATION_STATES } from "@/lib/catalog";
 
 type Row = {
   id: string;
   slug: string;
   name: string;
-  kind: "exchange" | "broker" | "wallet";
+  kind: string;
   status: "research" | "verified" | "restricted";
   official_url?: string | null;
   affiliate_url?: string | null;
@@ -57,9 +58,20 @@ const blank = {
   import_source_url: "",
   import_retrieved_at: "",
   import_provenance: {},
+  subcategory: "",
+  attributes: {} as Record<string, string | boolean | null>,
+  verification_status: "needs_review",
+  last_verified_at: "",
+  operator_name: "",
+  founded_year: "",
+  editorial_score: "",
+  archived: false,
+  cover_url: "",
+  languages: "",
+  source_notes: "",
 };
 
-const tabs = ["General", "Affiliate", "Review", "GEO / SEO", "Publish"] as const;
+const tabs = ["General", "Features", "Affiliate", "Review", "GEO / SEO", "Publish"] as const;
 
 function slugify(v: string) {
   return v.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -88,6 +100,8 @@ export function AdminPlatformsClient() {
   const [importing, setImporting] = useState(false);
   const [importNotes, setImportNotes] = useState<string[]>([]);
   const [duplicates, setDuplicates] = useState<{ id: string; name: string; slug: string }[]>([]);
+  const [quality, setQuality] = useState("all");
+  const [kindFilter, setKindFilter] = useState("all");
 
   async function load() {
     setLoading(true);
@@ -116,10 +130,18 @@ export function AdminPlatformsClient() {
     return () => window.removeEventListener("beforeunload", warn);
   }, [dirty]);
 
-  const filtered = useMemo(
-    () => rows.filter((r) => `${r.name} ${r.slug} ${r.kind} ${r.status}`.toLowerCase().includes(query.toLowerCase())),
-    [rows, query]
-  );
+  const filtered = useMemo(() => rows.filter((r) => {
+    const hay = `${r.name} ${r.slug} ${r.kind} ${r.status}`.toLowerCase();
+    if (query && !hay.includes(query.toLowerCase())) return false;
+    if (kindFilter !== "all" && r.kind !== kindFilter) return false;
+    const v = String(r.verification_status || "needs_review");
+    if (quality === "needs_review" && v !== "needs_review" && v !== "imported") return false;
+    if (quality === "missing" && (r.short_description && r.official_url)) return false;
+    if (quality === "stale" && v !== "stale") return false;
+    if (quality === "imported" && v !== "imported") return false;
+    if (quality === "hidden" && r.visible) return false;
+    return true;
+  }), [rows, query, kindFilter, quality]);
 
   function setField(patch: Record<string, unknown>) {
     setForm((prev) => ({ ...prev, ...patch }));
@@ -134,7 +156,13 @@ export function AdminPlatformsClient() {
       tags: (row.tags || []).join(", "),
       pros: (row.pros || []).join("\n"),
       cons: (row.cons || []).join("\n"),
+      languages: Array.isArray(row.languages) ? row.languages.join(", ") : String(row.languages || ""),
       ranking_priority: Number(row.ranking_priority || 0),
+      attributes: (row.attributes && typeof row.attributes === "object" ? row.attributes : {}) as Record<string, string | boolean | null>,
+      verification_status: String(row.verification_status || "needs_review"),
+      last_verified_at: String(row.last_verified_at || "").slice(0, 10),
+      editorial_score: row.editorial_score == null ? "" : String(row.editorial_score),
+      founded_year: row.founded_year == null ? "" : String(row.founded_year),
     } as typeof form : blank);
     setImportUrl(row?.official_url || row?.affiliate_url || "");
     setImportNotes([]);
@@ -168,16 +196,17 @@ export function AdminPlatformsClient() {
         seo_description: form.seo_description || f.seoDescription?.value || "",
         logo_url: form.logo_url || f.logoUrl?.value || "",
         og_image_url: form.og_image_url || f.ogImageUrl?.value || "",
-        affiliate_url: form.affiliate_url || importUrl,
         import_source_url: j.imported?.sourceUrl || "",
         import_retrieved_at: j.imported?.retrievedAt || "",
         import_provenance: j.imported || {},
+        verification_status: "imported",
         visible: false,
         status: "research",
       });
       setDuplicates(j.duplicates || []);
       setImportNotes([
         j.message,
+        j.imported?.suggestedKind?.kind ? `Suggested category (needs review): ${j.imported.suggestedKind.kind}` : "No category inferred. Choose it manually.",
         ...(j.imported?.needsReview || []),
         ...(j.imported?.missing?.length ? [`Missing public fields: ${j.imported.missing.join(", ")}`] : []),
       ].filter(Boolean));
@@ -195,6 +224,7 @@ export function AdminPlatformsClient() {
       tags: String(form.tags || "").split(/[,\n]/).map((x) => x.trim()).filter(Boolean),
       pros: String(form.pros || "").split(/[,\n]/).map((x) => x.trim()).filter(Boolean),
       cons: String(form.cons || "").split(/[,\n]/).map((x) => x.trim()).filter(Boolean),
+      languages: String(form.languages || "").split(/[,\n]/).map((x) => x.trim()).filter(Boolean),
     };
     const r = await fetch("/api/admin/platforms", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
     const j = await r.json().catch(() => ({}));
@@ -246,12 +276,24 @@ export function AdminPlatformsClient() {
           <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search inventory…" />
         </div>
         <button className="ax-tool-btn" onClick={load}><RefreshCw />Refresh</button>
-        <button className="ax-primary-btn" onClick={() => edit()}><Plus />Add partner</button>
+        <select className="ax-tool-btn" value={kindFilter} onChange={(e) => setKindFilter(e.target.value)} aria-label="Filter category">
+          <option value="all">All categories</option>
+          {CATALOG.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
+        </select>
+        <select className="ax-tool-btn" value={quality} onChange={(e) => setQuality(e.target.value)} aria-label="Filter data quality">
+          <option value="all">All quality states</option>
+          <option value="needs_review">Needs review / imported</option>
+          <option value="imported">Imported</option>
+          <option value="stale">Stale</option>
+          <option value="missing">Missing core fields</option>
+          <option value="hidden">Hidden</option>
+        </select>
+        <button className="ax-primary-btn" onClick={() => edit()}><Plus />Add platform</button>
       </div>
       {message && <div className="ax-admin-alert">{message}</div>}
       <div className="ax-inventory-grid">
         <div className="ax-inventory-head">
-          <span>PLATFORM</span><span>TYPE</span><span>STATUS</span><span>PUBLIC</span><span>UPDATED</span><span />
+          <span>PLATFORM</span><span>TYPE</span><span>QUALITY</span><span>PUBLIC</span><span>UPDATED</span><span />
         </div>
         {loading ? (
           <div className="ax-inventory-empty">Loading inventory…</div>
@@ -267,7 +309,7 @@ export function AdminPlatformsClient() {
               <span><b>{row.name}</b><small>{row.slug}</small></span>
             </button>
             <span className="ax-type-chip">{row.kind}</span>
-            <span className={`ax-state-chip is-${row.status}`}>{row.status}</span>
+            <span className={`ax-state-chip is-${row.status}`}>{String(row.verification_status || row.status)}</span>
             <span>{row.visible ? "Visible" : "Hidden"}</span>
             <span>{row.updated_at ? new Date(row.updated_at).toLocaleDateString() : "—"}</span>
             <span className="ax-row-actions">
@@ -322,10 +364,14 @@ export function AdminPlatformsClient() {
               <section className="ax-form-grid">
                 <label>Name *<input required value={form.name || ""} onChange={(e) => setField({ name: e.target.value })} /></label>
                 <label>Type
-                  <select value={form.kind} onChange={(e) => setField({ kind: e.target.value })}>
-                    <option value="broker">Broker</option>
-                    <option value="exchange">Exchange</option>
-                    <option value="wallet">Wallet</option>
+                  <select value={form.kind} onChange={(e) => setField({ kind: e.target.value, attributes: {} })}>
+                    {CATALOG.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
+                  </select>
+                </label>
+                <label>Subcategory
+                  <select value={form.subcategory || ""} onChange={(e) => setField({ subcategory: e.target.value })}>
+                    <option value="">Not set</option>
+                    {(catalogById(form.kind)?.subcategories || []).map((s) => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </label>
                 <label>Slug<input value={form.slug || ""} onChange={(e) => setField({ slug: e.target.value })} placeholder="auto-from-name" /></label>
@@ -339,9 +385,39 @@ export function AdminPlatformsClient() {
                 <label className="wide">Official URL<input value={form.official_url || ""} onChange={(e) => setField({ official_url: e.target.value })} /></label>
                 <label className="wide">Logo URL<input value={form.logo_url || ""} onChange={(e) => setField({ logo_url: e.target.value })} /></label>
                 <label className="wide">Short description<textarea value={form.short_description || ""} onChange={(e) => setField({ short_description: e.target.value })} /></label>
+                <label className="wide">Cover image URL<input value={form.cover_url || ""} onChange={(e) => setField({ cover_url: e.target.value })} /></label>
                 <label>Custody model<input value={form.custody_model || ""} onChange={(e) => setField({ custody_model: e.target.value })} /></label>
                 <label>Ranking priority<input type="number" value={form.ranking_priority || 0} onChange={(e) => setField({ ranking_priority: Number(e.target.value) })} /></label>
                 <label className="wide">Tags<input value={form.tags || ""} onChange={(e) => setField({ tags: e.target.value })} placeholder="forex, mt5, crypto" /></label>
+              </section>
+            )}
+
+            {tab === "Features" && (
+              <section className="ax-form-grid">
+                <p className="wide partner-safety-note">Only fill fields you can source. Leave undisclosed features empty. Changing category resets these fields.</p>
+                {(catalogById(form.kind)?.attributes || []).map((spec) => (
+                  spec.type === "bool" ? (
+                    <label key={spec.key}>{spec.label}
+                      <select
+                        value={form.attributes?.[spec.key] === true ? "yes" : form.attributes?.[spec.key] === false ? "no" : ""}
+                        onChange={(e) => setField({ attributes: { ...form.attributes, [spec.key]: e.target.value === "" ? null : e.target.value === "yes" } })}
+                      >
+                        <option value="">Not disclosed</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                    </label>
+                  ) : (
+                    <label key={spec.key} className="wide">{spec.label}
+                      <input
+                        value={typeof form.attributes?.[spec.key] === "string" ? String(form.attributes[spec.key]) : ""}
+                        onChange={(e) => setField({ attributes: { ...form.attributes, [spec.key]: e.target.value } })}
+                      />
+                    </label>
+                  )
+                ))}
+                <label>Operator / company<input value={form.operator_name || ""} onChange={(e) => setField({ operator_name: e.target.value })} /></label>
+                <label>Founded year<input value={form.founded_year || ""} onChange={(e) => setField({ founded_year: e.target.value })} /></label>
               </section>
             )}
 
@@ -371,17 +447,27 @@ export function AdminPlatformsClient() {
                 <label className="wide">SEO title<input value={form.seo_title || ""} onChange={(e) => setField({ seo_title: e.target.value })} /></label>
                 <label className="wide">SEO description<textarea value={form.seo_description || ""} onChange={(e) => setField({ seo_description: e.target.value })} /></label>
                 <label className="wide">OG image URL<input value={form.og_image_url || ""} onChange={(e) => setField({ og_image_url: e.target.value })} /></label>
+                <label className="wide">Languages<input value={form.languages || ""} onChange={(e) => setField({ languages: e.target.value })} placeholder="en, es — only if sourced" /></label>
                 <p className="wide partner-safety-note">GEO availability, blocked markets and legal notices are stored as market rules. Add them after saving this platform.</p>
               </section>
             )}
 
             {tab === "Publish" && (
               <section className="ax-form-grid">
+                <label>Data quality
+                  <select value={form.verification_status} onChange={(e) => setField({ verification_status: e.target.value })}>
+                    {VERIFICATION_STATES.map((s) => <option key={s} value={s}>{s.replace("_", " ")}</option>)}
+                  </select>
+                </label>
+                <label>Last verified<input type="date" value={form.last_verified_at || ""} onChange={(e) => setField({ last_verified_at: e.target.value })} /></label>
+                <label>Editorial score<input value={form.editorial_score || ""} onChange={(e) => setField({ editorial_score: e.target.value })} placeholder="Leave empty if not rated" /></label>
+                <label className="wide">Source notes<textarea value={form.source_notes || ""} onChange={(e) => setField({ source_notes: e.target.value })} /></label>
                 <div className="ax-toggle-row wide">
                   <label><input type="checkbox" checked={!!form.featured} onChange={(e) => setField({ featured: e.target.checked })} /> Featured near top</label>
                   <label><input type="checkbox" checked={!!form.visible} onChange={(e) => setField({ visible: e.target.checked })} /> Publicly visible</label>
+                  <label><input type="checkbox" checked={!!form.archived} onChange={(e) => setField({ archived: e.target.checked, visible: e.target.checked ? false : form.visible })} /> Archived</label>
                 </div>
-                <div className="partner-safety-note wide">Safety default: keep “Publicly visible” off until the record, market availability and partner promotion rights are ready. Imported public metadata is never auto-published.</div>
+                <div className="partner-safety-note wide">Imported is not verified. Publicly visible stays off until you choose to publish. Do not invent fees, GEO, licenses or affiliate URLs to complete the form.</div>
               </section>
             )}
 

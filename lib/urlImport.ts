@@ -1,3 +1,4 @@
+import { classifyKindFromPublicText } from "@/lib/catalog";
 import { parsePublicHttpUrl } from "@/lib/httpUrl";
 import { safePublicFetch } from "@/lib/ssrf";
 
@@ -81,31 +82,35 @@ export async function importPublicPlatformMetadata(inputUrl: string) {
   const siteName = meta.get("og:site_name") || title.split(/[|\-–—]/)[0]?.trim() || base.hostname.replace(/^www\./, "");
   const canonical = meta.get("og:url") || firstMatch(html, [/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)/i]) || fetched.finalUrl;
   const icons = collectIcons(html, base);
-  const logo = ogImage || icons[0] || `${base.origin}/favicon.ico`;
+  const logo = icons[0] || null;
   const locale = meta.get("og:locale") || "";
   const retrievedAt = new Date().toISOString();
+  const classified = classifyKindFromPublicText({ title, description, host: base.hostname });
 
   return {
     sourceUrl: parsed.url.toString(),
     finalUrl: fetched.finalUrl,
     retrievedAt,
     httpStatus: fetched.status,
+    suggestedKind: classified,
     fields: {
       name: field(siteName.replace(/\s+(official|home|login|sign up)$/i, ""), fetched.finalUrl, "medium"),
       officialUrl: field(base.origin, fetched.finalUrl, "high"),
       seoTitle: field(title.slice(0, 70), fetched.finalUrl, title ? "high" : "low"),
       seoDescription: field(description.slice(0, 160), fetched.finalUrl, description ? "high" : "low"),
       shortDescription: field(description.slice(0, 280), fetched.finalUrl, description ? "medium" : "low"),
-      logoUrl: field(logo, fetched.finalUrl, ogImage ? "medium" : "low"),
+      logoUrl: field(logo, fetched.finalUrl, logo ? "low" : "low"),
       ogImageUrl: field(ogImage || null, fetched.finalUrl, ogImage ? "high" : "low"),
       canonicalUrl: field(canonical, fetched.finalUrl, "medium"),
       language: field(locale.slice(0, 16) || null, fetched.finalUrl, locale ? "medium" : "low"),
     },
     missing: [] as string[],
     needsReview: [
-      "Confirm the legal entity and product type before publishing.",
-      "Do not treat public marketing copy as verified fees, licensing or market eligibility.",
+      "Confirm the legal entity and product category before publishing.",
+      "Imported icons/OG images are not verified brand assets.",
+      "Do not treat public marketing copy as verified fees, licensing, KYC or market eligibility.",
       "Affiliate URLs, GEO rules and commercial CTAs must be entered manually.",
+      classified.kind ? `Suggested category from public text: ${classified.kind} (needs review, not verified).` : "Category could not be inferred. Choose it manually.",
     ],
   };
 }

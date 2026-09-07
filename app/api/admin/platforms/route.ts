@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { isAdminUser } from "@/lib/supabase/admin";
 import { createClient } from "@supabase/supabase-js";
 import { parsePublicHttpUrl } from "@/lib/httpUrl";
+import { isPlatformKind, VERIFICATION_STATES } from "@/lib/catalog";
 
 function adminClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -47,15 +48,16 @@ export async function POST(request: NextRequest) {
   const name = String(body.name ?? "").trim();
   const kind = String(body.kind ?? "").trim();
   const slug = String(body.slug ?? name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")).trim();
-  if (!name || !slug || !["exchange", "broker", "wallet"].includes(kind)) {
-    return NextResponse.json({ ok: false, error: "Name, slug and a valid platform type are required." }, { status: 400 });
+  if (!name || !slug || !isPlatformKind(kind)) {
+    return NextResponse.json({ ok: false, error: "Name, slug and a valid platform category are required." }, { status: 400 });
   }
 
   const official = optionalUrl(body.official_url, "Official URL");
   const affiliate = optionalUrl(body.affiliate_url, "Affiliate URL");
   const logo = optionalUrl(body.logo_url, "Logo URL");
   const og = optionalUrl(body.og_image_url, "OG image URL");
-  for (const check of [official, affiliate, logo, og]) {
+  const cover = optionalUrl(body.cover_url, "Cover URL");
+  for (const check of [official, affiliate, logo, og, cover]) {
     if (!check.ok) return NextResponse.json({ ok: false, error: check.error }, { status: 400 });
   }
 
@@ -88,6 +90,20 @@ export async function POST(request: NextRequest) {
     import_source_url: String(body.import_source_url ?? "").trim() || null,
     import_retrieved_at: body.import_retrieved_at || null,
     import_provenance: body.import_provenance && typeof body.import_provenance === "object" ? body.import_provenance : {},
+    subcategory: String(body.subcategory ?? "").trim() || null,
+    attributes: body.attributes && typeof body.attributes === "object" && !Array.isArray(body.attributes) ? body.attributes : {},
+    verification_status: (VERIFICATION_STATES as readonly string[]).includes(String(body.verification_status)) ? String(body.verification_status) : "needs_review",
+    last_verified_at: String(body.last_verified_at ?? "").trim() || null,
+    operator_name: String(body.operator_name ?? "").trim() || null,
+    founded_year: Number.isFinite(Number(body.founded_year)) && String(body.founded_year).trim() ? Number(body.founded_year) : null,
+    editorial_score: (() => {
+      const n = Number(body.editorial_score);
+      return String(body.editorial_score ?? "").trim() && Number.isFinite(n) ? n : null;
+    })(),
+    archived: Boolean(body.archived),
+    cover_url: cover.value,
+    languages: cleanArray(body.languages),
+    source_notes: String(body.source_notes ?? "").trim() || null,
     updated_at: new Date().toISOString(),
   };
 
@@ -98,7 +114,11 @@ export async function POST(request: NextRequest) {
       : supabase.from("platform").insert(row).select("*").single();
   let { data, error } = await run(payload);
   if (error && /column|schema cache/i.test(error.message)) {
-    const { ranking_priority, affiliate_campaign, og_image_url, import_source_url, import_retrieved_at, import_provenance, ...legacy } = payload;
+    const {
+      ranking_priority, affiliate_campaign, og_image_url, import_source_url, import_retrieved_at, import_provenance,
+      subcategory, attributes, verification_status, last_verified_at, operator_name, founded_year, editorial_score,
+      archived, cover_url, languages, source_notes, ...legacy
+    } = payload;
     ({ data, error } = await run(legacy as typeof payload));
   }
   if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });

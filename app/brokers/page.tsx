@@ -1,3 +1,10 @@
-import { PlatformIndex } from "@/components/PlatformIndex";import { buildMetadata } from "@/lib/seo";import { getPublicPlatforms } from "@/lib/platforms";
-export const metadata=buildMetadata({title:"Broker & Trading Platform Research",description:"Compare brokers and trading platforms with independent research into legal entity, instruments, fees, platform access, risk disclosures and market availability.",path:"/brokers",keywords:["broker reviews","trading platform comparison","forex broker comparison","trading platform research"]});
-export default async function Page(){const items=await getPublicPlatforms("broker");return <main><section className="shell page-hero"><span>PLATFORM HUB / BROKERS</span><h1>Brokers & trading platforms</h1><p>Independent comparison of forex, CFD and multi-asset brokers. Availability, products, leverage and legal entities can differ by country, so promotional links remain hidden unless the record is approved for public use.</p></section><section className="shell content-shell"><PlatformIndex kind="broker" items={items}/></section></main>}
+import { catalogById } from "@/lib/catalog";
+import { ProductHub, productHubMetadata } from "@/components/ProductHub";
+
+const KIND = "broker" as const;
+export async function generateMetadata() {
+  return productHubMetadata(catalogById(KIND)!);
+}
+export default async function Page() {
+  return <ProductHub cat={catalogById(KIND)!} />;
+}

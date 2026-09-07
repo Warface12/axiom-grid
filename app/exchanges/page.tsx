@@ -1,3 +1,10 @@
-import { PlatformIndex } from "@/components/PlatformIndex";import { buildMetadata } from "@/lib/seo";import { getPublicPlatforms } from "@/lib/platforms";
-export const metadata=buildMetadata({title:"Crypto Exchange Research & Comparisons",description:"Compare cryptocurrency exchanges by product access, security context, fees, funding, transparency and jurisdiction-specific availability.",path:"/exchanges",keywords:["crypto exchange reviews","crypto exchange comparison","cryptocurrency platforms"]});
-export default async function Page(){const items=await getPublicPlatforms("exchange");return <main><section className="shell page-hero"><span>PLATFORM HUB / EXCHANGES</span><h1>Crypto exchanges</h1><p>Research centralized crypto venues without mixing them with brokers or self-custody wallets. Profiles distinguish editorial research from commercial relationships and keep unknown or restricted promotions offline.</p></section><section className="shell content-shell"><PlatformIndex kind="exchange" items={items}/></section></main>}
+import { catalogById } from "@/lib/catalog";
+import { ProductHub, productHubMetadata } from "@/components/ProductHub";
+
+const KIND = "exchange" as const;
+export async function generateMetadata() {
+  return productHubMetadata(catalogById(KIND)!);
+}
+export default async function Page() {
+  return <ProductHub cat={catalogById(KIND)!} />;
+}

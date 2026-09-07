@@ -7,6 +7,8 @@ const links = [
   ["Exchanges", "/exchanges"],
   ["Brokers", "/brokers"],
   ["Wallets", "/wallets"],
+  ["DEXs", "/dex"],
+  ["Tools", "/tools"],
   ["Compare", "/compare"],
   ["Research", "/learn"],
   ["Updates", "/updates"],

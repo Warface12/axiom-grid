@@ -1,3 +1,10 @@
-import { PlatformIndex } from "@/components/PlatformIndex";import { buildMetadata } from "@/lib/seo";import { getPublicPlatforms } from "@/lib/platforms";
-export const metadata=buildMetadata({title:"Crypto Wallet Research & Comparisons",description:"Compare hardware and software crypto wallets by custody model, recovery, security, supported assets and practical usability.",path:"/wallets",keywords:["crypto wallet reviews","hardware wallet comparison","self custody wallet"]});
-export default async function Page(){const items=await getPublicPlatforms("wallet");return <main><section className="shell page-hero"><span>PLATFORM HUB / WALLETS</span><h1>Crypto wallets</h1><p>Compare custody models, recovery methods, security design and usability. Wallet research is kept separate from exchange accounts and broker products so users can understand what they actually control.</p></section><section className="shell content-shell"><PlatformIndex kind="wallet" items={items}/></section></main>}
+import { catalogById } from "@/lib/catalog";
+import { ProductHub, productHubMetadata } from "@/components/ProductHub";
+
+const KIND = "wallet" as const;
+export async function generateMetadata() {
+  return productHubMetadata(catalogById(KIND)!);
+}
+export default async function Page() {
+  return <ProductHub cat={catalogById(KIND)!} />;
+}

@@ -1,4 +1,11 @@
-import {safePlatformSeoTitle} from "@/lib/contentSafety";import { notFound } from "next/navigation";import { getPublicPlatform,getResearchPlatform } from "@/lib/platforms";import { PlatformDetail } from "@/components/PlatformDetail";import { buildMetadata, breadcrumbJsonLd, reviewJsonLd } from "@/lib/seo";import { SITE_URL } from "@/lib/site";
-const KIND="wallet" as const;
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const p=await getResearchPlatform(slug,KIND);if(!p)return buildMetadata({title:"Platform not found",description:"The requested research profile is unavailable.",path:"/wallets/"+slug,noIndex:true});return buildMetadata({title:safePlatformSeoTitle(p.seoTitle,p.name),description:p.seoDescription||p.short,path:"/wallets/"+p.slug,type:"article"});}
-export default async function Page({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const p=await getPublicPlatform(slug,KIND);if(!p)notFound();const path="/wallets/"+p.slug;const bc=breadcrumbJsonLd([{name:"Home",url:SITE_URL},{name:"Wallets",url:SITE_URL+"/wallets"},{name:p.name,url:SITE_URL+path}]);const review=reviewJsonLd(p,path);return <main><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(bc)}}/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(review)}}/><section className="shell page-hero"><span>WALLETS / PROFILE</span><p>Independent evidence-led platform research</p></section><PlatformDetail platform={p}/></main>}
+import { catalogById } from "@/lib/catalog";
+import { ProductProfile, productProfileMetadata } from "@/components/ProductProfile";
+
+const KIND = "wallet" as const;
+type Props = { params: Promise<{ slug: string }> };
+export async function generateMetadata({ params }: Props) {
+  return productProfileMetadata(catalogById(KIND)!, (await params).slug);
+}
+export default async function Page({ params }: Props) {
+  return <ProductProfile cat={catalogById(KIND)!} slug={(await params).slug} />;
+}

@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
 import { getPublicPlatforms } from "@/lib/platforms";
 import { CompareClient } from "@/components/CompareClient";
+import { CATALOG } from "@/lib/catalog";
 
 export const metadata = buildMetadata({
   title: "Compare Platforms — TopPick.pro",
-  description: "Compare exchanges, brokers and wallets by product type, custody, fees, security and published research notes.",
+  description: "Category-aware comparison for exchanges, wallets, brokers, DEXs and other crypto products using only published fields.",
   path: "/compare",
 });
 
@@ -19,16 +19,23 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ i
       <section className="page-hero">
         <span>COMPARE</span>
         <h1>Compare like with like.</h1>
-        <p>Exchanges, brokers and wallets are separated because the products, risks and custody models are fundamentally different. Comparison uses only published research fields — never invented ratings.</p>
+        <p>The comparison engine is ready. It only lists reviewed public profiles and leaves undisclosed fields empty. It will not invent fees, ratings or availability.</p>
       </section>
       {platforms.length ? (
         <CompareClient platforms={platforms} initialIds={initialIds} />
       ) : (
-        <section className="ag-lanes">
-          <Link className="ag-lane" href="/exchanges"><div className="lane-copy"><small>LIQUIDITY / CUSTODY</small><h2>Exchange research</h2><p>Fees, funding, assets, security and market access.</p></div><ArrowUpRight /></Link>
-          <Link className="ag-lane" href="/brokers"><div className="lane-copy"><small>EXECUTION / PRODUCTS</small><h2>Broker research</h2><p>Spreads, instruments, entities and platform access.</p></div><ArrowUpRight /></Link>
-          <Link className="ag-lane" href="/wallets"><div className="lane-copy"><small>CUSTODY / RECOVERY</small><h2>Wallet research</h2><p>Control, recovery, supported assets and security model.</p></div><ArrowUpRight /></Link>
-        </section>
+        <div className="ag-empty-directory">
+          <div className="empty-index">
+            <span>COMPARISON ENGINE</span>
+            <h2>Nothing to compare yet.</h2>
+            <p>When real platforms are published, you can compare two to four profiles inside the same product class. Until then the table stays empty on purpose.</p>
+            <div className="empty-actions">
+              {CATALOG.filter((c) => c.dedicated).map((c) => (
+                <Link key={c.id} href={`/${c.hub}`}>{c.plural}</Link>
+              ))}
+            </div>
+          </div>
+        </div>
       )}
     </main>
   );
