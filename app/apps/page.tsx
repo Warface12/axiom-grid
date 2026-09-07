@@ -12,7 +12,7 @@ export default function Page() {
     <main>
       <section className="shell page-hero">
         <span>TOPPICK APPS</span>
-        <h1>Install the research desk you actually use</h1>
+        <h1>Install TopPick on your devices</h1>
         <p>TopPick is installable as a progressive web app where your browser supports it. We do not offer unsigned APK, IPA or Windows installer downloads.</p>
       </section>
       <section className="shell content-shell">

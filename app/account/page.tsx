@@ -3,7 +3,7 @@ import { AccountClient } from "@/components/AccountClient";
 
 export const metadata = buildMetadata({
   title: "Your TopPick account",
-  description: "Save research, follow companies and control notification preferences.",
+  description: "Save products, follow companies, manage notifications and keep your TopPick account in one place.",
   path: "/account",
   noIndex: true,
 });
@@ -12,9 +12,9 @@ export default function Page() {
   return (
     <main>
       <section className="shell page-hero">
-        <span>USER ACCOUNT</span>
-        <h1>Your research desk</h1>
-        <p>Consumer accounts do not control company pages. Google and Apple sign-in appear only when those providers are actually configured.</p>
+        <span>YOUR ACCOUNT</span>
+        <h1>Your TopPick</h1>
+        <p>Save products, follow companies, watch opportunities and control alerts. This is a personal account — not Admin and not a company workspace.</p>
       </section>
       <section className="shell content-shell">
         <AccountClient />

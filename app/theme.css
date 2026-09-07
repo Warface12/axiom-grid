@@ -157,6 +157,9 @@ html[data-scheme="light"] .tp-home-search button{background:#0b8fb8!important;co
 .tp-home-card h3{margin:8px 0 10px;font-size:22px;letter-spacing:-.04em}
 .tp-home-card p{margin:0;color:#8da7b8;line-height:1.65}
 .tp-account-desk{display:grid;gap:16px}
+.tp-account-auth{display:grid;gap:18px;max-width:460px}
+.tp-auth-mode{min-height:44px;padding:0 16px;border-radius:12px;border:1px solid #1b4054;background:#061019;color:#c5d8e4;font-weight:800;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+.tp-auth-mode.is-active{border-color:#37d9ff;color:#37d9ff;background:#07202c}
 .ag-footer-col{display:flex;flex-direction:column;gap:11px}
 .ag-footer-col summary{font-weight:800;cursor:pointer;list-style:none;min-height:44px;display:flex;align-items:center}
 .ag-footer-col a{min-height:40px;display:flex;align-items:center}

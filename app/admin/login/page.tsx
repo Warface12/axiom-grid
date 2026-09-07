@@ -1,2 +1,37 @@
-import { Suspense } from "react";import { ShieldCheck,LockKeyhole } from "lucide-react";import { AdminLoginForm } from "@/components/admin/AdminLoginForm";import { TopPickMark } from "@/components/TopPickMark";
-export default function AdminLoginPage(){return <main className="admin-login-page"><div className="admin-login-visual"><div className="login-grid"/><div className="login-orbit orbit-one"/><div className="login-orbit orbit-two"/><div className="login-core"><TopPickMark/><strong>TOPPICK</strong><small>PRIVATE NODE</small></div></div><div className="admin-login-card"><div className="ax-admin-login-brand"><TopPickMark/><div><strong>TOPPICK.PRO</strong><small>PRIVATE CONTROL ROOM</small></div></div><div className="login-badge"><ShieldCheck/> AUTHORIZED OPERATOR ONLY</div><h1>Control room access</h1><p>Sign in with the private administrator credentials configured in Vercel. Supabase Auth remains supported as a fallback.</p><Suspense fallback={<p>Loading…</p>}><AdminLoginForm/></Suspense><div className="login-security"><LockKeyhole/> Session protected by a signed, HTTP-only server cookie and server-side admin checks.</div></div></main>}
+import { Suspense } from "react";
+import { ShieldCheck, LockKeyhole } from "lucide-react";
+import { AdminLoginForm } from "@/components/admin/AdminLoginForm";
+import { TopPickMark } from "@/components/TopPickMark";
+
+export default function AdminLoginPage() {
+  return (
+    <main className="admin-login-page">
+      <div className="admin-login-visual">
+        <div className="login-grid" />
+        <div className="login-orbit orbit-one" />
+        <div className="login-orbit orbit-two" />
+        <div className="login-core">
+          <TopPickMark />
+          <strong>TOPPICK</strong>
+          <small>PRIVATE NODE</small>
+        </div>
+      </div>
+      <div className="admin-login-card">
+        <div className="ax-admin-login-brand">
+          <TopPickMark />
+          <div>
+            <strong>TOPPICK.PRO</strong>
+            <small>PRIVATE CONTROL ROOM</small>
+          </div>
+        </div>
+        <div className="login-badge"><ShieldCheck /> AUTHORIZED OPERATOR ONLY</div>
+        <h1>Control room access</h1>
+        <p>This sign-in is only for TopPick operators. It does not create or open a consumer or partner account.</p>
+        <Suspense fallback={<p>Loading…</p>}>
+          <AdminLoginForm />
+        </Suspense>
+        <div className="login-security"><LockKeyhole /> Access is checked on the server with a signed HTTP-only cookie. A normal user or partner session cannot open Admin.</div>
+      </div>
+    </main>
+  );
+}

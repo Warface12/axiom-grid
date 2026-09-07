@@ -39,7 +39,7 @@ export async function POST(request: Request) {
   const expectedPassword = process.env.ADMIN_PASSWORD || "";
 
   if (!expectedEmail || !expectedPassword || !process.env.ADMIN_SESSION_SECRET) {
-    return NextResponse.json({ error: "Admin login is not configured. Add ADMIN_EMAIL, ADMIN_PASSWORD and ADMIN_SESSION_SECRET in Vercel." }, { status: 503 });
+    return NextResponse.json({ error: "Admin login is not configured for this deployment." }, { status: 503 });
   }
   if (!equal(email, expectedEmail) || !equal(password, expectedPassword)) {
     return NextResponse.json({ error: "Incorrect email or password." }, { status: 401 });

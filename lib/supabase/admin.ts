@@ -8,14 +8,10 @@ export async function createClient() {
 }
 
 export async function isAdminUser() {
-  if (await hasAdminSession()) return true;
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return false;
-  try {
-    const supabase=await createClient();
-    const {data:{user},error}=await supabase.auth.getUser();
-    if(error||!user)return false;
-    const adminEmail=(process.env.ADMIN_EMAIL||"").trim().toLowerCase();
-    return Boolean(adminEmail&&user.email?.toLowerCase()===adminEmail);
-  } catch { return false; }
+  return hasAdminSession();
 }
-export async function requireAdmin(){if(!(await isAdminUser()))throw new Error("Unauthorized admin action");return true}
+
+export async function requireAdmin() {
+  if (!(await isAdminUser())) throw new Error("Unauthorized admin action");
+  return true;
+}

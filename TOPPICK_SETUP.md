@@ -9,7 +9,7 @@ In Vercel → Project → Settings → Environment Variables add:
 - `ADMIN_PASSWORD` — a strong password. It is read only on the server and should not be committed to Git.
 - `ADMIN_SESSION_SECRET` — a long random secret (at least 32 random characters).
 
-Keep the existing Supabase variables too. The login now uses a signed HTTP-only server session, while existing Supabase Auth remains a fallback.
+Keep the existing Supabase variables for consumer and partner authentication. Admin login is a separate signed HTTP-only server session. Do not use Admin credentials on `/account`.
 
 ## 3. Database update
 Run once in Supabase SQL Editor:

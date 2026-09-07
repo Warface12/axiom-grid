@@ -30,54 +30,98 @@ const emptyPrefs = {
 export function AccountClient() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [accepted, setAccepted] = useState(false);
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [message, setMessage] = useState("");
-  const [oauth, setOauth] = useState({ google: false, apple: false });
   const [desk, setDesk] = useState<Desk | null>(null);
+  const [ready, setReady] = useState(false);
   const [tab, setTab] = useState("Overview");
   const [prefs, setPrefs] = useState(emptyPrefs);
   const [interests, setInterests] = useState<string[]>([]);
 
   async function refresh() {
-    const r = await fetch("/api/account/me", { cache: "no-store" });
-    const j = await r.json();
-    setDesk(j);
-    if (j.preferences) setPrefs({ ...emptyPrefs, ...j.preferences });
-    if (Array.isArray(j.interests)) setInterests(j.interests);
+    try {
+      const r = await fetch("/api/account/me", { cache: "no-store", credentials: "same-origin" });
+      const j = await r.json().catch(() => null);
+      if (!j || j.unavailable) {
+        setDesk({ user: j?.user || null });
+        if (j?.user) setMessage(j?.error || "We could not load your saved items right now. Try again shortly.");
+        return;
+      }
+      setDesk(j);
+      if (j.preferences) setPrefs({ ...emptyPrefs, ...j.preferences });
+      if (Array.isArray(j.interests)) setInterests(j.interests);
+    } catch {
+      setDesk({ user: null });
+    }
   }
 
   useEffect(() => {
-    fetch("/api/account/session").then((r) => r.json()).then((j) => setOauth(j.oauth || { google: false, apple: false }));
-    refresh();
+    refresh().finally(() => setReady(true));
   }, []);
 
-  async function auth() {
+  async function auth(event: React.FormEvent) {
+    event.preventDefault();
     setMessage("");
-    const r = await fetch("/api/account/session", {
+    try {
+      const r = await fetch("/api/account/session", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({
+          email,
+          password,
+          confirm,
+          acceptedTerms: accepted,
+          mode,
+        }),
+      });
+      const j = await r.json().catch(() => null);
+      if (!j?.ok) {
+        setMessage(j?.error || "Could not complete that request.");
+        return;
+      }
+      setPassword("");
+      setConfirm("");
+      setMessage(j.needsEmailConfirm ? "Check your email to confirm the account before signing in." : "Signed in.");
+      await refresh();
+    } catch {
+      setMessage("We could not reach the sign-in service. Try again in a moment.");
+    }
+  }
+
+  async function signOut() {
+    await fetch("/api/account/session", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ email, password, mode }),
+      body: JSON.stringify({ mode: "signout" }),
     });
-    const j = await r.json();
-    if (!j.ok) { setMessage(j.error || "Could not sign in."); return; }
-    setMessage(j.needsEmailConfirm ? "Check your email to confirm the account." : "Signed in.");
-    await refresh();
+    setDesk({ user: null });
+    setEmail("");
+    setPassword("");
+    setConfirm("");
+    setMessage("");
   }
 
   async function post(payload: object, okMessage: string) {
     const r = await fetch("/api/account/me", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
-    const j = await r.json();
-    if (!j.ok) { setMessage(j.error || "Could not save."); return; }
+    const j = await r.json().catch(() => null);
+    if (!j?.ok) { setMessage(j?.error || "Could not save."); return; }
     setMessage(okMessage);
     await refresh();
   }
 
+  if (!ready) {
+    return <div className="tp-state-card"><span>ACCOUNT</span><h2>Loading…</h2><p>Checking whether you are signed in.</p></div>;
+  }
+
   if (desk?.user?.email) {
     const unread = (desk.notifications || []).filter((n) => !n.read_at).length;
-    const tabs = ["Overview", "Saved", "Following", "Opportunities", "Notifications", "Interests", "Email", "Settings"];
+    const tabs = ["Overview", "Saved", "Following", "Opportunities", "Notifications", "Interests", "Email", "Games", "Settings"];
     return (
       <div className="tp-account-desk">
-        <p className="tp-muted">Signed in as <b>{desk.user.email}</b>. This is a consumer account — it cannot administer a company page.</p>
+        <p className="tp-muted">Signed in as <b>{desk.user.email}</b>. This is a personal TopPick account — it cannot open Admin or a company workspace.</p>
         <div className="tp-filter-bar" style={{ flexWrap: "wrap" }}>
           {tabs.map((item) => (
             <button key={item} type="button" className="ag-icon-btn" style={{ width: "auto", padding: "0 12px" }} onClick={() => setTab(item)}>{item}{item === "Notifications" && unread ? ` (${unread})` : ""}</button>
@@ -86,10 +130,10 @@ export function AccountClient() {
 
         {tab === "Overview" && (
           <div className="tp-tool-grid">
-            <article className="tp-tool-card"><small>SAVED</small><b>{desk.items?.length || 0}</b><p>Guides, comparisons and products you keep for later.</p></article>
-            <article className="tp-tool-card"><small>FOLLOWING</small><b>{desk.follows?.length || 0}</b><p>Companies you follow. Updates appear only when a reviewed record exists.</p></article>
-            <article className="tp-tool-card"><small>NOTIFICATIONS</small><b>{unread}</b><p>Unread in-product notices. Marketing email stays off unless you opt in.</p></article>
-            <article className="tp-tool-card"><small>INTERESTS</small><b>{interests.length || "Optional"}</b><p>Used for For You filtering. Not required to keep an account.</p></article>
+            <article className="tp-tool-card"><small>SAVED</small><b>{desk.items?.length || 0}</b><p>Products, guides and comparisons you keep.</p></article>
+            <article className="tp-tool-card"><small>FOLLOWING</small><b>{desk.follows?.length || 0}</b><p>Companies on your watchlist.</p></article>
+            <article className="tp-tool-card"><small>NOTIFICATIONS</small><b>{unread}</b><p>In-product notices. Marketing email stays off unless you opt in.</p></article>
+            <article className="tp-tool-card"><small>INTERESTS</small><b>{interests.length || "Optional"}</b><p>Used for For You and future app alerts.</p></article>
           </div>
         )}
 
@@ -98,18 +142,18 @@ export function AccountClient() {
             <b>Saved products, guides and comparisons</b>
             {(desk.items || []).length ? (
               <ul>{desk.items!.map((item) => <li key={item.id}>{item.item_type}: {item.item_id}</li>)}</ul>
-            ) : <p>Nothing saved yet. When a profile, guide or comparison exists, use Save on that page.</p>}
+            ) : <p>Nothing saved yet. Use Save on a published profile or comparison.</p>}
           </div>
         )}
 
         {tab === "Following" && (
           <div className="tp-state-card">
-            <b>Followed companies</b>
+            <b>Watchlist</b>
             {(desk.follows || []).length ? (
               <ul>{desk.follows!.map((item) => (
                 <li key={item.id}>
                   {item.platform_id}
-                  <button type="button" onClick={() => post({ unfollow: { platform_id: item.platform_id } }, "Unfollowed.")}>Unfollow</button>
+                  <button type="button" onClick={() => post({ unfollow: { platform_id: item.platform_id } }, "Removed from watchlist.")}>Unfollow</button>
                 </li>
               ))}</ul>
             ) : <p>You are not following any published company yet.</p>}
@@ -119,7 +163,7 @@ export function AccountClient() {
         {tab === "Opportunities" && (
           <div className="tp-state-card">
             <b>Opportunities</b>
-            <p>Saved offers appear here after a reviewed opportunity exists and you save it. Empty is expected until then.</p>
+            <p>Saved offers appear here after a reviewed opportunity exists.</p>
             <Link href="/opportunities">Browse opportunities</Link>
           </div>
         )}
@@ -134,13 +178,13 @@ export function AccountClient() {
                 <p>{n.body}</p>
                 {n.href ? <Link href={n.href}>Open</Link> : null}
               </article>
-            )) : <p>No notifications. Campaigns are never emailed to every account automatically.</p>}
+            )) : <p>No notifications yet.</p>}
           </div>
         )}
 
         {tab === "Interests" && (
           <div className="tp-finder">
-            <p>Optional. These help future For You, digest and app push routing.</p>
+            <p>Optional. Helps future For You, digest and app alerts.</p>
             {USER_INTERESTS.map((key) => (
               <label key={key}>
                 <input type="checkbox" checked={interests.includes(key)} onChange={(e) => setInterests((prev) => e.target.checked ? [...prev, key] : prev.filter((x) => x !== key))} />
@@ -172,30 +216,90 @@ export function AccountClient() {
           </div>
         )}
 
+        {tab === "Games" && (
+          <div className="tp-state-card">
+            <b>Games & app continuity</b>
+            <p>TopPick original games and installable app progress will appear here when those surfaces ship. Nothing is invented in the meantime.</p>
+            <Link href="/apps">Install the app</Link>
+          </div>
+        )}
+
         {tab === "Settings" && (
           <div className="tp-state-card">
             <b>Account settings</b>
-            <p>Password and OAuth providers are managed by the configured identity provider. Partner company administration is a separate application at <Link href="/partners/apply">/partners/apply</Link>.</p>
+            <p>Company pages are a separate partner application. Admin is a separate protected sign-in.</p>
+            <Link href="/partners/apply">Partner application</Link>
             <Link href="/legal/privacy">Privacy</Link>
+            <button type="button" onClick={() => void signOut()}>Sign out</button>
           </div>
         )}
-        {message ? <p>{message}</p> : null}
+        {message ? <p role="status">{message}</p> : null}
       </div>
     );
   }
 
   return (
-    <form className="tp-finder" onSubmit={(e) => { e.preventDefault(); void auth(); }}>
-      <label>Email<input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" /></label>
-      <label>Password<input type="password" required minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} autoComplete={mode === "signup" ? "new-password" : "current-password"} /></label>
-      <div style={{ display: "flex", gap: 8 }}>
-        <button className="primary-btn" type="submit" onClick={() => setMode("signin")}>Sign in</button>
-        <button type="submit" onClick={() => setMode("signup")}>Create account</button>
+    <div className="tp-account-auth">
+      <div className="tp-filter-bar" style={{ flexWrap: "wrap" }}>
+        <button type="button" className={mode === "signin" ? "tp-auth-mode is-active" : "tp-auth-mode"} aria-pressed={mode === "signin"} onClick={() => { setMode("signin"); setMessage(""); }}>Sign in</button>
+        <button type="button" className={mode === "signup" ? "tp-auth-mode is-active" : "tp-auth-mode"} aria-pressed={mode === "signup"} onClick={() => { setMode("signup"); setMessage(""); }}>Create account</button>
       </div>
-      {!oauth.google ? null : <p>Google sign-in is configured for this deployment.</p>}
-      {!oauth.apple ? null : <p>Apple sign-in is configured for this deployment.</p>}
-      {!oauth.google && !oauth.apple ? <p className="tp-muted">Google and Apple stay hidden until those providers are actually connected.</p> : null}
-      {message ? <p>{message}</p> : null}
-    </form>
+      <form
+        id="toppick-consumer-auth"
+        name="toppick-consumer-auth"
+        className="tp-finder"
+        method="post"
+        action="/api/account/session"
+        autoComplete="on"
+        onSubmit={(e) => void auth(e)}
+      >
+        <input type="hidden" name="auth-context" value="toppick-consumer" readOnly />
+        <label>Email
+          <input
+            type="email"
+            name="consumer-email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="section-consumer email"
+            autoCapitalize="none"
+            spellCheck={false}
+            inputMode="email"
+          />
+        </label>
+        <label>Password
+          <input
+            type="password"
+            name={mode === "signup" ? "consumer-new-password" : "consumer-password"}
+            required
+            minLength={8}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete={mode === "signup" ? "section-consumer new-password" : "section-consumer current-password"}
+          />
+        </label>
+        {mode === "signup" ? (
+          <>
+            <label>Confirm password
+              <input
+                type="password"
+                name="consumer-password-confirm"
+                required
+                minLength={8}
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+                autoComplete="section-consumer new-password"
+              />
+            </label>
+            <label>
+              <input type="checkbox" checked={accepted} onChange={(e) => setAccepted(e.target.checked)} required />
+              I agree to the <Link href="/legal/terms">Terms</Link> and <Link href="/legal/privacy">Privacy policy</Link>.
+            </label>
+          </>
+        ) : null}
+        <button className="primary-btn" type="submit">{mode === "signup" ? "Create account" : "Sign in"}</button>
+        {message ? <p role="alert">{message}</p> : null}
+      </form>
+    </div>
   );
 }

@@ -55,7 +55,7 @@ export default function Home(){
       <Link href="/learn" className="tp-home-card"><Fingerprint/><span>RESEARCH</span><h3>Guides you can use today</h3><p>Custody, fees, brokers vs exchanges, and how we review a platform.</p></Link>
       <Link href="/opportunities" className="tp-home-card"><CircleDollarSign/><span>OPPORTUNITIES</span><h3>Offers with conditions attached</h3><p>Cash, crypto, credit or points — never treated as the same thing.</p></Link>
       <Link href="/finder" className="tp-home-card"><Compass/><span>TOOLS</span><h3>Guided product finder</h3><p>Start from the job: trading, holding keys, DeFi, cards or analytics.</p></Link>
-      <Link href="/account" className="tp-home-card"><Bookmark/><span>SAVE & FOLLOW</span><h3>A research desk of your own</h3><p>Save profiles, follow companies and set notification preferences.</p></Link>
+      <Link href="/account" className="tp-home-card"><Bookmark/><span>YOUR ACCOUNT</span><h3>Save, follow and get notified</h3><p>Keep products, watchlists, comparisons, opportunities and email preferences in one TopPick account.</p></Link>
       <Link href="/markets" className="tp-home-card"><Globe2/><span>MARKETS</span><h3>Country-aware discovery</h3><p>Product access and promotional eligibility are separate questions.</p></Link>
     </section>
     <MethodologyTrack/>
