@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Newspaper } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
 import { getPublicPartnerPosts } from "@/lib/partnerPosts";
 
@@ -20,7 +20,7 @@ export default async function Page() {
       <section className="shell page-hero">
         <span>NEWS / SOURCED ONLY</span>
         <h1>No invented headlines.</h1>
-        <p>Public news here is limited to sourced partner updates. If this list is empty, nothing has been published yet.</p>
+        <p>Headlines here are sourced platform updates — not a simulated news desk.</p>
       </section>
       <section className="shell content-shell">
         {posts.length ? posts.map((p) => (
@@ -30,12 +30,13 @@ export default async function Page() {
             <Link href={`/updates/${p.slug}`}>Read sourced update <ArrowUpRight /></Link>
           </article>
         )) : (
-          <div className="ag-empty-directory">
-            <div className="empty-index">
-              <span><Newspaper /> NEWS DESK</span>
-              <h2>No sourced news yet.</h2>
-              <p>This route exists so the publishing workflow is ready. It will not be filled with simulated announcements.</p>
-              <Link href="/learn">Open research library</Link>
+          <div className="tp-empty-guide">
+            <h2>Read the research first</h2>
+            <p>When a sourced update is published, it will show here. Until then, the guides still explain custody, fees and product classes.</p>
+            <div className="tp-continue">
+              <Link href="/learn">Guides</Link>
+              <Link href="/markets">Markets</Link>
+              <Link href="/finder">Finder</Link>
             </div>
           </div>
         )}

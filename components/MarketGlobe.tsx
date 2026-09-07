@@ -6,8 +6,8 @@ export function MarketGlobe({ showCopy = true }: { showCopy?: boolean }) {
       {showCopy ? (
         <div className="tp-globe-copy">
           <span className="ag-section-marker">MARKETS</span>
-          <h2>Country is part of the product.</h2>
-          <p>Whether a company can serve you, and whether TopPick can promote it, are different questions. Unknown stays closed for promotion — never guessed.</p>
+          <h2>What changes in your country?</h2>
+          <p>Product access and promotions depend on where you are. Start with your market, then compare.</p>
           <Link className="tp-inline-link" href="/markets">Open markets</Link>
         </div>
       ) : null}

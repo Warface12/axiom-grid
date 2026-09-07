@@ -16,7 +16,7 @@ export default function Page() {
       <section className="page-hero">
         <span>MARKETS</span>
         <h1>Country is part of the product.</h1>
-        <p>Whether a provider can serve you, and whether TopPick can promote it, are different questions. Unknown stays closed for promotion.</p>
+        <p>Whether a provider can serve you, and whether TopPick can promote it, are different questions. We only promote when the market record is current.</p>
       </section>
       <MarketGlobe showCopy={false} />
       <div className="market-grid">

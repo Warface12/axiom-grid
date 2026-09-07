@@ -113,7 +113,7 @@ export function AccountClient() {
   }
 
   if (!ready) {
-    return <div className="tp-state-card"><span>ACCOUNT</span><h2>Loading…</h2><p>Checking whether you are signed in.</p></div>;
+    return <p className="tp-account-loading">Checking your session…</p>;
   }
 
   if (desk?.user?.email) {
@@ -219,7 +219,7 @@ export function AccountClient() {
         {tab === "Games" && (
           <div className="tp-state-card">
             <b>Games & app continuity</b>
-            <p>TopPick original games and installable app progress will appear here when those surfaces ship. Nothing is invented in the meantime.</p>
+            <p>Games and installable app progress will appear here when those surfaces are live.</p>
             <Link href="/apps">Install the app</Link>
           </div>
         )}

@@ -24,26 +24,20 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ i
       {platforms.length ? (
         <CompareClient platforms={platforms} initialIds={initialIds} />
       ) : (
-        <div className="ag-empty-directory">
-          <div className="empty-index">
-            <span>COMPARE</span>
-            <h2>Like with like — when profiles exist.</h2>
-            <p>Select two to four published products in the same class. Missing facts stay blank. Nothing is invented to fill a table.</p>
-            <div className="empty-actions">
-              {CATALOG.filter((c) => c.dedicated).map((c) => (
-                <Link key={c.id} href={`/${c.hub}`}>{c.plural}</Link>
-              ))}
-              <Link href="/learn">Guides</Link>
-            </div>
-            <div className="tp-tool-grid" style={{ marginTop: 24 }}>
-              {CATALOG.slice(0, 6).map((c) => (
-                <article key={c.id} className="tp-tool-card">
-                  <small>{c.plural}</small>
-                  <b>{c.label}</b>
-                  <p>We compare {c.compareKeys.map((key) => c.attributes.find((a) => a.key === key)?.label || key.replace(/_/g, " ")).slice(0, 6).join(", ")}.</p>
-                </article>
-              ))}
-            </div>
+        <div className="tp-empty-guide">
+          <h2>How comparison works</h2>
+          <p>Two to four products in the same class. Missing facts stay blank. Nothing is invented to fill a table.</p>
+          <ul>
+            <li>Exchange versus exchange — not versus a wallet</li>
+            <li>Fees and custody only when the source exists</li>
+            <li>Your country can change what you can actually use</li>
+          </ul>
+          <div className="tp-continue">
+            {CATALOG.filter((c) => c.dedicated).slice(0, 6).map((c) => (
+              <Link key={c.id} href={`/${c.hub}`}>{c.plural}</Link>
+            ))}
+            <Link href="/finder">Finder</Link>
+            <Link href="/learn">Guides</Link>
           </div>
         </div>
       )}

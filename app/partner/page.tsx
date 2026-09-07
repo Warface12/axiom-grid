@@ -14,7 +14,7 @@ export default function Page() {
       <section className="shell page-hero">
         <span>PARTNER PORTAL</span>
         <h1>Company control, without the 25-item menu.</h1>
-        <p>Overview, company, campaigns, advertising, performance, affiliate, billing and settings. Empty states stay empty until you have real access and real data.</p>
+        <p>Overview, company, campaigns, advertising, performance, affiliate, billing and settings — after you have partner access.</p>
       </section>
       <section className="shell content-shell">
         <PartnerPortalClient />

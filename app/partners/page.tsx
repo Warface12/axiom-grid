@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { buildMetadata, faqJsonLd, webPageJsonLd } from "@/lib/seo";
+import { PartnerFlow, PartnerCtas } from "@/components/PartnerFlow";
 
 export const metadata = buildMetadata({
   title: "Partner with TopPick",
@@ -18,27 +19,22 @@ const faq = [
 export default function Page() {
   const schema = webPageJsonLd({ name: "TopPick partners", description: "B2B partner, advertising and affiliate explanation.", path: "/partners" });
   return (
-    <main>
+    <main className="tp-partners-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
-      <section className="shell page-hero">
-        <span>B2B / PARTNERS</span>
-        <h1>Advertise, partner, or both — without buying a review.</h1>
-        <p>TopPick is a research and discovery publisher. Verified companies can run disclosed campaigns and submit official information. Editorial conclusions stay with TopPick.</p>
-        <div className="ag-hero-cta" style={{ marginTop: 20 }}>
-          <Link href="/partners/apply">Apply for partner access</Link>
-          <Link href="/partner">Partner sign-in</Link>
-        </div>
+      <section className="shell tp-hub-hero">
+        <p>PARTNERS</p>
+        <h1>Distribution without buying a review.</h1>
+        <p>Verified companies can run disclosed campaigns and submit official information. Editorial conclusions stay with TopPick.</p>
+        <PartnerCtas />
       </section>
-      <section className="shell content-shell simple-grid">
-        <article className="prose-card"><h3>Three commercial models</h3><p>Owner-managed affiliate (no partner login required). Verified advertiser with no affiliate link. Or both, when a real agreement exists.</p></article>
-        <article className="prose-card"><h3>What you can manage</h3><p>Company presence, products, offers, campaigns, GEO targeting, creatives, team access, billing and conversion integrations — after verification.</p></article>
-        <article className="prose-card"><h3>Tracking, without magic</h3><p>Click → approved destination → optional authorized postback → verified event ledger → analytics and reconciliation. Unconnected events stay Not tracked.</p></article>
-        <article className="prose-card"><h3>Disclosed placements</h3><p>Sponsored modules are labeled. Paying for inventory does not move an independent ranking.</p></article>
+      <section className="shell content-shell">
+        <h2 className="tp-flow-title">From company to measurement</h2>
+        <PartnerFlow />
       </section>
       <section className="shell content-shell tp-glossary-list">
         {faq.map((item) => (
-          <article key={item.question} className="tp-glossary-item"><b>{item.question}</b><p>{item.answer}</p></article>
+          <article key={item.question} className="tp-faq-row"><b>{item.question}</b><p>{item.answer}</p></article>
         ))}
       </section>
     </main>

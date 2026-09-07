@@ -5,8 +5,8 @@ export function Analytics() {
   if (!ga) return null;
   return (
     <>
-      <Script src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga)}`} strategy="afterInteractive" />
-      <Script id="toppick-ga" strategy="afterInteractive">{`
+      <Script src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga)}`} strategy="lazyOnload" />
+      <Script id="toppick-ga" strategy="lazyOnload">{`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());

@@ -1,5 +1,6 @@
 import { buildMetadata } from "@/lib/seo";
 import { countPublished } from "@/lib/publicInventory";
+import Link from "next/link";
 
 export async function generateMetadata() {
   const count = await countPublished("event_record");
@@ -15,15 +16,25 @@ export default async function Page() {
   const count = await countPublished("event_record");
   return (
     <main>
-      <section className="shell page-hero">
-        <span>EVENTS</span>
-        <h1>Dates, sources, terms — or it does not ship.</h1>
-        <p>Partner-submitted events require a real source and schedule. This route is noindex while the calendar is empty.</p>
+      <section className="shell tp-hub-hero">
+        <p>EVENTS</p>
+        <h1>Dates and sources, or it does not appear.</h1>
+        <p>Listed events need a real schedule and a source. Until then, use the research library.</p>
       </section>
       <section className="shell content-shell">
-        <div className="tp-state-card">
-          <b>{count ? `${count} published events` : "No published events"}</b>
-        </div>
+        {count ? (
+          <p>{count} published events</p>
+        ) : (
+          <div className="tp-empty-guide">
+            <h2>No events on the calendar</h2>
+            <p>When a reviewed session is published, it shows up here with dates and terms.</p>
+            <div className="tp-continue">
+              <Link href="/learn">Guides</Link>
+              <Link href="/markets">Markets</Link>
+              <Link href="/opportunities">Opportunities</Link>
+            </div>
+          </div>
+        )}
       </section>
     </main>
   );

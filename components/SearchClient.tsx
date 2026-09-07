@@ -35,7 +35,9 @@ export function SearchClient() {
       </div>
       {q.trim().length > 1 && (
         <div className="tp-search-results">
-          {!loading && !items.length ? <p>Nothing published matched that search. Directories stay empty until real profiles exist.</p> : items.map((i) => (
+          {!loading && !items.length ? (
+            <p>No matching guides or published profiles. Try a product class, a term like custody, or open Learn.</p>
+          ) : items.map((i) => (
             <Link key={i.id} href={i.href || "/search"}>
               <span>{(i.title || i.name || "?").slice(0, 2).toUpperCase()}</span>
               <div>

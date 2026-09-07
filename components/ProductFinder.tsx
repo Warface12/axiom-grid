@@ -50,7 +50,7 @@ export function ProductFinder() {
 
   return (
     <form className="tp-finder" onSubmit={(e) => e.preventDefault()}>
-      <p><b>Product finder</b> — this maps your question to a category. It does not recommend a company or invent a ranking.</p>
+      <p>Answer a few questions. We route you to the matching product class — not a ranked company list.</p>
       {questions.map((q, qi) => (
         <fieldset key={q.id}>
           <legend>{q.label}</legend>

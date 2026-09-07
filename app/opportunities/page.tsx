@@ -1,14 +1,13 @@
 import { buildMetadata } from "@/lib/seo";
 import { countPublished } from "@/lib/publicInventory";
-import { OFFER_TYPES } from "@/lib/ecosystem";
-import { OpportunityTaxonomy } from "@/components/OpportunityTaxonomy";
+import { OpportunityConstellation } from "@/components/OpportunityConstellation";
 import Link from "next/link";
 
 export async function generateMetadata() {
   const count = await countPublished("offer");
   return buildMetadata({
     title: "Crypto opportunities",
-    description: "Verified bonuses, learn-and-earn, staking and launch offers — only when a sourced record exists.",
+    description: "Understand reward types, then review sourced offers when they exist.",
     path: "/opportunities",
     noIndex: count === 0,
   });
@@ -17,24 +16,25 @@ export async function generateMetadata() {
 export default async function Page() {
   const count = await countPublished("offer");
   return (
-    <main>
-      <section className="shell page-hero">
-        <span>OPPORTUNITIES</span>
-        <h1>Offers with conditions attached.</h1>
-        <p>Rewards are classified as cash, crypto, trading credit, points or unknown. Game coins are never presented as dollars.</p>
+    <main className="tp-opp-page">
+      <section className="shell tp-hub-hero">
+        <p>OPPORTUNITIES</p>
+        <h1>Rewards are not interchangeable.</h1>
+        <p>Cash, crypto, credit and points look similar in ads. Classify the prize before you chase it.</p>
       </section>
+      <OpportunityConstellation />
       <section className="shell content-shell">
-        <OpportunityTaxonomy />
-        <div className="tp-state-card">
-          <b>{count ? `${count} published offers` : "Reviewed offers will appear here"}</b>
-          <p>Welcome offers, trading credit, learn & earn, staking, cards, airdrops and launches appear only after review. Game coins are never presented as dollars.</p>
-          <p><Link href="/learn">Read independent guides</Link> while this index waits for a sourced offer.</p>
-        </div>
-        <div className="tp-tool-grid" style={{ marginTop: 24 }}>
-          {OFFER_TYPES.slice(0, 8).map((type) => (
-            <article key={type} className="tp-tool-card"><small>TYPE</small><b>{type.replace(/_/g, " ")}</b><p>How TopPick can classify an offer. Not a live promotion.</p></article>
-          ))}
-        </div>
+        {count ? (
+          <p className="tp-inline-link">{count} reviewed offers</p>
+        ) : (
+          <p>When a reviewed offer is published, it appears here with its type and conditions. Until then, use the map above and the guides.</p>
+        )}
+        <p className="tp-continue">
+          <Link href="/learn">Guides</Link>
+          <Link href="/finder">Finder</Link>
+          <Link href="/markets">Your market</Link>
+          <Link href="/compare">Compare products</Link>
+        </p>
       </section>
     </main>
   );

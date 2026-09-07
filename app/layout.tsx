@@ -12,7 +12,7 @@ import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 export const metadata: Metadata = {
   ...buildMetadata({
     title: "TopPick.pro — Compare crypto platforms, wallets and brokers",
-    description: "Independent research for crypto exchanges, wallets, brokers and trading tools. Compare what is published, see what is missing, and keep partner links closed until a market is approved.",
+    description: "Independent research for crypto exchanges, wallets, brokers and trading tools. Discover, compare and understand products before you act.",
     path: "/",
   }),
   verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined },

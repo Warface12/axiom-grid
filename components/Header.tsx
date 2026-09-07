@@ -24,7 +24,7 @@ export function Header() {
           <Link href="/learn">Research</Link>
           <Link href="/opportunities">Opportunities</Link>
           <Link href="/markets">Markets</Link>
-          <Link href="/partners">Partners</Link>
+          <Link href="/partners" prefetch={false}>Partners</Link>
         </nav>
         <div className="ag-header-actions">
           <Link href="/search" className="ag-icon-btn" aria-label="Search TopPick">
