@@ -32,6 +32,7 @@ export const PUBLIC_STATIC_PATHS = [
 
 export const INTENTIONAL_NOINDEX_PATHS = [
   "/admin",
+  "/admin/login",
   "/account",
   "/partner",
   "/partners/apply",
