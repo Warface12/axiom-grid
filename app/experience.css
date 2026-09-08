@@ -401,7 +401,20 @@ html[data-scheme="light"] .tp-core-space{
 }
 html[data-scheme="light"] .ag-bottom-cta{background:linear-gradient(135deg,#3a2a78,#1f2a48)!important}
 
-.tp-finder-page,.tp-research-page,.tp-opp-page,.tp-learn-page,.tp-compare-page,.tp-markets-page{
+.tp-account-split{grid-template-columns:1fr!important}
+.tp-auth-mode{
+  min-height:48px!important;padding:0 16px!important;border-radius:14px!important;
+  background:transparent!important;color:#d7e8f4!important;border:1px solid rgba(140,200,255,.2)!important
+}
+.tp-auth-mode.is-active{
+  background:rgba(60,232,255,.14)!important;color:#3ce8ff!important;border-color:#3ce8ff!important
+}
+.tp-account-auth .primary-btn{width:100%}
+.tp-hub-hero{grid-template-columns:1fr!important}
+@media(min-width:921px){
+  .tp-account-split{grid-template-columns:.9fr 1.1fr!important}
+  .tp-hub-hero{grid-template-columns:1fr auto!important}
+}
   min-height:70dvh
 }
 .tp-finder-page{background:radial-gradient(circle at 90% 0,rgba(60,232,255,.14),transparent 34%),#050814}
