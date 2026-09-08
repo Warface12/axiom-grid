@@ -22,7 +22,7 @@
   --tp-safe-b:env(safe-area-inset-bottom,0px);
   --tp-safe-t:env(safe-area-inset-top,0px);
 }
-html{scroll-behavior:smooth}
+html,body{max-width:100%;overflow-x:clip}
 body{
   font-family:var(--font-body);
   font-size:var(--tp-fs-body);
@@ -390,6 +390,8 @@ h1,h2,h3,h4,.ag-brand,.tp-brand-line{font-family:var(--font-display);letter-spac
   .tp-dock{display:grid}
   .tp-menu{display:inline-grid}
   .ag-nav,.tp-header-aux{display:none!important}
+  .tp-hero-copy h1{font-size:2.15rem!important;line-height:1.1!important;max-width:100%}
+  .tp-brand-line{white-space:normal;overflow-wrap:anywhere}
   .tp-core-mod{opacity:0;pointer-events:none}
   .tp-core-mod.is-active{opacity:1;pointer-events:auto;transform:translate(-50%,-58%) translateZ(70px) scale(1.12)}
   .tp-core-mod span{min-width:168px;padding:14px 16px;font-size:18px}
@@ -437,7 +439,7 @@ html[data-scheme="light"] .tp-hero-stage{
     linear-gradient(180deg,#f7f3ea,#eef3f8)!important
 }
 html[data-scheme="light"] .tp-brand-line.accent{background:linear-gradient(90deg,#0b8fb8,#5b8cff);-webkit-background-clip:text;background-clip:text;color:transparent}
-html[data-scheme="light"] .tp-core-mod span,html[data-scheme="light"] .tp-universe-tile,html[data-scheme="light"] .tp-sig-card,
+html[data-scheme="light"] .tp-universe-tile,html[data-scheme="light"] .tp-sig-card,
 html[data-scheme="light"] .tp-lab-board,html[data-scheme="light"] .tp-core-readout,html[data-scheme="light"] .tp-earth2-tags a,
 html[data-scheme="light"] .tp-edu-card,html[data-scheme="light"] .tp-atlas-node,html[data-scheme="light"] .tp-engine li,
 html[data-scheme="light"] .tp-network li,html[data-scheme="light"] .tp-finder-step label,html[data-scheme="light"] .platform-card,
@@ -460,3 +462,64 @@ html[data-scheme="light"] .ag-hero-cta a:first-child,html[data-scheme="light"] .
 @keyframes tpRise{from{opacity:.01;transform:translateY(16px)}to{opacity:1;transform:none}}
 :focus-visible{outline:2px solid #3ce8ff;outline-offset:3px}
 @view-transition{navigation:auto}
+
+/* Punch pass — thicker materials, distinct chapters, cyan primaries */
+.primary-btn,.tp-account-auth .primary-btn,.tp-finder-nav button:last-child{
+  background:linear-gradient(135deg,#3ce8ff,#5b8cff)!important;color:#041018!important;border:0!important;box-shadow:0 14px 32px rgba(60,232,255,.22)
+}
+.tp-finder-nav button:first-child{background:rgba(8,18,30,.8)!important;color:#d7e8f4!important;border:1px solid var(--tp-line)!important;box-shadow:none}
+.tp-mod-3d{position:relative;display:block;transform-style:preserve-3d}
+.tp-mod-face{
+  display:grid!important;grid-template-columns:auto 1fr;gap:10px;align-items:center;min-width:148px;padding:12px 14px!important;
+  border-radius:18px;transform:translateZ(16px);
+  background:linear-gradient(165deg,rgba(120,210,255,.42),rgba(8,16,28,.92))!important;
+  border:1px solid rgba(210,245,255,.35)!important;
+  box-shadow:0 22px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.28)
+}
+.tp-mod-side{
+  position:absolute;left:0;top:0;width:16px;height:100%;border-radius:6px 0 0 6px;
+  background:linear-gradient(180deg,#1c4c62,#07141d);transform:rotateY(90deg);transform-origin:left center
+}
+.tp-mod-lid{
+  position:absolute;left:0;right:0;top:0;height:14px;
+  background:linear-gradient(90deg,rgba(180,245,255,.35),rgba(8,18,30,.8));
+  transform:rotateX(90deg);transform-origin:top
+}
+.tp-core-mod.is-active .tp-mod-face{
+  background:linear-gradient(165deg,#c9fbff,#3ce8ff 42%,#5b8cff)!important;color:#041018!important
+}
+.tp-chapter--universe .tp-chapter-inner,
+.tp-chapter--lab .tp-chapter-inner,
+.tp-chapter--globe .tp-chapter-inner,
+.tp-chapter--reward .tp-chapter-inner,
+.tp-chapter--vault .tp-chapter-inner,
+.tp-chapter--engine .tp-chapter-inner,
+.tp-chapter--learn .tp-chapter-inner,
+.tp-chapter--network .tp-chapter-inner,
+.tp-chapter--finder .tp-chapter-inner,
+.tp-chapter--account .tp-chapter-inner{
+  padding:22px 18px;border-radius:28px;border:1px solid rgba(255,255,255,.08)
+}
+.tp-chapter--universe .tp-chapter-inner{background:linear-gradient(160deg,rgba(48,24,78,.42),rgba(6,10,20,.55))}
+.tp-chapter--lab .tp-chapter-inner{background:linear-gradient(160deg,rgba(20,40,90,.45),rgba(6,10,20,.55))}
+.tp-chapter--globe .tp-chapter-inner{background:linear-gradient(160deg,rgba(10,50,70,.45),rgba(6,10,20,.55))}
+.tp-chapter--reward .tp-chapter-inner{background:linear-gradient(160deg,rgba(70,48,12,.42),rgba(6,10,20,.55))}
+.tp-chapter--vault .tp-chapter-inner{background:linear-gradient(160deg,rgba(10,48,38,.42),rgba(6,10,20,.55))}
+.tp-chapter--engine .tp-chapter-inner{background:linear-gradient(160deg,rgba(18,36,72,.45),rgba(6,10,20,.55))}
+.tp-chapter--learn .tp-chapter-inner{background:linear-gradient(160deg,rgba(48,36,22,.38),rgba(6,10,20,.55))}
+.tp-chapter--network .tp-chapter-inner{background:linear-gradient(160deg,rgba(36,22,72,.45),rgba(6,10,20,.55))}
+.tp-chapter--finder .tp-chapter-inner{background:linear-gradient(160deg,rgba(12,40,56,.42),rgba(6,10,20,.55))}
+.tp-chapter--account .tp-chapter-inner{background:linear-gradient(160deg,rgba(12,28,48,.4),rgba(6,10,20,.55))}
+.ag-nav a{text-transform:none!important;font-size:15px!important;letter-spacing:0!important}
+.page-hero h1,.tp-hub-hero h1,.tp-account-form h1{font-size:clamp(2rem,7vw,3.6rem)!important;text-transform:none!important}
+.ag-kicker,.tp-kicker{font-size:.78rem!important}
+html[data-scheme="light"] .tp-chapter-inner{border-color:#d5deea}
+html[data-scheme="light"] .tp-chapter--universe .tp-chapter-inner{background:linear-gradient(160deg,#f3eefc,#fff)}
+html[data-scheme="light"] .tp-chapter--lab .tp-chapter-inner{background:linear-gradient(160deg,#eef3ff,#fff)}
+html[data-scheme="light"] .tp-chapter--globe .tp-chapter-inner{background:linear-gradient(160deg,#e7f6fb,#fff)}
+html[data-scheme="light"] .tp-chapter--reward .tp-chapter-inner{background:linear-gradient(160deg,#fbf3e4,#fff)}
+html[data-scheme="light"] .tp-chapter--vault .tp-chapter-inner{background:linear-gradient(160deg,#e8f7f1,#fff)}
+html[data-scheme="light"] .tp-chapter--engine .tp-chapter-inner{background:linear-gradient(160deg,#eef2ff,#fff)}
+html[data-scheme="light"] .tp-chapter--learn .tp-chapter-inner{background:linear-gradient(160deg,#f7f1e8,#fff)}
+html[data-scheme="light"] .tp-chapter--network .tp-chapter-inner{background:linear-gradient(160deg,#f0eaff,#fff)}
+html[data-scheme="light"] .primary-btn,html[data-scheme="light"] .tp-account-auth .primary-btn{color:#fff!important}

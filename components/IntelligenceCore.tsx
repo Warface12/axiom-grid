@@ -54,10 +54,16 @@ export function IntelligenceCore() {
               aria-pressed={index === active}
               onClick={() => setActive(index)}
             >
-              <CategoryMark id={branch.id} />
-              <span>
-                <small>{branch.group}</small>
-                {branch.label}
+              <span className="tp-mod-3d">
+                <span className="tp-mod-face">
+                  <CategoryMark id={branch.id} />
+                  <span>
+                    <small>{branch.group}</small>
+                    {branch.label}
+                  </span>
+                </span>
+                <span className="tp-mod-side" aria-hidden="true" />
+                <span className="tp-mod-lid" aria-hidden="true" />
               </span>
             </button>
           ))}
