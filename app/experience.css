@@ -415,6 +415,7 @@ html[data-scheme="light"] .ag-bottom-cta{background:linear-gradient(135deg,#3a2a
   .tp-account-split{grid-template-columns:.9fr 1.1fr!important}
   .tp-hub-hero{grid-template-columns:1fr auto!important}
 }
+.tp-finder-page,.tp-research-page,.tp-opp-page,.tp-learn-page,.tp-compare-page,.tp-markets-page{
   min-height:70dvh
 }
 .tp-finder-page{background:radial-gradient(circle at 90% 0,rgba(60,232,255,.14),transparent 34%),#050814}
