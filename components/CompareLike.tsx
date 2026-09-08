@@ -1,32 +1,38 @@
 import Link from "next/link";
 
+const ROWS = [
+  { label: "Custody", a: "The operator holds your balance", b: "You hold the keys" },
+  { label: "Access", a: "Account and market eligibility", b: "Networks the wallet supports" },
+  { label: "Cost", a: "Trading and withdrawal fees", b: "Network fees you pay directly" },
+  { label: "Recovery", a: "Account recovery by the operator", b: "Seed phrase or backup you keep" },
+];
+
 export function CompareLike() {
   return (
     <section className="tp-compare-like">
       <div className="tp-section-head">
         <p>COMPARE</p>
         <h2>Like with like</h2>
-        <p>Two products of the same class. Missing facts stay blank instead of guessed.</p>
+        <p>Two products of the same class, lined up on the same questions. Where a fact is not published, the row stays blank instead of guessed.</p>
         <Link className="tp-inline-link" href="/compare">Open compare</Link>
       </div>
-      <div className="tp-compare-stage" aria-hidden="true">
-        <div className="tp-compare-slab">
-          <b>A</b>
-          <span>Exchange</span>
-          <span>Wallet</span>
-          <span>Broker</span>
+      <div className="tp-compare-board">
+        <div className="tp-compare-head" aria-hidden="true">
+          <span>Question</span>
+          <b>Exchange</b>
+          <b>Wallet</b>
         </div>
-        <svg className="tp-compare-join" viewBox="0 0 160 140">
-          <path d="M8 28 C70 28, 90 70, 152 70" fill="none" stroke="#37d9ff" strokeWidth="1.6" />
-          <path d="M8 70 H152" fill="none" stroke="#37d9ff" strokeWidth="1.6" opacity=".55" />
-          <path d="M8 112 C70 112, 90 70, 152 70" fill="none" stroke="#37d9ff" strokeWidth="1.6" opacity=".7" />
-          <circle cx="152" cy="70" r="5" fill="#37d9ff" />
-        </svg>
-        <div className="tp-compare-slab is-b">
-          <b>B</b>
-          <span>Exchange</span>
-          <span>Wallet</span>
-          <span>Broker</span>
+        {ROWS.map((row) => (
+          <div key={row.label} className="tp-compare-row">
+            <span>{row.label}</span>
+            <p>{row.a}</p>
+            <p>{row.b}</p>
+          </div>
+        ))}
+        <div className="tp-compare-row is-blank">
+          <span>Unpublished detail</span>
+          <p aria-label="Not published">—</p>
+          <p aria-label="Not published">—</p>
         </div>
       </div>
     </section>
