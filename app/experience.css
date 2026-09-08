@@ -437,6 +437,10 @@ html[data-scheme="light"] .ag-bottom-cta{background:linear-gradient(135deg,#3a2a
 @media(min-width:921px){.market-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .page-hero>span{font-size:.72rem!important;letter-spacing:.12em!important;text-transform:uppercase}
 
+html[data-nav-open] .ag-header-actions .ag-icon-btn:not(.tp-menu){visibility:hidden;pointer-events:none}
+html[data-nav-open] .tp-menu{z-index:220;position:relative}
+.tp-drawer{z-index:210!important}
+
 @media(prefers-reduced-motion:reduce){
   .tp-core-lab.is-live .tp-core-depth,.tp-hero-stage:before{animation:none!important;transform:none}
 }

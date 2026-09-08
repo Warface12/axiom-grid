@@ -26,6 +26,7 @@ export function MobileNav() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    document.documentElement.toggleAttribute("data-nav-open", open);
     if (open) closeRef.current?.focus();
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") setOpen(false);
@@ -33,6 +34,7 @@ export function MobileNav() {
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.removeAttribute("data-nav-open");
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
