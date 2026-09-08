@@ -1,81 +1,86 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useLiveScene, useParallax } from "@/lib/visual/live";
+import { CategoryMark } from "@/components/visual/CategoryMark";
 
 const BRANCHES = [
-  { id: "exchanges", label: "Exchanges", group: "Venues", href: "/exchanges", x: "-150px", y: "-112px", z: "64px", copy: "Custodial venues. The operator holds the balance until you withdraw." },
-  { id: "brokers", label: "Brokers", group: "Venues", href: "/brokers", x: "8px", y: "-128px", z: "8px", copy: "Forex, CFD and multi-asset brokers — their own class, not an exchange." },
-  { id: "dex", label: "DEXs", group: "Venues", href: "/dex", x: "156px", y: "-104px", z: "40px", copy: "On-chain venues with their own mechanics, not a copy of a CEX." },
-  { id: "wallets", label: "Wallets", group: "Custody", href: "/wallets", x: "-128px", y: "-8px", z: "88px", copy: "Who holds the keys, and how recovery is described." },
-  { id: "defi", label: "DeFi", group: "On-chain", href: "/defi", x: "24px", y: "6px", z: "28px", copy: "Protocols as products. Mechanics first, marketing second." },
-  { id: "tools", label: "Tools", group: "Jobs", href: "/tools", x: "150px", y: "10px", z: "72px", copy: "Analytics, tax, cards and terminals by the job you need done." },
-  { id: "markets", label: "Markets", group: "Access", href: "/markets", x: "-108px", y: "118px", z: "36px", copy: "Your country changes access, rails and what can even be offered." },
-  { id: "opportunities", label: "Opportunities", group: "Rewards", href: "/opportunities", x: "118px", y: "124px", z: "-8px", copy: "Cash, crypto, credit and points are different prizes." },
+  { id: "exchange", label: "Exchanges", group: "Venues", href: "/exchanges", copy: "Custodial venues. The operator holds the balance until you withdraw." },
+  { id: "broker", label: "Brokers", group: "Venues", href: "/brokers", copy: "Forex, CFD and multi-asset brokers — their own class, not an exchange." },
+  { id: "dex", label: "DEXs", group: "Venues", href: "/dex", copy: "On-chain venues with their own mechanics, not a copy of a CEX." },
+  { id: "wallet", label: "Wallets", group: "Custody", href: "/wallets", copy: "Who holds the keys, and how recovery is described." },
+  { id: "defi", label: "DeFi", group: "On-chain", href: "/defi", copy: "Protocols as products. Mechanics first, marketing second." },
+  { id: "tool", label: "Tools", group: "Jobs", href: "/tools", copy: "Analytics, tax, cards and terminals by the job you need done." },
+  { id: "markets", label: "Markets", group: "Access", href: "/markets", copy: "Your country changes access, rails and what can even be offered." },
+  { id: "opportunities", label: "Opportunities", group: "Rewards", href: "/opportunities", copy: "Cash, crypto, credit and points are different prizes." },
 ];
 
 export function IntelligenceCore() {
-  const rootRef = useRef<HTMLDivElement>(null);
+  const { ref, live, tier } = useLiveScene(0.08);
+  const parallaxRef = useParallax(true);
   const [active, setActive] = useState(0);
-  const [live, setLive] = useState(false);
   const current = BRANCHES[active];
+  const sparks = tier === "lite" ? 8 : tier === "balanced" ? 14 : 22;
 
   useEffect(() => {
-    const el = rootRef.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let shown = false;
-    const sync = () => setLive(shown && document.visibilityState === "visible");
-    const io = new IntersectionObserver(([entry]) => {
-      shown = entry.isIntersecting;
-      sync();
-    }, { threshold: 0.1 });
-    io.observe(el);
-    document.addEventListener("visibilitychange", sync);
-    return () => {
-      io.disconnect();
-      document.removeEventListener("visibilitychange", sync);
-    };
-  }, []);
+    if (!live) return;
+    const timer = window.setInterval(() => {
+      setActive((value) => (value + 1) % BRANCHES.length);
+    }, 4200);
+    return () => window.clearInterval(timer);
+  }, [live]);
 
   return (
-    <div ref={rootRef} className={`tp-chamber${live ? " is-live" : ""}`}>
-      <div className="tp-chamber-scene">
-        <div className="tp-chamber-world">
-          <div className="tp-chamber-wall" aria-hidden="true" />
-          <div className="tp-chamber-deck d0" aria-hidden="true" />
-          <div className="tp-chamber-deck d1" aria-hidden="true" />
-          <div className="tp-chamber-deck d2" aria-hidden="true" />
-          <span className="tp-chamber-riser r-l" aria-hidden="true" />
-          <span className="tp-chamber-riser r-r" aria-hidden="true" />
-          <span className="tp-chamber-scan" aria-hidden="true" />
-          {BRANCHES.map((branch, i) => (
-            <span
+    <div ref={ref} className={`tp-core-lab${live ? " is-live" : ""}`}>
+      <div ref={parallaxRef} className="tp-core-space" aria-hidden="true">
+        <div className="tp-core-depth">
+          <span className="tp-core-grid" />
+          <span className="tp-core-bloom" />
+          <span className="tp-core-ring r-a" />
+          <span className="tp-core-ring r-b" />
+          <span className="tp-core-ring r-c" />
+          <span className="tp-core-sun" />
+          <span className="tp-core-scan" />
+          {Array.from({ length: sparks }, (_, i) => (
+            <i key={i} className="tp-core-spark" style={{ ["--i" as string]: String(i) }} />
+          ))}
+          {BRANCHES.map((branch, index) => (
+            <button
               key={branch.id}
-              className="tp-chamber-slot"
-              style={{ ["--x" as string]: branch.x, ["--y" as string]: branch.y, ["--z" as string]: branch.z }}
+              type="button"
+              className={`tp-core-mod${index === active ? " is-active" : ""}`}
+              style={{ ["--i" as string]: String(index) }}
+              aria-pressed={index === active}
+              onClick={() => setActive(index)}
             >
-              <button
-                type="button"
-                className={`tp-tab${i === active ? " is-active" : ""}`}
-                aria-pressed={i === active}
-                onClick={() => setActive(i)}
-              >
-                <span className="tp-tab-face">
-                  <small>{branch.group}</small>
-                  {branch.label}
-                </span>
-                <span className="tp-tab-side" aria-hidden="true" />
-              </button>
-            </span>
+              <CategoryMark id={branch.id} />
+              <span>
+                <small>{branch.group}</small>
+                {branch.label}
+              </span>
+            </button>
           ))}
         </div>
       </div>
-      <article className="tp-hud">
+      <article className="tp-core-readout">
         <p>{current.group}</p>
         <h2>{current.label}</h2>
         <p>{current.copy}</p>
         <Link href={current.href}>Open {current.label}</Link>
+        <div className="tp-core-dots" role="tablist" aria-label="Intelligence modules">
+          {BRANCHES.map((branch, index) => (
+            <button
+              key={branch.id}
+              type="button"
+              role="tab"
+              aria-selected={index === active}
+              aria-label={branch.label}
+              className={index === active ? "is-active" : ""}
+              onClick={() => setActive(index)}
+            />
+          ))}
+        </div>
       </article>
     </div>
   );

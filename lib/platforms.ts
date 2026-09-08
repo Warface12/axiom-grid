@@ -125,8 +125,17 @@ export async function getResearchPlatform(slug: string, kind?: PlatformKind): Pr
 export async function getSitemapPlatforms() {
   const supabase = serverClient();
   if (!supabase) return [];
-  const { data } = await supabase.from("platform").select("*").eq("visible", true).neq("status", "restricted").limit(1000);
-  return (data || []).map((row) => mapPlatformRow(row as Record<string, unknown>)).filter((p) => !p.archived);
+  try {
+    const { data, error } = await supabase.from("platform").select("*").eq("visible", true).neq("status", "restricted").limit(1000);
+    if (error) {
+      console.error("getSitemapPlatforms:", error.message);
+      return [];
+    }
+    return (data || []).map((row) => mapPlatformRow(row as Record<string, unknown>)).filter((p) => !p.archived);
+  } catch (error) {
+    console.error("getSitemapPlatforms:", error);
+    return [];
+  }
 }
 
 export async function countPublicByKind(kind: PlatformKind) {

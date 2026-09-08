@@ -5,7 +5,7 @@ export function CatalogNav() {
   const groups = Array.from(new Set(CATALOG.map((item) => item.group)));
   return (
     <div className="ag-mega-wrap">
-      <Link href="/#categories">Explore</Link>
+      <Link href="/#universe">Discover</Link>
       <div className="ag-mega" role="menu">
         {groups.map((group) => (
           <div key={group}>
@@ -15,6 +15,13 @@ export function CatalogNav() {
             ))}
           </div>
         ))}
+        <div>
+          <b>Ways in</b>
+          <Link href="/finder">Finder</Link>
+          <Link href="/compare">Compare lab</Link>
+          <Link href="/search">Search</Link>
+          <Link href="/glossary">Glossary</Link>
+        </div>
       </div>
     </div>
   );

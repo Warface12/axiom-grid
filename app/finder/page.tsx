@@ -10,11 +10,11 @@ export const metadata = buildMetadata({
 
 export default function Page() {
   return (
-    <main>
+    <main className="tp-finder-page">
       <section className="shell page-hero">
         <span>PRODUCT FINDER</span>
-        <h1>Start from the job, not from a brand list</h1>
-        <p>Answer a few questions and we route you to the right product class — exchanges, wallets, brokers, DeFi or tools.</p>
+        <h1>A guided path, not a form dump.</h1>
+        <p>Answer four questions. We route you to the matching product class — exchanges, wallets, brokers, DeFi or tools. No ranked company list is invented.</p>
       </section>
       <section className="shell content-shell">
         <ProductFinder />

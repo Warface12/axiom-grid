@@ -15,9 +15,9 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ i
   const platforms = await getPublicPlatforms(undefined, 48);
   const initialIds = (params.ids || "").split(",").map((v) => v.trim()).filter(Boolean);
   return (
-    <main className="shell content-shell">
+    <main className="shell content-shell tp-compare-page">
       <section className="page-hero">
-        <span>COMPARE</span>
+        <span>COMPARE LAB</span>
         <h1>Compare like with like.</h1>
         <p>Compare reviewed public profiles in the same product class. Undisclosed fields stay empty. Fees, ratings and availability are never invented.</p>
       </section>

@@ -1,13 +1,20 @@
 import type { Metadata, Viewport } from "next";
+import { IBM_Plex_Mono, Manrope, Sora } from "next/font/google";
 import "./globals.css";
 import "./theme.css";
 import "./public-ux.css";
+import "./visual-system.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Analytics } from "@/components/Analytics";
 import { PwaRegister } from "@/components/PwaRegister";
+import { AppDock } from "@/components/AppDock";
 import { buildMetadata, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { THEME_BOOT_SCRIPT } from "@/lib/theme";
+
+const display = Sora({ subsets: ["latin"], variable: "--font-sora", display: "swap" });
+const body = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
+const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-plex", display: "swap" });
 
 export const metadata: Metadata = {
   ...buildMetadata({
@@ -26,12 +33,15 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#050a11",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#050814" },
+    { media: "(prefers-color-scheme: light)", color: "#f4f1ea" },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="dark" data-scheme="dark" suppressHydrationWarning>
+    <html lang="en" data-theme="dark" data-scheme="dark" className={`${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }} />
@@ -43,6 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <div id="main-content">{children}</div>
         <Footer />
+        <AppDock />
         <Analytics />
         <PwaRegister />
       </body>

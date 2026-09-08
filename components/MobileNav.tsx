@@ -9,9 +9,10 @@ import { ThemeControls } from "@/components/ThemeControls";
 
 const explore = [
   ["Home", "/"],
-  ["Compare", "/compare"],
   ["Finder", "/finder"],
-  ["Research", "/learn"],
+  ["Compare", "/compare"],
+  ["Research", "/research"],
+  ["Learn", "/learn"],
   ["Opportunities", "/opportunities"],
   ["Markets", "/markets"],
   ["Account", "/account"],
@@ -39,7 +40,7 @@ export function MobileNav() {
   return (
     <>
       <button className="ag-icon-btn tp-menu" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? "Close menu" : "Open menu"}>
-        {open ? <X size={18} /> : <Menu size={18} />}
+        {open ? <X size={20} /> : <Menu size={20} />}
       </button>
       {open ? (
         <div className="tp-drawer" id="mobile-nav">
@@ -53,7 +54,7 @@ export function MobileNav() {
             {explore.map(([label, href]) => (
               <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>
             ))}
-            <p className="tp-drawer-label">Categories</p>
+            <p className="tp-drawer-label">Product classes</p>
             {CATALOG.map((item) => (
               <Link key={item.id} href={`/${item.hub}`} onClick={() => setOpen(false)}>{item.plural}</Link>
             ))}
@@ -61,7 +62,8 @@ export function MobileNav() {
             <MarketSwitcher />
             <p className="tp-drawer-label">Appearance</p>
             <ThemeControls />
-            <Link className="tp-drawer-partner" href="/partners" onClick={() => setOpen(false)}>Partner with TopPick</Link>
+            <Link className="tp-drawer-partner" href="/partners" onClick={() => setOpen(false)}>Partner workspace</Link>
+            <Link href="/account" onClick={() => setOpen(false)}>User account</Link>
           </div>
         </div>
       ) : null}

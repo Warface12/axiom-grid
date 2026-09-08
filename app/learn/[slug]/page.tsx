@@ -28,7 +28,7 @@ export default async function Page({ params }: Props) {
   if (!g) notFound();
   const crumbs = breadcrumbJsonLd([
     { name: "Home", url: SITE_URL },
-    { name: "Research", url: `${SITE_URL}/learn` },
+    { name: "Learn", url: `${SITE_URL}/learn` },
     { name: g.title, url: `${SITE_URL}/learn/${g.slug}` },
   ]);
   const faq = faqJsonLd(g.body.slice(0, 2).map((section) => ({ question: section.heading, answer: section.paragraphs[0] })));
@@ -37,7 +37,7 @@ export default async function Page({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
       <nav className="tp-breadcrumbs" aria-label="Breadcrumb">
-        <Link href="/">Home</Link><span>/</span><Link href="/learn">Research</Link><span>/</span><span>{g.title}</span>
+        <Link href="/">Home</Link><span>/</span><Link href="/learn">Learn</Link><span>/</span><span>{g.title}</span>
       </nav>
       <section className="page-hero">
         <span>{g.category.toUpperCase()} / {g.readTime}</span>

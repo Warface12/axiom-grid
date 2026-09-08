@@ -20,18 +20,21 @@ const benefits = [
 export default function Page() {
   return (
     <main className="tp-account-split">
+      <section className="tp-account-form" aria-label="Sign in">
+        <p className="tp-kicker">User account</p>
+        <h1>Sign in to your TopPick</h1>
+        <p className="tp-lead">This is a personal account for saving and alerts. It cannot open Admin or a company workspace.</p>
+        <AccountClient />
+      </section>
       <section className="tp-account-value">
-        <p>YOUR TOPPICK</p>
-        <h1>Carry the research with you.</h1>
-        <p>An account is for saving, following and alerts. It is not Admin, and it is not a company workspace.</p>
+        <p className="tp-kicker">Why it exists</p>
+        <h2>Carry the research with you.</h2>
+        <p>An account is for saving, following and alerts. Partner applications use a different door.</p>
         <ul className="tp-account-benefits">
           {benefits.map((item) => (
             <li key={item.t}><b>{item.t}</b><span>{item.d}</span></li>
           ))}
         </ul>
-      </section>
-      <section className="tp-account-form" aria-label="Sign in">
-        <AccountClient />
       </section>
     </main>
   );

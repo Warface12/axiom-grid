@@ -22,7 +22,7 @@ export function paintTheme(mode: ThemeMode) {
   const scheme = resolveScheme(mode);
   root.dataset.scheme = scheme;
   const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute("content", scheme === "dark" ? "#050a11" : "#f3f6fb");
+  if (meta) meta.setAttribute("content", scheme === "dark" ? "#050814" : "#f4f1ea");
 }
 
 export function ThemeControls() {

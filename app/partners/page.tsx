@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { buildMetadata, faqJsonLd, webPageJsonLd } from "@/lib/seo";
 import { PartnerFlow, PartnerCtas } from "@/components/PartnerFlow";
+import { PartnerNetwork } from "@/components/visual/PartnerNetwork";
 
 export const metadata = buildMetadata({
   title: "Partner with TopPick",
@@ -28,6 +29,7 @@ export default function Page() {
         <p>Verified companies can run disclosed campaigns and submit official information. Editorial conclusions stay with TopPick.</p>
         <PartnerCtas />
       </section>
+      <PartnerNetwork />
       <section className="shell content-shell">
         <h2 className="tp-flow-title">From company to measurement</h2>
         <PartnerFlow />

@@ -53,6 +53,12 @@ export async function searchPublic(q: string, limit = 24): Promise<SearchHit[]> 
   if (term.includes("fee") || term.includes("maker") || term.includes("taker") || term.includes("spread")) {
     hits.push({ id: "page-fees", title: "Fees education", short: "Maker/taker, spread and withdrawals without invented numbers.", kind: "page", href: "/fees" });
   }
+  if (term.includes("research") || term.includes("method") || term.includes("finding")) {
+    hits.push({ id: "page-research", title: "Research desk", short: "Streams, verification and collections. No simulated live tape.", kind: "page", href: "/research" });
+  }
+  if (term.includes("reward") || term.includes("bonus") || term.includes("points")) {
+    hits.push({ id: "page-rewards", title: "Reward types", short: "Classify cash, crypto, credit and points before chasing an offer.", kind: "page", href: "/rewards" });
+  }
   if (term.includes("secur") || term.includes("custody") || term.includes("hardware")) {
     hits.push({ id: "page-security", title: "Security & custody", short: "Who can move the asset, and how wallets differ from venues.", kind: "page", href: "/security" });
   }

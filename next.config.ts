@@ -7,6 +7,13 @@ const nextConfig:NextConfig={
   distDir: process.env.NEXT_DEV_DIST || ".next",
   experimental:{optimizePackageImports:["lucide-react"]},
   async headers(){return[{source:"/:path*",headers:securityHeaders}]},
-  async redirects(){return[{source:"/guides",destination:"/learn",permanent:true},{source:"/guides/:slug",destination:"/learn/:slug",permanent:true}]},
+  async redirects(){return[
+    {source:"/guides",destination:"/learn",permanent:true},
+    {source:"/guides/:slug",destination:"/learn/:slug",permanent:true},
+    {source:"/cards",destination:"/crypto-cards",permanent:true},
+    {source:"/onramps",destination:"/on-ramps",permanent:true},
+    {source:"/on-ramp",destination:"/on-ramps",permanent:true},
+    {source:"/reward",destination:"/rewards",permanent:true},
+  ]},
 };
 export default nextConfig;
