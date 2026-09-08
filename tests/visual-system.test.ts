@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { CATALOG } from "../lib/catalog.ts";
 import { FOOTER_PATHS, PUBLIC_STATIC_PATHS } from "../lib/routes.ts";
 import { signatureFor, SIGNATURES } from "../lib/visual/signatures.ts";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = join(import.meta.dirname, "..");
@@ -45,5 +45,15 @@ describe("route integrity", () => {
     for (const path of FOOTER_PATHS) {
       assert.ok(pageExists(path), path);
     }
+  });
+});
+
+describe("visual stylesheets", () => {
+  it("loads experience.css after the visual system", () => {
+    const layout = readFileSync(join(root, "app/layout.tsx"), "utf8");
+    const visual = layout.indexOf("visual-system.css");
+    const experience = layout.indexOf("experience.css");
+    assert.ok(visual >= 0);
+    assert.ok(experience > visual);
   });
 });

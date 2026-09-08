@@ -13,9 +13,9 @@ export const metadata = buildMetadata({
 
 export default function Page() {
   return (
-    <main>
+    <main className="tp-learn-page">
       <section className="shell page-hero">
-        <span>LEARN</span>
+        <span>Learn</span>
         <h1>Understand the product before you use it.</h1>
         <p>Guides on custody, fees, brokers versus exchanges, and how to read a platform page. This is not personalized investment advice.</p>
       </section>

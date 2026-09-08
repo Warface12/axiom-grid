@@ -12,7 +12,7 @@ export default function Page() {
   return (
     <main className="tp-finder-page">
       <section className="shell page-hero">
-        <span>PRODUCT FINDER</span>
+        <span>Product finder</span>
         <h1>A guided path, not a form dump.</h1>
         <p>Answer four questions. We route you to the matching product class — exchanges, wallets, brokers, DeFi or tools. No ranked company list is invented.</p>
       </section>

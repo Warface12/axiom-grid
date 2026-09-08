@@ -19,7 +19,7 @@ export async function ProductHub({ cat }: { cat: CatalogKind }) {
   const items = await getPublicPlatforms(cat.id);
   const list = items.length ? itemListJsonLd(items.map((item) => ({ name: item.name, url: `${SITE_URL}${platformPath(item.kind, item.slug)}` }))) : null;
   return (
-    <main className={`tp-hub tp-hub--${cat.hub}`}>
+    <main className={`tp-hub tp-hub--${cat.hub} tp-hub--${cat.group.toLowerCase().replace(/\s+/g, "-")}`}>
       {list ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(list) }} /> : null}
       <section className="shell tp-hub-hero">
         <div>

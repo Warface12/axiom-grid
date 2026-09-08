@@ -39,8 +39,7 @@ export default function Home() {
         <p className="ag-kicker"><span className="pulse" /> Intelligence core</p>
         <h1>
           <span className="tp-brand-line">Read the market</span>
-          <span className="tp-brand-line">before the market</span>
-          <span className="tp-brand-line accent">reads you.</span>
+          <span className="tp-brand-line accent">before it reads you.</span>
         </h1>
         <p>Discover exchanges, brokers, wallets, DEXs and tools. Compare like with like. Check your market. Learn the risks before you act.</p>
         <div className="ag-hero-cta">

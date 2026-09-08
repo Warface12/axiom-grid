@@ -22,7 +22,7 @@ export default function Page() {
     <main className="tp-research-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <section className="shell page-hero">
-        <span>RESEARCH DESK</span>
+        <span>Research desk</span>
         <h1>Intelligence, not a news ticker.</h1>
         <p>Streams, methodology and collections. No simulated live market data. Unpublished facts stay unpublished.</p>
       </section>
