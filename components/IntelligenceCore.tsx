@@ -4,14 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 const BRANCHES = [
-  { id: "exchanges", label: "Exchanges", href: "/exchanges", x: "-132px", y: "-88px", z: "70px", copy: "Custodial venues where the operator holds your balance until you withdraw." },
-  { id: "brokers", label: "Brokers", href: "/brokers", x: "18px", y: "-118px", z: "12px", copy: "Forex, CFD and multi-asset brokers read in their own class, not against exchanges." },
-  { id: "wallets", label: "Wallets", href: "/wallets", x: "148px", y: "-76px", z: "48px", copy: "Software and hardware custody, judged on keys and recovery rather than branding." },
-  { id: "dex", label: "DEXs", href: "/dex", x: "-148px", y: "8px", z: "-18px", copy: "On-chain venues with their own mechanics — not a decentralised copy of an exchange." },
-  { id: "defi", label: "DeFi", href: "/defi", x: "8px", y: "6px", z: "92px", copy: "Protocols read as products, with mechanics separated from marketing language." },
-  { id: "tools", label: "Tools", href: "/tools", x: "156px", y: "28px", z: "8px", copy: "Analytics, tax, cards and terminals sorted by the job you actually need done." },
-  { id: "markets", label: "Markets", href: "/markets", x: "-96px", y: "108px", z: "36px", copy: "Your country changes access, fiat rails and what a promotion may even offer." },
-  { id: "opportunities", label: "Opportunities", href: "/opportunities", x: "102px", y: "118px", z: "-12px", copy: "Cash, crypto, credit and points are different prizes with different conditions." },
+  { id: "exchanges", label: "Exchanges", group: "Venues", href: "/exchanges", x: "-150px", y: "-112px", z: "64px", copy: "Custodial venues. The operator holds the balance until you withdraw." },
+  { id: "brokers", label: "Brokers", group: "Venues", href: "/brokers", x: "8px", y: "-128px", z: "8px", copy: "Forex, CFD and multi-asset brokers — their own class, not an exchange." },
+  { id: "dex", label: "DEXs", group: "Venues", href: "/dex", x: "156px", y: "-104px", z: "40px", copy: "On-chain venues with their own mechanics, not a copy of a CEX." },
+  { id: "wallets", label: "Wallets", group: "Custody", href: "/wallets", x: "-128px", y: "-8px", z: "88px", copy: "Who holds the keys, and how recovery is described." },
+  { id: "defi", label: "DeFi", group: "On-chain", href: "/defi", x: "24px", y: "6px", z: "28px", copy: "Protocols as products. Mechanics first, marketing second." },
+  { id: "tools", label: "Tools", group: "Jobs", href: "/tools", x: "150px", y: "10px", z: "72px", copy: "Analytics, tax, cards and terminals by the job you need done." },
+  { id: "markets", label: "Markets", group: "Access", href: "/markets", x: "-108px", y: "118px", z: "36px", copy: "Your country changes access, rails and what can even be offered." },
+  { id: "opportunities", label: "Opportunities", group: "Rewards", href: "/opportunities", x: "118px", y: "124px", z: "-8px", copy: "Cash, crypto, credit and points are different prizes." },
 ];
 
 export function IntelligenceCore() {
@@ -29,7 +29,7 @@ export function IntelligenceCore() {
     const io = new IntersectionObserver(([entry]) => {
       shown = entry.isIntersecting;
       sync();
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     io.observe(el);
     document.addEventListener("visibilitychange", sync);
     return () => {
@@ -39,34 +39,44 @@ export function IntelligenceCore() {
   }, []);
 
   return (
-    <div ref={rootRef} className={`tp-lattice${live ? " is-live" : ""}`}>
-      <div className="tp-lattice-scene" aria-hidden={false}>
-        <div className="tp-lattice-world">
-          <div className="tp-lattice-floor" aria-hidden="true" />
-          <span className="tp-lattice-mast" aria-hidden="true" />
+    <div ref={rootRef} className={`tp-chamber${live ? " is-live" : ""}`}>
+      <div className="tp-chamber-scene">
+        <div className="tp-chamber-world">
+          <div className="tp-chamber-wall" aria-hidden="true" />
+          <div className="tp-chamber-deck d0" aria-hidden="true" />
+          <div className="tp-chamber-deck d1" aria-hidden="true" />
+          <div className="tp-chamber-deck d2" aria-hidden="true" />
+          <span className="tp-chamber-riser r-l" aria-hidden="true" />
+          <span className="tp-chamber-riser r-r" aria-hidden="true" />
+          <span className="tp-chamber-scan" aria-hidden="true" />
           {BRANCHES.map((branch, i) => (
             <span
               key={branch.id}
-              className="tp-lattice-slot"
+              className="tp-chamber-slot"
               style={{ ["--x" as string]: branch.x, ["--y" as string]: branch.y, ["--z" as string]: branch.z }}
             >
               <button
                 type="button"
-                className={`tp-lattice-node${i === active ? " is-active" : ""}`}
+                className={`tp-tab${i === active ? " is-active" : ""}`}
                 aria-pressed={i === active}
                 onClick={() => setActive(i)}
               >
-                {branch.label}
+                <span className="tp-tab-face">
+                  <small>{branch.group}</small>
+                  {branch.label}
+                </span>
+                <span className="tp-tab-side" aria-hidden="true" />
               </button>
             </span>
           ))}
         </div>
       </div>
-      <p className="tp-lattice-readout">
-        <b>{current.label}</b>
-        {current.copy}{" "}
+      <article className="tp-hud">
+        <p>{current.group}</p>
+        <h2>{current.label}</h2>
+        <p>{current.copy}</p>
         <Link href={current.href}>Open {current.label}</Link>
-      </p>
+      </article>
     </div>
   );
 }

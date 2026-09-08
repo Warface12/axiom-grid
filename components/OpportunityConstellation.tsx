@@ -24,28 +24,21 @@ export function OpportunityConstellation() {
         <h2>Not every reward is money</h2>
         <p>Offers are sorted by how close the prize sits to spendable cash — and what you must do before it is yours.</p>
       </div>
-      <div className="tp-rewards-scale">
-        <span className="tp-rewards-axis" aria-hidden="true" />
-        <div className="tp-rewards-ends" aria-hidden="true">
-          <span>Closest to cash</span>
-          <span>Hardest to value</span>
-        </div>
-        <div className="tp-rewards-track" role="tablist" aria-label="Reward type">
-          {NODES.map((node, i) => (
-            <button
-              key={node.id}
-              type="button"
-              role="tab"
-              aria-selected={i === active}
-              className={`tp-reward-stop${i === active ? " is-active" : ""}`}
-              style={{ ["--i" as string]: String(i) }}
-              onClick={() => setActive(i)}
-            >
-              <i aria-hidden="true" />
-              <span>{node.label}</span>
-            </button>
-          ))}
-        </div>
+      <div className="tp-reward-stage" role="tablist" aria-label="Reward type">
+        {NODES.map((node, i) => (
+          <button
+            key={node.id}
+            type="button"
+            role="tab"
+            aria-selected={i === active}
+            className={`tp-reward-block${i === active ? " is-active" : ""}`}
+            style={{ ["--h" as string]: String(28 + i * 10) }}
+            onClick={() => setActive(i)}
+          >
+            <span className="tp-reward-prism" aria-hidden="true" />
+            <b>{node.label}</b>
+          </button>
+        ))}
       </div>
       <article className="tp-rewards-detail">
         <h3>{current.label}</h3>

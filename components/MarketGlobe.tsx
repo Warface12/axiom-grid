@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { MARKET_POLICIES } from "@/lib/markets";
 
 export function MarketGlobe({ showCopy = true }: { showCopy?: boolean }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [live, setLive] = useState(false);
+  const tags = MARKET_POLICIES.slice(0, 4);
 
   useEffect(() => {
     const el = rootRef.current;
@@ -35,18 +37,31 @@ export function MarketGlobe({ showCopy = true }: { showCopy?: boolean }) {
           <Link className="tp-inline-link" href="/markets">Open markets</Link>
         </div>
       ) : null}
-      <div ref={rootRef} className={`tp-earth${live ? " is-live" : ""}`} aria-hidden="true">
-        <div className="tp-earth-ball">
+      <div ref={rootRef} className={`tp-earth${live ? " is-live" : ""}`}>
+        <div className="tp-earth-halo" aria-hidden="true" />
+        <div className="tp-earth-ball" aria-hidden="true">
           <i className="tp-earth-ring r0" />
           <i className="tp-earth-ring r1" />
           <i className="tp-earth-ring r2" />
           <i className="tp-earth-ring r3" />
           <i className="tp-earth-ring r4" />
-          <i className="tp-earth-ring lat" />
+          <i className="tp-earth-ring r5" />
+          <i className="tp-earth-ring lat a" />
+          <i className="tp-earth-ring lat b" />
           <b className="tp-earth-dot d1" />
           <b className="tp-earth-dot d2" />
           <b className="tp-earth-dot d3" />
         </div>
+        <ul className="tp-earth-tags">
+          {tags.map((market) => (
+            <li key={market.code}>
+              <Link href={`/markets/${market.code.toLowerCase()}`}>
+                <small>{market.code}</small>
+                {market.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
