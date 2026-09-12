@@ -107,6 +107,11 @@ p,li,a,span,button,label,small,em,b,strong,legend,summary{
 .tp-niche-card em,.tp-job-card p,.tp-universe-tile em{color:var(--atelier-muted)!important;font-style:normal}
 
 /* Globe: solid planet */
+.tp-earth2-tags{display:grid!important;grid-template-columns:1fr 1fr;gap:10px!important}
+.tp-earth2-tags a{min-height:72px!important;align-content:center;word-spacing:.08em!important}
+@media(min-width:921px){
+  .tp-earth2-tags{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
 .tp-earth-ring,.tp-earth2-arcs{display:none!important}
 .tp-core-ring{border-color:rgba(228,188,106,.18)!important}
 .tp-earth2-ball{
