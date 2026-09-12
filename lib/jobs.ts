@@ -22,5 +22,13 @@ export const RESEARCH_JOBS = [
   { href: "/compliance", title: "Travel Rule / compliance", copy: "Vendors compared on published checks. This is not legal advice." },
   { href: "/indexes", title: "Hold a basket / index", copy: "Methodology and custody of the constituents. Live levels are never simulated." },
   { href: "/structured", title: "Use a structured note", copy: "Payoff as published. Diagrams are never invented." },
+  { href: "/otc", title: "Trade a block off-book", copy: "OTC desks. Quoted spreads stay empty unless the desk publishes them." },
+  { href: "/portfolio", title: "Track holdings", copy: "Portfolio apps compared on imports and who can see the list. Balances are never simulated." },
+  { href: "/bots", title: "Automate orders", copy: "Grid and DCA bots. Keys and venue access matter more than a backtest screenshot." },
+  { href: "/payroll", title: "Pay a contractor in crypto", copy: "Payroll rails. Tax treatment is never inferred." },
+  { href: "/vesting", title: "Admin a token unlock", copy: "Who can change the schedule is the product." },
+  { href: "/liquidity", title: "Provide inventory", copy: "Liquidity desks compared on custody of inventory. Depth is never invented." },
+  { href: "/education", title: "Take a third-party course", copy: "Academies are products. TopPick Learn stays a separate research desk." },
+  { href: "/alerts", title: "Watch a price or wallet", copy: "Alert tools. Live ticks are never fabricated here." },
   { href: "/markets", title: "Check your country first", copy: "Availability and promotional eligibility are stored separately." },
 ] as const;

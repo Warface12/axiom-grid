@@ -17,6 +17,14 @@ export const MARKET_POLICIES:MarketPolicy[]=[
  {code:"TW",name:"Taiwan",currency:"TWD",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Research-only by default. Promotion requires a documented market record."},
  {code:"MX",name:"Mexico",currency:"MXN",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Research-only by default. A Spanish homepage is not proof of promotional eligibility."},
  {code:"NG",name:"Nigeria",currency:"NGN",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Rails and onboarding change. TopPick will not infer availability from a global banner."},
+ {code:"NZ",name:"New Zealand",currency:"NZD",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Research may be public. Partner CTAs stay blocked until a current New Zealand eligibility record exists."},
+ {code:"SE",name:"Sweden",currency:"SEK",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"EEA context still needs a country record. Promotion stays blocked until documented."},
+ {code:"PL",name:"Poland",currency:"PLN",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Research-only by default. A regional EU banner is not proof of promotional eligibility."},
+ {code:"ID",name:"Indonesia",currency:"IDR",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Product and tax rules change. TopPick will not infer access from a global homepage."},
+ {code:"PH",name:"Philippines",currency:"PHP",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Research may be public. Commercial links require a current Philippines eligibility record."},
+ {code:"AR",name:"Argentina",currency:"ARS",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Rails and onboarding change. Availability is never inferred from a banner."},
+ {code:"IL",name:"Israel",currency:"ILS",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Research-only by default. Partner CTAs stay blocked until documented."},
+ {code:"TH",name:"Thailand",currency:"THB",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Research may be public. Promotion requires a current Thailand eligibility record."},
 ];
 export function getMarketPolicy(code?:string|null){const key=(code||"").toUpperCase();return MARKET_POLICIES.find(m=>m.code===key)||null}
 export function marketLabel(code?:string|null){return getMarketPolicy(code)?.name||"International"}

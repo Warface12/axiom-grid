@@ -57,6 +57,14 @@ export const SIGNATURES: Record<string, CategorySignature> = {
   jobs: { id: "jobs", accent: "#3ecfb2", glow: "rgba(62,207,178,.22)", object: "ramp" },
   index: { id: "index", accent: "#7ea2ff", glow: "rgba(126,162,255,.24)", object: "ledger" },
   structured: { id: "structured", accent: "#ffd27a", glow: "rgba(255,210,122,.22)", object: "vault" },
+  otc: { id: "otc", accent: "#e4bc6a", glow: "rgba(228,188,106,.22)", object: "venue" },
+  portfolio: { id: "portfolio", accent: "#7fd4ff", glow: "rgba(127,212,255,.22)", object: "ledger" },
+  bots: { id: "bots", accent: "#5ad0ff", glow: "rgba(90,208,255,.24)", object: "node" },
+  payroll: { id: "payroll", accent: "#ffb36a", glow: "rgba(255,179,106,.22)", object: "card" },
+  vesting: { id: "vesting", accent: "#c9a0ff", glow: "rgba(201,160,255,.26)", object: "hex" },
+  liquidity: { id: "liquidity", accent: "#6ef0c4", glow: "rgba(110,240,196,.26)", object: "ramp" },
+  education: { id: "education", accent: "#d7c4a0", glow: "rgba(215,196,160,.2)", object: "lens" },
+  alerts: { id: "alerts", accent: "#e08a6a", glow: "rgba(224,138,106,.22)", object: "lens" },
 };
 
 export function signatureFor(id?: string | null) {

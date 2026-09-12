@@ -41,6 +41,15 @@ const nextConfig:NextConfig={
     {source:"/indexes-etf",destination:"/indexes",permanent:true},
     {source:"/faq-page",destination:"/faq",permanent:true},
     {source:"/get-started",destination:"/start",permanent:true},
+    {source:"/otc-desk",destination:"/otc",permanent:true},
+    {source:"/portfolio-tracker",destination:"/portfolio",permanent:true},
+    {source:"/trading-bots",destination:"/bots",permanent:true},
+    {source:"/crypto-payroll",destination:"/payroll",permanent:true},
+    {source:"/token-vesting",destination:"/vesting",permanent:true},
+    {source:"/market-making",destination:"/liquidity",permanent:true},
+    {source:"/crypto-education",destination:"/education",permanent:true},
+    {source:"/price-alerts",destination:"/alerts",permanent:true},
+    {source:"/how-we-research",destination:"/methodology",permanent:true},
   ]},
 };
 export default nextConfig;
