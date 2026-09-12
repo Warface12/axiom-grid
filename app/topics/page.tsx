@@ -30,6 +30,8 @@ const CLUSTERS = [
     { href: "/options", label: "Options" },
     { href: "/indexes", label: "Indexes" },
     { href: "/structured", label: "Structured products" },
+    { href: "/forex", label: "Forex" },
+    { href: "/prop", label: "Prop firms" },
   ] },
   { title: "On-chain", links: [
     { href: "/dex", label: "DEXs" },

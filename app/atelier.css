@@ -377,8 +377,12 @@ html[data-scheme="light"] .tp-chapter-links a,html[data-scheme="light"] .tp-cont
 }
 .tp-account-form,.tp-account-value{padding:8px 0 24px}
 .tp-account-form h1,.tp-account-value h2{max-width:16ch;word-spacing:.09em}
-.tp-finder-page,.tp-compare-page,.tp-research-page{
+.tp-finder-page,.tp-compare-page,.tp-research-page,.tp-learn-page{
   background:radial-gradient(circle at 80% 0,rgba(228,188,106,.12),transparent 34%),#0b0907
+}
+.guide-grid{display:grid;gap:12px;width:min(1240px,calc(100% - 28px));margin:0 auto 28px}
+@media(min-width:921px){
+  .guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 .tp-method-track{
   border:0!important;

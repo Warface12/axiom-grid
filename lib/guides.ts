@@ -302,6 +302,32 @@ export const guides: GuideArticle[] = [
       ]},
     ],
   },
+  {
+    slug: "forex-is-still-a-wrapper",
+    title: "Forex is still a wrapper",
+    excerpt: "An FX homepage can still be a CFD. Compare the entity and published leverage.",
+    category: "learn",
+    readTime: "6 min",
+    body: [
+      { heading: "Name the contract", paragraphs: [
+        "A forex venue may offer spot FX, an NDF or a CFD wrapper. Those are different products. Compare the legal entity and the published leverage.",
+        "Spreads on TopPick stay empty unless the operator publishes them. A moving quote widget is not research.",
+      ]},
+    ],
+  },
+  {
+    slug: "prop-firms-without-the-pass-rate",
+    title: "Prop firms without the pass-rate",
+    excerpt: "Published rules and who holds the balance. Challenge statistics are marketing.",
+    category: "learn",
+    readTime: "6 min",
+    body: [
+      { heading: "The rulebook is the product", paragraphs: [
+        "A prop evaluation is a contract. Compare the published rules, the payout terms, and who holds the trading balance while you are evaluated.",
+        "Pass-rates and leaderboards are not evidence on TopPick. If the operator does not publish the rule, the field stays empty.",
+      ]},
+    ],
+  },
 ];
 
 export function getGuide(slug: string) {

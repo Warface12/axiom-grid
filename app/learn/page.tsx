@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { guides } from "@/lib/guides";
 import { GLOSSARY } from "@/lib/glossary";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, itemListJsonLd, webPageJsonLd } from "@/lib/seo";
+import { SITE_URL } from "@/lib/site";
 import { LearnAtlas } from "@/components/visual/LearnAtlas";
 
 export const metadata = buildMetadata({
@@ -12,8 +13,16 @@ export const metadata = buildMetadata({
 });
 
 export default function Page() {
+  const schema = webPageJsonLd({
+    name: "Learn crypto products",
+    description: "Evergreen guides for custody, fees, venues and on-chain classes.",
+    path: "/learn",
+  });
+  const list = itemListJsonLd(guides.map((guide) => ({ name: guide.title, url: `${SITE_URL}/learn/${guide.slug}` })));
   return (
     <main className="tp-learn-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(list) }} />
       <section className="shell page-hero">
         <span>Learn</span>
         <h1>Understand the product before you use it.</h1>

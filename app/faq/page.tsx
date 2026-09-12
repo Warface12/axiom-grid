@@ -18,6 +18,8 @@ const QA = [
   { q: "Do I need an account?", a: "No for reading. An account is for saving products, following companies and notifications. Partner workspaces stay separate." },
   { q: "Are offers and rewards ranked?", a: "No. Opportunities are classified by prize type and what you must do. They appear only when a published record exists." },
   { q: "Who pays TopPick?", a: "Partner compensation may apply. A commercial relationship never proves market eligibility or product quality. See the affiliate disclosure." },
+  { q: "What is the methodology page?", a: "Desk rules that apply even when a class is empty: name the class, read only published facts, keep markets separate, and never invent a ranking." },
+  { q: "Do you cover OTC, prop firms or payroll?", a: "Yes as researched classes. Those hubs stay empty until a reviewed public profile exists. They are not a live quote or a funded-trader leaderboard." },
 ];
 
 export default function Page() {
@@ -47,7 +49,8 @@ export default function Page() {
       </div>
       <p className="tp-chapter-links shell">
         <Link href="/start">Start here</Link>
-        <Link href="/how-we-rate">How we research</Link>
+        <Link href="/methodology">Methodology</Link>
+        <Link href="/how-we-rate">How we rate</Link>
         <Link href="/legal/affiliate-disclosure">Affiliate disclosure</Link>
         <Link href="/legal/risk-disclosure">Risks</Link>
       </p>
