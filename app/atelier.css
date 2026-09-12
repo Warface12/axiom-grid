@@ -209,7 +209,15 @@ html[data-scheme="light"] .tp-job-card,
 html[data-scheme="light"] .tp-start-card,
 html[data-scheme="light"] .tp-niche-card,
 html[data-scheme="light"] .market-card,
-html[data-scheme="light"] .tp-edu-card{background:#fffaf1!important;color:#1a140e!important}
+html[data-scheme="light"] .tp-edu-card,
+html[data-scheme="light"] .tp-empty-guide,
+html[data-scheme="light"] .legal-page,
+html[data-scheme="light"] .tp-glossary-item,
+html[data-scheme="light"] .tp-faq details,
+html[data-scheme="light"] .compare-picker-card,
+html[data-scheme="light"] .tp-search-box{background:#fffaf1!important;color:#1a140e!important}
+html[data-scheme="light"] .ag-footer{background:#efe6d4!important;color:#1a140e!important}
+html[data-scheme="light"] .tp-chapter-links a,html[data-scheme="light"] .tp-continue a{color:#8a5a12!important}
 
 .ag-mega-wrap>.ag-mega{
   min-width:min(920px,86vw)!important;

@@ -198,6 +198,32 @@ export const guides: GuideArticle[] = [
       ]},
     ],
   },
+  {
+    slug: "how-to-read-a-crypto-etf",
+    title: "How to read a crypto ETF",
+    excerpt: "Issuer, custody of the underlying, and why the share is not the token.",
+    category: "learn",
+    readTime: "6 min",
+    body: [
+      { heading: "You are buying a listed claim", paragraphs: [
+        "A crypto ETF or ETP is a share. Compare the issuer, the custodian of the underlying, the fee as published, and the market where the share trades.",
+        "Do not treat the ETF page as a spot token page. Creation, redemption and brokerage access are operator-specific.",
+      ]},
+    ],
+  },
+  {
+    slug: "privacy-tools-without-the-myth",
+    title: "Privacy tools without the myth",
+    excerpt: "What a privacy wallet actually changes, and what TopPick will not help you do.",
+    category: "learn",
+    readTime: "6 min",
+    body: [
+      { heading: "Mechanics, not evasion", paragraphs: [
+        "A privacy wallet or shielded pool changes who can see a transfer. It does not remove legal duties. TopPick compares published mechanics and will not help anyone evade the law.",
+        "If the operator does not publish the mechanism, the field stays empty.",
+      ]},
+    ],
+  },
 ];
 
 export function getGuide(slug: string) {
