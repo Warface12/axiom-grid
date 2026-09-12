@@ -7,13 +7,13 @@ import { CategoryMark } from "@/components/visual/CategoryMark";
 
 const BRANCHES = [
   { id: "exchange", label: "Exchanges", group: "Venues", href: "/exchanges", copy: "Custodial venues. The operator holds the balance until you withdraw." },
-  { id: "broker", label: "Brokers", group: "Venues", href: "/brokers", copy: "Forex, CFD and multi-asset brokers — their own class, not an exchange." },
-  { id: "dex", label: "DEXs", group: "Venues", href: "/dex", copy: "On-chain venues with their own mechanics, not a copy of a CEX." },
   { id: "wallet", label: "Wallets", group: "Custody", href: "/wallets", copy: "Who holds the keys, and how recovery is described." },
-  { id: "defi", label: "DeFi", group: "On-chain", href: "/defi", copy: "Protocols as products. Mechanics first, marketing second." },
-  { id: "tool", label: "Tools", group: "Jobs", href: "/tools", copy: "Analytics, tax, cards and terminals by the job you need done." },
+  { id: "futures", label: "Futures", group: "Venues", href: "/futures", copy: "Perps and dated futures. Funding stays empty unless sourced." },
+  { id: "lending", label: "Lending", group: "On-chain", href: "/lending", copy: "Collateral and liquidation — not a headline APY." },
+  { id: "bridge", label: "Bridges", group: "Infrastructure", href: "/bridges", copy: "In-flight custody is its own failure mode." },
+  { id: "niches", label: "All niches", group: "Map", href: "/niches", copy: "Forty-plus researched classes. Empty directories stay empty." },
   { id: "markets", label: "Markets", group: "Access", href: "/markets", copy: "Your country changes access, rails and what can even be offered." },
-  { id: "opportunities", label: "Opportunities", group: "Rewards", href: "/opportunities", copy: "Cash, crypto, credit and points are different prizes." },
+  { id: "jobs", label: "Jobs", group: "Start", href: "/jobs", copy: "Start from the work, not from a brand wall." },
 ];
 
 export function IntelligenceCore() {

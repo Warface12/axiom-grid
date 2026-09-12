@@ -51,7 +51,13 @@ export default async function Page({ params }: Props) {
             {section.paragraphs.map((paragraph) => <p key={paragraph.slice(0, 48)}>{paragraph}</p>)}
           </section>
         ))}
-        <p><Link href="/how-we-rate">Read the research protocol</Link></p>
+        <p className="tp-chapter-links">
+          <Link href="/how-we-rate">Research protocol</Link>
+          <Link href="/jobs">Jobs</Link>
+          <Link href="/niches">Niches</Link>
+          <Link href="/faq">FAQ</Link>
+          <Link href="/topics">Topics</Link>
+        </p>
       </article>
     </main>
   );

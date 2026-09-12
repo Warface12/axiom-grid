@@ -107,6 +107,8 @@ p,li,a,span,button,label,small,em,b,strong,legend,summary{
 .tp-niche-card em,.tp-job-card p,.tp-universe-tile em{color:var(--atelier-muted)!important;font-style:normal}
 
 /* Globe: solid planet */
+.tp-earth-ring,.tp-earth2-arcs{display:none!important}
+.tp-core-ring{border-color:rgba(228,188,106,.18)!important}
 .tp-earth2-ball{
   background:
     radial-gradient(circle at 28% 24%,rgba(255,236,200,.7),transparent 26%),

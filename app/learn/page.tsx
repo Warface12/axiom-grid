@@ -41,7 +41,12 @@ export default function Page() {
             </article>
           ))}
         </div>
-        <p className="tp-chapter-links"><Link href="/glossary">Full glossary</Link></p>
+        <p className="tp-chapter-links">
+          <Link href="/glossary">Full glossary</Link>
+          <Link href="/topics">Topics</Link>
+          <Link href="/start">Start here</Link>
+          <Link href="/faq">FAQ</Link>
+        </p>
       </section>
     </main>
   );
