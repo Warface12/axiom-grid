@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -8,18 +9,23 @@ export const metadata = buildMetadata({
 
 export default function Page() {
   return (
-    <main>
+    <main className="tp-start-page">
       <section className="shell page-hero">
-        <span>EVIDENCE</span>
-        <h1>Source policy</h1>
-        <p>Every important claim on a platform page should be traceable. If we cannot point to a public source, the field stays empty or marked for review.</p>
+        <span>Evidence</span>
+        <h1>If we cannot point to a source, the field stays empty.</h1>
+        <p>Every important claim on a platform page should be traceable. Imported metadata is not a verified fact.</p>
       </section>
-      <section className="shell content-shell simple-grid">
-        <article className="prose-card"><h3>What counts as a source</h3><p>Operator websites, legal documents, published fee schedules, official help centres and regulator registers. Marketing slogans are not treated as verified product facts.</p></article>
-        <article className="prose-card"><h3>Imported is not verified</h3><p>URL import may collect a title, description or icon from public HTML. That draft still needs a human review. We never auto-publish or fill fees, licenses or GEO from guesses.</p></article>
-        <article className="prose-card"><h3>What we will not do</h3><p>We do not bypass logins, CAPTCHAs, paywalls or private networks. We do not scrape behind authentication. Internal IPs are blocked in the importer.</p></article>
-        <article className="prose-card"><h3>Freshness</h3><p>When a fact is time-sensitive, last-checked and last-verified dates are stored. Stale does not mean false — it means it needs another look before you treat it as current.</p></article>
-      </section>
+      <div className="tp-start-grid">
+        <article className="tp-start-card"><b>What counts</b><p>Operator websites, legal documents, published fee schedules, official help centres and regulator registers. Marketing slogans are not verified facts.</p></article>
+        <article className="tp-start-card"><b>Imported is not verified</b><p>URL import may collect a title or icon. That draft still needs a human review. Fees, licenses and GEO are never guessed.</p></article>
+        <article className="tp-start-card"><b>What we will not do</b><p>We do not bypass logins, CAPTCHAs, paywalls or private networks. Internal IPs are blocked in the importer.</p></article>
+        <article className="tp-start-card"><b>Freshness</b><p>Stale does not mean false — it means it needs another look before you treat it as current.</p></article>
+      </div>
+      <p className="tp-chapter-links shell">
+        <Link href="/editorial-policy">Editorial policy</Link>
+        <Link href="/how-we-rate">How we rate</Link>
+        <Link href="/corrections">Corrections</Link>
+      </p>
     </main>
   );
 }

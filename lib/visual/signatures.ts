@@ -1,7 +1,7 @@
 import type { PlatformKind } from "@/lib/catalog";
 
 export type CategorySignature = {
-  id: PlatformKind | "markets" | "opportunities";
+  id: PlatformKind | "markets" | "opportunities" | "niches" | "jobs";
   accent: string;
   glow: string;
   object: "venue" | "keys" | "hex" | "card" | "ramp" | "node" | "lens" | "ledger" | "globe" | "vault";
@@ -53,6 +53,8 @@ export const SIGNATURES: Record<string, CategorySignature> = {
   compliance: { id: "compliance", accent: "#d7c4a0", glow: "rgba(215,196,160,.2)", object: "ledger" },
   markets: { id: "markets", accent: "#4db7ff", glow: "rgba(77,183,255,.26)", object: "globe" },
   opportunities: { id: "opportunities", accent: "#f0c56a", glow: "rgba(240,197,106,.22)", object: "vault" },
+  niches: { id: "niches", accent: "#e4bc6a", glow: "rgba(228,188,106,.22)", object: "hex" },
+  jobs: { id: "jobs", accent: "#3ecfb2", glow: "rgba(62,207,178,.22)", object: "ramp" },
 };
 
 export function signatureFor(id?: string | null) {

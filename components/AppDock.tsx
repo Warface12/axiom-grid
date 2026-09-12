@@ -3,7 +3,7 @@ import { Compass, GitCompare, Home, Search, UserRound } from "lucide-react";
 
 const ITEMS = [
   { href: "/", label: "Home", Icon: Home },
-  { href: "/#universe", label: "Discover", Icon: Compass },
+  { href: "/niches", label: "Niches", Icon: Compass },
   { href: "/compare", label: "Compare", Icon: GitCompare },
   { href: "/finder", label: "Finder", Icon: Search },
   { href: "/account", label: "Account", Icon: UserRound },
