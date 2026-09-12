@@ -38,6 +38,9 @@ const nextConfig:NextConfig={
     {source:"/travel-rule",destination:"/compliance",permanent:true},
     {source:"/crypto-index",destination:"/indexes",permanent:true},
     {source:"/structured-products",destination:"/structured",permanent:true},
+    {source:"/indexes-etf",destination:"/indexes",permanent:true},
+    {source:"/faq-page",destination:"/faq",permanent:true},
+    {source:"/get-started",destination:"/start",permanent:true},
   ]},
 };
 export default nextConfig;
