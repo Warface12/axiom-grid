@@ -3,9 +3,10 @@ import { buildMetadata } from "@/lib/seo";
 import { ProductFinder } from "@/components/ProductFinder";
 
 export const metadata = buildMetadata({
-  title: "Product finder",
-  description: "Map a question to exchanges, wallets, brokers, DeFi, ramps and tools.",
+  title: "Product finder — TopPick.pro",
+  description: "Map a job to exchanges, wallets, brokers, futures, lending, bridges and other niches. Four questions. No invented ranking.",
   path: "/finder",
+  keywords: ["crypto product finder", "choose a crypto exchange", "wallet finder"],
 });
 
 export default function Page() {
@@ -19,9 +20,10 @@ export default function Page() {
       <section className="shell content-shell">
         <ProductFinder />
         <p className="tp-continue">
+          <Link href="/jobs">Jobs</Link>
+          <Link href="/niches">Niches</Link>
           <Link href="/compare">Compare</Link>
           <Link href="/glossary">Glossary</Link>
-          <Link href="/how-we-rate">How we review</Link>
           <Link href="/markets">Your market</Link>
         </p>
       </section>
