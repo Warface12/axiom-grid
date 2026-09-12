@@ -9,6 +9,9 @@ import { ThemeControls } from "@/components/ThemeControls";
 
 const explore = [
   ["Home", "/"],
+  ["Start here", "/start"],
+  ["Jobs", "/jobs"],
+  ["All niches", "/niches"],
   ["Finder", "/finder"],
   ["Compare", "/compare"],
   ["Research", "/research"],
@@ -56,10 +59,11 @@ export function MobileNav() {
             {explore.map(([label, href]) => (
               <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>
             ))}
-            <p className="tp-drawer-label">Product classes</p>
-            {CATALOG.map((item) => (
-              <Link key={item.id} href={`/${item.hub}`} onClick={() => setOpen(false)}>{item.plural}</Link>
+            <p className="tp-drawer-label">Product families</p>
+            {Array.from(new Set(CATALOG.map((item) => item.group))).map((group) => (
+              <Link key={group} href="/niches" onClick={() => setOpen(false)}>{group}</Link>
             ))}
+            <Link href="/faq" onClick={() => setOpen(false)}>FAQ</Link>
             <p className="tp-drawer-label">Market</p>
             <MarketSwitcher />
             <p className="tp-drawer-label">Appearance</p>

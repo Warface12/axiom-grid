@@ -26,7 +26,7 @@ export default function Page() {
       <section className="shell page-hero">
         <span>Product niches</span>
         <h1>Every class has its own job and its own failure mode.</h1>
-        <p>These are research directories, not ranked leaderboards. If a class has no reviewed profile yet, the page stays empty instead of filling with invented brands.</p>
+        <p>{CATALOG.length} researched niches — exchanges, wallets, futures, bridges, lending, restaking and more. Empty classes stay empty instead of filling with invented brands.</p>
       </section>
       {groups.map((group) => (
         <section key={group} aria-label={group}>

@@ -21,6 +21,8 @@ export function Footer() {
           <Link href="/dex">DEXs</Link>
           <Link href="/defi">DeFi</Link>
           <Link href="/niches">All niches</Link>
+          <Link href="/jobs">Jobs</Link>
+          <Link href="/start">Start here</Link>
           <Link href="/finder">Product finder</Link>
           <Link href="/compare">Compare</Link>
           <Link href="/search">Search</Link>
@@ -30,6 +32,7 @@ export function Footer() {
           <Link href="/research">Research desk</Link>
           <Link href="/learn">Guides</Link>
           <Link href="/glossary">Glossary</Link>
+          <Link href="/faq">FAQ</Link>
           <Link href="/how-we-rate">How we rate</Link>
           <Link href="/security">Security & custody</Link>
           <Link href="/markets">Markets</Link>

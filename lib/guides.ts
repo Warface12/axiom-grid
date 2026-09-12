@@ -109,6 +109,66 @@ export const guides: GuideArticle[] = [
       ]},
     ],
   },
+  {
+    slug: "how-to-read-a-bridge",
+    title: "How to read a cross-chain bridge",
+    excerpt: "In-flight custody, published chains and what happens when a message fails.",
+    category: "learn",
+    readTime: "8 min",
+    body: [
+      { heading: "A bridge is not a wallet", paragraphs: [
+        "While assets move between chains they are often locked, minted or routed through a liquidity pool. That is a custody event, even if both endpoints look like self-custody wallets.",
+        "Compare the published chains, the lock or mint design, and what the operator says happens if a relayer or validator set stalls. Speed and TVL claims stay empty on TopPick unless a current source exists.",
+      ]},
+      { heading: "Failure modes to keep separate", paragraphs: [
+        "Smart-contract risk, operator-set risk, and destination-chain halt risk are different. A single “secure bridge” label hides which one you are taking.",
+        "If the product page does not name the mechanism, treat the custody field as unpublished rather than assuming canonical or lock-and-mint.",
+      ]},
+    ],
+  },
+  {
+    slug: "lending-and-liquidation",
+    title: "Crypto lending and liquidation",
+    excerpt: "Collateral, who can seize it, and why a headline APY is not a comparison.",
+    category: "learn",
+    readTime: "7 min",
+    body: [
+      { heading: "You are comparing a liquidation machine", paragraphs: [
+        "A lending market is a ruleset for posting collateral and seizing it. The interesting facts are the asset held, the oracle used, and the liquidation path — not a promotional supply rate.",
+        "TopPick shows APY only when a sourced, dated figure exists. Missing rates stay blank.",
+      ]},
+      { heading: "Custodial earn is a different product", paragraphs: [
+        "An exchange earn or savings product is usually an unsecured or custodial claim on the operator. Do not compare it in the same table as an on-chain money market.",
+        "Use the savings niche for operator earn books and the lending niche for protocol markets.",
+      ]},
+    ],
+  },
+  {
+    slug: "what-is-restaking",
+    title: "What restaking actually adds",
+    excerpt: "Shared security, extra slashing and why points are not yield.",
+    category: "learn",
+    readTime: "7 min",
+    body: [
+      { heading: "You are extending slashable risk", paragraphs: [
+        "Restaking uses already-staked assets to secure extra services. The new product is the extra slashing condition and the operator set — not a points dashboard.",
+        "Compare the base asset, the published undelegate or lockup path, and who can trigger a slash. TopPick will not invent a restaking APY.",
+      ]},
+    ],
+  },
+  {
+    slug: "stablecoins-and-redemption",
+    title: "Stablecoins and redemption",
+    excerpt: "Reserves, who can redeem, and why a peg chart is not research.",
+    category: "learn",
+    readTime: "8 min",
+    body: [
+      { heading: "The issuer is the product", paragraphs: [
+        "A stablecoin is a claim design. Compare the published reserves, the redemption desk, and the markets where redemption is actually offered.",
+        "TopPick does not draw a live peg tape. If redemption is unpublished, the field stays empty.",
+      ]},
+    ],
+  },
 ];
 
 export function getGuide(slug: string) {

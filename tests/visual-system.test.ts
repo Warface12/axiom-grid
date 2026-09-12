@@ -54,8 +54,10 @@ describe("visual stylesheets", () => {
     const visual = layout.indexOf("visual-system.css");
     const experience = layout.indexOf("experience.css");
     const readability = layout.indexOf("readability.css");
+    const atelier = layout.indexOf("atelier.css");
     assert.ok(visual >= 0);
     assert.ok(experience > visual);
     assert.ok(readability > experience);
+    assert.ok(atelier > readability);
   });
 });

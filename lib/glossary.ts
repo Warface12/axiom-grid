@@ -14,4 +14,9 @@ export const GLOSSARY = [
   { slug: "stablecoin", term: "Stablecoin", definition: "A token that aims to hold a reference value. Issuers differ on reserves, redemption and markets. Peg charts on TopPick are never simulated." },
   { slug: "copy-trading", term: "Copy trading", definition: "A product that mirrors another account’s orders. You still hold (or the operator holds) the copied balance. Past results are not a forecast." },
   { slug: "oracle", term: "Oracle", definition: "A feed that brings off-chain or cross-contract data on-chain. Compare published sources and update rules, not a live ticker we do not operate." },
+  { slug: "restaking", term: "Restaking", definition: "Using already-staked assets to secure extra services. Compare what can be slashed and who operates the extra service. Points programs are not yield." },
+  { slug: "rwa", term: "RWA / tokenized asset", definition: "A token that claims to represent an off-chain asset. The legal wrapper and the custodian of that asset are the product — not the token ticker." },
+  { slug: "prediction-market", term: "Prediction market", definition: "A venue that prices event outcomes. Compare resolution source, custody of stakes and eligibility. Odds on TopPick are never a live tape." },
+  { slug: "lending", term: "Lending / borrow", definition: "A market that posts collateral and can liquidate it. Who holds the asset, and the liquidation rule, matter more than a headline APY." },
+  { slug: "etf", term: "Crypto ETF / ETP", definition: "A listed fund with crypto exposure. Compare issuer, custody of the underlying and the market where the share trades — not the spot token page." },
 ];

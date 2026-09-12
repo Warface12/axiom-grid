@@ -21,7 +21,7 @@ export const metadata = buildMetadata({
   title: `${SITE_NAME} — Compare crypto exchanges, wallets and brokers`,
   description: "Discover, compare and research crypto exchanges, wallets, brokers and tools. Understand custody, markets and opportunities before you act.",
   path: "/",
-  keywords: ["crypto exchange comparison", "wallet comparison", "broker research", "DEX research", "crypto niches", "futures comparison", "bridge research"],
+  keywords: ["crypto exchange comparison", "wallet comparison", "broker research", "DEX research", "crypto niches", "futures comparison", "bridge research", "lending", "restaking", "prediction markets"],
 });
 
 export default function Home() {
@@ -36,21 +36,38 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
       <HeroStage>
-        <p className="ag-kicker"><span className="pulse" /> Intelligence core</p>
+        <p className="ag-kicker"><span className="pulse" /> Independent research studio</p>
         <h1>
-          <span className="tp-brand-line">Read the market</span>
-          <span className="tp-brand-line accent">before it reads you.</span>
+          <span className="tp-brand-line">Read the product</span>
+          <span className="tp-brand-line accent">before you fund it.</span>
         </h1>
-        <p>Discover exchanges, brokers, wallets, DEXs and tools. Compare like with like. Check your market. Learn the risks before you act.</p>
+        <p>Exchanges, wallets, brokers, futures, bridges and forty other niches — compared only on published facts. Empty classes stay empty.</p>
         <div className="ag-hero-cta">
-          <Link href="/finder">Find a product <ArrowUpRight /></Link>
-          <Link href="/compare">Compare</Link>
+          <Link href="/start">Start here <ArrowUpRight /></Link>
+          <Link href="/niches">Browse niches</Link>
         </div>
         <HomeSearch />
         <TrustStrip />
         <p className="ag-risk-line"><ShieldCheck /> Digital assets can involve substantial loss. Protections vary by country.</p>
       </HeroStage>
       <ProductUniverse />
+      <section className="tp-chapter tp-chapter--jobs" id="jobs">
+        <div className="tp-chapter-inner">
+          <header className="tp-chapter-copy">
+            <p className="tp-kicker">Jobs</p>
+            <h2>What are you actually trying to do?</h2>
+            <p className="tp-lead">Buy on a venue. Hold keys. Trade perps. Move across chains. Report tax. Each job opens a class — not a ranked brand wall.</p>
+          </header>
+          <div className="tp-jobs-grid">
+            <Link className="tp-job-card" href="/exchanges"><b>Buy or sell crypto</b><p>Venue custody, fees and your country.</p></Link>
+            <Link className="tp-job-card" href="/wallets"><b>Hold the keys</b><p>Hardware, software and recovery.</p></Link>
+            <Link className="tp-job-card" href="/futures"><b>Trade perps</b><p>Funding stays empty unless sourced.</p></Link>
+            <Link className="tp-job-card" href="/bridges"><b>Move across chains</b><p>In-flight custody is its own risk.</p></Link>
+            <Link className="tp-job-card" href="/lending"><b>Lend or borrow</b><p>Collateral and liquidation, as published.</p></Link>
+            <Link className="tp-job-card" href="/jobs"><b>See every job</b><p>Fourteen working paths into the catalog.</p></Link>
+          </div>
+        </div>
+      </section>
       <section className="tp-chapter tp-chapter--finder" id="finder">
         <div className="tp-chapter-inner">
           <header className="tp-chapter-copy">

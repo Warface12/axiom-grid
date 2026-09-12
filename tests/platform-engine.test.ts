@@ -20,6 +20,9 @@ describe("catalog", () => {
     assert.equal(isPlatformKind("bridge"), true);
     assert.equal(isPlatformKind("futures"), true);
     assert.equal(isPlatformKind("stablecoin"), true);
+    assert.equal(isPlatformKind("lending"), true);
+    assert.equal(isPlatformKind("restaking"), true);
+    assert.equal(isPlatformKind("prediction"), true);
     assert.equal(catalogByHub("explorers")?.id, "explorer");
     assert.equal(platformPath("wallet", "ledger"), "/wallets/ledger");
   });

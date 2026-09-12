@@ -56,6 +56,15 @@ export async function searchPublic(q: string, limit = 24): Promise<SearchHit[]> 
   if (term.includes("niche") || term.includes("categor") || term.includes("directory")) {
     hits.push({ id: "page-niches", title: "Product niches", short: "Every researched product class. Empty classes stay empty.", kind: "page", href: "/niches" });
   }
+  if (term.includes("start") || term.includes("how to") || term.includes("begin")) {
+    hits.push({ id: "page-start", title: "How to start", short: "Finder, compare, markets and learn — four doors.", kind: "page", href: "/start" });
+  }
+  if (term.includes("job") || term.includes("use case") || term.includes("i want to")) {
+    hits.push({ id: "page-jobs", title: "Jobs", short: "Map a real job to a product class.", kind: "page", href: "/jobs" });
+  }
+  if (term.includes("faq") || term.includes("question") || term.includes("advice")) {
+    hits.push({ id: "page-faq", title: "FAQ", short: "Research, markets, empty classes and accounts.", kind: "page", href: "/faq" });
+  }
   if (term.includes("research") || term.includes("method") || term.includes("finding")) {
     hits.push({ id: "page-research", title: "Research desk", short: "Streams, verification and collections. No simulated live tape.", kind: "page", href: "/research" });
   }

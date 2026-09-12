@@ -6,6 +6,7 @@ import "./public-ux.css";
 import "./visual-system.css";
 import "./experience.css";
 import "./readability.css";
+import "./atelier.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Analytics } from "@/components/Analytics";

@@ -22,6 +22,17 @@ const nextConfig:NextConfig={
     {source:"/kyc",destination:"/identity",permanent:true},
     {source:"/yield-farming",destination:"/yield",permanent:true},
     {source:"/discover",destination:"/niches",permanent:true},
+    {source:"/start-here",destination:"/start",permanent:true},
+    {source:"/help",destination:"/faq",permanent:true},
+    {source:"/use-cases",destination:"/jobs",permanent:true},
+    {source:"/options-trading",destination:"/options",permanent:true},
+    {source:"/eigenlayer",destination:"/restaking",permanent:true},
+    {source:"/real-world-assets",destination:"/rwa",permanent:true},
+    {source:"/prediction-markets",destination:"/prediction",permanent:true},
+    {source:"/lend",destination:"/lending",permanent:true},
+    {source:"/socialfi",destination:"/social",permanent:true},
+    {source:"/crypto-etf",destination:"/etf",permanent:true},
+    {source:"/earn",destination:"/savings",permanent:true},
   ]},
 };
 export default nextConfig;

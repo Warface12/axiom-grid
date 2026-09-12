@@ -19,9 +19,9 @@ export function Header() {
         </Link>
         <nav className="ag-nav" aria-label="Primary">
           <CatalogNav />
+          <Link href="/jobs">Jobs</Link>
           <Link href="/compare">Compare</Link>
           <Link href="/research">Research</Link>
-          <Link href="/opportunities">Opportunities</Link>
           <Link href="/markets">Markets</Link>
           <Link href="/learn">Learn</Link>
         </nav>

@@ -1,0 +1,199 @@
+/* Atelier — last-loaded visual identity. Warm editorial studio, phone + desktop. */
+:root{
+  --atelier-ink:#0b0907;
+  --atelier-panel:#14110e;
+  --atelier-paper:#f3ead8;
+  --atelier-muted:#c8b8a0;
+  --atelier-gold:#e4bc6a;
+  --atelier-teal:#3ecfb2;
+  --atelier-rose:#e08a6a;
+}
+html,body{
+  background:var(--atelier-ink)!important;
+  color:var(--atelier-paper)!important;
+  font-family:Georgia,"Iowan Old Style","Palatino Linotype",var(--font-body),serif!important;
+  font-size:clamp(1.12rem,2.6vw,1.22rem)!important;
+  line-height:1.62!important;
+  word-spacing:.08em!important;
+  letter-spacing:.012em!important
+}
+h1,h2,h3,h4,.ag-brand,.tp-brand-line,.ag-kicker,.tp-kicker{
+  font-family:"Iowan Old Style",Georgia,var(--font-display),serif!important;
+  word-spacing:.07em!important
+}
+p,li,a,span,button,label,small,em,b,strong,legend,summary{
+  word-spacing:.08em!important;
+  overflow-wrap:break-word;
+  word-break:normal
+}
+.tp-brand-line,.ag-brand span,.ag-brand b,.ag-brand em{
+  white-space:normal!important;
+  word-break:normal!important;
+  letter-spacing:.01em!important
+}
+
+/* Header: frosted studio bar */
+.ag-header{
+  background:rgba(11,9,7,.88)!important;
+  border-bottom:0!important;
+  box-shadow:0 18px 40px rgba(0,0,0,.28)!important
+}
+.ag-header-inner{width:min(1280px,calc(100% - 28px))!important}
+.ag-brand{color:var(--atelier-paper)!important;gap:10px}
+.ag-brand b{font-weight:750;letter-spacing:.02em!important}
+.ag-brand em{color:var(--atelier-gold)!important;font-style:normal}
+.ag-nav a,.tp-header-aux .ag-icon-btn{color:var(--atelier-paper)!important}
+.ag-icon-btn{
+  background:rgba(243,234,216,.08)!important;
+  border:0!important;
+  border-radius:999px!important
+}
+
+/* Hero: magazine spread */
+.tp-hero-stage{
+  background:
+    radial-gradient(ellipse 70% 46% at 88% 0,rgba(228,188,106,.22),transparent 52%),
+    radial-gradient(ellipse 50% 40% at 0 80%,rgba(62,207,178,.14),transparent 48%),
+    linear-gradient(180deg,#120e0a,#0b0907 70%)!important
+}
+.tp-hero-stage:before{
+  opacity:.18!important;
+  background-image:
+    linear-gradient(rgba(243,234,216,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(243,234,216,.07) 1px,transparent 1px)!important
+}
+.tp-brand-line.accent{color:var(--atelier-gold)!important}
+.ag-hero-cta a{
+  min-height:54px;padding:0 22px;border-radius:999px;font-weight:750;
+  background:var(--atelier-gold);color:#1a1206;text-decoration:none
+}
+.ag-hero-cta a:nth-child(2){background:transparent;color:var(--atelier-paper);box-shadow:inset 0 0 0 1.5px rgba(243,234,216,.28)}
+.tp-home-search{
+  border:0!important;background:rgba(20,17,14,.92)!important;
+  box-shadow:0 16px 40px rgba(0,0,0,.35)!important;border-radius:18px!important
+}
+.tp-home-search button{background:var(--atelier-gold)!important;color:#1a1206!important}
+
+/* Chapters: distinct rooms */
+.tp-chapter{padding:64px 0 72px}
+.tp-chapter--universe{background:linear-gradient(180deg,#1a1220,#0b0907 78%)!important}
+.tp-chapter--finder{background:linear-gradient(180deg,#10221c,#0b0907)!important}
+.tp-chapter--rail{background:linear-gradient(180deg,#16110c,#0b0907)!important}
+.tp-chapter--lab{background:linear-gradient(180deg,#101824,#0b0907)!important}
+.tp-chapter--globe{background:linear-gradient(180deg,#0c1c1c,#0b0907)!important}
+.tp-chapter--reward{background:linear-gradient(180deg,#24180c,#0b0907)!important}
+.tp-chapter--vault{background:linear-gradient(180deg,#102018,#0b0907)!important}
+.tp-chapter--engine{background:linear-gradient(180deg,#141824,#0b0907)!important}
+.tp-chapter--learn{background:linear-gradient(180deg,#22180f,#0b0907)!important}
+.tp-chapter--account{background:linear-gradient(180deg,#16120e,#0b0907)!important}
+.tp-chapter--network{background:linear-gradient(180deg,#1a1424,#0b0907)!important}
+.tp-chapter--trust{background:linear-gradient(180deg,#14110e,#0b0907)!important}
+.tp-chapter--jobs{background:linear-gradient(180deg,#1c1410,#0b0907)!important}
+.tp-kicker,.ag-kicker{color:var(--atelier-gold)!important;letter-spacing:.16em!important}
+
+/* Surfaces: filled, never hairline boxes */
+.tp-universe-tile,.tp-sig-card,.tp-edu-card,.platform-card,.market-card,
+.tp-niche-card,.tp-job-card,.tp-faq details,.tp-start-card,.guide-grid .prose-card,
+.tp-finder-step label,.tp-account-benefits li,.tp-engine li,.tp-network li,
+.tp-atlas-node,.tp-earth2-tags a,.tp-compare-slab,.tp-lab-board,.tp-compare-board,
+.tp-vault-detail,.tp-core-readout,.tp-finder-launch span,.compare-picker-card{
+  border:0!important;
+  background:linear-gradient(165deg,rgba(36,30,24,.96),rgba(14,12,10,.98))!important;
+  box-shadow:0 22px 44px rgba(0,0,0,.38)!important;
+  color:var(--atelier-paper)!important
+}
+.tp-niche-card em,.tp-job-card p,.tp-universe-tile em{color:var(--atelier-muted)!important;font-style:normal}
+
+/* Globe: solid planet */
+.tp-earth2-ball{
+  background:
+    radial-gradient(circle at 28% 24%,rgba(255,236,200,.7),transparent 26%),
+    radial-gradient(circle at 62% 38%,rgba(62,207,178,.38),transparent 30%),
+    radial-gradient(circle at 40% 72%,#1a4a3a,#0a1614 70%)!important;
+  box-shadow:0 40px 80px rgba(0,0,0,.5),0 0 50px rgba(62,207,178,.2)!important
+}
+
+/* Crystals / save plates */
+.tp-crystal-body{
+  clip-path:none!important;border-radius:20px!important;
+  background:radial-gradient(circle at 30% 24%,#fff3c8,#e4bc6a 46%,#7a4e14)!important
+}
+.tp-save-plate{
+  position:relative!important;left:auto!important;right:auto!important;transform:none!important;
+  display:flex;align-items:center;min-height:74px;margin:0 0 12px;
+  background:linear-gradient(90deg,rgba(228,188,106,.22),rgba(20,17,14,.95))!important
+}
+.tp-save-scene{min-height:0!important;perspective:none}
+
+/* Footer + partner */
+.ag-footer{background:#080705!important;color:var(--atelier-paper)!important}
+.ag-bottom-cta{
+  background:linear-gradient(135deg,#3a2a14,#1a140e 46%,#101820)!important;
+  border:0!important
+}
+.ag-bottom-cta a{background:var(--atelier-gold)!important;color:#1a1206!important;border-radius:999px!important}
+
+/* Inner pages */
+.tp-niche-page,.tp-jobs-page,.tp-start-page,.tp-faq-page{
+  padding:28px 0 88px;
+  background:radial-gradient(circle at 80% 0,rgba(228,188,106,.12),transparent 34%),#0b0907
+}
+.tp-jobs-grid,.tp-start-grid,.tp-faq-list{width:min(1240px,calc(100% - 28px));margin:0 auto;display:grid;gap:14px}
+.tp-job-card,.tp-start-card{
+  display:grid;gap:8px;padding:22px;border-radius:24px;text-decoration:none
+}
+.tp-job-card b,.tp-start-card b{font-size:1.28rem}
+.tp-faq details{padding:18px 20px;border-radius:20px}
+.tp-faq summary{font-weight:750;cursor:pointer}
+.page-hero h1{font-size:clamp(2rem,6vw,3.6rem)!important;line-height:1.12!important;max-width:16ch}
+.page-hero p{max-width:40rem;color:var(--atelier-muted)}
+
+@media(min-width:921px){
+  .tp-hero-stage{
+    display:grid!important;grid-template-columns:1.05fr .95fr;align-items:center;
+    min-height:86vh;width:min(1280px,calc(100% - 48px));margin:0 auto;padding:28px 0 48px!important;
+    border-radius:0 0 36px 36px
+  }
+  .tp-hero-copy h1{font-size:clamp(3.2rem,5vw,5.6rem)!important;max-width:11ch}
+  .tp-core-lab{order:0}
+  .tp-jobs-grid,.tp-start-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tp-niche-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ag-nav a{font-size:15px!important;color:var(--atelier-paper)!important}
+  .ag-footer-grid{grid-template-columns:1.5fr repeat(3,.85fr)!important}
+  .tp-universe{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .tp-chapter-inner{grid-template-columns:1fr 1.1fr;align-items:center}
+  .tp-chapter--universe .tp-chapter-inner,
+  .tp-chapter--jobs .tp-chapter-inner{grid-template-columns:1fr}
+}
+@media(min-width:1280px){
+  .tp-jobs-grid,.tp-start-grid,.tp-niche-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:920px){
+  .tp-hero-stage{min-height:auto!important;padding:12px 16px 32px!important}
+  .tp-hero-copy h1{font-size:2.05rem!important;max-width:100%}
+  .tp-core-space{height:38dvh!important;min-height:240px!important}
+  .tp-chapter{padding:48px 0 56px}
+  .ag-header{background:#0b0907!important}
+}
+
+html[data-scheme="light"] body,
+html[data-scheme="light"]{
+  background:#f6efe2!important;color:#1a140e!important
+}
+html[data-scheme="light"] .ag-header{background:rgba(246,239,226,.92)!important}
+html[data-scheme="light"] .ag-brand,html[data-scheme="light"] .ag-nav a{color:#1a140e!important}
+html[data-scheme="light"] .tp-hero-stage,
+html[data-scheme="light"] .tp-chapter--universe,
+html[data-scheme="light"] .tp-chapter--finder,
+html[data-scheme="light"] .tp-chapter--lab,
+html[data-scheme="light"] .tp-chapter--globe,
+html[data-scheme="light"] .tp-niche-page,
+html[data-scheme="light"] .tp-jobs-page,
+html[data-scheme="light"] .tp-start-page,
+html[data-scheme="light"] .tp-faq-page{background:#f6efe2!important}
+html[data-scheme="light"] .tp-universe-tile,
+html[data-scheme="light"] .tp-job-card,
+html[data-scheme="light"] .tp-start-card,
+html[data-scheme="light"] .tp-niche-card,
+html[data-scheme="light"] .market-card,
+html[data-scheme="light"] .tp-edu-card{background:#fffaf1!important;color:#1a140e!important}
