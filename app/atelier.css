@@ -115,6 +115,11 @@ p,li,a,span,button,label,small,em,b,strong,legend,summary{
 }
 .tp-earth-ring,.tp-earth2-arcs{display:none!important}
 .tp-core-ring{border-color:rgba(228,188,106,.18)!important}
+.tp-core-mod.is-active .tp-mod-face,
+.tp-core-mod.is-active span{
+  background:linear-gradient(165deg,#fff6d4,#e4bc6a)!important;
+  color:#1a1206!important
+}
 .tp-earth2-ball{
   background:
     radial-gradient(circle at 28% 24%,rgba(255,236,200,.7),transparent 26%),
