@@ -6,7 +6,7 @@ import { MARKET_POLICIES } from "@/lib/markets";
 
 export function MarketGlobe({ showCopy = true }: { showCopy?: boolean }) {
   const { ref, live } = useLiveScene(0.15);
-  const tags = MARKET_POLICIES.slice(0, 5);
+  const tags = MARKET_POLICIES;
 
   return (
     <section className={`tp-chapter tp-chapter--globe${showCopy ? "" : " is-embed"}`} aria-label="Markets">
