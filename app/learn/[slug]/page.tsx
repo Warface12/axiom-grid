@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getGuide, guides } from "@/lib/guides";
-import { buildMetadata, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import { buildMetadata, breadcrumbJsonLd, faqJsonLd, articleJsonLd } from "@/lib/seo";
 import { SITE_URL } from "@/lib/site";
 import Link from "next/link";
 
@@ -32,19 +32,21 @@ export default async function Page({ params }: Props) {
     { name: g.title, url: `${SITE_URL}/learn/${g.slug}` },
   ]);
   const faq = faqJsonLd(g.body.slice(0, 2).map((section) => ({ question: section.heading, answer: section.paragraphs[0] })));
+  const article = articleJsonLd({ name: g.title, description: g.excerpt, path: `/learn/${g.slug}` });
   return (
-    <main className="shell content-shell">
+    <main className="tp-learn-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
-      <nav className="tp-breadcrumbs" aria-label="Breadcrumb">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }} />
+      <nav className="shell tp-breadcrumbs" aria-label="Breadcrumb">
         <Link href="/">Home</Link><span>/</span><Link href="/learn">Learn</Link><span>/</span><span>{g.title}</span>
       </nav>
-      <section className="page-hero">
+      <section className="shell page-hero">
         <span>{g.category.toUpperCase()} / {g.readTime}</span>
         <h1>{g.title}</h1>
         <p>{g.excerpt}</p>
       </section>
-      <article className="prose-card">
+      <article className="shell prose-card tp-edu-card">
         {g.body.map((section) => (
           <section key={section.heading}>
             <h2>{section.heading}</h2>
