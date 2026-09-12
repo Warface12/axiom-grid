@@ -413,12 +413,16 @@ html[data-scheme="light"] .tp-chapter-links a,html[data-scheme="light"] .tp-cont
   }
   .tp-hero-copy{order:0!important;padding:8px 4px 0!important}
   .tp-core-lab{order:2!important}
-  .tp-core-space{display:none!important}
   .tp-hero-copy h1,.page-hero h1{
     font-size:2.15rem!important;
     max-width:100%!important;
     line-height:1.16!important
   }
+}
+.tp-core-space{display:none!important}
+.tp-core-readout{
+  padding:26px 28px!important;
+  border-radius:28px!important
 }
 
 /* Gold must beat older cyan first-child rules */
