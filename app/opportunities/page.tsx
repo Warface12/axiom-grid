@@ -4,12 +4,11 @@ import { OpportunityConstellation } from "@/components/OpportunityConstellation"
 import Link from "next/link";
 
 export async function generateMetadata() {
-  const count = await countPublished("offer");
+  await countPublished("offer");
   return buildMetadata({
     title: "Crypto opportunities",
     description: "Understand reward types, then review sourced offers when they exist.",
     path: "/opportunities",
-    noIndex: count === 0,
   });
 }
 

@@ -1,0 +1,446 @@
+/* Dramatic chapter environments — loaded last. Overrides boxed/terminal leftovers. */
+
+.tp-chapter-inner,
+.tp-chapter--universe .tp-chapter-inner,
+.tp-chapter--lab .tp-chapter-inner,
+.tp-chapter--globe .tp-chapter-inner,
+.tp-chapter--reward .tp-chapter-inner,
+.tp-chapter--vault .tp-chapter-inner,
+.tp-chapter--engine .tp-chapter-inner,
+.tp-chapter--learn .tp-chapter-inner,
+.tp-chapter--network .tp-chapter-inner,
+.tp-chapter--finder .tp-chapter-inner,
+.tp-chapter--account .tp-chapter-inner{
+  padding:0!important;border:0!important;background:transparent!important;border-radius:0!important;box-shadow:none!important
+}
+
+.ag-kicker,.tp-kicker,.ag-section-marker{
+  font-size:.72rem!important;letter-spacing:.11em!important;white-space:normal!important;max-width:100%;line-height:1.35
+}
+
+.tp-chapter{
+  padding:56px 0 64px;
+  isolation:isolate;
+  overflow:clip
+}
+.tp-chapter-inner{width:min(1240px,calc(100% - 28px));margin:0 auto;display:grid;gap:28px}
+.tp-chapter-copy h2{font-size:clamp(1.85rem,6.2vw,3.15rem)!important;line-height:1.08!important;max-width:16ch}
+.tp-lead,.tp-chapter-copy>p{font-size:clamp(1.08rem,2.8vw,1.22rem)!important;line-height:1.55;max-width:38rem}
+
+/* —— HERO: cinematic, mobile-first —— */
+.tp-hero-stage{
+  position:relative!important;
+  background:
+    radial-gradient(ellipse 80% 50% at 70% 0%,rgba(60,232,255,.28),transparent 55%),
+    radial-gradient(ellipse 60% 40% at 0% 80%,rgba(155,134,255,.22),transparent 50%),
+    linear-gradient(180deg,#02040a 0%,#071322 55%,#050814 100%)!important;
+  overflow:clip
+}
+.tp-hero-stage:before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.45;
+  background-image:
+    linear-gradient(rgba(60,232,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(60,232,255,.07) 1px,transparent 1px);
+  background-size:48px 48px;
+  transform:perspective(600px) rotateX(58deg) scale(1.4) translateY(-8%);
+  transform-origin:center top
+}
+.tp-hero-copy,.tp-core-lab{position:relative;z-index:1}
+.tp-hero-copy h1{
+  display:grid;gap:0;
+  font-size:clamp(1.8rem,7.2cqi,2.35rem)!important;
+  line-height:1.06!important;max-width:14ch
+}
+.tp-brand-line{display:block;white-space:normal;overflow-wrap:anywhere}
+
+/* Intelligence core — larger, denser materials */
+.tp-core-space{
+  height:min(52dvh,480px)!important;min-height:300px!important;
+  border-radius:32px;overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 48%,rgba(60,232,255,.28),transparent 42%),
+    radial-gradient(circle at 20% 80%,rgba(155,134,255,.16),transparent 40%),
+    #040914;
+  box-shadow:inset 0 0 80px rgba(0,0,0,.45),0 30px 80px rgba(0,0,0,.4)
+}
+.tp-core-sun{width:42px!important;height:42px!important;margin:-21px!important;box-shadow:0 0 40px #3ce8ff,0 0 90px rgba(91,140,255,.55)!important}
+.tp-core-bloom{width:280px!important;height:280px!important;margin:-140px!important;filter:blur(12px)!important}
+.tp-core-readout{
+  border:0!important;
+  background:linear-gradient(165deg,rgba(20,48,72,.92),rgba(6,12,22,.96))!important;
+  box-shadow:0 28px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.12)!important
+}
+.tp-core-lab.is-live .tp-core-depth{animation:tpCoreSway 16s ease-in-out infinite}
+
+/* —— CHAPTER ENVIRONMENTS —— */
+.tp-chapter--universe{
+  background:
+    radial-gradient(circle at 12% 18%,rgba(168,120,255,.28),transparent 36%),
+    linear-gradient(180deg,#14081f,#07040e 70%)
+}
+.tp-chapter--finder{
+  background:
+    radial-gradient(circle at 92% 8%,rgba(60,232,255,.2),transparent 32%),
+    linear-gradient(180deg,#04141c,#050814)
+}
+.tp-chapter--rail{
+  background:linear-gradient(180deg,#0a1424,#050814)
+}
+.tp-chapter--lab{
+  background:
+    linear-gradient(90deg,rgba(40,120,200,.18),transparent 42%,rgba(80,220,180,.12)),
+    linear-gradient(180deg,#06101f,#050814)
+}
+.tp-chapter--globe{
+  background:
+    radial-gradient(circle at 50% 40%,rgba(40,180,255,.22),transparent 42%),
+    linear-gradient(180deg,#021018,#050814)
+}
+.tp-chapter--reward{
+  background:
+    radial-gradient(circle at 18% 24%,rgba(240,197,106,.22),transparent 38%),
+    linear-gradient(180deg,#160e04,#08060a)
+}
+.tp-chapter--vault{
+  background:
+    radial-gradient(circle at 82% 12%,rgba(110,240,196,.18),transparent 36%),
+    linear-gradient(180deg,#041510,#050814)
+}
+.tp-chapter--engine{
+  background:
+    radial-gradient(circle at 8% 80%,rgba(91,140,255,.22),transparent 40%),
+    linear-gradient(180deg,#070b1c,#050814)
+}
+.tp-chapter--learn{
+  background:
+    radial-gradient(circle at 90% 70%,rgba(255,196,140,.12),transparent 36%),
+    linear-gradient(180deg,#14100c,#08080c)
+}
+.tp-chapter--account{
+  background:
+    radial-gradient(circle at 50% 100%,rgba(60,232,255,.14),transparent 46%),
+    linear-gradient(180deg,#07121c,#050814)
+}
+.tp-chapter--network{
+  background:
+    radial-gradient(circle at 0 40%,rgba(155,134,255,.24),transparent 40%),
+    linear-gradient(180deg,#10081c,#050814)
+}
+.tp-chapter--trust{
+  background:linear-gradient(180deg,#080c12,#050814)
+}
+
+/* Universe: tilted 3D slabs, not identical cards */
+.tp-universe-tile,.tp-sig-card{
+  border:0!important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.08),transparent 40%),
+    linear-gradient(165deg,rgba(28,18,48,.92),rgba(8,8,16,.96))!important;
+  box-shadow:0 22px 40px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06) inset!important;
+  transform:perspective(520px) rotateX(8deg) rotateY(-6deg);
+  transform-style:preserve-3d
+}
+.tp-universe-col:nth-child(2) .tp-universe-tile{transform:perspective(520px) rotateX(8deg) rotateY(6deg);background:linear-gradient(165deg,rgba(18,40,56,.94),rgba(8,8,16,.96))!important}
+.tp-universe-col:nth-child(3) .tp-universe-tile{transform:perspective(520px) rotateX(10deg);background:linear-gradient(165deg,rgba(18,36,28,.94),rgba(8,8,16,.96))!important}
+.tp-sig-card{min-height:220px;align-content:end}
+.tp-sig-card .tp-cat-mark{width:72px;height:72px}
+.tp-sig-rail{gap:14px;padding-bottom:20px;mask-image:linear-gradient(90deg,#000 92%,transparent)}
+
+/* Finder launch as giant app tiles */
+.tp-finder-launch{
+  border:0!important;gap:12px!important;padding:8px!important;
+  background:transparent!important;box-shadow:none!important
+}
+.tp-finder-launch span{
+  min-height:88px;display:grid;align-content:center;padding:18px!important;font-size:1.15rem;
+  border-radius:22px!important;
+  background:linear-gradient(160deg,rgba(20,60,80,.8),rgba(6,14,24,.95))!important;
+  box-shadow:0 16px 32px rgba(0,0,0,.3)
+}
+.tp-finder-launch b{font-size:1.05rem;border-radius:18px!important}
+
+/* Compare chamber — slabs visible on mobile */
+.tp-lab-slabs{
+  display:grid!important;grid-template-columns:1fr 1fr;gap:12px;position:relative;min-height:0;perspective:900px
+}
+.tp-lab-slab{
+  position:relative!important;width:auto!important;left:auto!important;right:auto!important;
+  min-height:110px;padding:18px!important;border:0!important;
+  box-shadow:0 24px 40px rgba(0,0,0,.4)!important
+}
+.tp-lab-slab.s-a{transform:rotateY(14deg) rotateX(8deg)!important}
+.tp-lab-slab.s-b{transform:rotateY(-14deg) rotateX(8deg)!important}
+.tp-lab-board,.tp-compare-board{
+  border:0!important;
+  background:linear-gradient(180deg,rgba(12,28,48,.88),rgba(6,10,18,.96))!important;
+  box-shadow:0 30px 60px rgba(0,0,0,.4)!important
+}
+.tp-lab-head,.tp-compare-head{font-size:.78rem}
+.tp-lab-row p,.tp-lab-row span{font-size:15px}
+
+.tp-compare-stage{
+  display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 18px;
+  perspective:900px
+}
+.tp-compare-slab{
+  flex:0 0 min(240px,78vw);scroll-snap-align:center;min-height:140px;padding:20px;border-radius:22px;
+  background:linear-gradient(165deg,rgba(80,170,220,.35),rgba(8,16,28,.95));
+  box-shadow:0 24px 44px rgba(0,0,0,.4);
+  transform:rotateY(calc((var(--i,0) - 1)*12deg)) rotateX(8deg)
+}
+.tp-compare-slab small{display:block;color:#8fe4f5;letter-spacing:.12em;text-transform:uppercase;font-size:11px}
+.tp-compare-slab b{display:block;font-size:1.35rem;margin-top:8px}
+
+/* Globe — larger, more planetary */
+.tp-earth2-stage{width:min(100%,420px)!important;max-width:none}
+.tp-earth2-ball{
+  background:
+    radial-gradient(circle at 30% 28%,rgba(200,250,255,.7),transparent 28%),
+    radial-gradient(circle at 70% 70%,#06384a,#021018 70%)!important;
+  box-shadow:0 40px 80px rgba(0,0,0,.55),inset -24px -16px 40px rgba(0,0,0,.55),0 0 60px rgba(60,232,255,.25)!important
+}
+.tp-earth2-tags a{
+  border:0!important;
+  background:linear-gradient(90deg,rgba(20,70,90,.7),rgba(8,16,24,.92))!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.28)!important
+}
+
+/* Opportunity crystals */
+.tp-crystal-body{
+  width:56px!important;height:84px!important;
+  background:linear-gradient(180deg,rgba(255,230,160,.85),rgba(120,80,20,.9))!important;
+  filter:drop-shadow(0 12px 16px rgba(0,0,0,.4))
+}
+.tp-crystal.is-active .tp-crystal-body{
+  background:linear-gradient(180deg,#fff4cc,#f0c56a 38%,#8a5a12)!important;
+  filter:drop-shadow(0 0 18px rgba(240,197,106,.45))
+}
+.tp-vault-detail{
+  border:0!important;
+  background:linear-gradient(160deg,rgba(48,32,8,.88),rgba(10,10,14,.96))!important
+}
+
+/* Security vault plates */
+.tp-vault-stack{min-height:320px!important}
+.tp-vault-plate{
+  height:64px!important;border:0!important;
+  background:linear-gradient(90deg,rgba(110,240,196,.28),rgba(8,24,22,.95))!important;
+  box-shadow:0 16px 28px rgba(0,0,0,.35);
+  font-size:1.05rem
+}
+.tp-vault-plate.is-active{box-shadow:0 0 28px rgba(110,240,196,.28),0 16px 28px rgba(0,0,0,.35)!important}
+
+/* Research cubes */
+.tp-engine{gap:14px!important}
+.tp-engine li{
+  border:0!important;min-height:140px;
+  background:linear-gradient(160deg,rgba(30,50,100,.72),rgba(8,12,24,.95))!important;
+  box-shadow:0 20px 40px rgba(0,0,0,.32)!important;
+  transform:perspective(600px) rotateY(-8deg)
+}
+.tp-engine li:nth-child(even){transform:perspective(600px) rotateY(8deg)}
+.tp-engine span{font-size:1.4rem}
+
+/* Partner network graph */
+.tp-net-graph{
+  position:relative;min-height:280px;margin:8px 0 12px;
+  display:grid;place-items:center
+}
+.tp-net-hub{
+  width:110px;height:110px;border-radius:50%;display:grid;place-items:center;text-align:center;
+  font-weight:800;z-index:2;
+  background:radial-gradient(circle at 35% 30%,#c9b8ff,#6b4ad4 55%,#24124a);
+  box-shadow:0 0 40px rgba(155,134,255,.45),0 20px 40px rgba(0,0,0,.4)
+}
+.tp-net-spoke{
+  position:absolute;left:50%;top:50%;width:96px;padding:10px 8px;border-radius:16px;text-align:center;font-size:13px;font-weight:750;
+  background:rgba(18,12,36,.9);box-shadow:0 12px 24px rgba(0,0,0,.35);
+  transform:rotate(calc(var(--a)*1deg)) translateY(-118px) rotate(calc(var(--a)*-1deg)) translate(-50%,-50%)
+}
+.tp-network li{
+  border:0!important;
+  background:linear-gradient(160deg,rgba(48,28,88,.7),rgba(10,8,20,.95))!important;
+  box-shadow:0 18px 36px rgba(0,0,0,.3)!important
+}
+
+/* Learn atlas — editorial, not product cards */
+.tp-atlas-node{
+  border:0!important;min-height:140px;align-content:end;
+  background:linear-gradient(180deg,rgba(80,50,24,.35),rgba(16,12,10,.96))!important;
+  box-shadow:inset 4px 0 0 #f0c56a,0 16px 32px rgba(0,0,0,.28)!important
+}
+.tp-edu-card{
+  border:0!important;
+  background:linear-gradient(165deg,rgba(36,28,20,.8),rgba(10,10,12,.96))!important;
+  box-shadow:0 16px 32px rgba(0,0,0,.28)!important
+}
+
+/* Account / save */
+.tp-save-cta,.tp-lab-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:54px;padding:0 24px;border-radius:16px;font-weight:800;
+  background:linear-gradient(135deg,#3ce8ff,#5b8cff);color:#041018
+}
+.tp-save-scene{min-height:200px;perspective:900px;position:relative}
+.tp-save-plate{
+  position:absolute;left:10%;right:18%;height:72px;border-radius:18px;padding:18px 20px;font-weight:800;font-size:1.2rem;
+  background:linear-gradient(90deg,rgba(60,232,255,.2),rgba(10,18,32,.92));
+  transform:translateY(calc(var(--d)*36px)) rotateX(58deg);
+  box-shadow:0 18px 30px rgba(0,0,0,.35)
+}
+.tp-account-benefits{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.tp-account-benefits li{
+  padding:16px 18px;border-radius:18px;
+  background:linear-gradient(160deg,rgba(16,36,52,.8),rgba(8,12,20,.95));
+  display:grid;gap:4px
+}
+.tp-account-benefits b{font-size:1.1rem}
+.tp-account-auth input,.tp-account-auth button{min-height:52px;font-size:16px;border-radius:14px}
+
+/* Hubs / cards */
+.tp-hub{background:radial-gradient(circle at 90% 0,rgba(60,232,255,.1),transparent 32%),#050814}
+.tp-hub-hero{padding:36px 0 8px}
+.tp-hub-object{width:140px!important;height:140px!important}
+.platform-card{
+  border:0!important;border-radius:22px!important;
+  box-shadow:0 22px 44px rgba(0,0,0,.32)!important
+}
+
+/* Bottom CTA / footer */
+.ag-bottom-cta{
+  width:min(1240px,calc(100% - 28px))!important;margin:0 auto 48px!important;
+  border:0!important;
+  background:linear-gradient(135deg,#3a2a78,#1a1038 40%,#0a1424)!important;
+  box-shadow:0 30px 70px rgba(0,0,0,.4)!important
+}
+.ag-bottom-cta h2{color:#fff!important}
+
+/* Finder app — large touch options */
+.tp-finder-step legend{font-size:clamp(1.45rem,5vw,2rem)!important}
+.tp-finder-step label{
+  font-size:1.05rem!important;min-height:64px!important;border:0!important;
+  background:linear-gradient(160deg,rgba(16,40,56,.88),rgba(8,12,20,.96))!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.25)
+}
+.tp-finder-step label.is-on{box-shadow:inset 0 0 0 2px #3ce8ff,0 10px 24px rgba(0,0,0,.25)!important}
+.tp-finder-progress button{border:0!important;background:rgba(8,20,32,.8)!important}
+
+/* Admin: still utilitarian, less microscopic terminal type */
+.ax-admin-rail nav a{
+  min-height:46px;border-radius:12px;font-size:13px!important;letter-spacing:0!important;text-transform:none!important
+}
+.ax-admin-title h1{text-transform:none!important;font-family:var(--font-display);letter-spacing:-.04em}
+
+@keyframes tpCoreSway{
+  0%,100%{transform:rotateX(calc(16deg + (var(--py,0)*-8deg))) rotateY(calc(-14deg + (var(--px,0)*16deg)))}
+  50%{transform:rotateX(calc(22deg + (var(--py,0)*-8deg))) rotateY(calc(10deg + (var(--px,0)*16deg)))}
+}
+
+@media(min-width:921px){
+  .tp-hero-copy h1{font-size:clamp(3rem,4.6vw,5.4rem)!important;max-width:12ch}
+  .tp-core-space{height:min(72vh,640px)!important;min-height:520px!important}
+  .tp-lab-slabs{display:block!important;min-height:150px}
+  .tp-lab-slab{position:absolute!important;width:46%!important}
+  .tp-lab-slab.s-a{left:4%!important}
+  .tp-lab-slab.s-b{right:4%!important}
+  .tp-earth2-stage{width:480px!important}
+  .tp-net-spoke{width:120px}
+  .tp-compare-stage{justify-content:center;overflow:visible}
+  .tp-hub-hero{grid-template-columns:1fr auto}
+}
+@media(max-width:920px){
+  .tp-hero-stage{display:flex!important;flex-direction:column;gap:10px;min-height:100dvh;padding:10px 16px 28px!important}
+  .tp-core-lab{order:-1}
+  .tp-core-space{
+    height:42dvh!important;min-height:280px!important;width:calc(100% + 32px);margin-left:-16px;margin-right:-16px;
+    border-radius:0 0 28px 28px
+  }
+  .tp-hero-copy h1{font-size:1.85rem!important;max-width:100%}
+  .tp-universe-tile,.tp-sig-card{transform:none}
+  .tp-engine li,.tp-engine li:nth-child(even){transform:none}
+  .tp-lab-row{grid-template-columns:1fr!important;gap:4px}
+  .tp-lab-head{display:none}
+  .tp-net-graph{min-height:240px;transform:scale(.92)}
+}
+@media(max-width:430px){
+  .tp-finder-launch{grid-template-columns:1fr 1fr}
+  .tp-vault-orbit{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:844px) and (orientation:landscape){
+  .tp-hero-stage{flex-direction:row!important;min-height:auto!important}
+  .tp-core-lab{order:0;flex:1}
+  .tp-hero-copy{flex:1}
+  .tp-core-space{width:100%;margin:0;height:220px!important;min-height:220px!important;border-radius:20px}
+}
+
+html[data-scheme="light"] .tp-hero-stage{
+  background:
+    radial-gradient(ellipse 80% 50% at 70% 0%,rgba(11,143,184,.18),transparent 55%),
+    linear-gradient(180deg,#f6f1e6,#e8eef6)!important
+}
+html[data-scheme="light"] .tp-chapter--universe{background:linear-gradient(180deg,#efe6fb,#f4f1ea)}
+html[data-scheme="light"] .tp-chapter--finder{background:linear-gradient(180deg,#e4f4f8,#f4f1ea)}
+html[data-scheme="light"] .tp-chapter--lab{background:linear-gradient(180deg,#e8eefc,#f4f1ea)}
+html[data-scheme="light"] .tp-chapter--globe{background:linear-gradient(180deg,#dceef4,#f4f1ea)}
+html[data-scheme="light"] .tp-chapter--reward{background:linear-gradient(180deg,#f6ead4,#f4f1ea)}
+html[data-scheme="light"] .tp-chapter--vault{background:linear-gradient(180deg,#def3ea,#f4f1ea)}
+html[data-scheme="light"] .tp-chapter--engine{background:linear-gradient(180deg,#e6eaf8,#f4f1ea)}
+html[data-scheme="light"] .tp-chapter--learn{background:linear-gradient(180deg,#f3eadc,#f4f1ea)}
+html[data-scheme="light"] .tp-chapter--network{background:linear-gradient(180deg,#ece4f8,#f4f1ea)}
+html[data-scheme="light"] .tp-chapter--account,html[data-scheme="light"] .tp-chapter--rail,html[data-scheme="light"] .tp-chapter--trust{background:#f4f1ea}
+html[data-scheme="light"] .tp-universe-tile,html[data-scheme="light"] .tp-sig-card,
+html[data-scheme="light"] .tp-finder-launch span,html[data-scheme="light"] .tp-lab-board,
+html[data-scheme="light"] .tp-engine li,html[data-scheme="light"] .tp-network li,
+html[data-scheme="light"] .tp-atlas-node,html[data-scheme="light"] .tp-edu-card,
+html[data-scheme="light"] .tp-account-benefits li,html[data-scheme="light"] .tp-finder-step label,
+html[data-scheme="light"] .tp-earth2-tags a,html[data-scheme="light"] .tp-compare-slab{
+  background:#fff!important;color:#132033!important;box-shadow:0 16px 40px rgba(20,40,70,.1)!important
+}
+html[data-scheme="light"] .tp-core-space{
+  background:radial-gradient(circle at 50% 48%,rgba(11,143,184,.2),#e8eef4)!important
+}
+html[data-scheme="light"] .ag-bottom-cta{background:linear-gradient(135deg,#3a2a78,#1f2a48)!important}
+
+.tp-account-split{grid-template-columns:1fr!important}
+.tp-auth-mode{
+  min-height:48px!important;padding:0 16px!important;border-radius:14px!important;
+  background:transparent!important;color:#d7e8f4!important;border:1px solid rgba(140,200,255,.2)!important
+}
+.tp-auth-mode.is-active{
+  background:rgba(60,232,255,.14)!important;color:#3ce8ff!important;border-color:#3ce8ff!important
+}
+.tp-account-auth .primary-btn{width:100%}
+.tp-hub-hero{grid-template-columns:1fr!important}
+@media(min-width:921px){
+  .tp-account-split{grid-template-columns:.9fr 1.1fr!important}
+  .tp-hub-hero{grid-template-columns:1fr auto!important}
+}
+.tp-finder-page,.tp-research-page,.tp-opp-page,.tp-learn-page,.tp-compare-page,.tp-markets-page{
+  min-height:70dvh
+}
+.tp-finder-page{background:radial-gradient(circle at 90% 0,rgba(60,232,255,.14),transparent 34%),#050814}
+.tp-research-page{background:radial-gradient(circle at 8% 10%,rgba(91,140,255,.16),transparent 36%),#050814}
+.tp-opp-page{background:radial-gradient(circle at 12% 0,rgba(240,197,106,.14),transparent 32%),#08060a}
+.tp-learn-page{background:radial-gradient(circle at 80% 0,rgba(255,196,140,.1),transparent 34%),#0c0a08}
+.tp-compare-page{background:radial-gradient(circle at 50% 0,rgba(91,140,255,.14),transparent 36%),#050814}
+.tp-markets-page{background:radial-gradient(circle at 50% 0,rgba(40,180,255,.16),transparent 38%),#021018}
+.tp-hub--exchanges{background:radial-gradient(circle at 88% 0,rgba(60,232,255,.16),transparent 32%),#050814}
+.tp-hub--wallets{background:radial-gradient(circle at 88% 0,rgba(110,240,196,.14),transparent 32%),#050814}
+.tp-hub--brokers{background:radial-gradient(circle at 88% 0,rgba(91,140,255,.16),transparent 32%),#050814}
+.tp-hub--dex,.tp-hub--defi{background:radial-gradient(circle at 88% 0,rgba(155,134,255,.16),transparent 32%),#050814}
+.market-card{
+  display:grid;gap:6px;padding:20px;border-radius:22px;text-decoration:none;color:inherit;
+  background:linear-gradient(160deg,rgba(12,40,56,.86),rgba(6,12,20,.96));
+  box-shadow:0 18px 36px rgba(0,0,0,.3);border:0
+}
+.market-grid{display:grid;gap:12px;margin:24px 0}
+@media(min-width:921px){.market-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.page-hero>span{font-size:.72rem!important;letter-spacing:.12em!important;text-transform:uppercase}
+
+html[data-nav-open] .ag-header-actions .ag-icon-btn:not(.tp-menu){visibility:hidden;pointer-events:none}
+html[data-nav-open] .tp-menu{z-index:220;position:relative}
+.tp-drawer{z-index:210!important}
+
+@media(prefers-reduced-motion:reduce){
+  .tp-core-lab.is-live .tp-core-depth,.tp-hero-stage:before{animation:none!important;transform:none}
+}

@@ -15,9 +15,9 @@ export async function generateMetadata() {
 export default async function Page() {
   const count = await countPublished("event_record");
   return (
-    <main>
-      <section className="shell tp-hub-hero">
-        <p>EVENTS</p>
+    <main className="tp-start-page">
+      <section className="shell page-hero">
+        <span>Events</span>
         <h1>Dates and sources, or it does not appear.</h1>
         <p>Listed events need a real schedule and a source. Until then, use the research library.</p>
       </section>
@@ -30,7 +30,9 @@ export default async function Page() {
             <p>When a reviewed session is published, it shows up here with dates and terms.</p>
             <div className="tp-continue">
               <Link href="/learn">Guides</Link>
+              <Link href="/topics">Topics</Link>
               <Link href="/markets">Markets</Link>
+              <Link href="/jobs">Jobs</Link>
               <Link href="/opportunities">Opportunities</Link>
             </div>
           </div>

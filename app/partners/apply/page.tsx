@@ -10,9 +10,9 @@ export const metadata = buildMetadata({
 
 export default function Page() {
   return (
-    <main>
+    <main className="tp-start-page">
       <section className="shell page-hero">
-        <span>APPLY FOR PARTNER ACCESS</span>
+        <span>Partner apply</span>
         <h1>Tell us who you represent.</h1>
         <p>Four short steps. Consumer mailboxes are allowed for agencies but are not automatic verification. Existing TopPick companies are claimed, not duplicated.</p>
       </section>

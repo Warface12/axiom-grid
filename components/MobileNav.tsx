@@ -9,9 +9,15 @@ import { ThemeControls } from "@/components/ThemeControls";
 
 const explore = [
   ["Home", "/"],
-  ["Compare", "/compare"],
+  ["Start here", "/start"],
+  ["Jobs", "/jobs"],
+  ["All niches", "/niches"],
   ["Finder", "/finder"],
-  ["Research", "/learn"],
+  ["Compare", "/compare"],
+  ["Research", "/research"],
+  ["Learn", "/learn"],
+  ["Methodology", "/methodology"],
+  ["FAQ", "/faq"],
   ["Opportunities", "/opportunities"],
   ["Markets", "/markets"],
   ["Account", "/account"],
@@ -25,6 +31,7 @@ export function MobileNav() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    document.documentElement.toggleAttribute("data-nav-open", open);
     if (open) closeRef.current?.focus();
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") setOpen(false);
@@ -32,6 +39,7 @@ export function MobileNav() {
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.removeAttribute("data-nav-open");
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
@@ -39,7 +47,7 @@ export function MobileNav() {
   return (
     <>
       <button className="ag-icon-btn tp-menu" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? "Close menu" : "Open menu"}>
-        {open ? <X size={18} /> : <Menu size={18} />}
+        {open ? <X size={20} /> : <Menu size={20} />}
       </button>
       {open ? (
         <div className="tp-drawer" id="mobile-nav">
@@ -53,15 +61,17 @@ export function MobileNav() {
             {explore.map(([label, href]) => (
               <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>
             ))}
-            <p className="tp-drawer-label">Categories</p>
-            {CATALOG.map((item) => (
-              <Link key={item.id} href={`/${item.hub}`} onClick={() => setOpen(false)}>{item.plural}</Link>
+            <p className="tp-drawer-label">Product families</p>
+            {Array.from(new Set(CATALOG.map((item) => item.group))).map((group) => (
+              <Link key={group} href="/niches" onClick={() => setOpen(false)}>{group}</Link>
             ))}
+            <Link href="/faq" onClick={() => setOpen(false)}>FAQ</Link>
             <p className="tp-drawer-label">Market</p>
             <MarketSwitcher />
             <p className="tp-drawer-label">Appearance</p>
             <ThemeControls />
-            <Link className="tp-drawer-partner" href="/partners" onClick={() => setOpen(false)}>Partner with TopPick</Link>
+            <Link className="tp-drawer-partner" href="/partners" onClick={() => setOpen(false)}>Partner workspace</Link>
+            <Link href="/account" onClick={() => setOpen(false)}>User account</Link>
           </div>
         </div>
       ) : null}

@@ -15,9 +15,9 @@ export async function generateMetadata() {
 export default async function Page() {
   const count = await countPublished("external_game");
   return (
-    <main>
-      <section className="shell tp-hub-hero">
-        <p>THIRD-PARTY GAMES</p>
+    <main className="tp-start-page">
+      <section className="shell page-hero">
+        <span>Third-party games</span>
         <h1>Sourced titles only — not a hidden catalogue.</h1>
         <p>This is not TopPick’s own games. Listed titles need an official site, terms and review.</p>
       </section>
@@ -30,6 +30,7 @@ export default async function Page() {
             <p>Original TopPick games, when they ship, live on a separate route and never load here.</p>
             <div className="tp-continue">
               <Link href="/games">TopPick games</Link>
+              <Link href="/gamefi">GameFi research</Link>
               <Link href="/learn">Guides</Link>
               <Link href="/opportunities">Opportunities</Link>
             </div>

@@ -1,1 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><defs><linearGradient id="b" x1="0" x2="1"><stop stop-color="#2bd7ff"/><stop offset="1" stop-color="#2468ff"/></linearGradient></defs><rect width="1200" height="630" fill="#050a11"/><circle cx="920" cy="170" r="260" fill="#071a2d"/><path d="M120 150h240M240 150v300" fill="none" stroke="#f4fbff" stroke-width="42" stroke-linecap="round"/><path d="M360 150h120c80 0 130 45 130 105S560 360 480 360H390M400 352v98M455 440l45 45 100-112" fill="none" stroke="url(#b)" stroke-width="42" stroke-linecap="round" stroke-linejoin="round"/><text x="660" y="285" fill="#f4fbff" font-family="Arial,Helvetica,sans-serif" font-size="96" font-weight="800">TopPick</text><text x="1005" y="285" fill="#2b82ff" font-family="Arial,Helvetica,sans-serif" font-size="58" font-weight="800">.pro</text><text x="663" y="355" fill="#8ca8ba" font-family="Arial,Helvetica,sans-serif" font-size="30" letter-spacing="6">COMPARE • REVIEW • CHOOSE SMARTER</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0b0907"/>
+  <rect x="48" y="48" width="1104" height="534" rx="36" fill="#14110e"/>
+  <rect x="80" y="80" width="1040" height="88" rx="22" fill="#f3ead8"/>
+  <text x="600" y="136" text-anchor="middle" fill="#1a140e" font-family="Georgia,Times,serif" font-size="34" letter-spacing="6">THE RESEARCH ISSUE</text>
+  <text x="96" y="280" fill="#f3ead8" font-family="Georgia,Times,serif" font-size="78">Read the product</text>
+  <text x="96" y="370" fill="#e4bc6a" font-family="Georgia,Times,serif" font-size="78">before you fund it.</text>
+  <text x="96" y="460" fill="#c8b8a0" font-family="Georgia,Times,serif" font-size="28">TopPick.pro — comparison publisher, not advice</text>
+  <circle cx="1000" cy="430" r="88" fill="#1a4a3a"/>
+  <circle cx="968" cy="402" r="22" fill="#f3ead8" opacity=".55"/>
+</svg>

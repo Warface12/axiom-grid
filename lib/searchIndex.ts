@@ -53,6 +53,30 @@ export async function searchPublic(q: string, limit = 24): Promise<SearchHit[]> 
   if (term.includes("fee") || term.includes("maker") || term.includes("taker") || term.includes("spread")) {
     hits.push({ id: "page-fees", title: "Fees education", short: "Maker/taker, spread and withdrawals without invented numbers.", kind: "page", href: "/fees" });
   }
+  if (term.includes("niche") || term.includes("categor") || term.includes("directory")) {
+    hits.push({ id: "page-niches", title: "Product niches", short: "Every researched product class. Empty classes stay empty.", kind: "page", href: "/niches" });
+  }
+  if (term.includes("start") || term.includes("how to") || term.includes("begin")) {
+    hits.push({ id: "page-start", title: "How to start", short: "Finder, compare, markets and learn — four doors.", kind: "page", href: "/start" });
+  }
+  if (term.includes("job") || term.includes("use case") || term.includes("i want to")) {
+    hits.push({ id: "page-jobs", title: "Jobs", short: "Map a real job to a product class.", kind: "page", href: "/jobs" });
+  }
+  if (term.includes("faq") || term.includes("question") || term.includes("advice")) {
+    hits.push({ id: "page-faq", title: "FAQ", short: "Research, markets, empty classes and accounts.", kind: "page", href: "/faq" });
+  }
+  if (term.includes("topic") || term.includes("guide") || term.includes("learn")) {
+    hits.push({ id: "page-topics", title: "Topics", short: "Custody, fees, venues and on-chain questions.", kind: "page", href: "/topics" });
+  }
+  if (term.includes("research") || term.includes("finding")) {
+    hits.push({ id: "page-research", title: "Research desk", short: "Streams, verification and collections. No simulated live tape.", kind: "page", href: "/research" });
+  }
+  if (term.includes("method") || term.includes("desk rule") || term.includes("how we research")) {
+    hits.push({ id: "page-methodology", title: "Research methodology", short: "Four desk rules: class, published facts, separate markets, no invented ranking.", kind: "page", href: "/methodology" });
+  }
+  if (term.includes("reward") || term.includes("bonus") || term.includes("points")) {
+    hits.push({ id: "page-rewards", title: "Reward types", short: "Classify cash, crypto, credit and points before chasing an offer.", kind: "page", href: "/rewards" });
+  }
   if (term.includes("secur") || term.includes("custody") || term.includes("hardware")) {
     hits.push({ id: "page-security", title: "Security & custody", short: "Who can move the asset, and how wallets differ from venues.", kind: "page", href: "/security" });
   }

@@ -38,9 +38,15 @@ export async function PlatformDetail({ platform }: { platform: Platform }) {
           <span>/</span>
           <span>{platform.name}</span>
         </nav>
-        <span className="kind-label">{cat?.label || platform.kind} / RESEARCH PROFILE</span>
+        <span className="kind-label">{cat?.label || platform.kind} / research profile</span>
         <h1>{platform.name}</h1>
         <p className="page-lead">{platform.description || "An editorial review has not been published for this profile yet."}</p>
+        <ul className="tp-fact-chips">
+          <li><small>Custody</small><b>{unknownLabel(platform.custody)}</b></li>
+          <li><small>Status</small><b>{platform.status}</b></li>
+          <li><small>Data quality</small><b>{platform.verificationStatus || "needs_review"}</b></li>
+          {platform.subcategory ? <li><small>Subcategory</small><b>{platform.subcategory}</b></li> : null}
+        </ul>
         <div className="notice">
           <ShieldCheck size={18} /> TopPick.pro publishes research, not personal financial advice. Product access, legal entity, protections, fees and promotional eligibility can vary by jurisdiction. Fields without a source stay empty.
         </div>

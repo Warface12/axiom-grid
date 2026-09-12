@@ -2,19 +2,23 @@ import Link from "next/link";
 import { ArrowUpRight, CheckCircle2, CircleDashed, ShieldAlert } from "lucide-react";
 import type { Platform } from "@/lib/types";
 import { catalogById, platformPath } from "@/lib/catalog";
+import { CategoryMark } from "@/components/visual/CategoryMark";
 
 export function PlatformCard({ platform }: { platform: Platform }) {
   const Icon = platform.status === "verified" ? CheckCircle2 : platform.status === "restricted" ? ShieldAlert : CircleDashed;
   const cat = catalogById(platform.kind);
   return (
-    <article className="platform-card">
+    <article className={`platform-card is-${platform.kind}`}>
       <div className="platform-top">
         {platform.logoUrl ? (
           <span className="platform-logo platform-logo-image">
-            <img src={platform.logoUrl} alt="" width={44} height={44} />
+            <img src={platform.logoUrl} alt={`${platform.name} logo`} width={44} height={44} />
           </span>
         ) : (
-          <span className={`platform-logo logo-${platform.kind}`} aria-hidden="true">{platform.logoText}</span>
+          <span className={`platform-logo logo-${platform.kind}`} aria-hidden="true">
+            <CategoryMark id={platform.kind} />
+            {platform.logoText}
+          </span>
         )}
         <span className={`status-chip status-${platform.status}`}>
           <Icon size={13} />

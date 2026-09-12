@@ -1,0 +1,92 @@
+/* Last-loaded. Fixes iPhone smashed words and the thin-line empty-box look. */
+html,body,p,h1,h2,h3,h4,h5,li,a,span,button,label,small,em,b,strong,legend,summary,td,th,dt,dd{
+  word-spacing:.06em!important;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility
+}
+body,p,li,a,label,small,em,td,dd,.tp-lead,.ag-risk-line,.tp-chapter-copy p{
+  letter-spacing:.01em!important
+}
+h1,h2,h3,h4,.tp-brand-line,.ag-brand{
+  letter-spacing:-.015em!important
+}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",var(--font-body),Manrope,system-ui,sans-serif!important;
+  font-size:clamp(1.08rem,3.2vw,1.2rem)!important;
+  line-height:1.58!important
+}
+h1,h2,h3,h4,.ag-brand,.tp-brand-line{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",var(--font-display),Sora,system-ui,sans-serif!important
+}
+.tp-brand-line{overflow-wrap:normal!important;word-break:normal!important;white-space:normal!important}
+
+/* Kill hairline document look */
+.tp-lab-board,.tp-compare-board,.tp-earth2-tags a,.tp-universe-tile,.tp-sig-card,
+.tp-engine li,.tp-network li,.tp-atlas-node,.tp-edu-card,.tp-finder-step label,
+.platform-card,.market-card,.compare-picker-card,.tp-account-benefits li,
+.tp-vault-detail,.tp-core-readout,.tp-finder-launch span{
+  border:0!important;
+  box-shadow:0 18px 40px rgba(0,0,0,.35)!important
+}
+
+/* Crystals: never render as empty squares */
+.tp-crystal{min-height:110px}
+.tp-crystal-body{
+  width:58px!important;height:58px!important;clip-path:none!important;border-radius:18px!important;
+  background:
+    radial-gradient(circle at 30% 25%,#fff6c8,#f0c56a 42%,#8a5a12)!important;
+  box-shadow:0 12px 24px rgba(240,197,106,.28),inset 0 1px 0 rgba(255,255,255,.5)!important
+}
+.tp-crystal.is-active .tp-crystal-body{
+  transform:scale(1.08);
+  box-shadow:0 0 28px rgba(240,197,106,.55),0 12px 24px rgba(0,0,0,.3)!important
+}
+.tp-crystal b{font-size:13px!important;letter-spacing:.01em!important;word-spacing:.08em!important}
+
+/* Globe: planet, not a wire hoop */
+.tp-earth2-ball{
+  background:
+    radial-gradient(circle at 28% 24%,rgba(255,255,255,.55),transparent 26%),
+    radial-gradient(circle at 62% 40%,rgba(80,200,160,.35),transparent 28%),
+    radial-gradient(circle at 40% 70%,rgba(20,90,70,.5),transparent 32%),
+    radial-gradient(circle at 70% 72%,#052a38,#021018 72%)!important
+}
+.tp-earth2-stage{min-height:280px}
+.tp-earth2-tags a{
+  padding:16px 18px!important;font-size:1.05rem!important;word-spacing:.08em!important
+}
+
+/* Save / follow cards — not empty pills */
+.tp-save-plate{
+  height:auto!important;min-height:72px;transform:none!important;position:relative!important;
+  left:auto!important;right:auto!important;margin:0 0 10px;display:block
+}
+.tp-save-scene{min-height:0!important;perspective:none}
+
+/* Footer + partner CTA readable */
+.ag-footer p,.ag-footer a,.ag-footer-bottom span,.ag-bottom-cta h2,.ag-bottom-cta a{
+  word-spacing:.07em!important;letter-spacing:.01em!important
+}
+.ag-footer-grid{display:grid!important;grid-template-columns:1fr!important;gap:22px}
+.ag-bottom-cta{padding:28px 22px!important}
+
+@media(min-width:921px){
+  .ag-footer-grid{grid-template-columns:1.4fr repeat(3,.8fr)!important}
+}
+
+/* Niche map */
+.tp-niche-page{padding:28px 0 80px;background:radial-gradient(circle at 80% 0,rgba(60,232,255,.12),transparent 34%),#050814}
+.tp-niche-grid{display:grid;gap:14px;width:min(1240px,calc(100% - 28px));margin:0 auto}
+.tp-niche-card{
+  display:grid;grid-template-columns:auto 1fr;gap:14px;padding:18px;border-radius:22px;text-decoration:none;color:inherit;
+  background:linear-gradient(165deg,rgba(20,36,56,.92),rgba(8,12,20,.96));
+  box-shadow:0 18px 36px rgba(0,0,0,.32)
+}
+.tp-niche-card b{display:block;font-size:1.2rem;margin-bottom:4px}
+.tp-niche-card em{font-style:normal;color:var(--tp-muted);font-size:15px;line-height:1.45}
+@media(min-width:921px){
+  .tp-niche-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:1440px){
+  .tp-niche-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}

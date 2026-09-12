@@ -10,9 +10,9 @@ export const metadata = buildMetadata({
 
 export default function Page() {
   return (
-    <main>
-      <section className="shell tp-hub-hero">
-        <p>GAMES</p>
+    <main className="tp-start-page">
+      <section className="shell page-hero">
+        <span>Games</span>
         <h1>Playable research, not a casino.</h1>
         <p>When a TopPick-made game ships, it loads only here. Research pages never download game assets.</p>
       </section>
@@ -23,6 +23,7 @@ export default function Page() {
           <div className="tp-continue">
             <Link href="/learn">Guides</Link>
             <Link href="/finder">Finder</Link>
+            <Link href="/jobs">Jobs</Link>
             <Link href="/apps">Install the app</Link>
           </div>
         </div>

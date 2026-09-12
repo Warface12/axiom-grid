@@ -12,9 +12,9 @@ export const metadata = buildMetadata({
 
 export default function Page() {
   return (
-    <main className="shell content-shell">
+    <main className="shell content-shell tp-markets-page">
       <section className="page-hero">
-        <span>MARKETS</span>
+        <span>Markets</span>
         <h1>Country is part of the product.</h1>
         <p>Whether a provider can serve you, and whether TopPick can promote it, are different questions. We only promote when the market record is current.</p>
       </section>

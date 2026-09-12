@@ -3,79 +3,142 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { CATALOG, type PlatformKind } from "@/lib/catalog";
+import { MARKET_POLICIES } from "@/lib/markets";
+import { CategoryMark } from "@/components/visual/CategoryMark";
 
-const questions: { id: string; label: string; options: { label: string; kinds: PlatformKind[] }[] }[] = [
+const STEPS: { id: string; label: string; hint: string; options: { label: string; kinds?: PlatformKind[]; note?: string }[] }[] = [
   {
     id: "job",
-    label: "What are you trying to do?",
+    label: "What are you looking for?",
+    hint: "Start from the job, not from a brand list.",
     options: [
-      { label: "Buy or sell crypto on a venue", kinds: ["exchange", "dex", "onramp"] },
-      { label: "Hold keys or use a device wallet", kinds: ["wallet"] },
-      { label: "Use a broker for forex, CFDs or multi-asset", kinds: ["broker"] },
-      { label: "Use DeFi, staking or on-chain apps", kinds: ["defi", "staking", "dex"] },
-      { label: "Use charts, bots, tax or explorers", kinds: ["tool", "tax", "explorer", "trading-platform"] },
-      { label: "Use cards or payment ramps", kinds: ["crypto-card", "onramp"] },
+      { label: "Buy or sell crypto on a venue", kinds: ["exchange", "dex", "onramp", "p2p"] },
+      { label: "Hold keys or use a device wallet", kinds: ["wallet", "custody", "multisig"] },
+      { label: "Use a broker for forex, CFDs or multi-asset", kinds: ["broker", "forex", "prop"] },
+      { label: "Trade perps, futures or copy someone", kinds: ["futures", "copy-trading", "trading-platform"] },
+      { label: "Use DeFi, staking, yield or DAOs", kinds: ["defi", "staking", "yield", "dao", "dex"] },
+      { label: "Move value across chains or layers", kinds: ["bridge", "layer2", "oracle", "validator"] },
+      { label: "Use cards, ramps, P2P or merchant payments", kinds: ["crypto-card", "onramp", "p2p", "payments", "stablecoin"] },
+      { label: "Use charts, tax, identity or analytics", kinds: ["tool", "tax", "explorer", "analytics", "identity", "rpc", "compliance", "portfolio", "alerts", "charting"] },
+      { label: "Look at NFTs, launchpads, mining or cover", kinds: ["nft", "launchpad", "mining", "insurance"] },
+      { label: "Lend, save, restake or hold RWAs", kinds: ["lending", "savings", "restaking", "rwa", "staking"] },
+      { label: "Use options, prediction markets or ETFs", kinds: ["options", "prediction", "etf", "index", "structured"] },
+      { label: "Play, social or privacy tools", kinds: ["gamefi", "social", "privacy"] },
+      { label: "Institutional custody, prime or OTC", kinds: ["custody", "institutional", "otc"] },
+      { label: "Automate, pay staff or admin unlocks", kinds: ["bots", "payroll", "vesting", "liquidity", "education"] },
+    ],
+  },
+  {
+    id: "where",
+    label: "Where are you researching from?",
+    hint: "Your country changes access and what can be promoted. This does not geo-block research.",
+    options: [
+      ...MARKET_POLICIES.map((market) => ({ label: `${market.name} (${market.code})`, kinds: ["exchange", "broker", "onramp", "crypto-card"] as PlatformKind[] })),
+      { label: "Mostly on-chain / not sure yet", kinds: ["wallet", "dex", "defi", "staking", "explorer"] },
+    ],
+  },
+  {
+    id: "priority",
+    label: "What matters most?",
+    hint: "We route by product class, not by a fake ranking.",
+    options: [
+      { label: "Custody and who can move funds", kinds: ["wallet", "exchange", "custody"] },
+      { label: "Market access and fiat rails", kinds: ["exchange", "broker", "onramp", "payments", "p2p"] },
+      { label: "On-chain mechanics", kinds: ["dex", "defi", "staking", "bridge", "layer2", "yield"] },
+      { label: "Cost disclosures", kinds: ["exchange", "broker", "tax", "futures"] },
+      { label: "Research tools and reporting", kinds: ["tool", "explorer", "tax", "analytics"] },
     ],
   },
   {
     id: "custody",
-    label: "Who should hold the keys?",
+    label: "Custody preference",
+    hint: "Neither model is universally safer. They fail differently.",
     options: [
-      { label: "The operator holds balances", kinds: ["exchange", "broker", "crypto-card", "onramp"] },
-      { label: "I keep the keys", kinds: ["wallet", "dex", "defi", "staking", "explorer"] },
-      { label: "Not sure yet", kinds: ["exchange", "wallet", "broker"] },
-    ],
-  },
-  {
-    id: "market",
-    label: "Do you need fiat access in a specific market?",
-    options: [
-      { label: "Yes — country and fiat rails matter", kinds: ["exchange", "broker", "onramp", "crypto-card"] },
-      { label: "Mostly on-chain", kinds: ["wallet", "dex", "defi", "staking", "explorer"] },
-      { label: "Not sure", kinds: ["exchange", "wallet", "broker", "tool"] },
+      { label: "The operator holds balances", kinds: ["exchange", "broker", "crypto-card", "onramp", "custody", "copy-trading", "institutional"] },
+      { label: "I keep the keys", kinds: ["wallet", "dex", "defi", "staking", "explorer", "bridge", "dao"] },
+      { label: "Not sure yet", kinds: ["exchange", "wallet", "broker", "custody"] },
     ],
   },
 ];
 
 export function ProductFinder() {
-  const [answers, setAnswers] = useState([0, 2, 2]);
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<number[]>(Array(STEPS.length).fill(-1));
+
   const kinds = useMemo(() => {
     const scored = new Map<PlatformKind, number>();
-    questions.forEach((q, qi) => {
-      q.options[answers[qi]].kinds.forEach((kind) => scored.set(kind, (scored.get(kind) || 0) + 1));
+    STEPS.forEach((q, qi) => {
+      const choice = answers[qi];
+      if (choice < 0) return;
+      q.options[choice].kinds?.forEach((kind) => scored.set(kind, (scored.get(kind) || 0) + 1));
     });
     return [...scored.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5).map(([kind]) => kind);
   }, [answers]);
+
   const matches = CATALOG.filter((c) => kinds.includes(c.id));
+  const current = STEPS[step];
+  const done = answers.every((value) => value >= 0);
+
+  function pick(optionIndex: number) {
+    setAnswers((prev) => prev.map((value, index) => (index === step ? optionIndex : value)));
+    if (step < STEPS.length - 1) setStep(step + 1);
+  }
 
   return (
-    <form className="tp-finder" onSubmit={(e) => e.preventDefault()}>
-      <p>Answer a few questions. We route you to the matching product class — not a ranked company list.</p>
-      {questions.map((q, qi) => (
-        <fieldset key={q.id}>
-          <legend>{q.label}</legend>
-          {q.options.map((opt, oi) => (
-            <label key={opt.label} className={answers[qi] === oi ? "is-on" : ""}>
-              <input
-                type="radio"
-                name={q.id}
-                checked={answers[qi] === oi}
-                onChange={() => setAnswers((prev) => prev.map((value, index) => (index === qi ? oi : value)))}
-              />
-              <span>{opt.label}</span>
-            </label>
-          ))}
-        </fieldset>
-      ))}
-      <div className="tp-tool-grid">
-        {matches.map((cat) => (
-          <Link key={cat.id} href={`/${cat.hub}`} className="tp-tool-card">
-            <small>{cat.group}</small>
-            <b>{cat.plural}</b>
-            <p>{cat.summary}</p>
-          </Link>
+    <div className="tp-finder-app">
+      <div className="tp-finder-progress" aria-hidden="true">
+        {STEPS.map((item, index) => (
+          <button key={item.id} type="button" className={index === step ? "is-on" : answers[index] >= 0 ? "is-done" : ""} onClick={() => setStep(index)}>
+            <span>{index + 1}</span>
+            {item.id}
+          </button>
         ))}
       </div>
-    </form>
+      <fieldset className="tp-finder-step">
+        <legend>{current.label}</legend>
+        <p>{current.hint}</p>
+        {current.options.map((opt, oi) => (
+          <label key={opt.label} className={answers[step] === oi ? "is-on" : ""}>
+            <input
+              type="radio"
+              name={current.id}
+              checked={answers[step] === oi}
+              onChange={() => pick(oi)}
+            />
+            <span>{opt.label}</span>
+          </label>
+        ))}
+      </fieldset>
+      <div className="tp-finder-nav">
+        <button type="button" onClick={() => setStep(Math.max(0, step - 1))} disabled={step === 0}>Back</button>
+        <button type="button" onClick={() => setStep(Math.min(STEPS.length - 1, step + 1))} disabled={step === STEPS.length - 1}>Next</button>
+      </div>
+      {done ? (
+        <div className="tp-finder-results">
+          <h2>Matching product classes</h2>
+          <p>These are classes, not ranked companies. Empty directories stay empty.</p>
+          <div className="tp-finder-grid">
+            {matches.map((cat) => (
+              <Link key={cat.id} href={`/${cat.hub}`} className="tp-universe-tile">
+                <CategoryMark id={cat.id} />
+                <span>
+                  <small>{cat.group}</small>
+                  <b>{cat.plural}</b>
+                  <em>{cat.summary}</em>
+                </span>
+              </Link>
+            ))}
+          </div>
+          <p className="tp-chapter-links">
+            <Link href="/markets">Check your market</Link>
+            <Link href="/compare">Compare inside a class</Link>
+            <Link href="/jobs">All jobs</Link>
+            <Link href="/niches">All niches</Link>
+          </p>
+        </div>
+      ) : (
+        <p className="tp-finder-hint">Answer all four steps to see the matching classes.</p>
+      )}
+    </div>
   );
 }

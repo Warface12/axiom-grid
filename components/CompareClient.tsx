@@ -92,6 +92,14 @@ export function CompareClient({ platforms, initialIds = [] }: Props) {
 
       {compareList.length >= 2 ? (
         <>
+        <div className="tp-compare-stage" aria-hidden="true">
+          {compareList.map((platform, index) => (
+            <article key={platform.slug} className="tp-compare-slab" style={{ ["--i" as string]: String(index) }}>
+              <small>{catalogById(platform.kind)?.label || platform.kind}</small>
+              <b>{platform.name}</b>
+            </article>
+          ))}
+        </div>
         <div className="compare-table-wrap premium-compare-wrap">
           <table className="compare-table">
             <thead>

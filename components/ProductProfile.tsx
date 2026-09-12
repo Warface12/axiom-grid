@@ -5,6 +5,7 @@ import { PlatformDetail } from "@/components/PlatformDetail";
 import { buildMetadata, breadcrumbJsonLd, reviewJsonLd } from "@/lib/seo";
 import { SITE_URL } from "@/lib/site";
 import { platformPath, type CatalogKind } from "@/lib/catalog";
+import { CategoryMark } from "@/components/visual/CategoryMark";
 
 export async function productProfileMetadata(cat: CatalogKind, slug: string) {
   const p = await getResearchPlatform(slug, cat.id);
@@ -29,12 +30,16 @@ export async function ProductProfile({ cat, slug }: { cat: CatalogKind; slug: st
   ]);
   const review = p.description ? reviewJsonLd(p, path) : null;
   return (
-    <main>
+    <main className={`tp-profile tp-hub--${cat.hub}`}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bc) }} />
       {review ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(review) }} /> : null}
-      <section className="shell page-hero">
-        <span>{cat.plural.toUpperCase()} / PROFILE</span>
-        <p>Independent evidence-led platform research. Unpublished fields stay empty rather than estimated.</p>
+      <section className="shell tp-profile-hero">
+        <CategoryMark id={cat.id} className="tp-hub-object" />
+        <div>
+          <p>{cat.plural} / research profile</p>
+          <h1>{p.name}</h1>
+          <p>Independent evidence-led platform research. Unpublished fields stay empty rather than estimated.</p>
+        </div>
       </section>
       <PlatformDetail platform={p} />
     </main>
