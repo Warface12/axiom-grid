@@ -224,6 +224,32 @@ export const guides: GuideArticle[] = [
       ]},
     ],
   },
+  {
+    slug: "how-to-read-a-crypto-index",
+    title: "How to read a crypto index",
+    excerpt: "Methodology, constituents and who holds the basket.",
+    category: "learn",
+    readTime: "6 min",
+    body: [
+      { heading: "The rule is the product", paragraphs: [
+        "An index is a published recipe. Compare the constituents, the rebalance rule and who holds the assets. A ticker is not a methodology.",
+        "TopPick does not draw a live index level. If the rule is unpublished, the field stays empty.",
+      ]},
+    ],
+  },
+  {
+    slug: "structured-products-without-the-diagram",
+    title: "Structured products without the diagram",
+    excerpt: "Tenor, knockout and why a pretty payoff sketch is not research.",
+    category: "learn",
+    readTime: "6 min",
+    body: [
+      { heading: "Read the tenor and the knockout", paragraphs: [
+        "A dual or barrier note is a contract. Compare the tenor, the knockout, and who holds the notional. TopPick will not invent a payoff diagram.",
+        "If the operator does not publish those terms, treat the product as incomplete research.",
+      ]},
+    ],
+  },
 ];
 
 export function getGuide(slug: string) {
