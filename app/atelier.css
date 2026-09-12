@@ -42,7 +42,8 @@ p,li,a,span,button,label,small,em,b,strong,legend,summary{
 }
 .ag-header-inner{width:min(1280px,calc(100% - 28px))!important}
 .ag-brand{color:var(--atelier-paper)!important;gap:10px}
-.ag-brand b{font-weight:750;letter-spacing:.02em!important}
+.ag-brand b,.ag-brand em{word-spacing:0!important;letter-spacing:0!important}
+.ag-brand b{font-weight:750}
 .ag-brand em{color:var(--atelier-gold)!important;font-style:normal}
 .ag-nav a,.tp-header-aux .ag-icon-btn{color:var(--atelier-paper)!important}
 .ag-icon-btn{
