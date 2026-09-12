@@ -65,6 +65,7 @@ p,li,a,span,button,label,small,em,b,strong,legend,summary{
     linear-gradient(rgba(243,234,216,.07) 1px,transparent 1px),
     linear-gradient(90deg,rgba(243,234,216,.07) 1px,transparent 1px)!important
 }
+.tp-brand-line{display:block!important}
 .tp-brand-line.accent{color:var(--atelier-gold)!important}
 .ag-hero-cta a{
   min-height:54px;padding:0 22px;border-radius:999px;font-weight:750;
@@ -177,7 +178,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{
     min-height:86vh;width:min(1280px,calc(100% - 48px));margin:0 auto;padding:28px 0 48px!important;
     border-radius:0 0 36px 36px
   }
-  .tp-hero-copy h1{font-size:clamp(3.2rem,5vw,5.6rem)!important;max-width:11ch}
+  .tp-hero-copy h1{font-size:clamp(3.2rem,5vw,5.6rem)!important;max-width:18ch}
   .tp-core-lab{order:0}
   .tp-jobs-grid,.tp-start-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tp-niche-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -441,6 +442,16 @@ html[data-scheme="light"] .tp-chapter-links a,html[data-scheme="light"] .tp-cont
   background:linear-gradient(165deg,#fff6d4,var(--sig,#e4bc6a))!important;
   box-shadow:0 10px 18px rgba(0,0,0,.3)!important
 }
+.tp-mod-face,.tp-core-mod span,.tp-core-mod{
+  border:0!important;
+  background:linear-gradient(165deg,rgba(36,30,24,.96),rgba(14,12,10,.98))!important;
+  box-shadow:0 16px 28px rgba(0,0,0,.35)!important
+}
+.tp-core-mod.is-active .tp-mod-face,
+.tp-core-mod.is-active span{
+  background:linear-gradient(165deg,#fff6d4,#e4bc6a)!important;
+  color:#1a1206!important
+}
 
 /* Spaces must stay visible even if an older layer used negative tracking */
 html,body,p,h1,h2,h3,h4,li,a,span,button,label,small,em,b,strong,legend,summary{
@@ -450,7 +461,7 @@ html,body,p,h1,h2,h3,h4,li,a,span,button,label,small,em,b,strong,legend,summary{
 .ag-brand b,.ag-brand em{word-spacing:0!important;letter-spacing:0!important}
 .tp-masthead-vol,.tp-masthead-meta{letter-spacing:.08em!important;word-spacing:.16em!important}
 
-@media(min-width:921px) and (max-width:1400px){
+@media(min-width:921px) and (max-width:1600px){
   .ag-nav a[href="/start"],
   .ag-nav a[href="/jobs"],
   .ag-nav a[href="/research"],
