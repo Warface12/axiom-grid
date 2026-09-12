@@ -95,7 +95,10 @@ p,li,a,span,button,label,small,em,b,strong,legend,summary{
 .tp-kicker,.ag-kicker{color:var(--atelier-gold)!important;letter-spacing:.16em!important}
 
 /* Surfaces: filled, never hairline boxes */
-.tp-universe-tile,.tp-sig-card,.tp-edu-card,.platform-card,.market-card,
+.tp-universe-tile,.tp-sig-card,.tp-edu-card,.platform-card{
+  padding:20px!important;border-radius:24px!important
+}
+.platform-card,.market-card,
 .tp-niche-card,.tp-job-card,.tp-faq details,.tp-start-card,.guide-grid .prose-card,
 .tp-finder-step label,.tp-account-benefits li,.tp-engine li,.tp-network li,
 .tp-atlas-node,.tp-earth2-tags a,.tp-compare-slab,.tp-lab-board,.tp-compare-board,
@@ -190,7 +193,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{
   .tp-compare-page .tp-jobs-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media(min-width:921px) and (max-width:1180px){
-  .ag-nav a[href="/research"],.ag-nav a[href="/learn"]{display:none}
+  .ag-nav a[href="/research"],.ag-nav a[href="/learn"],.ag-nav a[href="/markets"]{display:none}
 }
 @media(max-width:920px){
   .tp-hero-stage{min-height:auto!important;padding:12px 16px 32px!important}
@@ -291,11 +294,57 @@ html[data-scheme="light"] .tp-chapter-links a,html[data-scheme="light"] .tp-cont
 .tp-search-box input{flex:1;border:0;background:transparent;color:var(--atelier-paper);font-size:16px;min-height:54px}
 .tp-search-results a{display:block;padding:14px 0;color:var(--atelier-paper)}
 .tp-finder-grid{display:grid;gap:12px}
+.tp-masthead{
+  width:min(1280px,calc(100% - 28px));
+  margin:14px auto 0;
+  padding:18px 22px 16px;
+  border-radius:22px;
+  background:
+    linear-gradient(180deg,#f6edd8,#e8d7b4);
+  color:#1a140e;
+  box-shadow:0 18px 40px rgba(0,0,0,.28);
+  text-align:center
+}
+.tp-masthead-vol,.tp-masthead-meta{
+  margin:0;
+  font-size:.78rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#6a4e24;
+  word-spacing:.12em
+}
+.tp-masthead-mark{
+  margin:6px 0 8px;
+  font-family:"Iowan Old Style",Georgia,serif;
+  font-size:clamp(1.8rem,5vw,3.1rem);
+  line-height:1.05;
+  color:#1a140e;
+  word-spacing:.1em
+}
+.tp-chapter--desk{background:linear-gradient(180deg,#24160e,#0b0907)!important}
+.tp-desk-grid{display:grid;gap:12px}
+.tp-desk-card{
+  display:grid;gap:8px;padding:22px;border-radius:24px;text-decoration:none;
+  background:linear-gradient(165deg,rgba(48,34,20,.96),rgba(14,12,10,.98));
+  box-shadow:0 22px 44px rgba(0,0,0,.38);
+  color:var(--atelier-paper)
+}
+.tp-desk-card small{color:var(--atelier-gold);letter-spacing:.12em;text-transform:uppercase}
+.tp-desk-card p{margin:0;color:var(--atelier-muted)}
+.ag-footer-bottom span{word-spacing:.1em!important;letter-spacing:.012em}
+.tp-method-page .tp-start-card small{color:var(--atelier-gold)}
 @media(min-width:921px){
   .tp-finder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tp-desk-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tp-masthead{margin-top:18px;padding:22px 28px}
 }
 .tp-sig-rail{display:grid;gap:12px;overflow:auto}
+.tp-stream-grid{display:grid;gap:12px;width:min(1240px,calc(100% - 28px));margin:0 auto 28px}
+.tp-atlas-guides{display:grid;gap:12px}
 @media(min-width:921px){
   .tp-sig-rail{grid-template-columns:repeat(3,minmax(0,1fr))}
   .tp-glossary-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tp-stream-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tp-atlas-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tp-desk-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 }

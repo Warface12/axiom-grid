@@ -26,6 +26,7 @@ export default function Page() {
         <article className="prose-card"><h3>Market fit</h3><p>Jurisdiction-specific availability, restrictions and the separate question of whether affiliate promotion is permitted.</p></article>
       </section>
       <p className="tp-chapter-links shell">
+        <Link href="/methodology">Desk rules</Link>
         <Link href="/editorial-policy">Editorial policy</Link>
         <Link href="/source-policy">Source policy</Link>
         <Link href="/faq">FAQ</Link>

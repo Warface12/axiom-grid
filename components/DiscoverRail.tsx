@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CATALOG } from "@/lib/catalog";
 import { CategoryMark } from "@/components/visual/CategoryMark";
 
-const FEATURED = ["exchange", "wallet", "broker", "futures", "dex", "lending", "bridge", "onramp", "staking", "etf", "prediction", "custody"];
+const FEATURED = ["exchange", "wallet", "broker", "futures", "dex", "lending", "otc", "onramp", "staking", "etf", "bots", "custody"];
 
 export function DiscoverRail() {
   const featured = CATALOG.filter((item) => FEATURED.includes(item.id));

@@ -16,14 +16,17 @@ import { ResearchEngine } from "@/components/visual/ResearchEngine";
 import { PartnerNetwork } from "@/components/visual/PartnerNetwork";
 import { LearnAtlas } from "@/components/visual/LearnAtlas";
 import { MethodologyTrack } from "@/components/MethodologyTrack";
+import { IssueMasthead } from "@/components/IssueMasthead";
+import { ReadingDesk } from "@/components/ReadingDesk";
 import { RESEARCH_JOBS } from "@/lib/jobs";
 import { CATALOG } from "@/lib/catalog";
+import { MARKET_POLICIES } from "@/lib/markets";
 
 export const metadata = buildMetadata({
   title: `${SITE_NAME} — Compare crypto exchanges, wallets and brokers`,
-  description: "Discover, compare and research crypto exchanges, wallets, brokers and tools. Understand custody, markets and opportunities before you act.",
+  description: "Independent research studio for crypto exchanges, wallets, brokers, OTC, lending and related niches. Compared only on published facts. Empty classes stay empty.",
   path: "/",
-  keywords: ["crypto exchange comparison", "wallet comparison", "broker research", "DEX research", "crypto niches", "futures comparison", "bridge research", "lending", "restaking", "prediction markets"],
+  keywords: ["crypto exchange comparison", "wallet comparison", "broker research", "DEX research", "OTC desk", "crypto payroll", "trading bots", "lending", "restaking", "prediction markets"],
 });
 
 export default function Home() {
@@ -37,13 +40,14 @@ export default function Home() {
     <main className="ag-home tp-home">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
+      <IssueMasthead />
       <HeroStage>
         <p className="ag-kicker"><span className="pulse" /> Independent research studio</p>
         <h1>
           <span className="tp-brand-line">Read the product</span>
           <span className="tp-brand-line accent">before you fund it.</span>
         </h1>
-        <p>Exchanges, wallets, brokers, futures, bridges and {CATALOG.length} researched niches — compared only on published facts. Empty classes stay empty.</p>
+        <p>{CATALOG.length} niches and {MARKET_POLICIES.length} research markets — exchanges, wallets, brokers, OTC, lending and more. Compared only on published facts. Empty classes stay empty.</p>
         <div className="ag-hero-cta">
           <Link href="/start">Start here <ArrowUpRight /></Link>
           <Link href="/niches">Browse niches</Link>
@@ -91,6 +95,7 @@ export default function Home() {
         </div>
       </section>
       <DiscoverRail />
+      <ReadingDesk />
       <CompareLike />
       <MarketGlobe />
       <OpportunityConstellation />

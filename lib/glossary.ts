@@ -23,4 +23,11 @@ export const GLOSSARY = [
   { slug: "travel-rule", term: "Travel Rule", definition: "A compliance requirement to share originator and beneficiary information with certain transfers. Whether a vendor covers your market must come from the vendor." },
   { slug: "index", term: "Crypto index", definition: "A basket that tracks a published methodology. Compare the constituents, the rebalance rule and who holds the assets. TopPick does not draw a live index tape." },
   { slug: "structured-product", term: "Structured product", definition: "A note or dual with a published payoff. Compare tenor, knockout and custody of the notional. Payoff diagrams are never invented here." },
+  { slug: "otc", term: "OTC desk", definition: "A negotiated block venue. Compare settlement, published minimums and who holds the inventory. Quoted spreads on TopPick are never a live tape." },
+  { slug: "portfolio-tracker", term: "Portfolio tracker", definition: "Software that imports holdings from venues or wallets. Compare connectors and who can see the list. Balances are never simulated here." },
+  { slug: "trading-bot", term: "Trading bot", definition: "An agent that places venue orders. The first question is where the API key lives. Backtests are not evidence on TopPick." },
+  { slug: "crypto-payroll", term: "Crypto payroll", definition: "A rail that pays staff or contractors in digital assets. Who holds the float, and in which markets, must come from the operator." },
+  { slug: "vesting", term: "Token vesting", definition: "A schedule that releases tokens over time. Who can change the schedule is the product. Unlock charts are never guessed." },
+  { slug: "liquidity-desk", term: "Liquidity / market making", definition: "A product that supplies inventory to a venue or pool. Compare custody of that inventory. Depth charts stay empty unless sourced." },
+  { slug: "alerts", term: "Price / on-chain alerts", definition: "A watch tool that notifies on a condition. Compare the data source. Live ticks are never fabricated on TopPick." },
 ];

@@ -49,6 +49,14 @@ const CLUSTERS = [
     { href: "/finder", label: "Finder" },
     { href: "/faq", label: "FAQ" },
   ] },
+  { title: "Desks & tools", links: [
+    { href: "/otc", label: "OTC desks" },
+    { href: "/portfolio", label: "Portfolio trackers" },
+    { href: "/bots", label: "Trading bots" },
+    { href: "/payroll", label: "Crypto payroll" },
+    { href: "/alerts", label: "Alert tools" },
+    { href: "/methodology", label: "Methodology" },
+  ] },
 ];
 
 export default function Page() {

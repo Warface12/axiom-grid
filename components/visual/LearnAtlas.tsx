@@ -37,6 +37,8 @@ export function LearnAtlas() {
         <p className="tp-chapter-links">
           <Link href="/learn">All guides</Link>
           <Link href="/glossary">Glossary</Link>
+          <Link href="/topics">Topics</Link>
+          <Link href="/methodology">Methodology</Link>
         </p>
       </div>
     </section>

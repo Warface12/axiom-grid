@@ -52,18 +52,22 @@ export default function Page() {
             <small>Verification</small>
             <b>How a record becomes public</b>
             <p>Imported is not verified. Partner links never rewrite editorial conclusions.</p>
-            <Link href="/how-we-rate">Methodology</Link>
+            <Link href="/methodology">Desk rules</Link>
           </article>
         </div>
         <h2>Collections</h2>
-        <div className="tp-sig-rail">
-          {CATALOG.map((cat) => (
-            <Link key={cat.id} href={`/${cat.hub}`} className="tp-sig-card">
-              <small>{cat.group}</small>
-              <b>{cat.plural}</b>
-              <span>{cat.summary}</span>
-            </Link>
-          ))}
+        <div className="tp-universe">
+          {Array.from(new Set(CATALOG.map((cat) => cat.group))).map((group) => {
+            const items = CATALOG.filter((cat) => cat.group === group);
+            return (
+              <article key={group} className="tp-edu-card">
+                <small>{items.length} classes</small>
+                <b>{group}</b>
+                <p>{items.map((item) => item.plural).join(" · ")}</p>
+                <Link href="/niches">Open {group}</Link>
+              </article>
+            );
+          })}
         </div>
         <h2>Guides in this desk</h2>
         <div className="tp-atlas-guides">

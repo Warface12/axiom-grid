@@ -250,6 +250,58 @@ export const guides: GuideArticle[] = [
       ]},
     ],
   },
+  {
+    slug: "how-to-read-an-otc-desk",
+    title: "How to read an OTC desk",
+    excerpt: "Settlement, inventory custody and why a quoted spread is not a live tape.",
+    category: "learn",
+    readTime: "6 min",
+    body: [
+      { heading: "A desk is not an order book", paragraphs: [
+        "An OTC desk negotiates a block. Compare who holds the inventory, how settlement works, and the published minimum. A chat quote is not a public market.",
+        "TopPick will not invent a spread. If the desk does not publish terms, the field stays empty.",
+      ]},
+    ],
+  },
+  {
+    slug: "portfolio-trackers-without-the-balance",
+    title: "Portfolio trackers without the balance",
+    excerpt: "Imports, custody of API keys, and why TopPick never draws your holdings.",
+    category: "learn",
+    readTime: "6 min",
+    body: [
+      { heading: "The import is the product", paragraphs: [
+        "A tracker is only as good as the venues it can import and the keys it asks for. Compare read-only access, export formats and who can see the list.",
+        "TopPick does not simulate balances or PnL. If a connector is unpublished, treat coverage as missing.",
+      ]},
+    ],
+  },
+  {
+    slug: "trading-bots-and-where-keys-live",
+    title: "Trading bots and where keys live",
+    excerpt: "Grid and DCA products fail first on custody of exchange keys, not on a backtest.",
+    category: "learn",
+    readTime: "6 min",
+    body: [
+      { heading: "The bot is a key holder", paragraphs: [
+        "A grid or DCA bot is an agent with venue access. Compare where the API key lives, which permissions it needs, and whether the operator can move funds.",
+        "Backtests and live PnL screenshots are marketing. TopPick will not invent them.",
+      ]},
+    ],
+  },
+  {
+    slug: "crypto-payroll-is-still-custody",
+    title: "Crypto payroll is still custody",
+    excerpt: "Who holds the float, and why tax treatment is never inferred.",
+    category: "learn",
+    readTime: "6 min",
+    body: [
+      { heading: "Float is the product", paragraphs: [
+        "A payroll rail holds value between the company and the contractor. Compare who holds that float, which assets settle, and the published markets.",
+        "TopPick will not infer tax treatment from a homepage. If the operator does not publish it, the cell stays empty.",
+      ]},
+    ],
+  },
 ];
 
 export function getGuide(slug: string) {

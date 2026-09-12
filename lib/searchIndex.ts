@@ -68,8 +68,11 @@ export async function searchPublic(q: string, limit = 24): Promise<SearchHit[]> 
   if (term.includes("topic") || term.includes("guide") || term.includes("learn")) {
     hits.push({ id: "page-topics", title: "Topics", short: "Custody, fees, venues and on-chain questions.", kind: "page", href: "/topics" });
   }
-  if (term.includes("research") || term.includes("method") || term.includes("finding")) {
+  if (term.includes("research") || term.includes("finding")) {
     hits.push({ id: "page-research", title: "Research desk", short: "Streams, verification and collections. No simulated live tape.", kind: "page", href: "/research" });
+  }
+  if (term.includes("method") || term.includes("desk rule") || term.includes("how we research")) {
+    hits.push({ id: "page-methodology", title: "Research methodology", short: "Four desk rules: class, published facts, separate markets, no invented ranking.", kind: "page", href: "/methodology" });
   }
   if (term.includes("reward") || term.includes("bonus") || term.includes("points")) {
     hits.push({ id: "page-rewards", title: "Reward types", short: "Classify cash, crypto, credit and points before chasing an offer.", kind: "page", href: "/rewards" });

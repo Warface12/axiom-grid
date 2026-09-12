@@ -35,6 +35,7 @@ export function Footer() {
           <Link href="/faq">FAQ</Link>
           <Link href="/topics">Topics</Link>
           <Link href="/how-we-rate">How we rate</Link>
+          <Link href="/methodology">Methodology</Link>
           <Link href="/security">Security & custody</Link>
           <Link href="/markets">Markets</Link>
           <Link href="/opportunities">Opportunities</Link>

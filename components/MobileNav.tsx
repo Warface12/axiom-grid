@@ -16,6 +16,8 @@ const explore = [
   ["Compare", "/compare"],
   ["Research", "/research"],
   ["Learn", "/learn"],
+  ["Methodology", "/methodology"],
+  ["FAQ", "/faq"],
   ["Opportunities", "/opportunities"],
   ["Markets", "/markets"],
   ["Account", "/account"],
