@@ -15,8 +15,11 @@ export function EmptyGuide({ cat }: { cat: CatalogKind }) {
       <div className="tp-continue">
         <Link href="/finder">Use the finder</Link>
         <Link href="/compare">Compare like with like</Link>
+        <Link href="/jobs">Browse jobs</Link>
+        <Link href="/niches">All niches</Link>
         <Link href="/learn">Read a guide</Link>
         <Link href="/markets">Check your market</Link>
+        <Link href="/faq">FAQ</Link>
       </div>
     </div>
   );
