@@ -49,6 +49,8 @@ export const SIGNATURES: Record<string, CategorySignature> = {
   social: { id: "social", accent: "#ffd27a", glow: "rgba(255,210,122,.22)", object: "card" },
   etf: { id: "etf", accent: "#5ad0ff", glow: "rgba(90,208,255,.24)", object: "ledger" },
   savings: { id: "savings", accent: "#e4bc6a", glow: "rgba(228,188,106,.22)", object: "vault" },
+  rpc: { id: "rpc", accent: "#7fd4ff", glow: "rgba(127,212,255,.22)", object: "node" },
+  compliance: { id: "compliance", accent: "#d7c4a0", glow: "rgba(215,196,160,.2)", object: "ledger" },
   markets: { id: "markets", accent: "#4db7ff", glow: "rgba(77,183,255,.26)", object: "globe" },
   opportunities: { id: "opportunities", accent: "#f0c56a", glow: "rgba(240,197,106,.22)", object: "vault" },
 };

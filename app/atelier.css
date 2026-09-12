@@ -17,9 +17,11 @@ html,body{
   word-spacing:.08em!important;
   letter-spacing:.012em!important
 }
-h1,h2,h3,h4,.ag-brand,.tp-brand-line,.ag-kicker,.tp-kicker{
+h1,h2,h3,h4,.ag-brand,.tp-brand-line,.ag-kicker,.tp-kicker,.page-hero h1,.tp-hub-hero h1{
   font-family:"Iowan Old Style",Georgia,var(--font-display),serif!important;
-  word-spacing:.07em!important
+  word-spacing:.09em!important;
+  letter-spacing:.01em!important;
+  text-transform:none!important
 }
 p,li,a,span,button,label,small,em,b,strong,legend,summary{
   word-spacing:.08em!important;
@@ -226,3 +228,15 @@ html[data-scheme="light"] .tp-edu-card{background:#fffaf1!important;color:#1a140
 }
 .tp-dock{background:rgba(11,9,7,.92)!important;border:0!important}
 .tp-drawer-panel{background:#100e0b!important}
+.tp-glossary-list{display:grid;gap:12px}
+.tp-glossary-item{
+  padding:20px 22px;border-radius:22px;
+  background:linear-gradient(165deg,rgba(36,30,24,.96),rgba(14,12,10,.98));
+  box-shadow:0 18px 36px rgba(0,0,0,.32)
+}
+.tp-glossary-item b{display:block;font-size:1.2rem;margin-bottom:6px}
+.tp-sig-rail{display:grid;gap:12px;overflow:auto}
+@media(min-width:921px){
+  .tp-sig-rail{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tp-glossary-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}

@@ -19,4 +19,6 @@ export const GLOSSARY = [
   { slug: "prediction-market", term: "Prediction market", definition: "A venue that prices event outcomes. Compare resolution source, custody of stakes and eligibility. Odds on TopPick are never a live tape." },
   { slug: "lending", term: "Lending / borrow", definition: "A market that posts collateral and can liquidate it. Who holds the asset, and the liquidation rule, matter more than a headline APY." },
   { slug: "etf", term: "Crypto ETF / ETP", definition: "A listed fund with crypto exposure. Compare issuer, custody of the underlying and the market where the share trades — not the spot token page." },
+  { slug: "rpc", term: "RPC", definition: "A remote endpoint that lets software read and submit chain data. Compare published networks, rate limits and who can see the requests. Latency is never invented on TopPick." },
+  { slug: "travel-rule", term: "Travel Rule", definition: "A compliance requirement to share originator and beneficiary information with certain transfers. Whether a vendor covers your market must come from the vendor." },
 ];

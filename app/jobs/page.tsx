@@ -24,6 +24,10 @@ const JOBS = [
   { href: "/tax", title: "Report activity", copy: "Tax and accounting tools compared on supported venues and export methods." },
   { href: "/custody", title: "Use institutional custody", copy: "Qualified custodians. Bankruptcy remoteness only as published." },
   { href: "/markets", title: "Check your country first", copy: "Availability and promotional eligibility are stored separately." },
+  { href: "/rpc", title: "Connect an app to a chain", copy: "RPC providers compared on published networks and who sees the requests." },
+  { href: "/compliance", title: "Travel Rule / compliance", copy: "Vendors compared on published checks. This is not legal advice." },
+  { href: "/prediction", title: "Price an event", copy: "Prediction markets. Odds are not a live tape on TopPick." },
+  { href: "/etf", title: "Use a listed crypto ETF", copy: "Issuer, custody of the underlying, and the market where the share trades." },
 ];
 
 export default function Page() {

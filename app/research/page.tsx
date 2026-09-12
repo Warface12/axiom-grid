@@ -57,7 +57,7 @@ export default function Page() {
         </div>
         <h2>Collections</h2>
         <div className="tp-sig-rail">
-          {CATALOG.slice(0, 8).map((cat) => (
+          {CATALOG.map((cat) => (
             <Link key={cat.id} href={`/${cat.hub}`} className="tp-sig-card">
               <small>{cat.group}</small>
               <b>{cat.plural}</b>

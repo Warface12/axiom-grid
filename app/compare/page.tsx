@@ -33,7 +33,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ i
             <li>Your country can change what you can actually use</li>
           </ul>
           <div className="tp-continue">
-            {CATALOG.filter((c) => c.dedicated).slice(0, 6).map((c) => (
+            {CATALOG.map((c) => (
               <Link key={c.id} href={`/${c.hub}`}>{c.plural}</Link>
             ))}
             <Link href="/finder">Finder</Link>

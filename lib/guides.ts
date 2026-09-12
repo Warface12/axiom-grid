@@ -169,6 +169,35 @@ export const guides: GuideArticle[] = [
       ]},
     ],
   },
+  {
+    slug: "options-vs-futures",
+    title: "Options vs futures",
+    excerpt: "Expiry, premium and why these are not the same as a spot exchange balance.",
+    category: "learn",
+    readTime: "7 min",
+    body: [
+      { heading: "Different contracts, different failures", paragraphs: [
+        "A perpetual or dated future is usually a linear or inverse contract with funding or expiry. An option is a right, typically paid for with premium, that can expire worthless.",
+        "Compare them inside their own class. Do not drop both into a generic “trading platform” table next to a spot wallet.",
+      ]},
+      { heading: "What TopPick will not invent", paragraphs: [
+        "Greeks, implied volatility and live funding are not simulated here. If the operator does not publish contract specs, the field stays empty.",
+      ]},
+    ],
+  },
+  {
+    slug: "how-to-read-a-prediction-market",
+    title: "How to read a prediction market",
+    excerpt: "Resolution source, custody of stakes and why odds are not a live tape.",
+    category: "learn",
+    readTime: "6 min",
+    body: [
+      { heading: "The resolution rule is the product", paragraphs: [
+        "A prediction market prices an event. The useful facts are who decides the outcome, who holds the stake, and who is allowed to participate.",
+        "TopPick does not draw a live odds tape. If resolution is unpublished, treat the market as incomplete research.",
+      ]},
+    ],
+  },
 ];
 
 export function getGuide(slug: string) {

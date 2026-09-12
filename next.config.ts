@@ -34,6 +34,8 @@ const nextConfig:NextConfig={
     {source:"/crypto-etf",destination:"/etf",permanent:true},
     {source:"/earn",destination:"/savings",permanent:true},
     {source:"/topics-map",destination:"/topics",permanent:true},
+    {source:"/nodes",destination:"/rpc",permanent:true},
+    {source:"/travel-rule",destination:"/compliance",permanent:true},
   ]},
 };
 export default nextConfig;

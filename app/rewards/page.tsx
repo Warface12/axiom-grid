@@ -29,6 +29,8 @@ export default function Page() {
             <Link href="/opportunities">Opportunities</Link>
             <Link href="/learn">Guides</Link>
             <Link href="/markets">Markets</Link>
+            <Link href="/jobs">Jobs</Link>
+            <Link href="/faq">FAQ</Link>
           </div>
         </div>
       </section>

@@ -40,6 +40,8 @@ export const PLATFORM_KIND_IDS = [
   "social",
   "etf",
   "savings",
+  "rpc",
+  "compliance",
 ] as const;
 
 export type PlatformKind = (typeof PLATFORM_KIND_IDS)[number];
@@ -738,6 +740,36 @@ export const CATALOG: CatalogKind[] = [
     ],
     compareKeys: ["custody", "lockup", "fiat", "kyc", "feeSummary", "regulatorySummary"],
   },
+  {
+    id: "rpc",
+    hub: "rpc",
+    label: "RPC / node access",
+    plural: "RPC providers",
+    group: "Infrastructure",
+    dedicated: false,
+    summary: "RPC and node-access products compared on published networks, rate limits and who sees the requests. Latency numbers stay empty unless sourced.",
+    subcategories: ["public", "private", "archive"],
+    attributes: [
+      bool("api", "API / RPC"),
+      text("networks", "Networks (as published)"),
+    ],
+    compareKeys: ["networks", "api", "productSummary", "securitySummary"],
+  },
+  {
+    id: "compliance",
+    hub: "compliance",
+    label: "Compliance / Travel Rule",
+    plural: "Compliance tools",
+    group: "Tools",
+    dedicated: false,
+    summary: "Travel Rule and compliance vendors compared on published checks and markets. This is not legal advice and not a KYC shortcut.",
+    subcategories: ["travel-rule", "monitoring", "reporting"],
+    attributes: [
+      bool("api", "API"),
+      text("kyc", "Checks (as published)"),
+    ],
+    compareKeys: ["kyc", "api", "regulatorySummary", "productSummary"],
+  },
 ];
 
 export const VERIFICATION_STATES = ["needs_review", "imported", "manual", "verified", "stale", "missing"] as const;
@@ -806,6 +838,8 @@ export function classifyKindFromPublicText(input: { title?: string; description?
     ["social", /\b(socialfi|social token|farcaster)\b/],
     ["etf", /\b(bitcoin etf|crypto etf|spot etp)\b/],
     ["savings", /\b(crypto earn|savings account crypto|dual investment)\b/],
+    ["rpc", /\b(rpc provider|node rpc|archive node)\b/],
+    ["compliance", /\b(travel rule|crypto compliance|kyt provider)\b/],
     ["explorer", /\b(block explorer|blockchain explorer|tx hash|etherscan)\b/],
     ["tax", /\b(crypto tax|tax software|capital gains report|accounting for crypto)\b/],
     ["tool", /\b(portfolio tracker|trading bot|analytics dashboard|market data)\b/],
