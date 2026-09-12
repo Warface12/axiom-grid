@@ -21,4 +21,6 @@ export const GLOSSARY = [
   { slug: "etf", term: "Crypto ETF / ETP", definition: "A listed fund with crypto exposure. Compare issuer, custody of the underlying and the market where the share trades — not the spot token page." },
   { slug: "rpc", term: "RPC", definition: "A remote endpoint that lets software read and submit chain data. Compare published networks, rate limits and who can see the requests. Latency is never invented on TopPick." },
   { slug: "travel-rule", term: "Travel Rule", definition: "A compliance requirement to share originator and beneficiary information with certain transfers. Whether a vendor covers your market must come from the vendor." },
+  { slug: "index", term: "Crypto index", definition: "A basket that tracks a published methodology. Compare the constituents, the rebalance rule and who holds the assets. TopPick does not draw a live index tape." },
+  { slug: "structured-product", term: "Structured product", definition: "A note or dual with a published payoff. Compare tenor, knockout and custody of the notional. Payoff diagrams are never invented here." },
 ];
