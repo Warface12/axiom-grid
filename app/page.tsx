@@ -17,6 +17,7 @@ import { PartnerNetwork } from "@/components/visual/PartnerNetwork";
 import { LearnAtlas } from "@/components/visual/LearnAtlas";
 import { MethodologyTrack } from "@/components/MethodologyTrack";
 import { RESEARCH_JOBS } from "@/lib/jobs";
+import { CATALOG } from "@/lib/catalog";
 
 export const metadata = buildMetadata({
   title: `${SITE_NAME} — Compare crypto exchanges, wallets and brokers`,
@@ -42,7 +43,7 @@ export default function Home() {
           <span className="tp-brand-line">Read the product</span>
           <span className="tp-brand-line accent">before you fund it.</span>
         </h1>
-        <p>Exchanges, wallets, brokers, futures, bridges and forty other niches — compared only on published facts. Empty classes stay empty.</p>
+        <p>Exchanges, wallets, brokers, futures, bridges and {CATALOG.length} researched niches — compared only on published facts. Empty classes stay empty.</p>
         <div className="ag-hero-cta">
           <Link href="/start">Start here <ArrowUpRight /></Link>
           <Link href="/niches">Browse niches</Link>
