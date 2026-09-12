@@ -245,6 +245,12 @@ html[data-scheme="light"] .tp-edu-card{background:#fffaf1!important;color:#1a140
 .tp-empty-guide h2,.legal-page h1{letter-spacing:.01em!important}
 .tp-continue{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:16px}
 .tp-continue a{color:var(--atelier-gold)!important}
+.tp-search-box{
+  display:flex;align-items:center;gap:10px;min-height:58px;padding:0 16px;border-radius:18px;
+  background:rgba(20,17,14,.92);box-shadow:0 16px 40px rgba(0,0,0,.3)
+}
+.tp-search-box input{flex:1;border:0;background:transparent;color:var(--atelier-paper);font-size:16px;min-height:54px}
+.tp-search-results a{display:block;padding:14px 0;color:var(--atelier-paper)}
 .tp-sig-rail{display:grid;gap:12px;overflow:auto}
 @media(min-width:921px){
   .tp-sig-rail{grid-template-columns:repeat(3,minmax(0,1fr))}

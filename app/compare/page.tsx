@@ -1,46 +1,58 @@
 import Link from "next/link";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, faqJsonLd } from "@/lib/seo";
 import { getPublicPlatforms } from "@/lib/platforms";
 import { CompareClient } from "@/components/CompareClient";
 import { CATALOG } from "@/lib/catalog";
 
 export const metadata = buildMetadata({
-  title: "Compare Platforms — TopPick.pro",
-  description: "Category-aware comparison for exchanges, wallets, brokers, DEXs and other crypto products using only published fields.",
+  title: "Compare crypto products — TopPick.pro",
+  description: "Category-aware comparison for exchanges, wallets, brokers, DEXs, futures, bridges and other niches using only published fields.",
   path: "/compare",
+  keywords: ["compare crypto exchanges", "wallet comparison", "broker vs exchange", "compare futures"],
 });
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ ids?: string }> }) {
   const params = await searchParams;
   const platforms = await getPublicPlatforms(undefined, 48);
   const initialIds = (params.ids || "").split(",").map((v) => v.trim()).filter(Boolean);
+  const faq = faqJsonLd([
+    { question: "Can I compare an exchange to a wallet?", answer: "No. TopPick compares like with like. Mix two classes and the table only shows the shared fields." },
+    { question: "Why are some cells empty?", answer: "Missing fees, licenses or yields stay empty. Nothing is invented to fill a table." },
+  ]);
   return (
-    <main className="shell content-shell tp-compare-page">
-      <section className="page-hero">
+    <main className="tp-compare-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
+      <section className="shell page-hero">
         <span>Compare lab</span>
         <h1>Compare like with like.</h1>
-        <p>Compare reviewed public profiles in the same product class. Undisclosed fields stay empty. Fees, ratings and availability are never invented.</p>
+        <p>Reviewed public profiles only. Undisclosed fields stay empty. Fees, ratings and availability are never invented.</p>
       </section>
-      {platforms.length ? (
-        <CompareClient platforms={platforms} initialIds={initialIds} />
-      ) : (
-        <div className="tp-empty-guide">
-          <h2>How comparison works</h2>
-          <p>Two to four products in the same class. Missing facts stay blank. Nothing is invented to fill a table.</p>
-          <ul>
-            <li>Exchange versus exchange — not versus a wallet</li>
-            <li>Fees and custody only when the source exists</li>
-            <li>Your country can change what you can actually use</li>
-          </ul>
-          <div className="tp-continue">
-            {CATALOG.map((c) => (
-              <Link key={c.id} href={`/${c.hub}`}>{c.plural}</Link>
-            ))}
-            <Link href="/finder">Finder</Link>
-            <Link href="/learn">Guides</Link>
+      <section className="shell">
+        {platforms.length ? (
+          <CompareClient platforms={platforms} initialIds={initialIds} />
+        ) : (
+          <div className="tp-empty-guide">
+            <h2>How comparison works</h2>
+            <p>Two to four products in the same class. Missing facts stay blank.</p>
+            <ul>
+              <li>Exchange versus exchange — not versus a wallet</li>
+              <li>Fees and custody only when the source exists</li>
+              <li>Your country can change what you can actually use</li>
+            </ul>
           </div>
+        )}
+      </section>
+      <section className="shell content-shell">
+        <h2>Open a class first</h2>
+        <div className="tp-jobs-grid">
+          {CATALOG.map((c) => (
+            <Link key={c.id} href={`/${c.hub}`} className="tp-job-card">
+              <b>{c.plural}</b>
+              <p>{c.summary}</p>
+            </Link>
+          ))}
         </div>
-      )}
+      </section>
     </main>
   );
 }
