@@ -1,3 +1,31 @@
+import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
-export const metadata=buildMetadata({title:"Terms of Use — TopPick.pro",description:"Terms governing use of TopPick.pro comparison research, partner links and market-availability information.",path:"/legal/terms"});
-export default function Page(){return <main className="shell legal-page"><span>LEGAL / TERMS</span><h1>Terms of use</h1><p>TopPick.pro provides general research, comparison material and links to third-party providers. The site is not a broker, exchange, wallet provider, investment adviser, law firm or tax adviser. Nothing on the site is a personalized recommendation or a promise of performance, profit, availability or regulatory status.</p><h2>Information can change</h2><p>Fees, spreads, product features, legal entities, account requirements, geographic availability and partner terms can change without notice. We aim to keep material information current, but users should verify important details directly with the provider before opening, funding or using an account.</p><h2>Risk</h2><p>Trading, leveraged products and digital assets can involve substantial risk and may result in loss of some or all capital. Historical performance and third-party ratings do not guarantee future results. Users are responsible for assessing whether a product is suitable for their circumstances and permitted in their jurisdiction.</p><h2>Third-party and affiliate links</h2><p>Some links may be affiliate links. TopPick.pro may receive compensation for qualifying actions. A commercial relationship does not guarantee a favorable review, public visibility or eligibility in every market. Third-party sites are governed by their own terms, privacy policies and regulatory obligations.</p><h2>Market availability</h2><p>Where market eligibility is unknown or restricted, TopPick.pro is designed to keep promotional visibility off rather than assume access is permitted. This is an editorial and operational safeguard, not a substitute for legal advice.</p></main>}
+
+export const metadata = buildMetadata({
+  title: "Terms of Use — TopPick.pro",
+  description: "Terms governing use of TopPick.pro comparison research, partner links and market-availability information.",
+  path: "/legal/terms",
+});
+
+export default function Page() {
+  return (
+    <main className="tp-start-page">
+      <section className="shell page-hero">
+        <span>Legal</span>
+        <h1>Terms of use</h1>
+        <p>TopPick.pro provides general research, comparison material and links to third-party providers. The site is not a broker, exchange, wallet provider, investment adviser, law firm or tax adviser.</p>
+      </section>
+      <div className="tp-start-grid">
+        <article className="tp-start-card"><b>Information can change</b><p>Fees, product features, legal entities and partner terms can change without notice. Verify important details with the provider before opening or funding an account.</p></article>
+        <article className="tp-start-card"><b>Risk</b><p>Trading, leveraged products and digital assets can involve substantial risk and may result in loss of some or all capital. Users are responsible for assessing suitability and local permission.</p></article>
+        <article className="tp-start-card"><b>Third-party and affiliate links</b><p>Some links may be affiliate links. A commercial relationship does not guarantee a favorable review or eligibility in every market.</p></article>
+        <article className="tp-start-card"><b>Market availability</b><p>Where eligibility is unknown or restricted, TopPick keeps promotional visibility off rather than assuming access is permitted. This is not legal advice.</p></article>
+      </div>
+      <p className="tp-chapter-links shell">
+        <Link href="/legal/risk-disclosure">Risks</Link>
+        <Link href="/legal/affiliate-disclosure">Affiliate disclosure</Link>
+        <Link href="/legal/privacy">Privacy</Link>
+      </p>
+    </main>
+  );
+}
