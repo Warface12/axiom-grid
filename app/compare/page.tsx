@@ -45,13 +45,20 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ i
       <section className="shell content-shell">
         <h2>Open a class first</h2>
         <div className="tp-jobs-grid">
-          {CATALOG.map((c) => (
-            <Link key={c.id} href={`/${c.hub}`} className="tp-job-card">
-              <b>{c.plural}</b>
-              <p>{c.summary}</p>
-            </Link>
-          ))}
+          {Array.from(new Set(CATALOG.map((c) => c.group))).map((group) => {
+            const items = CATALOG.filter((c) => c.group === group);
+            return (
+              <Link key={group} href="/niches" className="tp-job-card">
+                <b>{group}</b>
+                <p>{items.map((item) => item.plural).join(" · ")}</p>
+              </Link>
+            );
+          })}
         </div>
+        <p className="tp-chapter-links">
+          <Link href="/niches">All {CATALOG.length} niches</Link>
+          <Link href="/finder">Finder</Link>
+        </p>
       </section>
     </main>
   );

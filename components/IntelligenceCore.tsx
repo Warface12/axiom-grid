@@ -11,7 +11,7 @@ const BRANCHES = [
   { id: "futures", label: "Futures", group: "Venues", href: "/futures", copy: "Perps and dated futures. Funding stays empty unless sourced." },
   { id: "lending", label: "Lending", group: "On-chain", href: "/lending", copy: "Collateral and liquidation — not a headline APY." },
   { id: "bridge", label: "Bridges", group: "Infrastructure", href: "/bridges", copy: "In-flight custody is its own failure mode." },
-  { id: "niches", label: "All niches", group: "Map", href: "/niches", copy: "Forty-plus researched classes. Empty directories stay empty." },
+  { id: "niches", label: "All niches", group: "Map", href: "/niches", copy: "Every researched class on one map. Empty directories stay empty." },
   { id: "markets", label: "Markets", group: "Access", href: "/markets", copy: "Your country changes access, rails and what can even be offered." },
   { id: "jobs", label: "Jobs", group: "Start", href: "/jobs", copy: "Start from the work, not from a brand wall." },
 ];

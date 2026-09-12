@@ -30,4 +30,7 @@ export const GLOSSARY = [
   { slug: "vesting", term: "Token vesting", definition: "A schedule that releases tokens over time. Who can change the schedule is the product. Unlock charts are never guessed." },
   { slug: "liquidity-desk", term: "Liquidity / market making", definition: "A product that supplies inventory to a venue or pool. Compare custody of that inventory. Depth charts stay empty unless sourced." },
   { slug: "alerts", term: "Price / on-chain alerts", definition: "A watch tool that notifies on a condition. Compare the data source. Live ticks are never fabricated on TopPick." },
+  { slug: "forex", term: "Forex venue", definition: "An FX-first product. It may still be a CFD wrapper. Compare the entity and published leverage. Spreads stay empty unless sourced." },
+  { slug: "prop-firm", term: "Prop firm", definition: "An evaluation or funded-trader desk. Compare published rules and who holds the balance. Pass-rates are never invented on TopPick." },
+  { slug: "multisig", term: "Multisig / shared keys", definition: "A wallet that needs more than one approval. Who must sign, and what happens if a cosigner disappears, is the product." },
 ];

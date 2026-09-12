@@ -30,5 +30,9 @@ export const RESEARCH_JOBS = [
   { href: "/liquidity", title: "Provide inventory", copy: "Liquidity desks compared on custody of inventory. Depth is never invented." },
   { href: "/education", title: "Take a third-party course", copy: "Academies are products. TopPick Learn stays a separate research desk." },
   { href: "/alerts", title: "Watch a price or wallet", copy: "Alert tools. Live ticks are never fabricated here." },
+  { href: "/forex", title: "Trade FX first", copy: "Forex venues. Spreads stay empty unless the operator publishes them." },
+  { href: "/prop", title: "Try a prop evaluation", copy: "Published rules and who holds the balance. Pass-rates are never invented." },
+  { href: "/charting", title: "Read a chart / terminal", copy: "Charting tools. Live candles are never drawn by TopPick." },
+  { href: "/multisig", title: "Share keys with a policy", copy: "Who must sign, and what happens if a cosigner disappears." },
   { href: "/markets", title: "Check your country first", copy: "Availability and promotional eligibility are stored separately." },
 ] as const;

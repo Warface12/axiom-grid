@@ -65,6 +65,10 @@ export const SIGNATURES: Record<string, CategorySignature> = {
   liquidity: { id: "liquidity", accent: "#6ef0c4", glow: "rgba(110,240,196,.26)", object: "ramp" },
   education: { id: "education", accent: "#d7c4a0", glow: "rgba(215,196,160,.2)", object: "lens" },
   alerts: { id: "alerts", accent: "#e08a6a", glow: "rgba(224,138,106,.22)", object: "lens" },
+  forex: { id: "forex", accent: "#7ea2ff", glow: "rgba(126,162,255,.26)", object: "venue" },
+  prop: { id: "prop", accent: "#ffd27a", glow: "rgba(255,210,122,.22)", object: "ledger" },
+  charting: { id: "charting", accent: "#5ad0ff", glow: "rgba(90,208,255,.24)", object: "lens" },
+  multisig: { id: "multisig", accent: "#6ef0c4", glow: "rgba(110,240,196,.26)", object: "keys" },
 };
 
 export function signatureFor(id?: string | null) {

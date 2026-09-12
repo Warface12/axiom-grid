@@ -50,6 +50,10 @@ const nextConfig:NextConfig={
     {source:"/crypto-education",destination:"/education",permanent:true},
     {source:"/price-alerts",destination:"/alerts",permanent:true},
     {source:"/how-we-research",destination:"/methodology",permanent:true},
+    {source:"/fx",destination:"/forex",permanent:true},
+    {source:"/prop-firms",destination:"/prop",permanent:true},
+    {source:"/charts",destination:"/charting",permanent:true},
+    {source:"/mpc",destination:"/multisig",permanent:true},
   ]},
 };
 export default nextConfig;

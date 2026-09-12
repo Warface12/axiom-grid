@@ -348,3 +348,51 @@ html[data-scheme="light"] .tp-chapter-links a,html[data-scheme="light"] .tp-cont
   .tp-atlas-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tp-desk-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
+
+/* Kill leftover neon cyan from older layers */
+.tp-core-sun{
+  box-shadow:0 0 40px rgba(228,188,106,.55),0 0 90px rgba(228,188,106,.28)!important;
+  background:radial-gradient(circle,#fff6d4,#e4bc6a 60%,#7a4e14)!important
+}
+.tp-core-bloom,.tp-core-scan{background:radial-gradient(circle,rgba(228,188,106,.22),transparent 62%)!important}
+.tp-core-readout a,.tp-chapter-links a,.tp-continue a,.tp-earth2-tags small,.tp-engine span{
+  color:var(--atelier-gold)!important
+}
+.tp-core-dots button.is-active{
+  background:var(--atelier-gold)!important;
+  box-shadow:0 0 12px rgba(228,188,106,.45)!important
+}
+.tp-finder-launch b,.tp-finder-nav button:last-child{
+  background:var(--atelier-gold)!important;
+  color:#1a1206!important;
+  border:0!important
+}
+.tp-finder-step label.is-on,.tp-finder-progress .is-on{
+  box-shadow:inset 0 0 0 2px var(--atelier-gold),0 10px 24px rgba(0,0,0,.25)!important;
+  border-color:var(--atelier-gold)!important;
+  color:var(--atelier-gold)!important
+}
+.tp-account-benefits li{
+  display:grid;gap:6px;padding:16px 18px;border-radius:18px;margin:0 0 10px
+}
+.tp-account-form,.tp-account-value{padding:8px 0 24px}
+.tp-account-form h1,.tp-account-value h2{max-width:16ch;word-spacing:.09em}
+.tp-finder-page,.tp-compare-page,.tp-research-page{
+  background:radial-gradient(circle at 80% 0,rgba(228,188,106,.12),transparent 34%),#0b0907
+}
+.tp-method-track{
+  border:0!important;
+  background:linear-gradient(165deg,rgba(36,30,24,.96),rgba(14,12,10,.98))!important;
+  box-shadow:0 22px 44px rgba(0,0,0,.32);
+  border-radius:28px
+}
+.tp-method-steps>div{
+  border:0!important;
+  background:rgba(243,234,216,.06);
+  border-radius:18px
+}
+@media(max-width:920px){
+  .tp-account-split{display:grid!important;grid-template-columns:1fr!important}
+  .tp-core-readout{margin-top:8px}
+  .tp-masthead{border-radius:18px}
+}
