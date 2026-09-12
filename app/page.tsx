@@ -16,6 +16,7 @@ import { ResearchEngine } from "@/components/visual/ResearchEngine";
 import { PartnerNetwork } from "@/components/visual/PartnerNetwork";
 import { LearnAtlas } from "@/components/visual/LearnAtlas";
 import { MethodologyTrack } from "@/components/MethodologyTrack";
+import { RESEARCH_JOBS } from "@/lib/jobs";
 
 export const metadata = buildMetadata({
   title: `${SITE_NAME} — Compare crypto exchanges, wallets and brokers`,
@@ -59,12 +60,16 @@ export default function Home() {
             <p className="tp-lead">Buy on a venue. Hold keys. Trade perps. Move across chains. Report tax. Each job opens a class — not a ranked brand wall.</p>
           </header>
           <div className="tp-jobs-grid">
-            <Link className="tp-job-card" href="/exchanges"><b>Buy or sell crypto</b><p>Venue custody, fees and your country.</p></Link>
-            <Link className="tp-job-card" href="/wallets"><b>Hold the keys</b><p>Hardware, software and recovery.</p></Link>
-            <Link className="tp-job-card" href="/futures"><b>Trade perps</b><p>Funding stays empty unless sourced.</p></Link>
-            <Link className="tp-job-card" href="/bridges"><b>Move across chains</b><p>In-flight custody is its own risk.</p></Link>
-            <Link className="tp-job-card" href="/lending"><b>Lend or borrow</b><p>Collateral and liquidation, as published.</p></Link>
-            <Link className="tp-job-card" href="/jobs"><b>See every job</b><p>Fourteen working paths into the catalog.</p></Link>
+            {RESEARCH_JOBS.slice(0, 8).map((job) => (
+              <Link key={job.href} className="tp-job-card" href={job.href}>
+                <b>{job.title}</b>
+                <p>{job.copy}</p>
+              </Link>
+            ))}
+            <Link className="tp-job-card" href="/jobs">
+              <b>See every job</b>
+              <p>{RESEARCH_JOBS.length} working paths into the catalog.</p>
+            </Link>
           </div>
         </div>
       </section>

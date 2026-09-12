@@ -2,6 +2,7 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { CATALOG } from "../lib/catalog.ts";
 import { FOOTER_PATHS, PUBLIC_STATIC_PATHS } from "../lib/routes.ts";
+import { RESEARCH_JOBS } from "../lib/jobs.ts";
 import { signatureFor, SIGNATURES } from "../lib/visual/signatures.ts";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -44,6 +45,12 @@ describe("route integrity", () => {
   it("does not leave footer destinations as dead routes", () => {
     for (const path of FOOTER_PATHS) {
       assert.ok(pageExists(path), path);
+    }
+  });
+
+  it("maps every research job to a real hub or page", () => {
+    for (const job of RESEARCH_JOBS) {
+      assert.ok(pageExists(job.href), job.href);
     }
   });
 });
