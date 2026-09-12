@@ -17,6 +17,9 @@ describe("catalog", () => {
     assert.equal(isPlatformKind("casino"), false);
     assert.equal(isPlatformKind("explorer"), true);
     assert.equal(isPlatformKind("tax"), true);
+    assert.equal(isPlatformKind("bridge"), true);
+    assert.equal(isPlatformKind("futures"), true);
+    assert.equal(isPlatformKind("stablecoin"), true);
     assert.equal(catalogByHub("explorers")?.id, "explorer");
     assert.equal(platformPath("wallet", "ledger"), "/wallets/ledger");
   });

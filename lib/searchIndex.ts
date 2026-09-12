@@ -53,6 +53,9 @@ export async function searchPublic(q: string, limit = 24): Promise<SearchHit[]> 
   if (term.includes("fee") || term.includes("maker") || term.includes("taker") || term.includes("spread")) {
     hits.push({ id: "page-fees", title: "Fees education", short: "Maker/taker, spread and withdrawals without invented numbers.", kind: "page", href: "/fees" });
   }
+  if (term.includes("niche") || term.includes("categor") || term.includes("directory")) {
+    hits.push({ id: "page-niches", title: "Product niches", short: "Every researched product class. Empty classes stay empty.", kind: "page", href: "/niches" });
+  }
   if (term.includes("research") || term.includes("method") || term.includes("finding")) {
     hits.push({ id: "page-research", title: "Research desk", short: "Streams, verification and collections. No simulated live tape.", kind: "page", href: "/research" });
   }

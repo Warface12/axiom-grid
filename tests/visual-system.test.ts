@@ -53,7 +53,9 @@ describe("visual stylesheets", () => {
     const layout = readFileSync(join(root, "app/layout.tsx"), "utf8");
     const visual = layout.indexOf("visual-system.css");
     const experience = layout.indexOf("experience.css");
+    const readability = layout.indexOf("readability.css");
     assert.ok(visual >= 0);
     assert.ok(experience > visual);
+    assert.ok(readability > experience);
   });
 });

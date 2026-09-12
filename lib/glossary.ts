@@ -9,4 +9,9 @@ export const GLOSSARY = [
   { slug: "seed-phrase", term: "Seed phrase / recovery", definition: "A recovery secret used by many self-custody wallets. Anyone with the phrase can move funds. Comparison should cover how backup is designed, not slogans about being “easy”." },
   { slug: "liquid-staking", term: "Liquid staking", definition: "A staking design that issues a receipt token while assets are staked. Terms, slashing treatment and the receipt asset are protocol-specific. Yields are only shown when a sourced, current figure exists." },
   { slug: "spread", term: "Spread", definition: "The difference between displayed buy and sell prices. A zero-commission claim can still be expensive if the spread is wide. If a schedule is not published, TopPick leaves the field empty." },
+  { slug: "perpetual", term: "Perpetual / perp", definition: "A futures-style contract with no expiry. Funding payments and liquidation rules are venue-specific. TopPick does not invent funding rates." },
+  { slug: "bridge", term: "Bridge", definition: "A product that moves value between chains. While funds are in flight the custody model is often neither a simple wallet nor a simple exchange. Compare published chains and failure modes." },
+  { slug: "stablecoin", term: "Stablecoin", definition: "A token that aims to hold a reference value. Issuers differ on reserves, redemption and markets. Peg charts on TopPick are never simulated." },
+  { slug: "copy-trading", term: "Copy trading", definition: "A product that mirrors another account’s orders. You still hold (or the operator holds) the copied balance. Past results are not a forecast." },
+  { slug: "oracle", term: "Oracle", definition: "A feed that brings off-chain or cross-contract data on-chain. Compare published sources and update rules, not a live ticker we do not operate." },
 ];

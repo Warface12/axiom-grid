@@ -17,6 +17,7 @@ export function CatalogNav() {
         ))}
         <div>
           <b>Ways in</b>
+          <Link href="/niches">All niches</Link>
           <Link href="/finder">Finder</Link>
           <Link href="/compare">Compare lab</Link>
           <Link href="/search">Search</Link>

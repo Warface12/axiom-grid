@@ -20,6 +20,7 @@ export function Footer() {
           <Link href="/wallets">Wallets</Link>
           <Link href="/dex">DEXs</Link>
           <Link href="/defi">DeFi</Link>
+          <Link href="/niches">All niches</Link>
           <Link href="/finder">Product finder</Link>
           <Link href="/compare">Compare</Link>
           <Link href="/search">Search</Link>

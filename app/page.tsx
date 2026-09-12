@@ -21,7 +21,7 @@ export const metadata = buildMetadata({
   title: `${SITE_NAME} — Compare crypto exchanges, wallets and brokers`,
   description: "Discover, compare and research crypto exchanges, wallets, brokers and tools. Understand custody, markets and opportunities before you act.",
   path: "/",
-  keywords: ["crypto exchange comparison", "wallet comparison", "broker research", "DEX research"],
+  keywords: ["crypto exchange comparison", "wallet comparison", "broker research", "DEX research", "crypto niches", "futures comparison", "bridge research"],
 });
 
 export default function Home() {
@@ -83,6 +83,7 @@ export default function Home() {
             <Link className="tp-save-cta" href="/account">Open your TopPick</Link>
             <nav className="tp-save-links">
               <Link href="/apps">Install the app</Link>
+              <Link href="/niches">Browse niches</Link>
               <Link href="/how-we-rate">How we research</Link>
               <Link href="/legal/risk-disclosure">Risks</Link>
             </nav>

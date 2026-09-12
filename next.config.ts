@@ -14,6 +14,14 @@ const nextConfig:NextConfig={
     {source:"/onramps",destination:"/on-ramps",permanent:true},
     {source:"/on-ramp",destination:"/on-ramps",permanent:true},
     {source:"/reward",destination:"/rewards",permanent:true},
+    {source:"/nfts",destination:"/nft",permanent:true},
+    {source:"/bridge",destination:"/bridges",permanent:true},
+    {source:"/copy",destination:"/copy-trading",permanent:true},
+    {source:"/l2",destination:"/layer2",permanent:true},
+    {source:"/stablecoin",destination:"/stablecoins",permanent:true},
+    {source:"/kyc",destination:"/identity",permanent:true},
+    {source:"/yield-farming",destination:"/yield",permanent:true},
+    {source:"/discover",destination:"/niches",permanent:true},
   ]},
 };
 export default nextConfig;
