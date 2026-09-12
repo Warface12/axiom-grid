@@ -65,6 +65,9 @@ export async function searchPublic(q: string, limit = 24): Promise<SearchHit[]> 
   if (term.includes("faq") || term.includes("question") || term.includes("advice")) {
     hits.push({ id: "page-faq", title: "FAQ", short: "Research, markets, empty classes and accounts.", kind: "page", href: "/faq" });
   }
+  if (term.includes("topic") || term.includes("guide") || term.includes("learn")) {
+    hits.push({ id: "page-topics", title: "Topics", short: "Custody, fees, venues and on-chain questions.", kind: "page", href: "/topics" });
+  }
   if (term.includes("research") || term.includes("method") || term.includes("finding")) {
     hits.push({ id: "page-research", title: "Research desk", short: "Streams, verification and collections. No simulated live tape.", kind: "page", href: "/research" });
   }

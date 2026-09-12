@@ -33,6 +33,7 @@ const nextConfig:NextConfig={
     {source:"/socialfi",destination:"/social",permanent:true},
     {source:"/crypto-etf",destination:"/etf",permanent:true},
     {source:"/earn",destination:"/savings",permanent:true},
+    {source:"/topics-map",destination:"/topics",permanent:true},
   ]},
 };
 export default nextConfig;

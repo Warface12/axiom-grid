@@ -33,6 +33,7 @@ export function Footer() {
           <Link href="/learn">Guides</Link>
           <Link href="/glossary">Glossary</Link>
           <Link href="/faq">FAQ</Link>
+          <Link href="/topics">Topics</Link>
           <Link href="/how-we-rate">How we rate</Link>
           <Link href="/security">Security & custody</Link>
           <Link href="/markets">Markets</Link>

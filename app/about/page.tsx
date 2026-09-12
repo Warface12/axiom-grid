@@ -29,7 +29,14 @@ export default function Page() {
         <p>Fees, licenses, user counts, live prices, affiliate offers and testimonials are never fabricated to fill a layout.</p>
         <h2>Commercial relationships</h2>
         <p>When a partner link exists, it is stored explicitly and routed only after a market rule allows promotion. Compensation is disclosed and is not a ranking.</p>
-        <p><Link href="/editorial-policy">Editorial policy</Link> · <Link href="/how-we-rate">How we rate</Link> · <Link href="/contact">Contact</Link></p>
+        <p className="tp-chapter-links">
+          <Link href="/start">Start here</Link>
+          <Link href="/niches">Niches</Link>
+          <Link href="/editorial-policy">Editorial policy</Link>
+          <Link href="/how-we-rate">How we rate</Link>
+          <Link href="/faq">FAQ</Link>
+          <Link href="/contact">Contact</Link>
+        </p>
       </article>
     </main>
   );
