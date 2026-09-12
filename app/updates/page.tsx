@@ -12,9 +12,9 @@ export const metadata = buildMetadata({
 export default async function Page() {
   const posts = await getPublicPartnerPosts(30);
   return (
-    <main>
-      <section className="shell tp-hub-hero">
-        <p>UPDATES</p>
+    <main className="tp-start-page">
+      <section className="shell page-hero">
+        <span>Updates</span>
         <h1>Platform changes, without the hype.</h1>
         <p>Source-linked notices about products, terms and market changes.</p>
       </section>
@@ -41,7 +41,9 @@ export default async function Page() {
             <p>Published product notices will appear here. Use the library while you wait for a sourced update.</p>
             <div className="tp-continue">
               <Link href="/learn">Guides</Link>
+              <Link href="/topics">Topics</Link>
               <Link href="/markets">Markets</Link>
+              <Link href="/jobs">Jobs</Link>
               <Link href="/how-we-rate">How we research</Link>
             </div>
           </div>

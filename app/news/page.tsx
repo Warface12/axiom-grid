@@ -16,9 +16,9 @@ export async function generateMetadata() {
 export default async function Page() {
   const posts = await getPublicPartnerPosts(30);
   return (
-    <main>
+    <main className="tp-start-page">
       <section className="shell page-hero">
-        <span>NEWS / SOURCED ONLY</span>
+        <span>News</span>
         <h1>No invented headlines.</h1>
         <p>Headlines here are sourced platform updates — not a simulated news desk.</p>
       </section>
@@ -35,8 +35,10 @@ export default async function Page() {
             <p>When a sourced update is published, it will show here. Until then, the guides still explain custody, fees and product classes.</p>
             <div className="tp-continue">
               <Link href="/learn">Guides</Link>
+              <Link href="/topics">Topics</Link>
               <Link href="/markets">Markets</Link>
               <Link href="/finder">Finder</Link>
+              <Link href="/jobs">Jobs</Link>
             </div>
           </div>
         )}
