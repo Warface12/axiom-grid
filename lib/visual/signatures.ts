@@ -55,6 +55,8 @@ export const SIGNATURES: Record<string, CategorySignature> = {
   opportunities: { id: "opportunities", accent: "#f0c56a", glow: "rgba(240,197,106,.22)", object: "vault" },
   niches: { id: "niches", accent: "#e4bc6a", glow: "rgba(228,188,106,.22)", object: "hex" },
   jobs: { id: "jobs", accent: "#3ecfb2", glow: "rgba(62,207,178,.22)", object: "ramp" },
+  index: { id: "index", accent: "#7ea2ff", glow: "rgba(126,162,255,.24)", object: "ledger" },
+  structured: { id: "structured", accent: "#ffd27a", glow: "rgba(255,210,122,.22)", object: "vault" },
 };
 
 export function signatureFor(id?: string | null) {

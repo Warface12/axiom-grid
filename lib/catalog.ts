@@ -42,6 +42,8 @@ export const PLATFORM_KIND_IDS = [
   "savings",
   "rpc",
   "compliance",
+  "index",
+  "structured",
 ] as const;
 
 export type PlatformKind = (typeof PLATFORM_KIND_IDS)[number];
@@ -770,6 +772,35 @@ export const CATALOG: CatalogKind[] = [
     ],
     compareKeys: ["kyc", "api", "regulatorySummary", "productSummary"],
   },
+  {
+    id: "index",
+    hub: "indexes",
+    label: "Crypto index / basket",
+    plural: "Indexes",
+    group: "Trading venues",
+    dedicated: false,
+    summary: "Index and basket products compared on methodology, custody of the constituents and published markets. Live index levels are never simulated.",
+    subcategories: ["market-cap", "equal", "thematic"],
+    attributes: [
+      text("kyc", "Access (as published)"),
+    ],
+    compareKeys: ["custody", "kyc", "regulatorySummary", "feeSummary", "productSummary"],
+  },
+  {
+    id: "structured",
+    hub: "structured",
+    label: "Structured product",
+    plural: "Structured products",
+    group: "Trading venues",
+    dedicated: false,
+    summary: "Dual, barrier and other structured notes compared on payoff as published and custody of the notional. Payoff diagrams are never invented.",
+    subcategories: ["dual", "barrier", "note"],
+    attributes: [
+      text("lockup", "Tenor (as published)"),
+      text("kyc", "Eligibility (as published)"),
+    ],
+    compareKeys: ["custody", "lockup", "kyc", "feeSummary", "regulatorySummary", "productSummary"],
+  },
 ];
 
 export const VERIFICATION_STATES = ["needs_review", "imported", "manual", "verified", "stale", "missing"] as const;
@@ -840,6 +871,8 @@ export function classifyKindFromPublicText(input: { title?: string; description?
     ["savings", /\b(crypto earn|savings account crypto|dual investment)\b/],
     ["rpc", /\b(rpc provider|node rpc|archive node)\b/],
     ["compliance", /\b(travel rule|crypto compliance|kyt provider)\b/],
+    ["index", /\b(crypto index|index fund crypto|basket product)\b/],
+    ["structured", /\b(dual investment|structured product|barrier note)\b/],
     ["explorer", /\b(block explorer|blockchain explorer|tx hash|etherscan)\b/],
     ["tax", /\b(crypto tax|tax software|capital gains report|accounting for crypto)\b/],
     ["tool", /\b(portfolio tracker|trading bot|analytics dashboard|market data)\b/],

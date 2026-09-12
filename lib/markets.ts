@@ -13,6 +13,10 @@ export const MARKET_POLICIES:MarketPolicy[]=[
  {code:"CH",name:"Switzerland",currency:"CHF",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Cantonal and federal context can differ. Promotion stays blocked until documented."},
  {code:"HK",name:"Hong Kong",currency:"HKD",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Research may be public. Partner CTAs require a current Hong Kong eligibility record."},
  {code:"ZA",name:"South Africa",currency:"ZAR",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Research-only by default. No commercial CTA without documented eligibility."},
+ {code:"KR",name:"South Korea",currency:"KRW",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Research may be public. Partner CTAs stay blocked until a current Korea eligibility record exists."},
+ {code:"TW",name:"Taiwan",currency:"TWD",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Research-only by default. Promotion requires a documented market record."},
+ {code:"MX",name:"Mexico",currency:"MXN",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Research-only by default. A Spanish homepage is not proof of promotional eligibility."},
+ {code:"NG",name:"Nigeria",currency:"NGN",language:"en",publicResearch:true,commercialDefault:"blocked",notes:"Rails and onboarding change. TopPick will not infer availability from a global banner."},
 ];
 export function getMarketPolicy(code?:string|null){const key=(code||"").toUpperCase();return MARKET_POLICIES.find(m=>m.code===key)||null}
 export function marketLabel(code?:string|null){return getMarketPolicy(code)?.name||"International"}

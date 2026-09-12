@@ -20,5 +20,7 @@ export const RESEARCH_JOBS = [
   { href: "/etf", title: "Use a listed crypto ETF", copy: "Issuer, custody of the underlying, and the market where the share trades." },
   { href: "/rpc", title: "Connect an app to a chain", copy: "RPC providers compared on published networks and who sees the requests." },
   { href: "/compliance", title: "Travel Rule / compliance", copy: "Vendors compared on published checks. This is not legal advice." },
+  { href: "/indexes", title: "Hold a basket / index", copy: "Methodology and custody of the constituents. Live levels are never simulated." },
+  { href: "/structured", title: "Use a structured note", copy: "Payoff as published. Diagrams are never invented." },
   { href: "/markets", title: "Check your country first", copy: "Availability and promotional eligibility are stored separately." },
 ] as const;

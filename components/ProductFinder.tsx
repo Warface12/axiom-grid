@@ -22,7 +22,7 @@ const STEPS: { id: string; label: string; hint: string; options: { label: string
       { label: "Use charts, tax, identity or analytics", kinds: ["tool", "tax", "explorer", "analytics", "identity", "rpc", "compliance"] },
       { label: "Look at NFTs, launchpads, mining or cover", kinds: ["nft", "launchpad", "mining", "insurance"] },
       { label: "Lend, save, restake or hold RWAs", kinds: ["lending", "savings", "restaking", "rwa", "staking"] },
-      { label: "Use options, prediction markets or ETFs", kinds: ["options", "prediction", "etf"] },
+      { label: "Use options, prediction markets or ETFs", kinds: ["options", "prediction", "etf", "index", "structured"] },
       { label: "Play, social or privacy tools", kinds: ["gamefi", "social", "privacy"] },
       { label: "Institutional custody or a prime desk", kinds: ["custody", "institutional"] },
     ],

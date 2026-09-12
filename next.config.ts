@@ -36,6 +36,8 @@ const nextConfig:NextConfig={
     {source:"/topics-map",destination:"/topics",permanent:true},
     {source:"/nodes",destination:"/rpc",permanent:true},
     {source:"/travel-rule",destination:"/compliance",permanent:true},
+    {source:"/crypto-index",destination:"/indexes",permanent:true},
+    {source:"/structured-products",destination:"/structured",permanent:true},
   ]},
 };
 export default nextConfig;
