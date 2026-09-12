@@ -131,6 +131,8 @@ export function ProductFinder() {
           <p className="tp-chapter-links">
             <Link href="/markets">Check your market</Link>
             <Link href="/compare">Compare inside a class</Link>
+            <Link href="/jobs">All jobs</Link>
+            <Link href="/niches">All niches</Link>
           </p>
         </div>
       ) : (

@@ -285,6 +285,10 @@ html[data-scheme="light"] .tp-chapter-links a,html[data-scheme="light"] .tp-cont
 }
 .tp-search-box input{flex:1;border:0;background:transparent;color:var(--atelier-paper);font-size:16px;min-height:54px}
 .tp-search-results a{display:block;padding:14px 0;color:var(--atelier-paper)}
+.tp-finder-grid{display:grid;gap:12px}
+@media(min-width:921px){
+  .tp-finder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 .tp-sig-rail{display:grid;gap:12px;overflow:auto}
 @media(min-width:921px){
   .tp-sig-rail{grid-template-columns:repeat(3,minmax(0,1fr))}
